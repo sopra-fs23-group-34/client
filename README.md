@@ -2,7 +2,7 @@
 
 ## Getting started
 
-Read and go through these Tutorials. It will make your life easier:-)
+Read and go through these Tutorials. It will make your life easier:--)
 
 - Read the React [Docs](https://reactjs.org/docs/getting-started.html)
 - Do this React [Getting Started](https://reactjs.org/tutorial/tutorial.html) Tutorial (it doesn’t assume any existing React knowledge)
