@@ -3,7 +3,7 @@ import {GameGuard} from "components/routing/routeProtectors/GameGuard";
 import GameRouter from "components/routing/routers/GameRouter";
 import {LoginGuard} from "components/routing/routeProtectors/LoginGuard";
 import Login from "components/views/Login";
-
+import Hub from "components/views/Hub";
 /**
  * Main router of your application.
  * In the following class, different routes are rendered. In our case, there is a Login Route with matches the path "/login"
@@ -20,6 +20,11 @@ const AppRouter = () => {
         <Route path="/game">
           <GameGuard>
             <GameRouter base="/game"/>
+          </GameGuard>
+        </Route>
+        <Route path="/hub">
+          <GameGuard>
+            <Hub/>
           </GameGuard>
         </Route>
         <Route exact path="/login">
