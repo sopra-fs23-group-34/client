@@ -6,6 +6,12 @@ import {useHistory} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import "styles/views/Hub.scss";
+import IconBarChart from 'resources/BarChartIcon';
+import IconPlusCircle from 'resources/PlusCircleIcon';
+import IconRankingStar from 'resources/RankingStarIcon';
+import IconProfile from 'resources/ProfileIcon';
+import IconPersonPlus from 'resources/PersonPlusIcon';
+import IconDoorExit from 'resources/LogOutIcon';
 
 const Player = ({user}) => (
   <div className="player container">
@@ -30,9 +36,20 @@ const Hub = () => {
   // more information can be found under https://reactjs.org/docs/hooks-state.html
   const [users, setUsers] = useState(null);
 
-  const logout = () => {
+  const logout = async () => {
+    const token = localStorage.getItem('token');
     localStorage.removeItem('token');
-    history.push('/login');
+    const Id = localStorage.getItem('Id');
+    localStorage.removeItem('Id');
+    await api.post({
+      pathname: '/users/logout/' + Id,
+      headers: {
+        'token': token
+      }
+    })
+    history.push({
+      pathname: '/login'
+    });
   }
 
   const gotoUser = () => {
@@ -100,16 +117,19 @@ const Hub = () => {
           <Button className="hub hubbutton"
           onClick={() => gotoStats()}
           >
+            <IconBarChart></IconBarChart>
             <h2>Stats</h2>
             <p>Look at your progress.</p>
             </Button>
           <Button className="hub hubbutton">
+            <IconPlusCircle></IconPlusCircle>
             <h2>Create a game</h2>
             <p>Create a new game to play with your friends.</p>
           </Button>
           <Button className="hub hubbutton"
           onClick={() => gotoLeaderboard()}
           >
+            <IconRankingStar></IconRankingStar>
             <h2>Global leaderboard</h2>
             <p>Take a look at the global leaderboard.</p>
           </Button>
@@ -118,10 +138,12 @@ const Hub = () => {
           <Button className="hub hubbutton"
           onClick={() => gotoUser()}
           >
+            <IconProfile></IconProfile>
             <h2>Profile</h2>
             <p>See your Profile</p>
           </Button>
           <Button className="hub hubbutton">
+            <IconPersonPlus></IconPersonPlus>
             <h2>Join a game</h2>
             <p>Join a game of one of your friends.</p>
           </Button>
@@ -129,6 +151,7 @@ const Hub = () => {
           className="hub hubbutton"
           onClick={() => logout()}
         >
+          <IconDoorExit></IconDoorExit>
           <h2>Logout</h2>
           <p>Log out to play another day.</p>
         </Button>
