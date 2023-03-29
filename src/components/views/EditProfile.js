@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {api, handleError} from 'helpers/api';
-import {useHistory, useParams} from 'react-router-dom';
+import {Link, useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/Login.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
+import IconProfile from "../../resources/ProfileIcon";
 
 /*
 It is possible to add multiple components inside a single file,
@@ -34,7 +35,7 @@ FormField.propTypes = {
   onChange: PropTypes.func
 };
 
-const Edit = () => {
+const EditProfile = () => {
   const history = useHistory();
   const {id} = useParams();
   const [username, setUsername] = useState(null);
@@ -48,11 +49,18 @@ const Edit = () => {
       const requestBody = JSON.stringify({username, email, bio});
       await api.put('/users/update' +id, requestBody);
 // Login successfully worked --> navigate to the route /game in the GameRouter
-      history.push(`/profile/`+id);
+      history.push(`/hub`);
     } catch (error) {
       alert(`Something went wrong during the editing: \n${handleError(error)}`);
     }
   };
+
+  const gotoPassword = () => {
+    history.push({
+      pathname: '/password',
+      state: {userId: sessionStorage.getItem("userId")}
+    });
+  }
 
   return (
     <BaseContainer>
@@ -82,6 +90,11 @@ const Edit = () => {
               save changes
             </Button>
           </div>
+          <Button className="login button-container"
+                  onClick={() =>gotoPassword()}
+          >
+            Change password
+          </Button>
 
         </div>
       </div>
@@ -93,4 +106,4 @@ const Edit = () => {
  * You can get access to the history object's properties via the withRouter.
  * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
  */
-export default Edit;
+export default EditProfile;
