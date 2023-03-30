@@ -32,7 +32,7 @@ const Lobby = () => {
     const [users, setUsers] = useState(null);
 
     const logout = () => {
-        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
         history.push('/login');
     }
 
@@ -45,7 +45,7 @@ const Lobby = () => {
         async function fetchData() {
             try {
 
-                const userId = localStorage.getItem('id');
+                const userId = sessionStorage.getItem('id');
                 const response = await api(false, userId).post('/lobby/create');
 
                 // delays continuous execution of an async operation for 1 second.

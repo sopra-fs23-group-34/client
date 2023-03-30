@@ -46,7 +46,7 @@ const Password = () => {
   const saveChanges = async () => {
     try {
       const requestBody = JSON.stringify({oldPassword, newPassword});
-      await api(localStorage.getItem('token'),false).put('/users/update/' +id, requestBody);
+      await api(sessionStorage.getItem('token'),false).put('/users/update/' +id, requestBody);
 // Login successfully worked --> navigate to the route /game in the GameRouter
       history.push(`/hub`);
     } catch (error) {

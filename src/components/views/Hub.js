@@ -35,18 +35,18 @@ const Hub = () => {
   // more information can be found under https://reactjs.org/docs/hooks-state.html
 
   const logout = async () => {
-    const token = localStorage.getItem('token');
-    const Id = localStorage.getItem('id');
+    const token = sessionStorage.getItem('token');
+    const Id = sessionStorage.getItem('id');
     await api(token, Id).put('/users/logout/'+Id)
-    localStorage.removeItem('id');
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('id');
+    sessionStorage.removeItem('token');
     history.push({
       pathname: '/login'
     });
   }
 
   const gotoUser = () => {
-    const id = localStorage.getItem("id");
+    const id = sessionStorage.getItem("id");
     history.push({
       pathname: '/profile/' + id,
      state: {id: id}

@@ -72,19 +72,19 @@ const Profile = () => {
                     <FormField
                         label="Username"
                         value={username}
-                        placeholder={localStorage.getItem("username")}
+                        placeholder={sessionStorage.getItem("username")}
                         onChange={un => setUsername(un)}
                     />
                     <FormField
                         label="email"
                         value={email}
-                        placeholder={localStorage.getItem("email")}
+                        placeholder={sessionStorage.getItem("email")}
                         onChange={n => setEmail(n)}
                     />
                     <FormField
                         label="bio"
                         value={bio}
-                        placeholder={localStorage.getItem("bio")}
+                        placeholder={sessionStorage.getItem("bio")}
                         onChange={n => setBio(n)}
                     />
                     <div className="profile button-container">
