@@ -48,7 +48,6 @@ const Profile = () => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function fetchData() {
             try {
-                console.log("id: " + id);
                 const response = await api(sessionStorage.getItem('token'), false).get('/users/getUser/' + id);
 
                 // Get the returned users and update the state.
@@ -72,7 +71,7 @@ const Profile = () => {
             }
         }
         fetchData();
-    }, []);
+    }, [id]);
 
 
     const saveChanges = async () => {
