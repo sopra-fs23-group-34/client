@@ -7,6 +7,7 @@ import Hub from "components/views/Hub";
 import Register from "../../views/Register";
 import EditProfile from "../../views/EditProfile";
 import EditPassword from "../../views/EditPassword";
+import WebSocket from "../../views/Websocket";
 /**
  * Main router of your application.
  * In the following class, different routes are rendered. In our case, there is a Login Route with matches the path "/login"
@@ -52,6 +53,9 @@ const AppRouter = () => {
         </Route>
         <Route exact path="/">
           <Redirect to="/game"/>
+        </Route>
+        <Route path="/websocket">
+          <WebSocket />
         </Route>
       </Switch>
     </BrowserRouter>
