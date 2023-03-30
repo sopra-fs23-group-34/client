@@ -37,7 +37,7 @@ const Hub = () => {
   const logout = async () => {
     const token = sessionStorage.getItem('token');
     const Id = sessionStorage.getItem('id');
-    await api(token, Id).put('/users/logout/'+Id)
+    await api(token, Id).post('/users/logout/'+Id)
     sessionStorage.removeItem('id');
     sessionStorage.removeItem('token');
     history.push({
