@@ -7,13 +7,12 @@ import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import "styles/views/Lobby.scss";
 
-const Player = ({ user }) => ( <
-    div className = "player container" >
-    <
-    div className = "player username" > { user.username } < /div> <
-    div className = "player name" > { user.name } < /div> <
-    div className = "player id" > id: { user.id } < /div> <
-    /div>
+const Player = ({ user }) => ( 
+    <div className = "player container" >
+    <div className = "player username" > { user.username } </div> 
+    <div className = "player name" > { user.name } </div> 
+    <div className = "player id" > id: { user.id } </div> 
+    </div>
 );
 
 Player.propTypes = {
@@ -75,32 +74,29 @@ const Lobby = () => {
         fetchData();
     }, []);
 
-    let content = < Spinner / > ;
+    let content = <Spinner/> ;
 
     if (users) {
-        content = ( <
-            div className = "game" >
-            <
-            ul className = "game user-list" >
-            <
-            /ul> <
-            Button width = "100%"
+        content = ( 
+        <div className = "game" >
+            <ul className = "game user-list" >
+            </ul> 
+            <Button width = "100%"
             onClick = {
                 () => logout() } >
-            Logout <
-            /Button> <
-            /div>
+            Logout 
+            </Button> 
+            </div>
         );
     }
 
-    return ( <
-        BaseContainer className = "lobby container" >
-        <
-        h2 > Game Lobby < /h2> <
-        p className = "lobby paragraph" >
-        WIP <
-        /p> { content } <
-        /BaseContainer>
+    return ( 
+    <BaseContainer className = "lobby container" >
+        <h2> Game Lobby </h2> 
+        <p className = "lobby paragraph" >
+        WIP 
+        </p> { content } 
+        </BaseContainer>
     );
 }
 

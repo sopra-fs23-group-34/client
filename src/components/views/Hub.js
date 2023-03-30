@@ -1,9 +1,8 @@
-import {api} from 'helpers/api';
+import {api, handleError} from 'helpers/api';
 import {Spinner} from 'components/ui/Spinner';
 import {Button} from 'components/ui/Button';
 import {useHistory} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
-import PropTypes from "prop-types";
 import "styles/views/Hub.scss";
 import IconBarChart from 'resources/BarChartIcon';
 import IconPlusCircle from 'resources/PlusCircleIcon';
@@ -11,28 +10,35 @@ import IconRankingStar from 'resources/RankingStarIcon';
 import IconProfile from 'resources/ProfileIcon';
 import IconPersonPlus from 'resources/PersonPlusIcon';
 import IconDoorExit from 'resources/LogOutIcon';
+import * as React from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { TextField } from '@mui/material';
 
-const Player = ({user}) => (
-  <div className="player container">
-    <div className="player username">{user.username}</div>
-    <div className="player name">{user.name}</div>
-    <div className="player id">id: {user.id}</div>
-  </div>
-);
-
-Player.propTypes = {
-  user: PropTypes.object
-};
 
 const Hub = () => {
   // use react-router-dom's hook to access the history
   const history = useHistory();
+  const [lobbyKey, setLobbyKey] = React.useState(null);
+  
+  let FormDialog;
+  
+  const [open, setOpen] = React.useState(false);
 
-  // define a state variable (using the state hook).
-  // if this variable changes, the component will re-render, but the variable will
-  // keep its value throughout render cycles.
-  // a component can have as many state variables as you like.
-  // more information can be found under https://reactjs.org/docs/hooks-state.html
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  
+
+
 
   const logout = async () => {
     const token = sessionStorage.getItem('token');
@@ -71,11 +77,57 @@ const Hub = () => {
     })
   }
 
-  // the effect hook can be used to react to change in your component.
-  // in this case, the effect hook is only run once, the first time the component is mounted
-  // this can be achieved by leaving the second argument an empty array.
-  // for more information on the effect hook, please see https://reactjs.org/docs/hooks-effect.html
-  
+  const joinLobby = async () => {
+    try{
+      console.log(lobbyKey)
+      await api(false,false).post('/lobby/join/' + lobbyKey);
+
+      history.push({
+        pathname: '/lobby'
+      })
+    }catch (error) {
+      console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
+      console.error("Details:", error);
+      alert("Something went wrong while fetching the users! See the console for details.");
+  }
+
+    
+  }
+
+  FormDialog = (
+    <Button className="hub hubbutton"
+        onClick={handleClickOpen}
+        >
+          <IconPersonPlus></IconPersonPlus>
+          <h2>Join a game</h2>
+          <p>Join a game of one of your friends.</p>
+
+        
+    <Dialog open={open} onClose={handleClose}>
+      <DialogTitle>Join a Lobby</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+        Enter a code to join an existing lobby.
+        </DialogContentText>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Lobby code"
+          fullWidth
+          variant="standard"
+          value={lobbyKey}
+          placeholder=""
+          onChange={n => setLobbyKey(n)}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={joinLobby}>Subscribe</Button>
+      </DialogActions>
+    </Dialog>
+    </Button>
+);
 
   let content = <Spinner/>;
 
@@ -111,12 +163,9 @@ const Hub = () => {
             <IconProfile></IconProfile>
             <h2>Profile</h2>
             <p>See your Profile</p>
+            
           </Button>
-          <Button className="hub hubbutton">
-            <IconPersonPlus></IconPersonPlus>
-            <h2>Join a game</h2>
-            <p>Join a game of one of your friends.</p>
-          </Button>
+          {FormDialog}
           <Button
           className="hub hubbutton"
           onClick={() => logout()}
