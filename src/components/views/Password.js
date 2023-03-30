@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {api, handleError} from 'helpers/api';
 import {useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
-import 'styles/views/Login.scss';
+import 'styles/views/Register.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 
@@ -14,13 +14,14 @@ specific components that belong to the main one and the same file. :)
  */
 const FormField = props => {
   return (
-    <div className="login field">
-      <label className="login label">
+    <div className="register field">
+      <label className="register label">
         {props.label}
       </label>
       <input
-        className="login input"
-        placeholder="enter here.."
+          type="password"
+        className="register input"
+        placeholder="***********"
         value={props.value}
         onChange={e => props.onChange(e.target.value)}
       />
@@ -34,7 +35,7 @@ FormField.propTypes = {
   onChange: PropTypes.func
 };
 
-const EditPassword = () => {
+const Password = () => {
   const history = useHistory();
   const {id} = useParams();
   const [oldPassword, setOldPassword] = useState(null);
@@ -44,20 +45,29 @@ const EditPassword = () => {
 
 
   const saveChanges = async () => {
-    try {
-      const requestBody = JSON.stringify({oldPassword, newPassword});
-      await api.put('/users/update' +id, requestBody);
-// Login successfully worked --> navigate to the route /game in the GameRouter
-      history.push(`/hub`);
-    } catch (error) {
-      alert(`Something went wrong during the editing: \n${handleError(error)}`);
+    if (newPassword !== newRepeatPassword) {
+      alert("The new passwords do not match!");
+    }
+    else {
+      try {
+        const requestBody = JSON.stringify({oldPassword, newPassword});
+        await api(sessionStorage.getItem('token'), false).put('/users/update/' + id, requestBody);
+        // Login successfully worked --> navigate to the route /game in the GameRouter
+        history.push(`/hub`);
+      } catch (error) {
+        alert(`Something went wrong during the editing: \n${handleError(error)}`);
+      }
     }
   };
 
+  const goToProfile = () => {
+    history.push(`/profile/`+id);
+  }
+
   return (
     <BaseContainer>
-      <div className="login container">
-        <div className="login form">
+      <div className="register container">
+        <div className="register form">
           <FormField
             label="old password"
             value={oldPassword}
@@ -73,7 +83,7 @@ const EditPassword = () => {
               value={newRepeatPassword}
               onChange={n => setNewRepeatPassword(n)}
           />
-          <div className="login button-container">
+          <div className="register button-container">
             <Button
               disabled={!oldPassword && !newPassword}
               width="100%"
@@ -82,7 +92,14 @@ const EditPassword = () => {
               save changes
             </Button>
           </div>
-
+          <div className="register button-container">
+            <Button
+                width="100%"
+                onClick={() => goToProfile()}
+            >
+              Back to profile view
+            </Button>
+          </div>
         </div>
       </div>
     </BaseContainer>
@@ -93,4 +110,4 @@ const EditPassword = () => {
  * You can get access to the history object's properties via the withRouter.
  * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
  */
-export default EditPassword;
+export default Password;

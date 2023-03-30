@@ -1,6 +1,5 @@
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import {GameGuard} from "components/routing/routeProtectors/GameGuard";
-import GameRouter from "components/routing/routers/GameRouter";
 import {LoginGuard} from "components/routing/routeProtectors/LoginGuard";
 import Login from "components/views/Login";
 import Hub from "components/views/Hub";
@@ -8,6 +7,9 @@ import Register from "../../views/Register";
 import EditProfile from "../../views/EditProfile";
 import EditPassword from "../../views/EditPassword";
 import WebSocket from "../../views/Websocket";
+import Profile from "../../views/Profile";
+import Password from "../../views/Password";
+import Lobby from "components/views/Lobby";
 /**
  * Main router of your application.
  * In the following class, different routes are rendered. In our case, there is a Login Route with matches the path "/login"
@@ -21,9 +23,9 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/game">
+        <Route path="/lobby">
           <GameGuard>
-            <GameRouter base="/game"/>
+            <Lobby/>
           </GameGuard>
         </Route>
         <Route path="/hub">
@@ -43,16 +45,16 @@ const AppRouter = () => {
         </Route>
         <Route path="/profile/:id">
           <GameGuard>
-            <EditProfile/>
+            <Profile/>
           </GameGuard>
         </Route>
         <Route path="/password/:id">
           <GameGuard>
-            <EditPassword/>
+            <Password/>
           </GameGuard>
         </Route>
         <Route exact path="/">
-          <Redirect to="/game"/>
+          <Redirect to="/hub"/>
         </Route>
         <Route path="/websocket">
           <WebSocket />
