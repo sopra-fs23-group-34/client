@@ -44,7 +44,7 @@ const Register = () => {
   const registerAccount = async () => {
     try {
       const requestBody = JSON.stringify({username, email ,password});
-      const response = await api.post('/users/create', requestBody);
+      const response = await api(false,false).post('/users/create', requestBody);
 
       // Get the returned user and update a new object.
       const user = new User(response.data);
@@ -55,7 +55,7 @@ const Register = () => {
 
 
       // Login successfully worked --> navigate to the route /game in the GameRouter
-      history.push(`/game`);
+      history.push(`/hub`);
     } catch (error) {
       alert(`Something went wrong during the register: \n${handleError(error)}`);
     }
