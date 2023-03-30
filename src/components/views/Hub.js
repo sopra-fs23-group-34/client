@@ -37,7 +37,6 @@ const Hub = () => {
   const logout = async () => {
     const token = localStorage.getItem('token');
     const Id = localStorage.getItem('id');
-
     await api(token, Id).put('/users/logout/'+Id)
     localStorage.removeItem('id');
     localStorage.removeItem('token');
