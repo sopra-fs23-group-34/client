@@ -4,6 +4,9 @@ import {LoginGuard} from "components/routing/routeProtectors/LoginGuard";
 import Login from "components/views/Login";
 import Hub from "components/views/Hub";
 import Register from "../../views/Register";
+import EditProfile from "../../views/EditProfile";
+import EditPassword from "../../views/EditPassword";
+import WebSocket from "../../views/Websocket";
 import Profile from "../../views/Profile";
 import Password from "../../views/Password";
 import Lobby from "components/views/Lobby";
@@ -52,6 +55,9 @@ const AppRouter = () => {
         </Route>
         <Route exact path="/">
           <Redirect to="/hub"/>
+        </Route>
+        <Route path="/websocket">
+          <WebSocket />{/*This has to be changed, its only for easier testing*/}
         </Route>
       </Switch>
     </BrowserRouter>
