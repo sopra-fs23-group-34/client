@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {api, handleError} from 'helpers/api';
 import {useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
@@ -38,17 +38,49 @@ const Profile = () => {
     const history = useHistory();
     const {id} = useParams();
     const [username, setUsername] = useState(null);
+    const [usernamePreview, setUsernamePreview] = useState(null);
     const [email, setEmail] = useState(null);
+    const [emailPreview, setEmailPreview] = useState(null);
     const [bio, setBio] = useState(null);
+    const [bioPreview, setBioPreview] = useState(null);
 
+    useEffect(() => {
+        // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
+        async function fetchData() {
+            try {
+                console.log("id: " + id);
+                const response = await api(sessionStorage.getItem('token'), false).get('/users/getUser/' + id);
+
+                // Get the returned users and update the state.
+                setUsernamePreview(response.data['username']);
+                setEmailPreview(response.data['email']);
+                setBioPreview(response.data['bio']);
+
+                // This is just some data for you to see what is available.
+                // Feel free to remove it.
+                console.log('request to:', response.request.responseURL);
+                console.log('status code:', response.status);
+                console.log('status text:', response.statusText);
+                console.log('requested data:', response.data);
+
+                // See here to get more data.
+                console.log(response);
+            } catch (error) {
+                console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
+                console.error("Details:", error);
+                alert("Something went wrong while fetching the users! See the console for details.");
+            }
+        }
+        fetchData();
+    }, []);
 
 
     const saveChanges = async () => {
         try {
             const requestBody = JSON.stringify({username, email, bio});
             await api(sessionStorage.getItem('token'), false).put('/users/update/' +id, requestBody);
-// Login successfully worked --> navigate to the route /game in the GameRouter
-            history.push(`/hub`);
+            // Login successfully worked --> navigate to the route /hub in the GameRouter
+            history.push(`/profile/`+id);
         } catch (error) {
             alert(`Something went wrong during the editing: \n${handleError(error)}`);
         }
@@ -65,26 +97,27 @@ const Profile = () => {
         history.push(`/hub`);
     }
 
-    return (
+    let content;
+    content= (
         <BaseContainer>
             <div className="profile container">
                 <div className="profile form">
                     <FormField
                         label="Username"
                         value={username}
-                        placeholder={sessionStorage.getItem("username")}
+                        placeholder={usernamePreview}
                         onChange={un => setUsername(un)}
                     />
                     <FormField
                         label="email"
                         value={email}
-                        placeholder={sessionStorage.getItem("email")}
+                        placeholder={emailPreview}
                         onChange={n => setEmail(n)}
                     />
                     <FormField
                         label="bio"
                         value={bio}
-                        placeholder={sessionStorage.getItem("bio")}
+                        placeholder={bioPreview}
                         onChange={n => setBio(n)}
                     />
                     <div className="profile button-container">
@@ -114,6 +147,8 @@ const Profile = () => {
             </div>
         </BaseContainer>
     );
+
+    return (content);
 };
 
 /**
