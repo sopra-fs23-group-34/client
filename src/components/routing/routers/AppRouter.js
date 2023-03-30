@@ -57,7 +57,7 @@ const AppRouter = () => {
           <Redirect to="/hub"/>
         </Route>
         <Route path="/websocket">
-          <WebSocket />
+          <WebSocket />{/*This has to be changed, its only for easier testing*/}
         </Route>
       </Switch>
     </BrowserRouter>
