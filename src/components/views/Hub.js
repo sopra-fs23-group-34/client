@@ -1,4 +1,4 @@
-import {api, handleError} from 'helpers/api';
+import {api} from 'helpers/api';
 import {Spinner} from 'components/ui/Spinner';
 import {Button} from 'components/ui/Button';
 import {useHistory} from 'react-router-dom';
@@ -8,85 +8,17 @@ import IconBarChart from 'resources/BarChartIcon';
 import IconPlusCircle from 'resources/PlusCircleIcon';
 import IconRankingStar from 'resources/RankingStarIcon';
 import IconProfile from 'resources/ProfileIcon';
-import IconPersonPlus from 'resources/PersonPlusIcon';
 import IconDoorExit from 'resources/LogOutIcon';
 import * as React from 'react';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { TextField } from '@mui/material';
-
-const FormField = props => {
-  return (
-    <div className="login field">
-      <label className="login label">
-        {props.label}
-      </label>
-      <input
-        className="login input"
-        placeholder="enter here.."
-        value={props.value}
-        onChange={e => props.onChange(e.target.value)}
-      />
-    </div>
-  );
-};
-
-
-const FormDialog = (props) => {
-  return (
-    <Button className="hub hubbutton"
-      onClick={e => props.onChange(e.target.value)}
-    >
-      <IconPersonPlus></IconPersonPlus>
-      <h2>Join a game</h2>
-      <p>Join a game of one of your friends.</p>
-      <Dialog open={e => props.onChange(e.target.value)} onClose={e => props.onClose(e.target.value)}>
-        <DialogTitle>Join a Lobby</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Enter a code to join an existing lobby.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Lobby code"
-            fullWidth
-            variant="standard"
-            value={props.lobbyKey}
-            placeholder=""
-            onChange={e => props.onChange(e.lobbyKey)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={e => props.onChange(e.target.value)}>Cancel</Button>
-          <Button onClick={e => props.onChange(e.target.value)}>Subscribe</Button>
-        </DialogActions>
-      </Dialog>
-    </Button>
-  )
-};
-
+import PopUp from 'resources/PopUp'
 
 const Hub = () => {
   // use react-router-dom's hook to access the history
   const history = useHistory();
-  const [lobbyKey, setLobbyKey] = React.useState("");
-  
-  const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
 
-  
+
   const logout = async () => {
     const token = sessionStorage.getItem('token');
     const Id = sessionStorage.getItem('id');
@@ -124,25 +56,6 @@ const Hub = () => {
     })
   }
 
-  const joinLobby = async () => {
-    try{
-      console.log(lobbyKey)
-      await api(false,false).post('/lobby/join/' + lobbyKey);
-
-      history.push({
-        pathname: '/lobby'
-      })
-    }catch (error) {
-      console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
-      console.error("Details:", error);
-      alert("Something went wrong while fetching the users! See the console for details.");
-  }
-
-    
-  }
-
-
-
   let content = <Spinner/>;
 
     content = (
@@ -179,10 +92,7 @@ const Hub = () => {
             <p>See your Profile</p>
             
           </Button>
-          <FormDialog
-            lobbyKey={lobbyKey}
-            onChange={e => console.log(e)}
-          />
+          <PopUp/>
           <Button
           className="hub hubbutton"
           onClick={() => logout()}
