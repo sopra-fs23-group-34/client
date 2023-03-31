@@ -4,7 +4,7 @@ import SockJsClient from 'react-stomp';
 
 
     
-export default WebSocket = () => {
+export default WebSocketElement = () => {
   const [ref, setRef] = useState(null);
   const [counter, setCounter] = useState(0);
   const [header, setHeader] = useState("aosigdnoaisngd");
