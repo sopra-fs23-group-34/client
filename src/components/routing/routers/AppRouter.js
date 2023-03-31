@@ -4,7 +4,7 @@ import {LoginGuard} from "components/routing/routeProtectors/LoginGuard";
 import Login from "components/views/Login";
 import Hub from "components/views/Hub";
 import Register from "../../views/Register";
-import WebSocketElement from "../../views/Websocket";
+import WebSocket from "../../views/Websocket";
 import Profile from "../../views/Profile";
 import Password from "../../views/Password";
 import Lobby from "components/views/Lobby";
@@ -55,7 +55,7 @@ const AppRouter = () => {
           <Redirect to="/hub"/>
         </Route>
         <Route path="/websocket">
-          <WebSocketElement />{/*This has to be changed, its only for easier testing*/}
+          <WebSocket />{/*This has to be changed, its only for easier testing*/}
         </Route>
       </Switch>
     </BrowserRouter>

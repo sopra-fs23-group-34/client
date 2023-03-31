@@ -80,6 +80,7 @@ const Profile = () => {
             await api(sessionStorage.getItem('token'), false).put('/users/update/' +id, requestBody);
             // Login successfully worked --> navigate to the route /hub in the GameRouter
             history.push(`/profile/`+id);
+            alert("Changes saved successfully!")
         } catch (error) {
             alert(`Something went wrong during the editing: \n${handleError(error)}`);
         }

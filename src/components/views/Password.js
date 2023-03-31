@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
-import {api, handleError} from 'helpers/api';
+import {handleError} from 'helpers/api';
 import {useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/Register.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
+import axios from "axios";
+import {getDomain} from "../../helpers/getDomain";
 
 /*
 It is possible to add multiple components inside a single file,
@@ -50,8 +52,14 @@ const Password = () => {
     }
     else {
       try {
-        const requestBody = JSON.stringify({oldPassword, newPassword});
-        await api(sessionStorage.getItem('token'), false).put('/users/update/' + id, requestBody);
+        const requestBody = JSON.stringify({newPassword});
+        const headers = {};
+        headers['token'] = sessionStorage.getItem('token');
+        headers['password'] = oldPassword;
+        headers['Content-Type'] = 'application/json';
+        headers['Access-Control-Allow-Origin'] = '*';
+        const apiPassword = axios.create({baseURL: getDomain(), headers})
+        await apiPassword.put('/users/update/' + id, requestBody);
         // Login successfully worked --> navigate to the route /game in the GameRouter
         history.push(`/hub`);
       } catch (error) {
