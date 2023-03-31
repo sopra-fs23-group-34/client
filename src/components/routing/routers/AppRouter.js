@@ -4,8 +4,6 @@ import {LoginGuard} from "components/routing/routeProtectors/LoginGuard";
 import Login from "components/views/Login";
 import Hub from "components/views/Hub";
 import Register from "../../views/Register";
-import EditProfile from "../../views/EditProfile";
-import EditPassword from "../../views/EditPassword";
 import WebSocket from "../../views/Websocket";
 import Profile from "../../views/Profile";
 import Password from "../../views/Password";
