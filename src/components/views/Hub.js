@@ -18,13 +18,63 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { TextField } from '@mui/material';
 
+const FormField = props => {
+  return (
+    <div className="login field">
+      <label className="login label">
+        {props.label}
+      </label>
+      <input
+        className="login input"
+        placeholder="enter here.."
+        value={props.value}
+        onChange={e => props.onChange(e.target.value)}
+      />
+    </div>
+  );
+};
+
+
+const FormDialog = (props) => {
+  return (
+    <Button className="hub hubbutton"
+      onClick={e => props.onChange(e.target.value)}
+    >
+      <IconPersonPlus></IconPersonPlus>
+      <h2>Join a game</h2>
+      <p>Join a game of one of your friends.</p>
+      <Dialog open={e => props.onChange(e.target.value)} onClose={e => props.onClose(e.target.value)}>
+        <DialogTitle>Join a Lobby</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Enter a code to join an existing lobby.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Lobby code"
+            fullWidth
+            variant="standard"
+            value={props.lobbyKey}
+            placeholder=""
+            onChange={e => props.onChange(e.lobbyKey)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={e => props.onChange(e.target.value)}>Cancel</Button>
+          <Button onClick={e => props.onChange(e.target.value)}>Subscribe</Button>
+        </DialogActions>
+      </Dialog>
+    </Button>
+  )
+};
+
 
 const Hub = () => {
   // use react-router-dom's hook to access the history
   const history = useHistory();
-  const [lobbyKey, setLobbyKey] = React.useState(null);
-  
-  let FormDialog;
+  const [lobbyKey, setLobbyKey] = React.useState("");
   
   const [open, setOpen] = React.useState(false);
 
@@ -37,9 +87,6 @@ const Hub = () => {
   };
 
   
-
-
-
   const logout = async () => {
     const token = sessionStorage.getItem('token');
     const Id = sessionStorage.getItem('id');
@@ -94,40 +141,7 @@ const Hub = () => {
     
   }
 
-  FormDialog = (
-    <Button className="hub hubbutton"
-        onClick={handleClickOpen}
-        >
-          <IconPersonPlus></IconPersonPlus>
-          <h2>Join a game</h2>
-          <p>Join a game of one of your friends.</p>
 
-        
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Join a Lobby</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-        Enter a code to join an existing lobby.
-        </DialogContentText>
-        <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="Lobby code"
-          fullWidth
-          variant="standard"
-          value={lobbyKey}
-          placeholder=""
-          onChange={n => setLobbyKey(n)}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={joinLobby}>Subscribe</Button>
-      </DialogActions>
-    </Dialog>
-    </Button>
-);
 
   let content = <Spinner/>;
 
@@ -165,7 +179,10 @@ const Hub = () => {
             <p>See your Profile</p>
             
           </Button>
-          {FormDialog}
+          <FormDialog
+            lobbyKey={lobbyKey}
+            onChange={e => console.log(e)}
+          />
           <Button
           className="hub hubbutton"
           onClick={() => logout()}
