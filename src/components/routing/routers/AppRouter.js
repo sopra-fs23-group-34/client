@@ -8,6 +8,7 @@ import WebSocket from "../../views/Websocket";
 import Profile from "../../views/Profile";
 import Password from "../../views/Password";
 import Lobby from "components/views/Lobby";
+import Hub2 from "components/views/Hub copy"
 /**
  * Main router of your application.
  * In the following class, different routes are rendered. In our case, there is a Login Route with matches the path "/login"
@@ -53,6 +54,9 @@ const AppRouter = () => {
         </Route>
         <Route exact path="/">
           <Redirect to="/hub"/>
+        </Route>
+        <Route exact path="/hubTest">
+          <Hub2/>
         </Route>
         <Route path="/websocket">
           <WebSocket />{/*This has to be changed, its only for easier testing*/}
