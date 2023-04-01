@@ -10,37 +10,61 @@ const WebSocketElement = () => {
   const [counter, setCounter] = useState(0);
   const [header, setHeader] = useState("aosigdnoaisngd");
   const [players, setPlayers] = useState([]);
+  const [roundScore, setRoundScore] = useState(0);
 
   const startGame = () => {
-    console.log("oasdg");
-    ref.sendMessage('/app/startGame/test',JSON.stringify({'content': "startGame"}) );
+    ref.sendMessage('/app/startGame/test',JSON.stringify({'roundLimit': 2, "foodCategory": "FRUITS"}) );
   };
 
   const joinGame = () => {
-    console.log("oasdg");
-    ref.sendMessage('/app/join/test',JSON.stringify({'content': "startGame"}) );
+    ref.sendMessage('/app/join/test/10',JSON.stringify({'content': "startGame"}) );
   };
 
-  const HandleMessage = (msg) => {
-    if (typeof msg === 'number') {
-      setCounter(msg);
-    }
-    else if (Array.isArray(msg)) { 
-      setPlayers(msg);
-    }
-    else {
-      setHeader(msg.content);
-    }
+  const makeGuess = () => {
+    ref.sendMessage('/app/guess/test/10',JSON.stringify({'carbs': 100}) );
   };
+
+  const handlePlayers = (msg) => {
+    console.log(msg.content)
+    setPlayers(msg.content);
+  };
+
+  const handleStartGame = (msg) => {
+    setHeader(msg.content);
+  };
+
+  const handleTimer = (msg) => {
+    setCounter(msg.content);
+  };
+
+  const handleRoundScore = (msg) => {
+    setRoundScore(msg.content);
+  };
+
+  const topicHandlers = {
+    'players': handlePlayers,
+    'startGame': handleStartGame,
+    'timer': handleTimer,
+    'RoundScore': handleRoundScore
+  };
+  
+  
+  function handleMessage(msg) {
+    const handler = topicHandlers[msg.topic];
+    if (handler) {
+      handler(msg);
+    }
+  }
+  
 
 
    return (
     <div className="register field">
            <h2>ahsdfasasogunpaoidgnpoaisngpoianpogin</h2>
       <SockJsClient url='http://localhost:8080/ws'
-              topics={['/lobbys/messages']}
+              topics={['/topic/lobbies/test',  '/topic/players/'+10]}
               onMessage={(msg) => {
-                HandleMessage(msg);
+                handleMessage(msg);
               }}
               ref={(client) => { setRef(client)}}
               onConnect={console.log("sdgoinaosgin")}
@@ -48,6 +72,8 @@ const WebSocketElement = () => {
        <h3>{header}</h3>
        <Button onClick={joinGame} > Join game</Button>
        <Button onClick={startGame} > Start Game</Button>
+       <Button onClick={makeGuess} > Guess 10</Button>
+       <h2 style={{color: 'red'}}>Your score is: {roundScore}</h2>
        <TableContainer component={Paper} style={{ width: '50%', margin: '0 auto' }}>
         <Table>
           <TableHead>
