@@ -8,6 +8,7 @@ import WebSocket from "../../views/Websocket";
 import Profile from "../../views/Profile";
 import Password from "../../views/Password";
 import Lobby from "components/views/Lobby";
+
 /**
  * Main router of your application.
  * In the following class, different routes are rendered. In our case, there is a Login Route with matches the path "/login"

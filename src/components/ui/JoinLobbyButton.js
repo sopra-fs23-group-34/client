@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import IconPersonPlus from './PersonPlusIcon';
+import IconPersonPlus from '../../resources/PersonPlusIcon';
 import { Button } from 'components/ui/Button';
 import "styles/views/Hub.scss";
 import {api, handleError} from "helpers/api";
