@@ -2,6 +2,7 @@ import { Button } from 'components/ui/Button';
 import React, {  useState } from 'react';
 import SockJsClient from 'react-stomp';
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
+import { Typography } from '@mui/material';
 
 
     
@@ -10,18 +11,28 @@ const WebSocketElement = () => {
   const [counter, setCounter] = useState(0);
   const [header, setHeader] = useState("aosigdnoaisngd");
   const [players, setPlayers] = useState([]);
-  const [roundScore, setRoundScore] = useState(0);
+  const [roundScore, setRoundScore] = useState({});
+  const [finalScore, setFinalScore] = useState({});
+  const [food, setFood] = useState(null);
+  const [roundEnd, setRoundEnd] = useState({});
+  const [gameScore, setGameScore] = useState({});
 
+  const gameCode = "QG0EET";
+  const user_id = 19;
   const startGame = () => {
-    ref.sendMessage('/app/startGame/test',JSON.stringify({'roundLimit': 2, "foodCategory": "FRUITS"}) );
+    ref.sendMessage('/app/startGame/' + gameCode , JSON.stringify({'roundLimit': 1, "foodCategory": "FRUITS"}) );
   };
 
   const joinGame = () => {
-    ref.sendMessage('/app/join/test/10',JSON.stringify({'content': "startGame"}) );
+    ref.sendMessage('/app/join/' + gameCode + '/' + user_id,JSON.stringify({'content': "startGame"}) );
   };
 
   const makeGuess = () => {
-    ref.sendMessage('/app/guess/test/10',JSON.stringify({'carbs': 100}) );
+    ref.sendMessage('/app/guess/'+ gameCode +'/' + user_id,JSON.stringify({
+      content: {
+        'carbs': 10
+      }
+    }) );
   };
 
   const handlePlayers = (msg) => {
@@ -41,14 +52,34 @@ const WebSocketElement = () => {
     setRoundScore(msg.content);
   };
 
+  const handleGameScore = (msg) => {
+    setGameScore(msg.content);
+  };
+
+  const handleFinalScore = (msg) => {
+    setFinalScore(msg.content);
+  };
+
+  const handleFood = (msg) => {
+    setFood(msg.content);
+  };
+
+  const handleRoundEnd = (msg) => {
+    setRoundEnd(msg.content);
+  };
+
   const topicHandlers = {
     'players': handlePlayers,
     'startGame': handleStartGame,
-    'timer': handleTimer,
-    'RoundScore': handleRoundScore
+    'Timer': handleTimer,
+    'RoundScore': handleRoundScore,
+    'GameScore': handleGameScore,
+    'FinalScore': handleFinalScore,
+    'Food': handleFood,
+    'RoundEnd': handleRoundEnd,
   };
   
-  
+
   function handleMessage(msg) {
     const handler = topicHandlers[msg.topic];
     if (handler) {
@@ -62,7 +93,7 @@ const WebSocketElement = () => {
     <div className="register field">
            <h2>ahsdfasasogunpaoidgnpoaisngpoianpogin</h2>
       <SockJsClient url='http://localhost:8080/ws'
-              topics={['/topic/lobbies/test',  '/topic/players/'+10]}
+              topics={['/topic/lobbies/'+ gameCode,  '/topic/players/'+ user_id]}
               onMessage={(msg) => {
                 handleMessage(msg);
               }}
@@ -72,8 +103,6 @@ const WebSocketElement = () => {
        <h3>{header}</h3>
        <Button onClick={joinGame} > Join game</Button>
        <Button onClick={startGame} > Start Game</Button>
-       <Button onClick={makeGuess} > Guess 10</Button>
-       <h2 style={{color: 'red'}}>Your score is: {roundScore}</h2>
        <TableContainer component={Paper} style={{ width: '50%', margin: '0 auto' }}>
         <Table>
           <TableHead>
@@ -93,8 +122,24 @@ const WebSocketElement = () => {
         </Table>
       </TableContainer>
        <h2>{counter}</h2>
+       <Typography align='center'>Round Timer: {counter}</Typography>
+       <Typography align='center'>The food is: {food}</Typography>
+       <Button onClick={makeGuess} > Guess 10</Button>
+       {Object.keys(roundScore).map((key)  => (
+         <div key={key}>
+           <h3>{key}</h3>
+           <ul>
+             <li>Actual values: {roundScore[key][0].actualValues}</li>
+             <li>Guessed values: {roundScore[key][1].guessedValues}</li>
+             <li>Deviations: {roundScore[key][2].deviations}</li>
+           </ul>
+         </div>
+         ))}
+       <Typography align='center'>Game Score: {Object.values(gameScore).join(", ")}</Typography>
+       <Typography align='center'>Final Scores: {Object.values(finalScore).join(", ")}</Typography>
 
-    </div>
+     </div>
+     
   );
 };
 /**
