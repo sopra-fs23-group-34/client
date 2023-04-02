@@ -1,6 +1,7 @@
 import { Button } from "components/ui/Button"
 import { useHistory } from "react-router-dom"
 import IconRankingStar from "resources/RankingStarIcon";
+
 export default function LeaderboardButton() {
     const history = useHistory();
     const gotoLeaderboard = () => {

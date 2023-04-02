@@ -9,7 +9,7 @@ export default function StatsButton() {
         })
       }
     return (
-        <Button className="hub hubbutton"
+        <Button margin = "auto" className="hub hubbutton"
           onClick={() => gotoStats()}
           >
             <IconBarChart></IconBarChart>
