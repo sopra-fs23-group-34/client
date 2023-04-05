@@ -8,6 +8,13 @@ import WebSocket from "../../views/Websocket";
 import Profile from "../../views/Profile";
 import Password from "../../views/Password";
 import Lobby from "components/views/Lobby";
+import {WebsocketWrapperComponent } from "components/views/WebsocketWrapper";
+import Guesses from "components/views/Guesses";
+import RoundScore from "components/views/RoundScore";
+import FinalScore from "components/views/FinalScore";
+
+
+
 
 /**
  * Main router of your application.
@@ -22,11 +29,6 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/lobby">
-          <GameGuard>
-            <Lobby/>
-          </GameGuard>
-        </Route>
         <Route path="/hub">
           <GameGuard>
             <Hub/>
@@ -57,6 +59,22 @@ const AppRouter = () => {
         </Route>
         <Route path="/websocket">
           <WebSocket />{/*This has to be changed, its only for easier testing*/}
+        </Route>
+        <Route path="/*">
+          <WebsocketWrapperComponent> 
+            <Route path="/lobby">
+                <Lobby/>
+            </Route>
+              <Route path="/guesses">
+                <Guesses />{/*This has to be changed, its only for easier testing*/}
+              </Route>
+              <Route path="/roundScore">
+                <RoundScore/>
+              </Route>
+              <Route path="/finalScore">
+                <FinalScore/>
+              </Route>
+          </WebsocketWrapperComponent>
         </Route>
       </Switch>
     </BrowserRouter>

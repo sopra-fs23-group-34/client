@@ -3,6 +3,7 @@ import React, {  useState } from 'react';
 import SockJsClient from 'react-stomp';
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 import { Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 
     
@@ -16,8 +17,9 @@ const WebSocketElement = () => {
   const [food, setFood] = useState(null);
   const [roundEnd, setRoundEnd] = useState({});
   const [gameScore, setGameScore] = useState({});
+
   console.log(roundEnd)
-  const gameCode = "6AWTEX";
+  const gameCode = "MI1MGN";
   const user_id = 19; 
   const startGame = () => {
     ref.sendMessage('/app/startGame/' + gameCode , JSON.stringify({'roundLimit': 1, "foodCategory": "FRUITS"}) );
@@ -93,7 +95,7 @@ const WebSocketElement = () => {
     <div className="register field">
            <h2>ahsdfasasogunpaoidgnpoaisngpoianpogin</h2>
       <SockJsClient url='http://localhost:8080/ws'
-              topics={['/topic/lobbies/'+ gameCode,  '/topic/players/'+ user_id]}
+              topics={['/topic/lobbies/' + gameCode,  '/topic/players/' + user_id]}
               onMessage={(msg) => {
                 handleMessage(msg);
               }}
@@ -103,6 +105,9 @@ const WebSocketElement = () => {
        <h3>{header}</h3>
        <Button onClick={joinGame} > Join game</Button>
        <Button onClick={startGame} > Start Game</Button>
+       <h2>hallo</h2>
+       <Link to={{ pathname: "/bliblablub", data: ref }}>Bliblablub</Link>
+        <h2>hallo</h2>
        <TableContainer component={Paper} style={{ width: '50%', margin: '0 auto' }}>
         <Table>
           <TableHead>
@@ -134,6 +139,7 @@ const WebSocketElement = () => {
              <li>Deviations: {roundScore[key][2].deviations}</li>
            </ul>
          </div>
+                    
          ))}
        <Typography align='center'>Game Score: {Object.values(gameScore).join(", ")}</Typography>
        <Typography align='center'>Final Scores: {Object.values(finalScore).join(", ")}</Typography>
@@ -148,3 +154,4 @@ const WebSocketElement = () => {
  */
 
 export default WebSocketElement;
+
