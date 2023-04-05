@@ -23,7 +23,7 @@ Player.propTypes = {
 const Lobby = () => {
     // use react-router-dom's hook to access the history
     const history = useHistory();
-    const {ref, lastMessage} = useContext(WebsocketWrapper);
+    const {ref, msg} = useContext(WebsocketWrapper);
     const [gameCode, setGameCode] = useState(null);
     
     // define a state variable (using the state hook).
