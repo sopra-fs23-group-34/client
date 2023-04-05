@@ -60,7 +60,7 @@ const AppRouter = () => {
         </Route>
         <Route path="/*">
           <WebsocketWrapperComponent> 
-            <Route path="/lobby">
+            <Route path="/lobby/:gamecode/:id">
                 <Lobby/>
             </Route>
               <Route path="/guesses">
