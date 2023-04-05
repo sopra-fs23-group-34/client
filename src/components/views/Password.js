@@ -59,7 +59,7 @@ const Password = () => {
         headers['Content-Type'] = 'application/json';
         headers['Access-Control-Allow-Origin'] = '*';
         const apiPassword = axios.create({baseURL: getDomain(), headers})
-        await apiPassword.put('/users/update/' + id, requestBody);
+        await apiPassword(sessionStorage.getItem('token'), oldPassword).put('/users/update/' + id, requestBody);
         // Login successfully worked --> navigate to the route /game in the GameRouter
         history.push(`/hub`);
       } catch (error) {
