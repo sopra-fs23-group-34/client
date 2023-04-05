@@ -7,7 +7,7 @@ import Register from "../../views/Register";
 import WebSocket from "../../views/Websocket";
 import Profile from "../../views/Profile";
 import Password from "../../views/Password";
-import Lobby from "components/views/Lobby";
+import Lobby from "components/views/WebsocketViews/Lobby";
 import {WebsocketWrapperComponent } from "components/views/WebsocketViews/WebsocketWrapper";
 import Guesses from "components/views/WebsocketViews/Guesses";
 import RoundScore from "components/views/WebsocketViews/RoundScore";
@@ -60,7 +60,7 @@ const AppRouter = () => {
         </Route>
         <Route path="/*">
           <WebsocketWrapperComponent> 
-            <Route path="/lobby">
+            <Route path="/lobby/:gamecode/:id">
                 <Lobby/>
             </Route>
               <Route path="/guesses">
