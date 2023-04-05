@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import SockJsClient from 'react-stomp';
 
 // Define a separate context to hold the states from SockJsClient
@@ -10,6 +10,9 @@ export function WebsocketWrapperComponent({children}) {
   const [gameCode, setGameCode] = useState(null);
   const [userid, setuserid] = useState(null);
 
+  setGameCode(sessionStorage.getItem("gameCode"));
+  setuserid(sessionStorage.getItem("id"));
+
   const handleMessage = (msg) => {
     setMsg(msg);
   };
@@ -18,7 +21,7 @@ export function WebsocketWrapperComponent({children}) {
     <WebsocketWrapper.Provider value={{ ref , msg, gameCode, userid }}>
       <SockJsClient
         url='http://localhost:8080/ws'
-        topics={['/topic/lobbies/' + "" , '/topic/players/' + ""]}
+        topics={['/topic/lobbies/' + gameCode , '/topic/players/' + userid]}
         onMessage={(msg) => {
           handleMessage(msg);
         }}

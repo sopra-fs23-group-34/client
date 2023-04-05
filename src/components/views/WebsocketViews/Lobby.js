@@ -46,7 +46,7 @@ const Lobby = () => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function fetchData() {
             try {
-
+                
                 // delays continuous execution of an async operation for 1 second.
 
             } catch (error) {
