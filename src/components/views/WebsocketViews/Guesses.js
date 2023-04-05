@@ -8,7 +8,6 @@ import {Slider} from "@mui/material";
 
 const Guesses = () => {
 
-
   return (
       <BaseContainer>
 
