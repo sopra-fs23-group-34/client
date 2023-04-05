@@ -1,6 +1,8 @@
 import React, {useContext, useState} from 'react';
-import 'styles/views/Login.scss';
+import 'styles/views/Slider.scss';
 import { WebsocketWrapper } from './WebsocketWrapper';
+import BaseContainer from "../../ui/BaseContainer";
+import {Slider} from "@mui/material";
 
 
 
@@ -8,9 +10,32 @@ const Guesses = () => {
 
 
   return (
-      <div>
-      <h1>asdf</h1>
-    </div>
+      <BaseContainer>
+
+          <div className="slider form">
+              <h2>Enter Protein</h2>
+      <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
+          </div>
+
+          <div className="slider form">
+              <h2>Enter Fat</h2>
+
+              <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
+          </div>
+
+          <div className="slider form">
+              <h2>Enter Carbs</h2>
+
+              <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
+          </div>
+
+          <div className="slider form">
+              <h2>Enter Sugar</h2>
+
+              <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
+          </div>
+
+        </BaseContainer>
   );
 };
 
