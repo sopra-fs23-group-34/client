@@ -19,7 +19,7 @@ const WebSocketElement = () => {
   const [gameScore, setGameScore] = useState({});
 
   console.log(roundEnd)
-  const gameCode = "MI1MGN";
+  const gameCode = "3GVM9S";
   const user_id = 19; 
   const startGame = () => {
     ref.sendMessage('/app/startGame/' + gameCode , JSON.stringify({'roundLimit': 1, "foodCategory": "FRUITS"}) );

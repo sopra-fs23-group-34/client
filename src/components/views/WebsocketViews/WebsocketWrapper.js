@@ -17,11 +17,12 @@ export function WebsocketWrapperComponent({children}) {
   }, []);
 
   const handleMessage = (msg) => {
+    console.log(msg)
     setMsg(msg);
   };
 
   return (
-    <WebsocketWrapper.Provider value={{ ref , msg, gameCode, userid }}>
+    <WebsocketWrapper.Provider value={{ ref , msg }}>
       <SockJsClient
         url='http://localhost:8080/ws'
         topics={['/topic/lobbies/' + gameCode , '/topic/players/' + userid]}
