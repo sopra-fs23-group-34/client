@@ -64,7 +64,7 @@ const AppRouter = () => {
                 <Lobby/>
             </Route>
               <Route path="/guesses">
-                <Guesses />{/*This has to be changed, its only for easier testing*/}
+                <Guesses />
               </Route>
               <Route path="/roundScore">
                 <RoundScore/>

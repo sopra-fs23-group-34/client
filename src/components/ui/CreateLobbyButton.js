@@ -7,7 +7,7 @@ export default function CreateLobbyButton() {
     const createLobby = async () => {
 
       const userId = sessionStorage.getItem('id');
-      const response = await api(false, userId).post('/lobby/create');
+      const response = await api(false, userId).post('/lobbys/create');
       console.log(response.data)
         history.push({
           pathname: '/lobby',
