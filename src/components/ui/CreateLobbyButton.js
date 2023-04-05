@@ -1,11 +1,19 @@
 import { Button } from "components/ui/Button"
 import { useHistory } from "react-router-dom"
 import IconPlusCircle from "resources/PlusCircleIcon";
+import { api } from "helpers/api";
 export default function CreateLobbyButton() {
     const history = useHistory();
-    const createLobby = () => {
+    const createLobby = async () => {
+
+      const userId = sessionStorage.getItem('id');
+      const response = await api(false, userId).post('/lobby/create');
+      console.log(response.data)
         history.push({
-          pathname: '/lobby'
+          pathname: '/lobby',
+          state: {
+            gameCode:response.data
+          }
         })
       }
     return (
