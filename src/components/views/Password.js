@@ -41,18 +41,18 @@ const Password = () => {
   const history = useHistory();
   const {id} = useParams();
   const [oldPassword, setOldPassword] = useState(null);
-  const [newPassword, setNewPassword] = useState(null);
+  const [password, setPassword] = useState(null);
   const [newRepeatPassword, setNewRepeatPassword] = useState(null);
 
 
 
   const saveChanges = async () => {
-    if (newPassword !== newRepeatPassword) {
+    if (password !== newRepeatPassword) {
       alert("The new passwords do not match!");
     }
     else {
       try {
-        const requestBody = JSON.stringify({newPassword});
+        const requestBody = JSON.stringify({password});
         const headers = {};
         headers['token'] = sessionStorage.getItem('token');
         headers['password'] = oldPassword;
@@ -83,8 +83,8 @@ const Password = () => {
           />
           <FormField
               label="new password"
-              value={newPassword}
-              onChange={n => setNewPassword(n)}
+              value={password}
+              onChange={n => setPassword(n)}
           />
           <FormField
               label="repeat new password"
@@ -93,7 +93,7 @@ const Password = () => {
           />
           <div className="register button-container">
             <Button
-              disabled={!oldPassword && !newPassword}
+              disabled={!oldPassword && !password}
               width="100%"
               onClick={() => saveChanges()}
             >
