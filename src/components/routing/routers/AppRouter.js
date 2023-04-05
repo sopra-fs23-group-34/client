@@ -8,12 +8,10 @@ import WebSocket from "../../views/Websocket";
 import Profile from "../../views/Profile";
 import Password from "../../views/Password";
 import Lobby from "components/views/Lobby";
-import {WebsocketWrapperComponent } from "components/views/WebsocketWrapper";
-import Guesses from "components/views/Guesses";
-import RoundScore from "components/views/RoundScore";
-import FinalScore from "components/views/FinalScore";
-
-
+import {WebsocketWrapperComponent } from "components/views/WebsocketViews/WebsocketWrapper";
+import Guesses from "components/views/WebsocketViews/Guesses";
+import RoundScore from "components/views/WebsocketViews/RoundScore";
+import FinalScore from "components/views/WebsocketViews/FinalScore";
 
 
 /**
@@ -73,7 +71,7 @@ const AppRouter = () => {
               </Route>
               <Route path="/finalScore">
                 <FinalScore/>
-              </Route>
+            </Route>
           </WebsocketWrapperComponent>
         </Route>
       </Switch>
