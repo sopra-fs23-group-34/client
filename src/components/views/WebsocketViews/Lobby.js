@@ -158,6 +158,7 @@ const Lobby = () => {
                 }}>
                 <Item>
                     <Button width = "100%"
+                    disabled={!foodCategory}
                     onClick = {
                         () => startGame() } >
                     Start Game 
