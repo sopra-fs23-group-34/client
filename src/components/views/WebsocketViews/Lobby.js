@@ -8,6 +8,12 @@ import "styles/views/Lobby.scss";
 import { WebsocketWrapper } from './WebsocketWrapper';
 import * as React from "react";
 import Box from '@mui/material/Box';
+import { Grid, Slider } from '@mui/material';
+import Item from 'components/ui/Item';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
 const Player = ({ user }) => ( 
@@ -24,7 +30,25 @@ Player.propTypes = {
 const Lobby = () => {
     // use react-router-dom's hook to access the history
     const history = useHistory();
-    const {msg} = useContext(WebsocketWrapper);
+    const {ref , msg} = useContext(WebsocketWrapper);
+    const [roundCount, setRoundCount] = useState(5);
+    const [foodCategory, setFoodCategory] = useState("");
+    const handleChangeCategory = (event) => {
+        setFoodCategory(event.target.value);
+      };
+    
+      const categories = [
+        "VEGETABLES",
+        "FRUITS",
+        "MEAT",
+        "SNACKS",
+        "DRINKS"
+      ]
+    
+    const handleChange = (event, newValue) => {
+        setRoundCount(newValue);
+        console.log(foodCategory)
+    }
 
     // define a state variable (using the state hook).
     // if this variable changes, the component will re-render, but the variable will
@@ -46,6 +70,10 @@ const Lobby = () => {
         history.push('/hub');
     }
 
+    const startGame = () => {
+        ref.sendMessage('/app/startGame/' + sessionStorage.getItem('gameCode') , JSON.stringify({'roundLimit': roundCount, "foodCategory": "FRUITS"}) );
+        history.push("/guesses");
+      };
     // the effect hook can be used to react to change in your component.
     // in this case, the effect hook is only run once, the first time the component is mounted
     // this can be achieved by leaving the second argument an empty array.
@@ -59,25 +87,84 @@ const Lobby = () => {
         <div className = "game"  style={{
             width: "100%"
         }}>
-            <Box
-                sx={{ 
-                width:"100%", 
-                height: 400, 
-                maxWidth: 360,
-                margin: "left",
-                marginLeft: "30px"}}
-            >
-                {users.map((user) => (
-                  <Player
-                  key={user.id}
-                  user={user} />
-                ))}   
-            </Box>
-            <Button width = "100%"
-            onClick = {
-                () => leaveLobby() } >
-            Leave Lobby 
-            </Button> 
+            <Grid container spacing={3} sx={{
+                width: "100%",
+                margin: "auto",
+                justifyContent: "space-around"
+            }}>
+                <Box item xs={3}
+                    sx={{ 
+                    width:"100%", 
+                    height: 400, 
+                    maxWidth: 360,
+                    margin: "left",
+                    marginLeft: "30px"}}
+                >
+                    {users.map((user) => (
+                      <Player
+                      key={user.id}
+                      user={user} />
+                    ))}   
+                </Box>
+                <Box item xs={3}>
+                    <h2>Number of Rounds</h2>
+                    <Slider 
+                    value={roundCount}
+                    aria-label="Default" 
+                    valueLabelDisplay="auto"
+                    min={1}
+                    max={10}
+                    onChange={handleChange}
+                    />
+                    <h2>Food categories</h2>
+                    <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="food-category-label">Food Category</InputLabel>
+        <Select
+          labelId="food-category-label"
+          id="food-category-label-select"
+          value={foodCategory}
+          label="Food Category"
+          onChange={handleChangeCategory}
+        >
+            {categories.map((category) => (
+                <MenuItem
+                key={category}
+                value={category}
+                >
+                    {category}
+                </MenuItem>
+            ))}
+        </Select>
+      </FormControl>
+    </Box>
+                </Box>
+            </Grid>
+            <Grid container spacing={3} sx={{
+                justifyContent: "space-between"
+            }}>
+                <Grid item xs={3}>
+                <Item>
+                    <Button width = "100%"
+                    onClick = {
+                        () => leaveLobby() } >
+                    Leave Lobby 
+                    </Button>
+                </Item>
+                </Grid>
+                <Grid item xs={5} sx={{
+                    justifyContent: "flex-end"
+                }}>
+                <Item>
+                    <Button width = "100%"
+                    onClick = {
+                        () => startGame() } >
+                    Start Game 
+                    </Button>
+                </Item>
+                </Grid>
+            </Grid>
+            
             </div>
         );
     }

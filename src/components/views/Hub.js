@@ -1,27 +1,17 @@
 import BaseContainer from "components/ui/BaseContainer";
 import "styles/views/Hub.scss";
 import * as React from 'react';
-import { styled } from '@mui/material';
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Paper from '@mui/material/Paper';
 import StatsButton from '../ui/StatsButton';
 import CreateLobbyButton from "../ui/CreateLobbyButton";
 import LeaderboardButton from "../ui/LeaderboardButton";
 import ProfileButton from "../ui/ProfileButton";
 import PopUp from "../ui/JoinLobbyButton";
 import LogoutButton from "../ui/LogoutButton";
+import Item from "components/ui/Item";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : "#262632",
-  ...theme.typography.body2,
-  boxShadow: "none",
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-  border: 0,
-  margin: "auto"
-}));
+
 
 
 export  function BasicGrid() {
