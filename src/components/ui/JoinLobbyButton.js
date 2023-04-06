@@ -20,11 +20,14 @@ export default function FormDialog() {
   const joinLobby = async () => {
     try{
       console.log(lobbyKey)
-      await api(false,false).post('/lobby/join/' + document.getElementById("name").value);
-
-      history.push({
-        pathname: '/lobby'
-      })
+      
+        sessionStorage.setItem("gameCode", lobbyKey);
+        history.push({
+          pathname: '/lobby',
+          state: {
+            gameCode:lobbyKey
+          }
+        })
     }catch (error) {
       console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
       console.error("Details:", error);
@@ -33,6 +36,11 @@ export default function FormDialog() {
     }
 
 
+    const handleChange = event => {
+      setLobbyKey(event.target.value);
+  
+      console.log('value is:', event.target.value);
+    };
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -57,17 +65,16 @@ export default function FormDialog() {
           <TextField
             autoFocus
             margin="dense"
-            id="name"
             label="Lobby Key"
             type="text"
             fullWidth
             variant="standard"
-            onChange={n => setLobbyKey(n)}
+            onChange={handleChange}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={joinLobby}>Subscribe</Button>
+          <Button onClick={joinLobby}>Join Lobby</Button>
         </DialogActions>
       </Dialog>
       </div>

@@ -9,12 +9,16 @@ export function WebsocketWrapperComponent({children}) {
   const [msg, setMsg] = useState(null);
   const [gameCode, setGameCode] = useState(null);
   const [userid, setuserid] = useState(null);
-
-  
+  const joinGame = () => {
+    ref.sendMessage('/app/join/' + gameCode + '/' + sessionStorage.getItem("id"), JSON.stringify({'content': "startGame"}));
+  }
   useEffect(() => {
     setGameCode(sessionStorage.getItem("gameCode"));
     setuserid(sessionStorage.getItem("id"));
-  }, []);
+    console.log('ref:', ref);
+    console.log('msg:', msg);
+
+  }, [ref, msg]);
 
   const handleMessage = (msg) => {
     console.log(msg)
@@ -30,7 +34,7 @@ export function WebsocketWrapperComponent({children}) {
           handleMessage(msg);
         }}
         ref={(client) => { setRef(client)}}
-        onConnect={() => console.log("connected")}
+        onConnect={() => joinGame()}
       />
       {children}
     </WebsocketWrapper.Provider>
