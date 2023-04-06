@@ -38,16 +38,15 @@ const Lobby = () => {
       };
     
       const categories = [
-        "VEGETABLES",
-        "FRUITS",
-        "MEAT",
-        "SNACKS",
-        "DRINKS"
+        "Vegetables",
+        "Fruits",
+        "Meat",
+        "Snacks",
+        "Drinks"
       ]
     
     const handleChange = (event, newValue) => {
         setRoundCount(newValue);
-        console.log(foodCategory)
     }
 
     // define a state variable (using the state hook).
@@ -71,7 +70,9 @@ const Lobby = () => {
     }
 
     const startGame = () => {
-        ref.sendMessage('/app/startGame/' + sessionStorage.getItem('gameCode') , JSON.stringify({'roundLimit': roundCount, "foodCategory": "FRUITS"}) );
+        const food = foodCategory.toUpperCase();
+        const gameCode = sessionStorage.getItem('gameCode');
+        ref.sendMessage('/app/startGame/' + gameCode , JSON.stringify({'roundLimit': roundCount, "foodCategory": food}) );
         history.push("/guesses");
       };
     // the effect hook can be used to react to change in your component.
