@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import 'styles/views/Slider.scss';
 import { WebsocketWrapper } from './WebsocketWrapper';
 import BaseContainer from "../../ui/BaseContainer";
@@ -17,8 +17,20 @@ const Guesses = () => {
     const [fat, setFat] = useState(50);
     const [carbs, setCarbs] = useState(50);
     const [sugar, setSugar] = useState(50);
+    const [timer, setTimer] = useState(15);
+    const [food, setFood] = useState("Food");
 
-    console.log("msg Guesses:", msg)
+
+    useEffect(() => {
+        if (msg && msg.topic === "Timer") {
+            setTimer(msg.content);
+        }
+
+        if (msg && msg.topic === "Food") {
+            setFood(msg.content);
+        }
+
+    }, [msg]);
 
     const setGuess = () => {
         const gameCode = sessionStorage.getItem('gameCode');
@@ -42,13 +54,18 @@ const Guesses = () => {
         setSugar(newValue);
     }
 
+    if (timer === 0) {
+        setGuess();
+    }
+
   return (
       <BaseContainer>
+          <h2>{timer}</h2>
           <div>
-          <img src="https://www.applesfromny.com/wp-content/uploads/2020/05/20Ounce_NYAS-Apples2.png" alt="Apple" className="slider image" />
-              <h1 className="slider subtitle">Apple</h1>
-          </div>
+          <img src="https://www.applesfromny.com/wp-content/uploads/2020/05/20Ounce_NYAS-Apples2.png" alt="Apple" className="slider image"/>
 
+          </div>
+          <h1 className="slider subtitle">{food}</h1>
           <div className="slider form">
               <h2 className='slider title'>Protein</h2>
               <Slider
