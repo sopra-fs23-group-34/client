@@ -9,6 +9,7 @@ class User {
     this.token = null;
     this.status = null;
     this.bio = null;
+    this.totalscore = null;
     Object.assign(this, data);
   }
 }

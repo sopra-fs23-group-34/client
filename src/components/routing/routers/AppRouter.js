@@ -12,6 +12,7 @@ import {WebsocketWrapperComponent } from "components/views/WebsocketViews/Websoc
 import Guesses from "components/views/WebsocketViews/Guesses";
 import RoundScore from "components/views/WebsocketViews/RoundScore";
 import FinalScore from "components/views/WebsocketViews/FinalScore";
+import Leaderboard from "components/views/Leaderboard";
 
 
 /**
@@ -30,6 +31,11 @@ const AppRouter = () => {
         <Route path="/hub">
           <GameGuard>
             <Hub/>
+          </GameGuard>
+        </Route>
+        <Route path="/leaderboard">
+          <GameGuard>
+            <Leaderboard/>
           </GameGuard>
         </Route>
         <Route exact path="/login">
