@@ -19,7 +19,7 @@
     font-weight: 300;
     padding-left: 37px;
     padding-right: 37px;
-    padding-bottom: 5px;
+    padding-bottom: 1px;
     padding-top: 1px;
     border-radius: 0.75em;
     background-color: $background;
@@ -52,7 +52,10 @@
   &.button-container {
     display: flex;
     justify-content: center;
-    margin-top: 2em;
+    width: 90%;
+    max-width: 100em;
+    margin-inline: auto;
+    margin-bottom: 10px;
   }
   &.title {
     position: relative;
@@ -67,8 +70,8 @@
   }
 
   &.image {
-    width: 50%;
-    height: 50%;
+    width: 40%;
+    height: 40%;
     object-fit: contain;
     border-radius: 0.75em;
     display: flex;

@@ -61,10 +61,10 @@ const Guesses = () => {
   return (
       <BaseContainer>
           <h2>{timer}</h2>
-          <div>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <img src="https://www.applesfromny.com/wp-content/uploads/2020/05/20Ounce_NYAS-Apples2.png" alt="Apple" className="slider image"/>
-
           </div>
+
           <h1 className="slider subtitle">{food}</h1>
           <div className="slider form">
               <h2 className='slider title'>Protein</h2>
@@ -114,8 +114,8 @@ const Guesses = () => {
               <p className='slider description'>Selected sugar value: {sugar}</p>
           </div>
 
-          <div className="profile button-container">
-              <Button className="profile button-container"
+          <div className="slider button-container">
+              <Button className="slider button-container"
                       onClick={() => setGuess()}
               >
                   Enter guess
