@@ -10,7 +10,6 @@ class User {
     this.status = null;
     this.bio = null;
     this.totalscore = null;
-    this.placing = null;
     Object.assign(this, data);
   }
 }
