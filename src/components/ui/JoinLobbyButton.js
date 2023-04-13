@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import IconPersonPlus from '../../resources/PersonPlusIcon';
 import { Button } from 'components/ui/Button';
 import "styles/views/Hub.scss";
-import {api, handleError} from "helpers/api";
+import {handleError} from "helpers/api";
 import {useHistory} from 'react-router-dom';
 
 export default function FormDialog() {
