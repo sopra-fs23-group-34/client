@@ -62,9 +62,13 @@ const Lobby = () => {
         setUsers(msg.content);
 
       }
-    }, [msg]);
+      if (msg && msg.topic === "Timer") {
+        history.push("/guesses");
+      }
+    }, [msg, history]);
 
     const leaveLobby = () => {
+        ref.sendMessage('/app/leave/' + sessionStorage.getItem('gameCode') + '/' + sessionStorage.getItem("id"))
         sessionStorage.removeItem('gameCode');
         history.push('/hub');
     }
@@ -175,7 +179,7 @@ const Lobby = () => {
     <BaseContainer className = "lobby container">
         <h2> Game Lobby </h2> 
         <p className = "lobby paragraph" >
-        WIP 
+        Lobby Key: {sessionStorage.getItem('gameCode')} 
         </p>
         {content}
         </BaseContainer>
