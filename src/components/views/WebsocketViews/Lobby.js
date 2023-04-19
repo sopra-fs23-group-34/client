@@ -70,6 +70,7 @@ const Lobby = () => {
     const leaveLobby = () => {
         ref.sendMessage('/app/leave/' + sessionStorage.getItem('gameCode') + '/' + sessionStorage.getItem("id"))
         sessionStorage.removeItem('gameCode');
+        sessionStorage.removeItem('host');
         history.push('/hub');
     }
 
@@ -86,9 +87,49 @@ const Lobby = () => {
 
 
     let content = <Spinner/> ;
-
+    let hostview;
     if (users) {
         content = ( 
+            <div className = "game"  style={{
+                width: "100%"
+            }}>
+                <Grid container spacing={3} sx={{
+                    width: "100%",
+                    margin: "auto",
+                    justifyContent: "left"
+                }}>
+                    <Box item xs={3}
+                        sx={{ 
+                        width:"100%", 
+                        height: 400, 
+                        maxWidth: 360,
+                        margin: "left",
+                        marginLeft: "30px"}}
+                    >
+                        {users.map((user) => (
+                          <Player
+                          key={user.id}
+                          user={user} />
+                        ))}   
+                    </Box>
+                </Grid>
+                <Grid container spacing={3} sx={{
+                    justifyContent: "space-between"
+                }}>
+                    <Grid item xs={3}>
+                    <Item>
+                        <Button width = "100%"
+                        onClick = {
+                            () => leaveLobby() } >
+                        Leave Lobby 
+                        </Button>
+                    </Item>
+                    </Grid>
+                </Grid>
+                
+                </div>
+            );
+        hostview = ( 
         <div className = "game"  style={{
             width: "100%"
         }}>
@@ -181,7 +222,7 @@ const Lobby = () => {
         <p className = "lobby paragraph" >
         Lobby Key: {sessionStorage.getItem('gameCode')} 
         </p>
-        {content}
+        {sessionStorage.getItem('host') ? hostview : content}
         </BaseContainer>
     );
 }
