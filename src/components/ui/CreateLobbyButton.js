@@ -10,6 +10,7 @@ export default function CreateLobbyButton() {
       const response = await api(false, userId).post('/lobbys/create');
       console.log(response.data)
       sessionStorage.setItem("gameCode", response.data);
+      sessionStorage.setItem("host", true);
         history.push({
           pathname: '/lobby',
           state: {
