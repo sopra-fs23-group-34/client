@@ -1,6 +1,6 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import 'styles/views/RoundScore.scss';
-import { WebsocketWrapper } from './WebsocketWrapper';
+import {WebsocketWrapper} from './WebsocketWrapper';
 import BaseContainer from "../../ui/BaseContainer";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,33 +12,50 @@ import Paper from '@mui/material/Paper';
 import {Spinner} from "../../ui/Spinner";
 
 
-
 const RoundScore = () => {
-  const { ref, msg } = useContext(WebsocketWrapper);
-  console.log(msg)
-
-    function createData(name, calories, fat, carbs, protein) {
-        return { name, calories, fat, carbs, protein };
-    }
-
-    const list1 = ["andre", "Nataell", "Nico"]
-    const list2 = [1, 2, 3]
-    const list3 = [65, 44, 82]
-
+    const {ref, msg} = useContext(WebsocketWrapper);
+    const [ranking, setRanking] = useState("noRanking");
+    const [guess, setGuess] = useState("noGuess");
+    const [name, setName] = useState("noName");
     const rows = [
-        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-        createData('Eclair', 262, 16.0, 24, 6.0),
-        createData('Cupcake', 305, 3.7, 67, 4.3),
-        createData('Gingerbread', 356, 16.0, 49, 3.9),
+        createData('Nataell', 159, 6.0, 24, 4.0),
+        createData('Nico', 237, 9.0, 37, 4.3),
+        createData('Elias', 262, 16.0, 24, 6.0),
+        createData('Maurice', 305, 3.7, 67, 4.3),
+        createData('Andre', 356, 16.0, 49, 3.9),
     ];
 
 
-    let nutritionTable = <Spinner/> ;
+    console.log(msg)
+
+    useEffect(() => {
+        if (msg && msg.topic === "Ranking") {
+            setRanking(msg.content);
+        }
+
+        if (msg && msg.topic === "Guess") {
+            setGuess(msg.content);
+        }
+    }, [msg]);
+
+
+    if (ranking === "noRanking" && guess === "noGuess" && name === "noName") {
+        setRanking([1, 2, 3, 4, 5, 6])
+        setGuess([22, 33, 44, 55, 66, 77])
+        setName(["Andre", "Nataell", "Nico", "Elias", "Maurice", "Bob"])
+    }
+
+    function createData(name, calories, fat, carbs, protein) {
+        return {name, calories, fat, carbs, protein};
+    }
+
+
+
+    let nutritionTable = <Spinner/>;
 
     nutritionTable = (
         <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+            <Table sx={{minWidth: 650}} size="small" aria-label="a dense table">
                 <TableHead>
                     <TableRow>
                         <TableCell>Dessert (100g serving)</TableCell>
@@ -52,7 +69,7 @@ const RoundScore = () => {
                     {rows.map((row) => (
                         <TableRow
                             key={row.name}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
                         >
                             <TableCell component="th" scope="row">
                                 {row.name}
@@ -69,33 +86,33 @@ const RoundScore = () => {
     );
 
 
-  return (
-      <BaseContainer>
-      <div className="score container">
-      <h1>round statistics</h1>
-          <h2>your performance and the ranking</h2>
-          <table className="score table">
-              <thead className="score th:first-child">
-              <tr className="score tr">
-                  <th>players</th>
-                  <th>rank</th>
-                  <th>points this round</th>
-              </tr>
-              </thead>
-              <tbody className="score th">
-              {list1.map((item, index) => (
-                  <tr key={index}>
-                      <td>{item}</td>
-                      <td>{list2[index]}</td>
-                      <td>{list3[index]}</td>
-                  </tr>
-              ))}
-              </tbody>
-          </table>
-          {nutritionTable}
-    </div>
-      </BaseContainer>
-  );
+    return (
+        <BaseContainer>
+            <div className="score container">
+                <h1>round statistics</h1>
+                <h2>your performance and the ranking</h2>
+                <table className="score table">
+                    <thead className="score th:first-child">
+                    <tr className="score tr">
+                        <th>players</th>
+                        <th>rank</th>
+                        <th>points this round</th>
+                    </tr>
+                    </thead>
+                    <tbody className="score th">
+                    {name.map((item, index) => (
+                        <tr key={index}>
+                            <td>{ranking[index]}</td>
+                            <td>{guess[index]}</td>
+                            <td>{name[index]}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+                {nutritionTable}
+            </div>
+        </BaseContainer>
+    );
 };
 
 /**

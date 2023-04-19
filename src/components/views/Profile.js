@@ -70,6 +70,7 @@ const Profile = () => {
                 alert("Something went wrong while fetching the users! See the console for details.");
             }
         }
+
         fetchData();
     }, [id]);
 
@@ -77,9 +78,9 @@ const Profile = () => {
     const saveChanges = async () => {
         try {
             const requestBody = JSON.stringify({username, email, bio});
-            await api(sessionStorage.getItem('token'), false).put('/users/update/' +id, requestBody);
+            await api(sessionStorage.getItem('token'), false).put('/users/update/' + id, requestBody);
             // Login successfully worked --> navigate to the route /hub in the GameRouter
-            history.push(`/profile/`+id);
+            history.push(`/profile/` + id);
             alert("Changes saved successfully!")
         } catch (error) {
             alert(`Something went wrong during the editing: \n${handleError(error)}`);
@@ -88,7 +89,7 @@ const Profile = () => {
 
     const gotoPassword = () => {
         history.push({
-            pathname: '/password/'+id,
+            pathname: '/password/' + id,
             state: {userId: sessionStorage.getItem("userId")}
         });
     }
@@ -98,7 +99,7 @@ const Profile = () => {
     }
 
     let content;
-    content= (
+    content = (
         <BaseContainer>
             <div className="profile container">
                 <div className="profile form">
@@ -131,7 +132,7 @@ const Profile = () => {
                     </div>
                     <div className="profile button-container">
                         <Button className="profile button-container"
-                                onClick={() =>gotoPassword()}
+                                onClick={() => gotoPassword()}
                         >
                             Change password
                         </Button>

@@ -14,96 +14,96 @@ As a rule of thumb, use one file per component and only add small,
 specific components that belong to the main one in the same file.
  */
 const FormField = props => {
-  return (
-    <div className="register field">
-      <label className="register label">
-        {props.label}
-      </label>
-      <input
-        className="register input"
-        placeholder="enter here.."
-        value={props.value}
-        type={props.type}
-        onChange={e => props.onChange(e.target.value)}
-      />
-    </div>
-  );
+    return (
+        <div className="register field">
+            <label className="register label">
+                {props.label}
+            </label>
+            <input
+                className="register input"
+                placeholder="enter here.."
+                value={props.value}
+                type={props.type}
+                onChange={e => props.onChange(e.target.value)}
+            />
+        </div>
+    );
 };
 
 FormField.propTypes = {
-  label: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func
+    label: PropTypes.string,
+    value: PropTypes.string,
+    onChange: PropTypes.func
 };
 
 const Register = () => {
-  const history = useHistory();
-  const [username, setUsername] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+    const history = useHistory();
+    const [username, setUsername] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
 
-  const registerAccount = async () => {
-    try {
-      const requestBody = JSON.stringify({username, email ,password});
-      const response = await api(false,false).post('/users/create', requestBody);
+    const registerAccount = async () => {
+        try {
+            const requestBody = JSON.stringify({username, email, password});
+            const response = await api(false, false).post('/users/create', requestBody);
 
-      // Get the returned user and update a new object.
-      const user = new User(response.data);
+            // Get the returned user and update a new object.
+            const user = new User(response.data);
 
-      // Store the token into the local storage.
-      sessionStorage.setItem('token', user.token);
-      sessionStorage.setItem('id', user.id);
+            // Store the token into the local storage.
+            sessionStorage.setItem('token', user.token);
+            sessionStorage.setItem('id', user.id);
 
 
-      // Login successfully worked --> navigate to the route /game in the GameRouter
-      history.push(`/hub`);
-    } catch (error) {
-      alert(`Something went wrong during the register: \n${handleError(error)}`);
-    }
-  };
+            // Login successfully worked --> navigate to the route /game in the GameRouter
+            history.push(`/hub`);
+        } catch (error) {
+            alert(`Something went wrong during the register: \n${handleError(error)}`);
+        }
+    };
 
-  return (
-    <BaseContainer>
-      <div className="register container">
-        <p>SUPPPP BOOOYYYSSSSSS</p>
-        <div className="register form">
-          <FormField
-            label="Username"
-            value={username}
-            onChange={un => setUsername(un)}
-          />
-          <FormField
-              label="email"
-              value={email}
-              onChange={un => setEmail(un)}
-          />
-          <FormField
-            label="Password"
-            value={password}
-            type="password"
-            onChange={n => setPassword(n)}
-          />
-          <div className="register button-container">
-            <Button
-              disabled={!username || !password}
-              width="100%"
-              onClick={() => registerAccount()}
-            >
-              Register
-            </Button>
-          </div>
-          <p>Switch to Login.</p>
-          <Link to="/login">
-            <Button
-                width="100%"
-            >
-                Go to login window
-            </Button>
-          </Link>
-        </div>
-      </div>
-    </BaseContainer>
-  );
+    return (
+        <BaseContainer>
+            <div className="register container">
+                <p>SUPPPP BOOOYYYSSSSSS</p>
+                <div className="register form">
+                    <FormField
+                        label="Username"
+                        value={username}
+                        onChange={un => setUsername(un)}
+                    />
+                    <FormField
+                        label="email"
+                        value={email}
+                        onChange={un => setEmail(un)}
+                    />
+                    <FormField
+                        label="Password"
+                        value={password}
+                        type="password"
+                        onChange={n => setPassword(n)}
+                    />
+                    <div className="register button-container">
+                        <Button
+                            disabled={!username || !password}
+                            width="100%"
+                            onClick={() => registerAccount()}
+                        >
+                            Register
+                        </Button>
+                    </div>
+                    <p>Switch to Login.</p>
+                    <Link to="/login">
+                        <Button
+                            width="100%"
+                        >
+                            Go to login window
+                        </Button>
+                    </Link>
+                </div>
+            </div>
+        </BaseContainer>
+    );
 };
 
 /**
