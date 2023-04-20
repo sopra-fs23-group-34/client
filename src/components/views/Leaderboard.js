@@ -4,14 +4,21 @@ import { Spinner } from "components/ui/Spinner";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import User from "models/User";
-import { Box, Grid } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import "styles/views/Leaderboard.scss";
 import Item from "components/ui/Item";
+import * as React from 'react';
+import ListItem from '@mui/material/ListItem';
+//import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import { FixedSizeList} from 'react-window';
+import { useHistory } from "react-router-dom";
+
 
 const { default: BaseContainer } = require("components/ui/BaseContainer")
 const Player = ({user, index}) => {
     return (
-      <div className='player container'>
+      <div className='player container' data-status={index}>
             <div className="player placing">
                 {index + 1}
             </div>
@@ -31,22 +38,222 @@ const Player = ({user, index}) => {
   };
 const Leaderboard = () => {
     const [users, setUsers] = useState(null);
-
-
+    const history = useHistory();
+    const listRef = React.createRef();
+    function renderRow(props) {
+        const { index, style } = props;
+      
+        return (
+          <ListItem style={{...style}
+          } key={index} component="div" disablePadding>
+              <ListItemText primary={<Player
+                                key={users[index + 3].id}
+                                user={users[index + 3]}
+                                index={index + 3}
+                                />} />
+          </ListItem>
+        );
+      }
+      function renderTop(props) {
+        const { index, style } = props;
+      
+        return (
+          <ListItem style={style} key={index} component="div" disablePadding>
+              <ListItemText primary={<Player
+                                key={users[index].id}
+                                user={users[index]}
+                                index={index}
+                                />} />
+          </ListItem>
+        );
+      }
     useEffect(() => {
         let user1 = new User({
-            username: "babui",
+            username: "babuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabui",
             totalscore: "1291"
+        })
+        let me = new User({
+            username: "me",
+            totalscore: "1290",
+            token:sessionStorage.getItem("token")
         })
         setUsers(
             [
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                me,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
+                user1,
                 user1,
                 user1,
                 user1
             ]
         )
     }, [])
- 
+    function findUser(user) {
+        return user.token === sessionStorage.getItem('token');
+    }
+    function moveToMe() {
+        listRef.current.scrollToItem(users.indexOf(users.find(findUser)), "center")
+    }
+    function moveToTop() {
+        listRef.current.scrollToItem(0);
+    }
+    function Hub() {
+        history.push("/hub");
+    }
+    useEffect(() => {
+        let ignore = false;
+        if (!ignore && listRef.current)  {
+            moveToMe()
+        }
+        return () => { ignore = true; }
+        },);
 
     /*
     useEffect(() => {
@@ -88,21 +295,24 @@ const Leaderboard = () => {
                         }}>
                             <Item sx={{
                                 marginLeft:"2px",
-                                marginRight:"1px",
                                 textTransform: 'uppercase',
                                 fontWeight:"900",
                                 color:"white",
-                                pl:"0px"
+                                pl:"0px",
+                                width:"11%",
+                                marginRight:"1px"
 
                             }}>
                                 Rank
                             </Item>
                             <Item sx={{
-                                marginLeft:"1px",
                                 textTransform: 'uppercase' ,
                                 fontWeight:"900",
                                 color:"white",
-                                pl:"0px"
+                                pl:"0px",
+                                width:"60%",
+                                textAlign:"left",
+                                marginLeft:"0"
                             }}>
                                 Username
                             </Item>
@@ -115,22 +325,71 @@ const Leaderboard = () => {
                                 Total Score
                             </Item>
                         </Box>
-                        {users.map((user, index) => (
-                            <Player
-                            key={user.id}
-                            user={user}
-                            index={index}
-                            />
-                        ))}
+                        <FixedSizeList
+                        height={144}
+                        width={"100%"}
+                        itemSize={46}
+                        itemCount={3}
+                        overscanCount={0}
+                        style={{
+                            overflow: "hidden"
+                        }}
+                        >
+                            {renderTop}
+                        </FixedSizeList>
+                        <FixedSizeList
+                        height={400}
+                        width={"100%"}
+                        itemSize={46}
+                        itemCount={users.length - 3}
+                        overscanCount={1}
+                        ref={listRef}
+                        >
+                            {renderRow}
+                        </FixedSizeList>
                     </Box>
+                    <Grid container spacing={3}
+                    sx={{
+                        justifyContent: "space-between"
+                    }}>
+                        <Grid item xs={2}>
+                            <Item>
+                                <Button
+                                    onClick={() => moveToMe()}
+                                    >find me
+                                </Button>
+                            </Item>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <Item>
+                                <Button
+                                    onClick={() => moveToTop()}
+                                    >Go to Top
+                                </Button>
+                            </Item>
+                        </Grid>
+                        <Grid item xs={3} sx={{
+                            justifyContent: "right"
+                        }}>
+                            <Item sx={{
+                            justifyContent: "right"
+                        }}>
+                                <Button
+                                    onClick={() => Hub()}
+                                >
+                                Hub
+                                </Button>
+                            </Item>
+                    </Grid>
                 </Grid>
-            </div>
+            </Grid>
+        </div>
         )
     }
 
     return (
         <BaseContainer className="leaderboard container">
-            <h2>Leaderbnoard</h2>
+            <h2>Global Leaderboard</h2>
             {content}
         </BaseContainer>
     )
