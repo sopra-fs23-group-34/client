@@ -5,6 +5,7 @@ import {Button} from 'components/ui/Button';
 import 'styles/views/Profile.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
+import {Alert, AlertTitle} from "@mui/material";
 
 /*
 It is possible to add multiple components inside a single file,
@@ -43,6 +44,9 @@ const Profile = () => {
     const [emailPreview, setEmailPreview] = useState(null);
     const [bio, setBio] = useState(null);
     const [bioPreview, setBioPreview] = useState(null);
+    const [alertStatusInfo, setAlertStatusInfo] = useState(false);
+    const [errorStatusUsername, setErrorStatusUsername] = useState(false);
+    const [errorStatusEmail, setErrorStatusEmail] = useState(false);
 
     useEffect(() => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
@@ -81,9 +85,19 @@ const Profile = () => {
             await api(sessionStorage.getItem('token'), false).put('/users/update/' + id, requestBody);
             // Login successfully worked --> navigate to the route /hub in the GameRouter
             history.push(`/profile/` + id);
-            alert("Changes saved successfully!")
+            // alert("Changes saved successfully!")
+            setAlertStatusInfo(true);
+
         } catch (error) {
-            alert(`Something went wrong during the editing: \n${handleError(error)}`);
+            // alert(`Something went wrong during the editing: \n${handleError(error)}`);
+            // get error message from error
+            const errorMessage = error.response.data.message;
+            if (errorMessage === "You can't pick the same username as somebody else!") {
+                setErrorStatusUsername(true);
+            }
+            if (errorMessage === "You can't pick the same mail as somebody else!") {
+                setErrorStatusEmail(true);
+            }
         }
     };
 
@@ -96,6 +110,18 @@ const Profile = () => {
 
     const gotoHub = () => {
         history.push(`/hub`);
+    }
+
+    const handleCloseInfo = () => {
+        setAlertStatusInfo(false);
+    }
+
+    const handleCloseUsername = () => {
+        setErrorStatusUsername(false);
+    }
+
+    const handleCloseEmail = () => {
+        setErrorStatusEmail(false);
     }
 
     let content;
@@ -145,6 +171,30 @@ const Profile = () => {
                         </Button>
                     </div>
                 </div>
+            </div>
+            <div className="profile popup-message">
+                {alertStatusInfo && (
+                    <Alert severity="info" onClose={handleCloseInfo}>
+                        <AlertTitle>Profile information successfully changed</AlertTitle>
+                        Your new information is saved - <strong>Now go and play!</strong>
+                    </Alert>
+                )}
+            </div>
+            <div className="profile popup-message">
+                {errorStatusUsername && (
+                    <Alert severity="error" onClose={handleCloseUsername}>
+                        <AlertTitle>Failed to update</AlertTitle>
+                        Username selected is already taken - <strong>Try again with a different one!</strong>
+                    </Alert>
+                )}
+            </div>
+            <div className="profile popup-message">
+                {errorStatusEmail && (
+                    <Alert severity="error" onClose={handleCloseEmail}>
+                        <AlertTitle>Failed to update</AlertTitle>
+                        The given email has already a account registered - <strong>Use a different email!</strong>
+                    </Alert>
+                )}
             </div>
         </BaseContainer>
     );

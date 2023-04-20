@@ -110,13 +110,15 @@ const Register = () => {
                     </Link>
                 </div>
             </div>
-            {alertStatus && (
-                <Alert severity="error"
-                       onClose={handleClose}>
-                    <AlertTitle>Registration Failed</AlertTitle>
-                    Username is already taken - <strong>try again with a different one!</strong>
-                </Alert>
-            )}
+            <div className="register popup-message">
+                {alertStatus && (
+                    <Alert severity="error"
+                           onClose={handleClose}>
+                        <AlertTitle>Registration Failed</AlertTitle>
+                        Username is already taken - <strong>try again with a different one!</strong>
+                    </Alert>
+                )}
+            </div>
         </BaseContainer>
     );
 };

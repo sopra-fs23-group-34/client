@@ -101,12 +101,14 @@ const Login = () => {
                     </Link>
                 </div>
             </div>
+            <div className="login popup-message">
             {alertStatus && (
                 <Alert severity="error" onClose={handleClose}>
                     <AlertTitle>Login failed</AlertTitle>
                     You have entered an invalid username or password - <strong>try again!</strong>
                 </Alert>
             )}
+            </div>
         </BaseContainer>
 
     );

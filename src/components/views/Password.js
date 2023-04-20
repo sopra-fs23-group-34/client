@@ -7,6 +7,7 @@ import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import axios from "axios";
 import {getDomain} from "../../helpers/getDomain";
+import {Alert, AlertTitle} from "@mui/material";
 
 /*
 It is possible to add multiple components inside a single file,
@@ -43,11 +44,13 @@ const Password = () => {
     const [oldPassword, setOldPassword] = useState(null);
     const [password, setPassword] = useState(null);
     const [newRepeatPassword, setNewRepeatPassword] = useState(null);
+    const [errorStatus, setErrorStatus] = useState(false);
 
 
     const saveChanges = async () => {
         if (password !== newRepeatPassword) {
-            alert("The new passwords do not match!");
+            // alert("The new passwords do not match!");
+            setErrorStatus(true);
         } else {
             try {
                 const requestBody = JSON.stringify({password});
@@ -68,6 +71,10 @@ const Password = () => {
 
     const goToProfile = () => {
         history.push(`/profile/` + id);
+    }
+
+    const handleClose = () => {
+        setErrorStatus(false);
     }
 
     return (
@@ -107,6 +114,14 @@ const Password = () => {
                         </Button>
                     </div>
                 </div>
+            </div>
+            <div className="profile popup-message">
+                {errorStatus && (
+                    <Alert severity="error" onClose={handleClose}>
+                        <AlertTitle>Failed to change</AlertTitle>
+                        The new passwords do not match - <strong>try again!</strong>
+                    </Alert>
+                )}
             </div>
         </BaseContainer>
     );

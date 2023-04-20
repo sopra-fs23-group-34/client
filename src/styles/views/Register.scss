@@ -50,4 +50,10 @@
     justify-content: center;
     margin-top: 2em;
   }
+  &.popup-message {
+    margin-top: 2em;
+    /* we include the center mixin defined in _theme.scss and save three duplicate lines :) */
+    @include center;
+    flex-direction: column;
+  }
 }
