@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {api, handleError} from 'helpers/api';
+import {api} from 'helpers/api';
 import User from 'models/User';
 import {useHistory, Link} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/Register.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
+import {Alert, AlertTitle} from "@mui/material";
 
 /*
 It is possible to add multiple components inside a single file,
@@ -41,6 +42,8 @@ const Register = () => {
     const [username, setUsername] = useState(null);
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
+    const [alertStatus, setAlertStatus] = useState(false);
+
 
     const registerAccount = async () => {
         try {
@@ -58,9 +61,14 @@ const Register = () => {
             // Login successfully worked --> navigate to the route /game in the GameRouter
             history.push(`/hub`);
         } catch (error) {
-            alert(`Something went wrong during the register: \n${handleError(error)}`);
+            // alert(`Something went wrong during the register: \n${handleError(error)}`);
+            setAlertStatus(true);
         }
     };
+
+    const handleClose = () => {
+        setAlertStatus(false);
+    }
 
     return (
         <BaseContainer>
@@ -102,6 +110,13 @@ const Register = () => {
                     </Link>
                 </div>
             </div>
+            {alertStatus && (
+                <Alert severity="error"
+                       onClose={handleClose}>
+                    <AlertTitle>Registration Failed</AlertTitle>
+                    Username is already taken - <strong>try again with a different one!</strong>
+                </Alert>
+            )}
         </BaseContainer>
     );
 };

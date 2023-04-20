@@ -103,7 +103,7 @@ const Login = () => {
             </div>
             {alertStatus && (
                 <Alert severity="error" onClose={handleClose}>
-                    <AlertTitle>Attempt failed</AlertTitle>
+                    <AlertTitle>Login failed</AlertTitle>
                     You have entered an invalid username or password - <strong>try again!</strong>
                 </Alert>
             )}
