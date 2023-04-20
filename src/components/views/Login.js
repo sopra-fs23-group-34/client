@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {api, handleError} from 'helpers/api';
+import {api} from 'helpers/api';
 import User from 'models/User';
 import {Link, useHistory} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/Login.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
+import {Alert, AlertTitle} from "@mui/material";
 
 /*
 It is possible to add multiple components inside a single file,
@@ -40,6 +41,7 @@ const Login = () => {
     const history = useHistory();
     const [password, setPassword] = useState(null);
     const [username, setUsername] = useState(null);
+    const [alertStatus, setAlertStatus] = useState(false);
 
     const doLogin = async () => {
         try {
@@ -56,9 +58,14 @@ const Login = () => {
             // Login successfully worked --> navigate to the route /game in the GameRouter
             history.push(`/hub`);
         } catch (error) {
-            alert(`Something went wrong during the login: \n${handleError(error)}`);
+            // alert(`Something went wrong during the login: \n${handleError(error)}`);
+            setAlertStatus(true);
         }
     };
+
+    const handleClose = () => {
+        setAlertStatus(false);
+    }
 
     return (
         <BaseContainer>
@@ -94,7 +101,14 @@ const Login = () => {
                     </Link>
                 </div>
             </div>
+            {alertStatus && (
+                <Alert severity="error" onClose={handleClose}>
+                    <AlertTitle>Attempt failed</AlertTitle>
+                    You have entered an invalid username or password - <strong>try again!</strong>
+                </Alert>
+            )}
         </BaseContainer>
+
     );
 };
 
