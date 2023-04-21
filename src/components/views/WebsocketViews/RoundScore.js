@@ -10,9 +10,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Spinner} from "../../ui/Spinner";
+import { useHistory } from 'react-router-dom';
 
 
 const RoundScore = () => {
+    const history = useHistory();
     const {ref, msg} = useContext(WebsocketWrapper);
     const [ranking, setRanking] = useState("noRanking");
     const [guess, setGuess] = useState("noGuess");
@@ -25,7 +27,7 @@ const RoundScore = () => {
         createData('Maurice', 305, 3.7, 67, 4.3),
         createData('Andre', 356, 16.0, 49, 3.9),
     ];
-
+    
 
     console.log(msg)
 
@@ -37,7 +39,12 @@ const RoundScore = () => {
         if (msg && msg.topic === "Guess") {
             setGuess(msg.content);
         }
-    }, [msg]);
+
+        if (msg.topic === "roundStart") {
+            history.push('/Guesses');
+        }
+
+    }, [msg, history]);
 
 
     if (ranking === "noRanking" && guess === "noGuess" && name === "noName") {

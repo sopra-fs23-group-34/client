@@ -13,9 +13,10 @@ const Guesses = () => {
     const [protein, setProtein] = useState(50);
     const [fat, setFat] = useState(50);
     const [carbs, setCarbs] = useState(50);
-    const [sugar, setSugar] = useState(50);
+    {/*const [sugar, setSugar] = useState(50);*/}
     const [timer, setTimer] = useState(15);
-    const [food, setFood] = useState("Food");
+    const [foodName, setFoodName] = useState("");
+    const [foodLink, setFoodLink] = useState("");
     const [calories, setCalories] = useState(50);
     const [roundScoreStart, setRoundScoreStart] = useState(false);
     const [update, setUpdate] = useState(0);
@@ -28,8 +29,8 @@ const Guesses = () => {
         }
 
         if (msg && msg.topic === "Food") {
-            setFood(msg.content);
-            console.log(msg.content)
+            setFoodName(msg.content["name"]);
+            setFoodLink(msg.content["imageLink"]);
         }
 
         if (msg && msg.topic === "RoundScoreStart") {
@@ -44,11 +45,11 @@ const Guesses = () => {
                 'protein': protein,
                 "fat": fat,
                 "carbs": carbs,
-                "sugar": sugar,
+                /* "sugar": sugar,*/
                 "calories": calories
             }
         }));
-    }, [update, gameCode, userid, protein, fat, carbs, sugar, calories, ref]);
+    }, [update, gameCode, userid, protein, fat, carbs, /*sugar,*/ calories, ref]);
 
     const setGuess = () => {
         ref.sendMessage('/app/guess/' + gameCode + '/' + userid, JSON.stringify({
@@ -56,7 +57,7 @@ const Guesses = () => {
                 'protein': protein,
                 "fat": fat,
                 "carbs": carbs,
-                "sugar": sugar,
+                /*"sugar": sugar,*/
                 "calories": calories
             }
         }));
@@ -78,11 +79,11 @@ const Guesses = () => {
     const handleCarbsChange = (event, newValue) => {
         setCarbs(newValue);
     }
-
+    {/* 
     const handleSugarChange = (event, newValue) => {
         setSugar(newValue);
     }
-
+    */}
     const handleCaloriesChange = (event, newValue) => {
         setCalories(newValue);
     }
@@ -95,11 +96,11 @@ const Guesses = () => {
         <BaseContainer>
             <h2>{timer}</h2>
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                <img src="https://www.applesfromny.com/wp-content/uploads/2020/05/20Ounce_NYAS-Apples2.png" alt="Apple"
+                <img src={foodLink} alt="food"
                      className="slider image"/>
             </div>
 
-            <h1 className="slider subtitle">{food}</h1>
+            <h1 className="slider subtitle">{foodName}</h1>
             <div className="slider form">
                 <h2 className='slider title'>Protein</h2>
                 <Slider
@@ -139,7 +140,7 @@ const Guesses = () => {
                 <p className='slider description'>Selected carbs value: {carbs}</p>
             </div>
 
-            <div className="slider form">
+            {/*<div className="slider form">
                 <h2 className='slider title'>Sugar</h2>
                 <Slider
                     defaultValue={50}
@@ -150,7 +151,7 @@ const Guesses = () => {
                     onChangeCommitted={handleChange}
                 />
                 <p className='slider description'>Selected sugar value: {sugar}</p>
-            </div>
+            </div> */}
                 <div className="slider form">
                     <h2 className='slider title'>Calories</h2>
                     <Slider

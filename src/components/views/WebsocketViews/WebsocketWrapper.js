@@ -15,9 +15,6 @@ export function WebsocketWrapperComponent({ children }) {
   useEffect(() => {
     setGameCode(sessionStorage.getItem("gameCode"));
     setuserid(sessionStorage.getItem("id"));
-    console.log(sessionStorage.getItem("id") + "user_id weboscket wrapper")
-    console.log("ref:", ref);
-    console.log("msg:", msg);
   }, [ref, msg]);
 
   const handleMessage = (msg) => {

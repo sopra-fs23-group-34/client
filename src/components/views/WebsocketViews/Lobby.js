@@ -8,7 +8,7 @@ import "styles/views/Lobby.scss";
 import {WebsocketWrapper} from './WebsocketWrapper';
 import * as React from "react";
 import Box from '@mui/material/Box';
-import {Grid, Slider} from '@mui/material';
+import {Grid, Slider, Typography} from '@mui/material';
 import Item from 'components/ui/Item';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -56,15 +56,21 @@ const Lobby = () => {
     // a component can have as many state variables as you like.
     // more information can be found under https://reactjs.org/docs/hooks-state.html
     const [users, setUsers] = useState([]);
+    const [errorMessage ,setErrorMessage] = useState("");
 
     useEffect(() => {
-        console.log("msg Lobby:", msg)
+        
         if (msg && msg.topic === "players") {
             setUsers(msg.content);
-
         }
         if (msg && msg.topic === "Timer") {
             history.push("/guesses");
+        }
+        if (msg && msg.topic === "error" && msg.content === "host_left") {
+            setErrorMessage("The host left the lobby, you will be redirected to the hub.");
+            sessionStorage.removeItem('gameCode');
+            sessionStorage.removeItem('host');
+            setTimeout(() => {  history.push("/hub");  }, 3000);
         }
     }, [msg, history]);
 
@@ -233,6 +239,7 @@ const Lobby = () => {
     return (
         <BaseContainer className="lobby container">
             <h2> Game Lobby </h2>
+            <Typography color={"error"}>{errorMessage}</Typography>
             <p className="lobby paragraph">
                 Lobby Key: {sessionStorage.getItem('gameCode')}
             </p>
