@@ -17,6 +17,7 @@ const RoundScore = () => {
     const [ranking, setRanking] = useState("noRanking");
     const [guess, setGuess] = useState("noGuess");
     const [name, setName] = useState("noName");
+    const list1 = ["Andre", "Nataell", "Nico"]
     const rows = [
         createData('Nataell', 159, 6.0, 24, 4.0),
         createData('Nico', 237, 9.0, 37, 4.3),
@@ -100,7 +101,7 @@ const RoundScore = () => {
                     </tr>
                     </thead>
                     <tbody className="score th">
-                    {name.map((item, index) => (
+                    {list1.map((ranking, index) => (
                         <tr key={index}>
                             <td>{ranking[index]}</td>
                             <td>{guess[index]}</td>
