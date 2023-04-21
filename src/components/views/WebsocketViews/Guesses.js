@@ -9,7 +9,7 @@ import {useHistory} from "react-router-dom";
 const Guesses = () => {
     // use react-router-dom's hook to access the history
     const history = useHistory();
-    const {ref, msg} = useContext(WebsocketWrapper);
+    const {ref, msg, gameCode, userid} = useContext(WebsocketWrapper);
     const [protein, setProtein] = useState(50);
     const [fat, setFat] = useState(50);
     const [carbs, setCarbs] = useState(50);
@@ -38,8 +38,8 @@ const Guesses = () => {
     }, [msg]);
 
     useEffect(() => {
-        const gameCode = sessionStorage.getItem('gameCode');
-        ref.sendMessage('/app/guess/' + gameCode + '/' + sessionStorage.getItem("id"), JSON.stringify({
+        console.log(gameCode, userid)
+        ref.sendMessage('/app/guess/' + gameCode + '/' + userid, JSON.stringify({
             content: {
                 'protein': protein,
                 "fat": fat,
@@ -48,11 +48,10 @@ const Guesses = () => {
                 "calories": calories
             }
         }));
-    }, [update]);
+    }, [update, gameCode, userid, protein, fat, carbs, sugar, calories, ref]);
 
     const setGuess = () => {
-        const gameCode = sessionStorage.getItem('gameCode');
-        ref.sendMessage('/app/guess/' + gameCode + '/' + sessionStorage.getItem("id"), JSON.stringify({
+        ref.sendMessage('/app/guess/' + gameCode + '/' + userid, JSON.stringify({
             content: {
                 'protein': protein,
                 "fat": fat,

@@ -14,6 +14,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { api } from 'helpers/api';
 
 
 const Player = ({user}) => (
@@ -74,12 +75,18 @@ const Lobby = () => {
         history.push('/hub');
     }
 
-    const startGame = () => {
-        const food = foodCategory.toUpperCase();
-        const gameCode = sessionStorage.getItem('gameCode');
-        ref.sendMessage('/app/startGame/' + gameCode, JSON.stringify({'roundLimit': roundCount, "foodCategory": food}));
-        history.push("/guesses");
-    };
+    const startGame = async () => {
+        const gameCode = sessionStorage.getItem("gameCode");
+        const token = sessionStorage.getItem("token");
+        const userId = sessionStorage.getItem("id");
+        try {
+          await api(token, userId).post("/lobbys/startGame/" + gameCode);
+          history.push("/guesses");
+        } catch (error) {
+          //not needed to display anything because if you are host and you press start it should work
+          console.log(error);
+        }
+      };
     // the effect hook can be used to react to change in your component.
     // in this case, the effect hook is only run once, the first time the component is mounted
     // this can be achieved by leaving the second argument an empty array.

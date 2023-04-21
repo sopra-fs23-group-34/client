@@ -15,6 +15,7 @@ export function WebsocketWrapperComponent({ children }) {
   useEffect(() => {
     setGameCode(sessionStorage.getItem("gameCode"));
     setuserid(sessionStorage.getItem("id"));
+    console.log(sessionStorage.getItem("id") + "user_id weboscket wrapper")
     console.log("ref:", ref);
     console.log("msg:", msg);
   }, [ref, msg]);
@@ -25,7 +26,7 @@ export function WebsocketWrapperComponent({ children }) {
   };
 
   return (
-    <WebsocketWrapper.Provider value={{ ref, msg }}>
+    <WebsocketWrapper.Provider value={{ ref, msg, gameCode, userid }}>
       <SockJsClient
         url="http://localhost:8080/ws"
         topics={["/topic/lobbies/" + gameCode, "/topic/players/" + userid]}
