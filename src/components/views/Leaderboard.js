@@ -4,7 +4,7 @@ import { Spinner } from "components/ui/Spinner";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import User from "models/User";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, ListItemButton } from "@mui/material";
 import "styles/views/Leaderboard.scss";
 import Item from "components/ui/Item";
 import * as React from 'react';
@@ -46,11 +46,17 @@ const Leaderboard = () => {
         return (
           <ListItem style={{...style}
           } key={index} component="div" disablePadding>
+            <ListItemButton sx={{
+                height:"46px",
+                width:"100%",
+                padding:"0px"
+            }}>
               <ListItemText primary={<Player
                                 key={users[index + 3].id}
                                 user={users[index + 3]}
                                 index={index + 3}
                                 />} />
+                                </ListItemButton>
           </ListItem>
         );
       }
@@ -59,11 +65,17 @@ const Leaderboard = () => {
       
         return (
           <ListItem style={style} key={index} component="div" disablePadding>
+            <ListItemButton sx={{
+                height:"46px",
+                width:"100%",
+                padding:"0px"
+            }}>
               <ListItemText primary={<Player
                                 key={users[index].id}
                                 user={users[index]}
                                 index={index}
                                 />} />
+            </ListItemButton>
           </ListItem>
         );
       }
