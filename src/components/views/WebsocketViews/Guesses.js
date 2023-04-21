@@ -38,16 +38,17 @@ const Guesses = () => {
     }, [msg]);
 
     useEffect(() => {
-        console.log("message sent")
         const gameCode = sessionStorage.getItem('gameCode');
-        ref.sendMessage('/app/guess/' + gameCode + '/' + localStorage.getItem("id"), JSON.stringify({
+        const content = {
             'protein': protein,
             "fat": fat,
             "carbs": carbs,
             "sugar": sugar,
             "calories": calories
-        }));
-        console.log(update)
+        }
+        console.log(content)
+        ref.sendMessage('/app/guess/' + gameCode + '/' + localStorage.getItem("id"), JSON.stringify(content));
+        // console.log(update)
     }, [update]);
 
     const setGuess = () => {
