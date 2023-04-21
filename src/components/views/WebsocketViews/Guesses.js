@@ -34,6 +34,18 @@ const Guesses = () => {
         }
     }, [msg]);
 
+    useEffect(() => {
+        console.log("message sent")
+        const gameCode = sessionStorage.getItem('gameCode');
+        ref.sendMessage('/app/guess/' + gameCode + '/' + localStorage.getItem("id"), JSON.stringify({
+            'protein': protein,
+            "fat": fat,
+            "carbs": carbs,
+            "sugar": sugar,
+            "calories": calories
+        }));
+    }, [fat, calories, sugar, carbs, protein]);
+
     const setGuess = () => {
         const gameCode = sessionStorage.getItem('gameCode');
         ref.sendMessage('/app/guess/' + gameCode + '/' + localStorage.getItem("id"), JSON.stringify({
