@@ -39,7 +39,7 @@ const Guesses = () => {
 
     useEffect(() => {
         const gameCode = sessionStorage.getItem('gameCode');
-        ref.sendMessage('/app/guess/' + gameCode + '/' + localStorage.getItem("id"), JSON.stringify({
+        ref.sendMessage('/app/guess/' + gameCode + '/' + sessionStorage.getItem("id"), JSON.stringify({
             content: {
                 'protein': protein,
                 "fat": fat,
@@ -52,7 +52,7 @@ const Guesses = () => {
 
     const setGuess = () => {
         const gameCode = sessionStorage.getItem('gameCode');
-        ref.sendMessage('/app/guess/' + gameCode + '/' + localStorage.getItem("id"), JSON.stringify({
+        ref.sendMessage('/app/guess/' + gameCode + '/' + sessionStorage.getItem("id"), JSON.stringify({
             content: {
                 'protein': protein,
                 "fat": fat,
