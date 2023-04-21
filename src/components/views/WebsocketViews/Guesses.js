@@ -18,15 +18,18 @@ const Guesses = () => {
     const [food, setFood] = useState("Food");
     const [calories, setCalories] = useState(50);
     const [roundScoreStart, setRoundScoreStart] = useState(false);
+    const [update, setUpdate] = useState(0);
 
 
     useEffect(() => {
         if (msg && msg.topic === "Timer") {
             setTimer(msg.content);
+            console.log('timer')
         }
 
         if (msg && msg.topic === "Food") {
             setFood(msg.content);
+            console.log(msg.content)
         }
 
         if (msg && msg.topic === "RoundScoreStart") {
@@ -35,16 +38,18 @@ const Guesses = () => {
     }, [msg]);
 
     useEffect(() => {
-        console.log("message sent")
         const gameCode = sessionStorage.getItem('gameCode');
-        ref.sendMessage('/app/guess/' + gameCode + '/' + localStorage.getItem("id"), JSON.stringify({
+        const content = {
             'protein': protein,
             "fat": fat,
             "carbs": carbs,
             "sugar": sugar,
             "calories": calories
-        }));
-    }, [fat, calories, sugar, carbs, protein]);
+        }
+        console.log(content)
+        ref.sendMessage('/app/guess/' + gameCode + '/' + localStorage.getItem("id"), JSON.stringify(content));
+        // console.log(update)
+    }, [update]);
 
     const setGuess = () => {
         const gameCode = sessionStorage.getItem('gameCode');
@@ -56,6 +61,10 @@ const Guesses = () => {
             "calories": calories
         }));
         history.push("/roundscore");
+    }
+
+    const handleChange = () => {
+        setUpdate(update + 1);
     }
 
     const handleProteinChange = (event, newValue) => {
@@ -99,6 +108,7 @@ const Guesses = () => {
                     valueLabelDisplay="auto"
                     value={protein}
                     onChange={handleProteinChange}
+                    onChangeCommitted={handleChange}
                 />
                 <p className='slider description'>Selected protein value: {protein}</p>
             </div>
@@ -111,6 +121,7 @@ const Guesses = () => {
                     valueLabelDisplay="auto"
                     value={fat}
                     onChange={handleFatChange}
+                    onChangeCommitted={handleChange}
                 />
                 <p className='slider description'>Selected fat value: {fat}</p>
             </div>
@@ -123,6 +134,7 @@ const Guesses = () => {
                     valueLabelDisplay="auto"
                     value={carbs}
                     onChange={handleCarbsChange}
+                    onChangeCommitted={handleChange}
                 />
                 <p className='slider description'>Selected carbs value: {carbs}</p>
             </div>
@@ -135,6 +147,7 @@ const Guesses = () => {
                     valueLabelDisplay="auto"
                     value={sugar}
                     onChange={handleSugarChange}
+                    onChangeCommitted={handleChange}
                 />
                 <p className='slider description'>Selected sugar value: {sugar}</p>
             </div>
@@ -146,6 +159,7 @@ const Guesses = () => {
                         valueLabelDisplay="auto"
                         value={calories}
                         onChange={handleCaloriesChange}
+                        onChangeCommitted={handleChange}
                     />
                 <p className='slider description'>Selected calories value: {calories}</p>
             </div>
