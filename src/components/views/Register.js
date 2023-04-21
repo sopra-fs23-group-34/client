@@ -65,27 +65,7 @@ const Register = () => {
             setAlertStatus(true);
         }
     };
-    const setFood = async () => {
-        try {
-            //const requestBody = JSON.stringify({username, email, password});
-            const response = await api(false, false).get('/users/food/pizza');
-            console.log(response.data)
-            // Get the returned user and update a new object.
-           // const user = new User(response.data);
-
-            // Store the token into the local storage.
-           // sessionStorage.setItem('token', user.token);
-            //sessionStorage.setItem('id', user.id);
-
-
-            // Login successfully worked --> navigate to the route /game in the GameRouter
-            //history.push(`/hub`);
-        } catch (error) {
-            // alert(`Something went wrong during the register: \n${handleError(error)}`);
-            setAlertStatus(true);
-        }
-    };
-
+    
     const handleClose = () => {
         setAlertStatus(false);
     }
@@ -120,13 +100,6 @@ const Register = () => {
                             onClick={() => registerAccount()}
                         >
                             Register
-                        </Button>
-                        <Button
-                            
-                            width="100%"
-                            onClick={() => setFood()}
-                        >
-                            Request Pizza
                         </Button>
                     </div>
                     
