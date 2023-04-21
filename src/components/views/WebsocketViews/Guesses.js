@@ -39,26 +39,27 @@ const Guesses = () => {
 
     useEffect(() => {
         const gameCode = sessionStorage.getItem('gameCode');
-        const content = {
-            'protein': protein,
-            "fat": fat,
-            "carbs": carbs,
-            "sugar": sugar,
-            "calories": calories
-        }
-        console.log(content)
-        ref.sendMessage('/app/guess/' + gameCode + '/' + localStorage.getItem("id"), JSON.stringify(content));
-        // console.log(update)
+        ref.sendMessage('/app/guess/' + gameCode + '/' + localStorage.getItem("id"), JSON.stringify({
+            content: {
+                'protein': protein,
+                "fat": fat,
+                "carbs": carbs,
+                "sugar": sugar,
+                "calories": calories
+            }
+        }));
     }, [update]);
 
     const setGuess = () => {
         const gameCode = sessionStorage.getItem('gameCode');
         ref.sendMessage('/app/guess/' + gameCode + '/' + localStorage.getItem("id"), JSON.stringify({
-            'protein': protein,
-            "fat": fat,
-            "carbs": carbs,
-            "sugar": sugar,
-            "calories": calories
+            content: {
+                'protein': protein,
+                "fat": fat,
+                "carbs": carbs,
+                "sugar": sugar,
+                "calories": calories
+            }
         }));
         history.push("/roundscore");
     }
