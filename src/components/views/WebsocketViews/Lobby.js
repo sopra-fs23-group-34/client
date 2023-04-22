@@ -32,7 +32,7 @@ const Lobby = () => {
     // use react-router-dom's hook to access the history
     const history = useHistory();
     const {ref, msg} = useContext(WebsocketWrapper);
-    const [roundCount, setRoundCount] = useState(5);
+    const [roundLimit, setRoundLimit] = useState(5);
     const [foodCategory, setFoodCategory] = useState("");
     const handleChangeCategory = (event) => {
         setFoodCategory(event.target.value);
@@ -47,7 +47,7 @@ const Lobby = () => {
     ]
 
     const handleChange = (event, newValue) => {
-        setRoundCount(newValue);
+        setRoundLimit(newValue);
     }
 
     // define a state variable (using the state hook).
@@ -81,12 +81,14 @@ const Lobby = () => {
         history.push('/hub');
     }
 
+    
     const startGame = async () => {
+        const gameConfig = JSON.stringify({foodCategory, roundLimit});
         const gameCode = sessionStorage.getItem("gameCode");
         const token = sessionStorage.getItem("token");
         const userId = sessionStorage.getItem("id");
         try {
-          await api(token, userId).post("/lobbys/startGame/" + gameCode);
+          await api(token, userId).post("/lobbys/startGame/" + gameCode,gameConfig);
           history.push("/guesses");
         } catch (error) {
           //not needed to display anything because if you are host and you press start it should work
@@ -170,7 +172,7 @@ const Lobby = () => {
                     <Box item xs={3}>
                         <h2>Number of Rounds</h2>
                         <Slider
-                            value={roundCount}
+                            value={roundLimit}
                             aria-label="Default"
                             valueLabelDisplay="auto"
                             min={1}

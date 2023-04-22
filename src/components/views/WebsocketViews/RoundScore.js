@@ -31,11 +31,13 @@ const RoundScore = () => {
 
     console.log(msg)
 
+
+
     useEffect(() => {
         if (msg && msg.topic === "Ranking") {
             setRanking(msg.content);
         }
-
+        /* kannst es eigentlich auch so machen mit dem message handler im websocket, das ist cleaner*/
         if (msg && msg.topic === "Guess") {
             setGuess(msg.content);
         }
@@ -48,6 +50,17 @@ const RoundScore = () => {
             history.push('/FinalScore');
         }
 
+        if (msg.topic === "RoundScore") {
+            console.log(msg.content)
+        }
+
+        if (msg.topic === "GameScore") {
+            console.log(msg.content)
+        }
+
+        if (msg.topic === "FinalScore") {
+            console.log(msg.content)
+        }
     }, [msg, history]);
 
 
