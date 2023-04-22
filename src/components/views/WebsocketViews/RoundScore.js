@@ -40,8 +40,12 @@ const RoundScore = () => {
             setGuess(msg.content);
         }
 
-        if (msg.topic === "roundStart") {
+        if (msg.topic === "RoundStart") {
             history.push('/Guesses');
+        }
+
+        if (msg.topic === "FinalScoreStart") {
+            history.push('/FinalScore');
         }
 
     }, [msg, history]);
