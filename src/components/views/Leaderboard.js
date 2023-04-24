@@ -44,7 +44,7 @@ const Player = ({user, index}) => {
   };
 const Leaderboard = () => {
     const [users, setUsers] = useState(null);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState([]);
     const history = useHistory();
     const listRef = React.createRef();
     const [show, setShow] = useState(false);
