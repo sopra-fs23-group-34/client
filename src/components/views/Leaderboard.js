@@ -413,7 +413,7 @@ const Leaderboard = () => {
                     }}>
                         <Grid item xs={2}>
                             <Item>
-                                <Button
+                                <Button style={{background: "#d9e0d9", color:"black"}}
                                     onClick={() => moveToMe()}
                                     >find me
                                 </Button>
@@ -421,7 +421,7 @@ const Leaderboard = () => {
                         </Grid>
                         <Grid item xs={3}>
                             <Item>
-                                <Button
+                                <Button style={{background: "#d9e0d9", color:"black"}}
                                     onClick={() => moveToTop()}
                                     >Go to Top
                                 </Button>
@@ -433,7 +433,7 @@ const Leaderboard = () => {
                             <Item sx={{
                             justifyContent: "right"
                         }}>
-                                <Button
+                                <Button style={{background: "#d9e0d9", color:"black"}}
                                     onClick={() => Hub()}
                                 >
                                 Hub
