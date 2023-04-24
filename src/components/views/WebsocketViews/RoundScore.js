@@ -16,56 +16,86 @@ import { useHistory } from 'react-router-dom';
 const RoundScore = () => {
     const history = useHistory();
     const {ref, msg} = useContext(WebsocketWrapper);
-    const [ranking, setRanking] = useState("noRanking");
+    const [ranking, setRanking] = useState([]);
     const [guess, setGuess] = useState("noGuess");
     const [name, setName] = useState("noName");
-    const list1 = ["Andre", "Nataell", "Nico"]
-    const rows = [
+    const [players, setPlayers] = useState([]);
+    const data = [
         createData('Nataell', 159, 6.0, 24, 4.0),
         createData('Nico', 237, 9.0, 37, 4.3),
         createData('Elias', 262, 16.0, 24, 6.0),
         createData('Maurice', 305, 3.7, 67, 4.3),
         createData('Andre', 356, 16.0, 49, 3.9),
     ];
-    
 
-    console.log(msg)
+
+    const handleRanking = (msg) => {
+        setRanking(msg.content);
+        console.log('ranking message')
+    }
+
+    const handleGuess = (msg) => {
+        setGuess(msg.content);
+        console.log('guess message')
+    }
+
+    const handleRoundStart = (msg) => {
+        history.push('/Guesses');
+        console.log('round start message')
+    }
+
+    const handleFinalScoreStart = (msg) => {
+        history.push('/FinalScore');
+        console.log('final score start message')
+    }
+
+    const handleRoundScore = (msg) => {
+        console.log('round score: ' + msg.content)
+        const listOfPlayers = msg.content
+        setPlayers(listOfPlayers)
+        // {player1{calories {actualValues, guessedValues, deviations}, carbs {actualValues, guessedValues, deviations}, fat, protein}
+        console.log(players)
+        {players.map((player) => {console.log(player.calories.actualValues)})}
+    }
+
+    const handleGameScore = (msg) => {
+        console.log('ranking:', msg.content)
+        setRanking(msg.content)
+        console.log('game score:' + ranking)
+    }
+
+    const handleFinalScore = (msg) => {
+        console.log(msg.content)
+        console.log('final score message')
+    }
+
+    const topicHandlers = {
+        "Ranking": handleRanking,
+        "Guess": handleGuess,
+        "RoundStart": handleRoundStart,
+        "FinalScoreStart": handleFinalScoreStart,
+        "RoundScore": handleRoundScore,
+        "GameScore": handleGameScore,
+        "FinalScore": handleFinalScore
+    };
+
+    function handleMessage(msg) {
+        const handler = topicHandlers[msg.topic];
+        if (handler) {
+            handler(msg);
+        }
+    }
 
 
 
     useEffect(() => {
-        if (msg && msg.topic === "Ranking") {
-            setRanking(msg.content);
-        }
-        /* kannst es eigentlich auch so machen mit dem message handler im websocket, das ist cleaner*/
-        if (msg && msg.topic === "Guess") {
-            setGuess(msg.content);
-        }
 
-        if (msg.topic === "RoundStart") {
-            history.push('/Guesses');
-        }
+        handleMessage(msg);
 
-        if (msg.topic === "FinalScoreStart") {
-            history.push('/FinalScore');
-        }
-
-        if (msg.topic === "RoundScore") {
-            console.log(msg.content)
-        }
-
-        if (msg.topic === "GameScore") {
-            console.log(msg.content)
-        }
-
-        if (msg.topic === "FinalScore") {
-            console.log(msg.content)
-        }
     }, [msg, history]);
 
 
-    if (ranking === "noRanking" && guess === "noGuess" && name === "noName") {
-        setRanking([1, 2, 3, 4, 5, 6])
+    if (guess === "noGuess" && name === "noName") {
         setGuess([22, 33, 44, 55, 66, 77])
         setName(["Andre", "Nataell", "Nico", "Elias", "Maurice", "Bob"])
     }
@@ -91,7 +121,7 @@ const RoundScore = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {data.map((row) => (
                         <TableRow
                             key={row.name}
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
@@ -113,29 +143,29 @@ const RoundScore = () => {
 
     return (
         <BaseContainer>
-            <div className="score container">
-                <h1>round statistics</h1>
-                <h2>your performance and the ranking</h2>
-                <table className="score table">
-                    <thead className="score th:first-child">
-                    <tr className="score tr">
-                        <th>players</th>
-                        <th>rank</th>
-                        <th>points this round</th>
-                    </tr>
-                    </thead>
-                    <tbody className="score th">
-                    {list1.map((ranking, index) => (
-                        <tr key={index}>
-                            <td>{ranking[index]}</td>
-                            <td>{guess[index]}</td>
-                            <td>{name[index]}</td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-                {nutritionTable}
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <TableContainer component={Paper} sx={{maxWidth: 300, marginBottom: 1}}>
+                <Table sx={{maxWidth: 300}} size="small" aria-label="ranking table" >
+                <TableHead>
+                <TableRow>
+                    <TableCell>Rank</TableCell>
+                    <TableCell align='right'>Name</TableCell>
+                    <TableCell align='right'>Points</TableCell>
+                </TableRow>
+                </TableHead>
+                <TableBody>
+                {Object.entries(ranking).map(([key, value], index) => (
+                    <TableRow key={key} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                        <TableCell>{index+1}</TableCell>
+                        <TableCell align='right'>{key}</TableCell>
+                        <TableCell align='right'>{value}</TableCell>
+                    </TableRow>
+                ))}
+                </TableBody>
+            </Table>
+            </TableContainer>
             </div>
+            {nutritionTable}
         </BaseContainer>
     );
 };
