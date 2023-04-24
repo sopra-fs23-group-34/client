@@ -49,22 +49,13 @@ const RoundScore = () => {
     }
 
     const handleRoundScore = (msg) => {
-        console.log('round score: ' + msg.content)
         const listOfPlayers = msg.content
         setPlayers(listOfPlayers)
         // {player1{calories {actualValues, guessedValues, deviations}, carbs {actualValues, guessedValues, deviations}, fat, protein}
-        console.log(players)
-        {
-            players.map((player) => {
-                console.log(player.calories.actualValues)
-            })
-        }
     }
 
     const handleGameScore = (msg) => {
-        console.log('ranking:', msg.content)
         setRanking(msg.content)
-        console.log('game score:' + ranking)
     }
 
     const handleFinalScore = (msg) => {
