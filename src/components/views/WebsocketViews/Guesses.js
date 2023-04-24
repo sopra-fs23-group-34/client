@@ -13,7 +13,8 @@ const Guesses = () => {
     const [protein, setProtein] = useState(50);
     const [fat, setFat] = useState(50);
     const [carbs, setCarbs] = useState(50);
-    {/*const [sugar, setSugar] = useState(50);*/}
+    {/*const [sugar, setSugar] = useState(50);*/
+    }
     const [timer, setTimer] = useState(15);
     const [foodName, setFoodName] = useState("");
     const [foodLink, setFoodLink] = useState("");
@@ -81,7 +82,8 @@ const Guesses = () => {
     const handleSugarChange = (event, newValue) => {
         setSugar(newValue);
     }
-    */}
+    */
+    }
     const handleCaloriesChange = (event, newValue) => {
         setCalories(newValue);
     }
@@ -150,18 +152,18 @@ const Guesses = () => {
                 />
                 <p className='slider description'>Selected sugar value: {sugar}</p>
             </div> */}
-                <div className="slider form">
-                    <h2 className='slider title'>Calories</h2>
-                    <Slider
-                        defaultValue={200}
-                        aria-label="calories"
-                        valueLabelDisplay="auto"
-                        value={calories}
-                        onChange={handleCaloriesChange}
-                        onChangeCommitted={handleChange}
-                        min={0}
-                        max={800}
-                    />
+            <div className="slider form">
+                <h2 className='slider title'>Calories</h2>
+                <Slider
+                    defaultValue={200}
+                    aria-label="calories"
+                    valueLabelDisplay="auto"
+                    value={calories}
+                    onChange={handleCaloriesChange}
+                    onChangeCommitted={handleChange}
+                    min={0}
+                    max={800}
+                />
                 <p className='slider description'>Selected kcal/100gr: {calories}</p>
             </div>
         </BaseContainer>

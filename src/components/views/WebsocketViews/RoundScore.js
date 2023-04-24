@@ -30,7 +30,6 @@ const RoundScore = () => {
 
     const handleRanking = (msg) => {
         setRanking(msg.content);
-        console.log('ranking message')
     }
 
     const handleGuess = (msg) => {
@@ -49,13 +48,8 @@ const RoundScore = () => {
     }
 
     const handleRoundScore = (msg) => {
-        const listOfPlayers = msg.content
-        setPlayers(listOfPlayers)
+        setPlayers(msg.content)
         // {player1{calories {actualValues, guessedValues, deviations}, carbs {actualValues, guessedValues, deviations}, fat, protein}
-    }
-
-    const handleGameScore = (msg) => {
-        setRanking(msg.content)
     }
 
     const handleFinalScore = (msg) => {
@@ -66,11 +60,11 @@ const RoundScore = () => {
     const topicHandlers = {
         "Ranking": handleRanking,
         "Guess": handleGuess,
-        "RoundStart": handleRoundStart,
-        "FinalScoreStart": handleFinalScoreStart,
         "RoundScore": handleRoundScore,
-        "GameScore": handleGameScore,
-        "FinalScore": handleFinalScore
+        "GameScore": handleRanking,
+        "FinalScore": handleFinalScore,
+        "RoundStart": handleRoundStart,
+        "FinalScoreStart": handleFinalScoreStart
     };
 
     function handleMessage(msg) {
@@ -171,6 +165,7 @@ const RoundScore = () => {
 
     return (
         <BaseContainer>
+            <h1 style={{textAlign: 'center'}}>Round Overview</h1>
             {rankingTable}
             {nutritionTable}
         </BaseContainer>
