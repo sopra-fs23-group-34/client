@@ -38,8 +38,8 @@ jobs:
           node-version: "18.x"
       - run: npm install
       - run: npm run build
-        env: 
-          process.env.CI = false
+        env:
+          CI: false
 
       - name: Deploy to App Engine
         id: deploy
