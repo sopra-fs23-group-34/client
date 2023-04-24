@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SockJsClient from "react-stomp";
-
+import { getDomain } from 'helpers/getDomain';
 // Define a separate context to hold the states from SockJsClient
 export const WebsocketWrapper = React.createContext();
 
@@ -25,7 +25,7 @@ export function WebsocketWrapperComponent({ children }) {
   return (
     <WebsocketWrapper.Provider value={{ ref, msg, gameCode, userid }}>
       <SockJsClient
-        url="http://localhost:8080/ws"
+        url= {getDomain() + "/ws"}
         topics={["/topic/lobbies/" + gameCode, "/topic/players/" + userid]}
         onMessage={(msg) => {
           handleMessage(msg);
