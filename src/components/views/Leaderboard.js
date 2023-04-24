@@ -1,10 +1,10 @@
 import { Spinner } from "components/ui/Spinner";
-//import { handleError } from "helpers/api";
-//import { api } from "helpers/api";
+import { handleError } from "helpers/api";
+import { api } from "helpers/api";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import User from "models/User";
-import { Box, Button, Grid, ListItemButton } from "@mui/material";
+import { Box, Button, Grid, ListItemButton, Typography } from "@mui/material";
 import "styles/views/Leaderboard.scss";
 import Item from "components/ui/Item";
 import * as React from 'react';
@@ -13,7 +13,13 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { FixedSizeList} from 'react-window';
 import { useHistory } from "react-router-dom";
-
+import StatsCard from "resources/StatsCard";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const { default: BaseContainer } = require("components/ui/BaseContainer")
 const Player = ({user, index}) => {
@@ -38,15 +44,30 @@ const Player = ({user, index}) => {
   };
 const Leaderboard = () => {
     const [users, setUsers] = useState(null);
+    const [user, setUser] = useState(null);
     const history = useHistory();
     const listRef = React.createRef();
+    const [show, setShow] = useState(false);
+    const [errorMessage, setErrorMessage] = React.useState("");
+      const handleClickOpen = () => {
+        setShow(true);
+      };
+    
+      const handleClose = () => {
+        setErrorMessage("");
+        setShow(false);
+      };
     function renderRow(props) {
         const { index, style } = props;
-      
+        const handleClick = () => {
+            setUser(users[index]);
+            console.log(users, user, index)
+            handleClickOpen();
+        }
         return (
           <ListItem style={{...style}
           } key={index} component="div" disablePadding>
-            <ListItemButton sx={{
+            <ListItemButton onClick={handleClick} sx={{
                 height:"46px",
                 width:"100%",
                 padding:"0px"
@@ -62,10 +83,13 @@ const Leaderboard = () => {
       }
       function renderTop(props) {
         const { index, style } = props;
-      
+        const handleClick = () => {
+            setUser(users[index]);
+            handleClickOpen();
+        }
         return (
           <ListItem style={style} key={index} component="div" disablePadding>
-            <ListItemButton sx={{
+            <ListItemButton onClick={handleClick} sx={{
                 height:"46px",
                 width:"100%",
                 padding:"0px"
@@ -79,6 +103,7 @@ const Leaderboard = () => {
           </ListItem>
         );
       }
+
     useEffect(() => {
         let user1 = new User({
             username: "babuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabui",
@@ -91,8 +116,10 @@ const Leaderboard = () => {
         })
         setUsers(
             [
+                me,
                 user1,
                 user1,
+                me,
                 user1,
                 user1,
                 user1,
@@ -247,6 +274,7 @@ const Leaderboard = () => {
             ]
         )
     }, [])
+
     function findUser(user) {
         return user.token === sessionStorage.getItem('token');
     }
@@ -267,11 +295,12 @@ const Leaderboard = () => {
         return () => { ignore = true; }
         },);
 
-    /*
+/*
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await api(null,null).get("/users/ranking");
+                const response = await api(sessionStorage.getItem("token"),sessionStorage.getItem("id")).get("/users/ranking");
+                console.log(response.data)
                 setUsers(response.data);
             } catch (error) {
                 console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
@@ -281,7 +310,7 @@ const Leaderboard = () => {
         }
         fetchData();
     }, []);
-    */
+*/
     let content = <Spinner/>;
 
     if (users) {
@@ -360,6 +389,24 @@ const Leaderboard = () => {
                             {renderRow}
                         </FixedSizeList>
                     </Box>
+                    
+        <Dialog fullWidth={true} maxWidth={"md"} sx={{
+            
+        }} open={show} onClose={handleClose}>
+        <DialogTitle >{user.username}'s Stats</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Enter a code to join an existing lobby.
+          </DialogContentText>
+          <Typography variant="body1" color="error">
+            {errorMessage}
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+            <Button>Compare against your own Stats</Button>
+          <Button onClick={handleClose}>Back</Button>
+        </DialogActions>
+      </Dialog>
                     <Grid container spacing={3}
                     sx={{
                         justifyContent: "space-between"
