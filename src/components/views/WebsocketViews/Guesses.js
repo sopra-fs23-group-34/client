@@ -25,7 +25,6 @@ const Guesses = () => {
     useEffect(() => {
         if (msg && msg.topic === "Timer") {
             setTimer(msg.content);
-            console.log('timer')
         }
 
         if (msg && msg.topic === "Food") {
@@ -39,7 +38,6 @@ const Guesses = () => {
     }, [msg]);
 
     useEffect(() => {
-        console.log(gameCode, userid)
         ref.sendMessage('/app/guess/' + gameCode + '/' + userid, JSON.stringify({
             content: {
                 'protein': protein,
@@ -49,7 +47,7 @@ const Guesses = () => {
                 "calories": calories
             }
         }));
-    }, [update, gameCode, userid, protein, fat, carbs, /*sugar,*/ calories, ref]);
+    }, [update, gameCode, userid, ref]);
 
     const setGuess = () => {
         ref.sendMessage('/app/guess/' + gameCode + '/' + userid, JSON.stringify({
