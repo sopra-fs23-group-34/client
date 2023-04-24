@@ -109,7 +109,7 @@ const Guesses = () => {
                     onChange={handleProteinChange}
                     onChangeCommitted={handleChange}
                 />
-                <p className='slider description'>Selected protein value: {protein}</p>
+                <p className='slider description'>Selected protein/100gr: {protein}</p>
             </div>
 
             <div className="slider form">
@@ -122,7 +122,7 @@ const Guesses = () => {
                     onChange={handleFatChange}
                     onChangeCommitted={handleChange}
                 />
-                <p className='slider description'>Selected fat value: {fat}</p>
+                <p className='slider description'>Selected fat/100gr: {fat}</p>
             </div>
 
             <div className="slider form">
@@ -135,7 +135,7 @@ const Guesses = () => {
                     onChange={handleCarbsChange}
                     onChangeCommitted={handleChange}
                 />
-                <p className='slider description'>Selected carbs value: {carbs}</p>
+                <p className='slider description'>Selected carb/100gr: {carbs}</p>
             </div>
 
             {/*<div className="slider form">
@@ -153,14 +153,16 @@ const Guesses = () => {
                 <div className="slider form">
                     <h2 className='slider title'>Calories</h2>
                     <Slider
-                        defaultValue={50}
+                        defaultValue={200}
                         aria-label="calories"
                         valueLabelDisplay="auto"
                         value={calories}
                         onChange={handleCaloriesChange}
                         onChangeCommitted={handleChange}
+                        min={0}
+                        max={800}
                     />
-                <p className='slider description'>Selected calories value: {calories}</p>
+                <p className='slider description'>Selected kcal/100gr: {calories}</p>
             </div>
         </BaseContainer>
     );

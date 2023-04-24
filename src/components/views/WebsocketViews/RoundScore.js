@@ -9,8 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {Spinner} from "../../ui/Spinner";
-import { useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 
 const RoundScore = () => {
@@ -55,7 +54,11 @@ const RoundScore = () => {
         setPlayers(listOfPlayers)
         // {player1{calories {actualValues, guessedValues, deviations}, carbs {actualValues, guessedValues, deviations}, fat, protein}
         console.log(players)
-        {players.map((player) => {console.log(player.calories.actualValues)})}
+        {
+            players.map((player) => {
+                console.log(player.calories.actualValues)
+            })
+        }
     }
 
     const handleGameScore = (msg) => {
@@ -87,7 +90,6 @@ const RoundScore = () => {
     }
 
 
-
     useEffect(() => {
 
         handleMessage(msg);
@@ -104,9 +106,44 @@ const RoundScore = () => {
         return {name, calories, fat, carbs, protein};
     }
 
+    let rankingTable;
 
+    rankingTable = (
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <div style={{
+                display: 'inline-block',
+                position: 'center',
+                justifyContent: 'center',
+                alignItems: 'center',
+                margin: 10
+            }}>
+                <TableContainer component={Paper} sx={{maxHeight: 200}}>
+                    <Table sx={{
+                        height: "max-content"
+                    }} size="small" stickyHeader aria-label="ranking table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Rank</TableCell>
+                                <TableCell align='right'>Name</TableCell>
+                                <TableCell align='right'>Points</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {Object.entries(ranking).map(([key, value], index) => (
+                                <TableRow hover role="checkbox">
+                                    <TableCell>{index + 1}</TableCell>
+                                    <TableCell align='right'>{key}</TableCell>
+                                    <TableCell align='right'>{value}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+        </div>
+    );
 
-    let nutritionTable = <Spinner/>;
+    let nutritionTable;
 
     nutritionTable = (
         <TableContainer component={Paper}>
@@ -143,28 +180,7 @@ const RoundScore = () => {
 
     return (
         <BaseContainer>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <TableContainer component={Paper} sx={{maxWidth: 300, marginBottom: 1}}>
-                <Table sx={{maxWidth: 300}} size="small" aria-label="ranking table" >
-                <TableHead>
-                <TableRow>
-                    <TableCell>Rank</TableCell>
-                    <TableCell align='right'>Name</TableCell>
-                    <TableCell align='right'>Points</TableCell>
-                </TableRow>
-                </TableHead>
-                <TableBody>
-                {Object.entries(ranking).map(([key, value], index) => (
-                    <TableRow key={key} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-                        <TableCell>{index+1}</TableCell>
-                        <TableCell align='right'>{key}</TableCell>
-                        <TableCell align='right'>{value}</TableCell>
-                    </TableRow>
-                ))}
-                </TableBody>
-            </Table>
-            </TableContainer>
-            </div>
+            {rankingTable}
             {nutritionTable}
         </BaseContainer>
     );
