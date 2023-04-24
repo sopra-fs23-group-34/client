@@ -57,7 +57,7 @@ export default function FormDialog() {
         <p>Join a game of one of your friends.</p>
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Join a game</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Enter a code to join an existing lobby.
