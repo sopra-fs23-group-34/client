@@ -13,6 +13,7 @@ import Guesses from "components/views/WebsocketViews/Guesses";
 import RoundScore from "components/views/WebsocketViews/RoundScore";
 import FinalScore from "components/views/WebsocketViews/FinalScore";
 import Leaderboard from "components/views/Leaderboard";
+import Stats from "components/views/Stats";
 
 /**
  * Main router of your application.
@@ -35,6 +36,11 @@ const AppRouter = () => {
         <Route path="/leaderboard">
           <GameGuard>
             <Leaderboard/>
+          </GameGuard>
+        </Route>
+        <Route path="/stats">
+          <GameGuard>
+            <Stats/>
           </GameGuard>
         </Route>
         <Route exact path="/login">
