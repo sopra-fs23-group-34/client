@@ -39,11 +39,11 @@ const Lobby = () => {
     };
 
     const categories = [
-        "Vegetables",
+        "All",
         "Fruits",
+        "Vegetables",
         "Meat",
-        "Snacks",
-        "Drinks"
+        "Snacks"
     ]
 
     const handleChange = (event, newValue) => {
