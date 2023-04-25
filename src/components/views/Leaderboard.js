@@ -3,7 +3,6 @@ import { handleError } from "helpers/api";
 import { api } from "helpers/api";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import User from "models/User";
 import { Box, Button, Grid, ListItemButton, Typography } from "@mui/material";
 import "styles/views/Leaderboard.scss";
 import Item from "components/ui/Item";
@@ -13,8 +12,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { FixedSizeList} from 'react-window';
 import { useHistory } from "react-router-dom";
-import StatsCard from "resources/StatsCard";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -32,7 +29,7 @@ const Player = ({user, index}) => {
               {user.username}
             </div>
             <div className='player totalscore'>
-              {user.totalscore}
+              {user.totalScore}
             </div>
 
       </div>
@@ -60,7 +57,7 @@ const Leaderboard = () => {
     function renderRow(props) {
         const { index, style } = props;
         const handleClick = () => {
-            setUser(users[index]);
+            setUser(users[index+3]);
             console.log(users, user, index)
             handleClickOpen();
         }
@@ -104,177 +101,6 @@ const Leaderboard = () => {
         );
       }
 
-    useEffect(() => {
-        let user1 = new User({
-            username: "babuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabuibabui",
-            totalscore: "1291"
-        })
-        let me = new User({
-            username: "me",
-            totalscore: "1290",
-            token:sessionStorage.getItem("token")
-        })
-        setUsers(
-            [
-                me,
-                user1,
-                user1,
-                me,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                me,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1,
-                user1
-            ]
-        )
-    }, [])
-
     function findUser(user) {
         return user.token === sessionStorage.getItem('token');
     }
@@ -295,7 +121,7 @@ const Leaderboard = () => {
         return () => { ignore = true; }
         },);
 
-/*
+
     useEffect(() => {
         async function fetchData() {
             try {
@@ -310,7 +136,7 @@ const Leaderboard = () => {
         }
         fetchData();
     }, []);
-*/
+
     let content = <Spinner/>;
 
     if (users) {
