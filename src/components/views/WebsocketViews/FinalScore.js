@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import 'styles/views/Login.scss';
 import {WebsocketWrapper} from './WebsocketWrapper';
 import TableContainer from "@mui/material/TableContainer";
@@ -9,12 +9,35 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import BaseContainer from "../../ui/BaseContainer";
+import {useHistory} from "react-router-dom";
 
 
 const FinalScore = () => {
-    const {ref, lastMessage} = useContext(WebsocketWrapper);
-    const [ranking, setRanking] = useState([]);
-    console.log(lastMessage)
+    const history = useHistory();
+    const {ref, msg} = useContext(WebsocketWrapper);
+    const [finalRanking, setFinalRanking] = useState([]);
+
+    const handleFinalScore = (msg) => {
+        setFinalRanking(msg.content)
+    }
+
+    const topicHandlers = {
+        "FinalScore": handleFinalScore
+    };
+
+    function handleMessage(msg) {
+        const handler = topicHandlers[msg.topic];
+        if (handler) {
+            handler(msg);
+        }
+    }
+
+    useEffect(() => {
+
+        handleMessage(msg);
+
+    }, [msg, history]);
+
 
     let rankingTable;
 
@@ -39,7 +62,7 @@ const FinalScore = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {Object.entries(ranking).map(([key, value], index) => (
+                            {Object.entries(finalRanking).map(([key, value], index) => (
                                 <TableRow hover role="checkbox">
                                     <TableCell>{index + 1}</TableCell>
                                     <TableCell align='right'>{key}</TableCell>
