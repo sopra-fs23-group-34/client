@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import 'styles/views/Login.scss';
+import 'styles/views/FinalScore.scss';
 import {WebsocketWrapper} from './WebsocketWrapper';
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
@@ -9,7 +9,8 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import BaseContainer from "../../ui/BaseContainer";
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import {Button} from "../../ui/Button";
 
 
 const FinalScore = () => {
@@ -32,6 +33,13 @@ const FinalScore = () => {
         }
     }
 
+    const leaveGame = () => {
+        ref.sendMessage('/app/leave/' + sessionStorage.getItem('gameCode') + '/' + sessionStorage.getItem("id"))
+        sessionStorage.removeItem('gameCode');
+        sessionStorage.removeItem('host');
+        history.push('/hub');
+    }
+
     useEffect(() => {
 
         handleMessage(msg);
@@ -50,7 +58,7 @@ const FinalScore = () => {
                 alignItems: 'center',
                 margin: 10
             }}>
-                <TableContainer component={Paper} sx={{maxHeight: 200}}>
+                <TableContainer component={Paper} sx={{maxHeight: 200, minWidth: 400}}>
                     <Table sx={{
                         height: "max-content"
                     }} size="small" stickyHeader aria-label="ranking table">
@@ -78,9 +86,18 @@ const FinalScore = () => {
 
     return (
         <BaseContainer>
-            <div>
-                <h1 style={{textAlign: 'center'}}>Final Score</h1>
-                {rankingTable}
+            <div className='finalScore container'>
+                <div className='finalScore form'>
+                    <h1 style={{textAlign: 'center'}}>Final Score</h1>
+                    {rankingTable}
+                    <Link to={"/hub"}>
+                        <Button width="100%"
+                                onClick={
+                                    () => leaveGame()}>
+                            Back to Hub
+                        </Button>
+                    </Link>
+                </div>
             </div>
         </BaseContainer>
     );
