@@ -3,7 +3,7 @@ import { handleError } from "helpers/api";
 import { api } from "helpers/api";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Box, Button, Grid, ListItemButton, Typography } from "@mui/material";
+import { Box, Button, Grid, ListItemButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import "styles/views/Leaderboard.scss";
 import Item from "components/ui/Item";
 import * as React from 'react';
@@ -17,7 +17,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-
+import Paper from '@mui/material/Paper';
+import {DataGrid, useGridApiRef} from '@mui/x-data-grid';
 const { default: BaseContainer } = require("components/ui/BaseContainer")
 const Player = ({user, index}) => {
     return (
@@ -39,26 +40,57 @@ const Player = ({user, index}) => {
   Player.propTypes = {
     user: PropTypes.object
   };
+
+const columns = [
+    {field: "Player", width:350},
+    {field: "Games played", width:150, type:"number", align:"center", cellClassName: "games-played"},
+    {field: "Wins", width: 80, type:"number", align:"center", cellClassName: "wins"},
+    {field: "Win percentage", width: 150, type:"number", valueFormatter: ({ value }) => `${value} %`, align:"center", cellClassName: "win-percentage"},
+    {field: "highscore", width: 100, type:"number", align:"center", cellClassName: "highscore"}
+]
 const Leaderboard = () => {
+    let idCounter = 0;
     const [users, setUsers] = useState(null);
     const [user, setUser] = useState([]);
     const history = useHistory();
     const listRef = React.createRef();
     const [show, setShow] = useState(false);
     const [errorMessage, setErrorMessage] = React.useState("");
-      const handleClickOpen = () => {
-        setShow(true);
-      };
+    const apiRef = useGridApiRef();
+    const [rows, setRows] = useState([]);
     
-      const handleClose = () => {
+    function createData(username, games_played, wins, ratio, highscore) {
+        return { id: idCounter, "Player": username, "Games played": games_played, "Wins": wins, "Win percentage": ratio, "highscore": highscore };
+      }
+      useEffect(() => {
+          let ignore = false;
+        if (!ignore)  {
+            setRows([
+                createData(user.username, 10, 10, 100, 8000)
+              ])
+        }
+        return () => { ignore = true; }
+      }, [user])
+    
+      const handleAddRow = () => {
+        idCounter += 1;
+        if (idCounter === 1){
+            apiRef.current.updateRows([createData("myname", 1291, 1290, Math.round((1290/1291*100 + Number.EPSILON) * 100) / 100, 8008)]);
+        }
+      };
+
+    const handleClickOpen = () => {
+        setShow(true);
+    };
+    
+    const handleClose = () => {
         setErrorMessage("");
         setShow(false);
-      };
+    };
     function renderRow(props) {
         const { index, style } = props;
         const handleClick = () => {
             setUser(users[index+3]);
-            console.log(users, user, index)
             handleClickOpen();
         }
         return (
@@ -126,7 +158,6 @@ const Leaderboard = () => {
         async function fetchData() {
             try {
                 const response = await api(sessionStorage.getItem("token"),sessionStorage.getItem("id")).get("/users/ranking");
-                console.log(response.data)
                 setUsers(response.data);
             } catch (error) {
                 console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
@@ -221,15 +252,22 @@ const Leaderboard = () => {
         }} open={show} onClose={handleClose}>
         <DialogTitle >{user.username}'s Stats</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Enter a code to join an existing lobby.
-          </DialogContentText>
+            <Box sx={{ height: 162, mt:1}}>
+                <DataGrid apiRef={apiRef} rows={rows} columns={columns}
+                    hideFooter
+                    initialState={{
+                        sorting: {
+                            sortModel: [{field: "Wins", sort:"desc"}]
+                        }
+                    }}
+                />
+            </Box>
           <Typography variant="body1" color="error">
             {errorMessage}
           </Typography>
         </DialogContent>
         <DialogActions>
-            <Button>Compare against your own Stats</Button>
+            <Button onClick={handleAddRow}>Compare against your own Stats</Button>
           <Button onClick={handleClose}>Back</Button>
         </DialogActions>
       </Dialog>
