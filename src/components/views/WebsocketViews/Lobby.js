@@ -8,14 +8,14 @@ import "styles/views/Lobby.scss";
 import {WebsocketWrapper} from './WebsocketWrapper';
 import * as React from "react";
 import Box from '@mui/material/Box';
-import {Grid, Slider, Typography} from '@mui/material';
+import {Grid, ListItem, ListItemText, Slider, Typography} from '@mui/material';
 import Item from 'components/ui/Item';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { api } from 'helpers/api';
-
+import { FixedSizeList } from 'react-window';
 
 const Player = ({user}) => (
     <div className="player container">
@@ -57,7 +57,21 @@ const Lobby = () => {
     // more information can be found under https://reactjs.org/docs/hooks-state.html
     const [users, setUsers] = useState([]);
     const [errorMessage ,setErrorMessage] = useState("");
+function renderTop(props) {
+        const { index, style } = props;
 
+        return (
+          <ListItem style={style} key={index} component="div" disablePadding>
+
+              <ListItemText primary={<Player
+                                key={users[index].id}
+                                user={users[index]}
+                                index={index}
+                                />} />
+
+          </ListItem>
+        );
+      }
     useEffect(() => {
         
         if (msg && msg.topic === "players") {
@@ -113,21 +127,18 @@ const Lobby = () => {
                     margin: "auto",
                     justifyContent: "left"
                 }}>
-                    <Box item xs={3}
-                         sx={{
-                             width: "100%",
-                             height: 400,
-                             maxWidth: 360,
-                             margin: "left",
-                             marginLeft: "30px"
-                         }}
+                    <FixedSizeList
+                    height={400}
+                    width={"35%"}
+                    itemSize={46}
+                    itemCount={users.length}
+                    overscanCount={1}
+                    style={{
+                        marginLeft: "25px"
+                    }}
                     >
-                        {users.map((user) => (
-                            <Player
-                                key={user.id}
-                                user={user}/>
-                        ))}
-                    </Box>
+                        {renderTop}
+                    </FixedSizeList>
                 </Grid>
                 <Grid container spacing={3} sx={{
                     justifyContent: "space-between"
@@ -154,21 +165,18 @@ const Lobby = () => {
                     margin: "auto",
                     justifyContent: "space-around"
                 }}>
-                    <Box item xs={3}
-                         sx={{
-                             width: "100%",
-                             height: 400,
-                             maxWidth: 360,
-                             margin: "left",
-                             marginLeft: "30px"
-                         }}
+                    <FixedSizeList
+                    height={400}
+                    width={"35%"}
+                    itemSize={46}
+                    itemCount={users.length}
+                    overscanCount={1}
+                    style={{
+                        marginLeft: "25px"
+                    }}
                     >
-                        {users.map((user) => (
-                            <Player
-                                key={user.id}
-                                user={user}/>
-                        ))}
-                    </Box>
+                        {renderTop}
+                    </FixedSizeList>
                     <Box item xs={3}>
                         <h2>Number of Rounds</h2>
                         <Slider
