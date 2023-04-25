@@ -149,6 +149,7 @@ const Stats = () => {
     return (
         <BaseContainer className="stats container">
             <h1>my name</h1>
+            <h2>This feature is mocked</h2>
             {content}
         </BaseContainer>
     )
