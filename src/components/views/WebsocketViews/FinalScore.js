@@ -86,18 +86,19 @@ const FinalScore = () => {
 
     return (
         <BaseContainer>
-            <div className='finalScore form'>
-                <h1 style={{textAlign: 'center'}}>Final Score</h1>
-                {rankingTable}
-                <Link to={"/hub"}>
-                    <Button width="100%"
-                            onClick={
-                                () => leaveGame()}>
-                        Back to Hub
-                    </Button>
-                </Link>
+            <div className='finalScore container'>
+                <div className='finalScore form'>
+                    <h1 style={{textAlign: 'center'}}>Final Score</h1>
+                    {rankingTable}
+                    <Link to={"/hub"}>
+                        <Button width="100%"
+                                onClick={
+                                    () => leaveGame()}>
+                            Back to Hub
+                        </Button>
+                    </Link>
+                </div>
             </div>
-
         </BaseContainer>
     );
 };
