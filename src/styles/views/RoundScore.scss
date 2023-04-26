@@ -2,8 +2,8 @@
 
 .score {
   &.container {
+    margin: 20px;
     background: $background;
-    padding: 1.5em;
     border-radius: $borderRadius;
     display: flex;
     flex-direction: column;
@@ -14,13 +14,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 60%;
-    max-width: 30em;
-    height: 23em;
+    width: 100%;
     font-size: 16px;
     font-weight: 300;
-    padding-left: 37px;
-    padding-right: 37px;
+    padding: 20px;
     border-radius: 0.75em;
     background-color: $background;
     transition: opacity 0.5s ease, transform 0.5s ease;

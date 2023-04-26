@@ -16,53 +16,38 @@ const RoundScore = () => {
     const history = useHistory();
     const {ref, msg} = useContext(WebsocketWrapper);
     const [ranking, setRanking] = useState([]);
-    const [guess, setGuess] = useState("noGuess");
-    const [name, setName] = useState("noName");
-    const [players, setPlayers] = useState([]);
-    const data = [
-        createData('Nataell', 159, 6.0, 24, 4.0),
-        createData('Nico', 237, 9.0, 37, 4.3),
-        createData('Elias', 262, 16.0, 24, 6.0),
-        createData('Maurice', 305, 3.7, 67, 4.3),
-        createData('Andre', 356, 16.0, 49, 3.9),
-    ];
+    const [data, setData] = useState([]);
+    const [solutionValues, setSolutionValues] = useState([])
 
 
     const handleRanking = (msg) => {
         setRanking(msg.content);
     }
 
-    const handleGuess = (msg) => {
-        setGuess(msg.content);
-        console.log('guess message')
-    }
-
-    const handleRoundStart = (msg) => {
+    const handleRoundStart = () => {
         history.push('/Guesses');
-        console.log('round start message')
     }
 
-    const handleFinalScoreStart = (msg) => {
+    const handleFinalScoreStart = () => {
         history.push('/FinalScore');
-        console.log('final score start message')
     }
 
     const handleRoundScore = (msg) => {
-        setPlayers(msg.content)
+        setData(msg.content)
+        const actualValues = {
+            carbs: msg.content[Object.keys(msg.content)[0]].carbs[0].actualValues,
+            protein: msg.content[Object.keys(msg.content)[0]].protein[0].actualValues,
+            fat: msg.content[Object.keys(msg.content)[0]].fat[0].actualValues,
+            calories: msg.content[Object.keys(msg.content)[0]].calories[0].actualValues
+        };
+        setSolutionValues(actualValues);
         // {player1{calories {actualValues, guessedValues, deviations}, carbs {actualValues, guessedValues, deviations}, fat, protein}
-    }
-
-    const handleFinalScore = (msg) => {
-        console.log(msg.content)
-        console.log('final score message')
     }
 
     const topicHandlers = {
         "Ranking": handleRanking,
-        "Guess": handleGuess,
         "RoundScore": handleRoundScore,
         "GameScore": handleRanking,
-        "FinalScore": handleFinalScore,
         "RoundStart": handleRoundStart,
         "FinalScoreStart": handleFinalScoreStart
     };
@@ -81,16 +66,6 @@ const RoundScore = () => {
 
     }, [msg, history]);
 
-
-    if (guess === "noGuess" && name === "noName") {
-        setGuess([22, 33, 44, 55, 66, 77])
-        setName(["Andre", "Nataell", "Nico", "Elias", "Maurice", "Bob"])
-    }
-
-    function createData(name, calories, fat, carbs, protein) {
-        return {name, calories, fat, carbs, protein};
-    }
-
     let rankingTable;
 
     rankingTable = (
@@ -102,7 +77,7 @@ const RoundScore = () => {
                 alignItems: 'center',
                 margin: 10
             }}>
-                <TableContainer component={Paper} sx={{maxHeight: 200}}>
+                <TableContainer component={Paper} sx={{maxHeight: 200, minWidth: 300}}>
                     <Table sx={{
                         height: "max-content"
                     }} size="small" stickyHeader aria-label="ranking table">
@@ -135,26 +110,28 @@ const RoundScore = () => {
             <Table sx={{minWidth: 650}} size="small" aria-label="a dense table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
+                        <TableCell>Player Name</TableCell>
+                        <TableCell align="right">Calories (kcal)</TableCell>
                         <TableCell align="right">Fat&nbsp;(g)</TableCell>
                         <TableCell align="right">Carbs&nbsp;(g)</TableCell>
                         <TableCell align="right">Protein&nbsp;(g)</TableCell>
                     </TableRow>
+                    <TableRow>
+                        <TableCell>Solution Values</TableCell>
+                        <TableCell align="right">{solutionValues.calories}</TableCell>
+                        <TableCell align="right">{solutionValues.fat}</TableCell>
+                        <TableCell align="right">{solutionValues.carbs}</TableCell>
+                        <TableCell align="right">{solutionValues.protein}</TableCell>
+                    </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.map((row) => (
-                        <TableRow
-                            key={row.name}
-                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                        >
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                            </TableCell>
-                            <TableCell align="right">{row.calories}</TableCell>
-                            <TableCell align="right">{row.fat}</TableCell>
-                            <TableCell align="right">{row.carbs}</TableCell>
-                            <TableCell align="right">{row.protein}</TableCell>
+                    {Object.entries(data).map(([name, { carbs, protein, fat, calories }]) => (
+                        <TableRow key={name}>
+                            <TableCell component="th" scope="row">{name}</TableCell>
+                            <TableCell align="right">{calories[1].guessedValues}</TableCell>
+                            <TableCell align="right">{fat[1].guessedValues}</TableCell>
+                            <TableCell align="right">{carbs[1].guessedValues}</TableCell>
+                            <TableCell align="right">{protein[1].guessedValues}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -165,9 +142,13 @@ const RoundScore = () => {
 
     return (
         <BaseContainer>
-            <h1 style={{textAlign: 'center'}}>Round Overview</h1>
-            {rankingTable}
-            {nutritionTable}
+            <div className='score container'>
+                <div className='score form'>
+                    <h1 style={{textAlign: 'center'}}>Round Overview</h1>
+                    {rankingTable}
+                    {nutritionTable}
+                </div>
+            </div>
         </BaseContainer>
     );
 };
