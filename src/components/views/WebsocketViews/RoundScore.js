@@ -106,37 +106,41 @@ const RoundScore = () => {
     let nutritionTable;
 
     nutritionTable = (
-        <TableContainer component={Paper}>
-            <Table sx={{minWidth: 650}} size="small" aria-label="a dense table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Player Name</TableCell>
-                        <TableCell align="right">Calories (kcal)</TableCell>
-                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>Solution Values</TableCell>
-                        <TableCell align="right">{solutionValues.calories}</TableCell>
-                        <TableCell align="right">{solutionValues.fat}</TableCell>
-                        <TableCell align="right">{solutionValues.carbs}</TableCell>
-                        <TableCell align="right">{solutionValues.protein}</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {Object.entries(data).map(([name, { carbs, protein, fat, calories }]) => (
-                        <TableRow key={name}>
-                            <TableCell component="th" scope="row">{name}</TableCell>
-                            <TableCell align="right">{calories[1].guessedValues}</TableCell>
-                            <TableCell align="right">{fat[1].guessedValues}</TableCell>
-                            <TableCell align="right">{carbs[1].guessedValues}</TableCell>
-                            <TableCell align="right">{protein[1].guessedValues}</TableCell>
+        <div>
+            <TableContainer component={Paper} sx={{maxHeight: 400}}>
+                <Table sx={{
+                    height: "max-content"
+                }} size="small" stickyHeader aria-label="dense table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Player Name</TableCell>
+                            <TableCell align="right">Calories (kcal)</TableCell>
+                            <TableCell align="right">Fat&nbsp;(g)</TableCell>
+                            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+                            <TableCell align="right">Protein&nbsp;(g)</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                        <TableRow>
+                            <TableCell>Solution Values</TableCell>
+                            <TableCell align="right">{Math.round(solutionValues.calories)}</TableCell>
+                            <TableCell align="right">{Math.round(solutionValues.fat)}</TableCell>
+                            <TableCell align="right">{Math.round(solutionValues.carbs)}</TableCell>
+                            <TableCell align="right">{Math.round(solutionValues.protein)}</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {Object.entries(data).map(([name, {carbs, protein, fat, calories}]) => (
+                            <TableRow key={name}>
+                                <TableCell component="th" scope="name">{name}</TableCell>
+                                <TableCell align="right">{calories[1].guessedValues}</TableCell>
+                                <TableCell align="right">{fat[1].guessedValues}</TableCell>
+                                <TableCell align="right">{carbs[1].guessedValues}</TableCell>
+                                <TableCell align="right">{protein[1].guessedValues}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </div>
     );
 
 
