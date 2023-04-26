@@ -2,16 +2,17 @@
   This file contains the most basic variables that control how your application will look.
  */
 
+
 /* Theme Colors
 
    these values control the colors of your application.
    feel free to play around with these and see what other look you can come up with! :D
 */
 
-$accent: #97ABFF;
-$accentDark: #123597;
+$accent: #ffffff;
+$accentDark: #d1d1d1;
 $textColor: white;
-$background: #262632;
+$background: #3b3b37;
 
 /* some constants */
 
@@ -21,13 +22,18 @@ $TABLETS_WIDTH: 750px;
 $SMALL_WIDTH: 768px;
 
 /* some standard elements */
+
+
 /* fonts */
-$fontDefault: "M PLUS Rounded 1c", sans-serif;
-$fontMono: "Roboto Mono", monospace;
+
+$fontDefault: "M PLUS Rounded 1c",
+sans-serif;
+$fontMono: "Roboto Mono",
+monospace;
 
 /* a standard drop shadow */
-$dropShadow: 0 0.25em 0.25em rgba(0, 0, 0, 0.25);
 
+$dropShadow: 0 0.25em 0.25em rgba(0, 0, 0, 0.25);
 $borderRadius: 0.75em;
 
 /* mixins
@@ -35,8 +41,9 @@ $borderRadius: 0.75em;
   these allow you to create small snippets that you can insert with a one-liner in other stylesheets
   for an example, see styles/views/Login.scss
 */
+
 @mixin center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
