@@ -74,7 +74,6 @@ const Register = () => {
     return (
         <BaseContainer>
             <div className="register container">
-                <p>SUPPPP BOOOYYYSSSSSS</p>
                 <div className="register form">
                     <FormField
                         label="Username"
