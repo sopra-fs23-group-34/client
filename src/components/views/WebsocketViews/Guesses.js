@@ -15,7 +15,7 @@ const Guesses = () => {
     const [carbs, setCarbs] = useState(50);
     {/*const [sugar, setSugar] = useState(50);*/
     }
-    const [timer, setTimer] = useState(15);
+    const [timer, setTimer] = useState(20);
     const [foodName, setFoodName] = useState("");
     const [foodLink, setFoodLink] = useState("");
     const [calories, setCalories] = useState(50);
