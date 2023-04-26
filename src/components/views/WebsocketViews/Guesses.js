@@ -94,10 +94,9 @@ const Guesses = () => {
 
     return (
         <BaseContainer>
-            <h2>{timer}</h2>
-            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                <img src={foodLink} alt="food"
-                     className="slider image"/>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 320 }}>
+                <h2 style={{ color: 'black', position: 'absolute', top: 0, left: 0 }}>{timer}</h2>
+                <img src={foodLink} alt="food" className="slider image" />
             </div>
 
             <h1 className="slider subtitle">{foodName}</h1>
