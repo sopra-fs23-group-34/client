@@ -58,7 +58,7 @@ const FinalScore = () => {
                 alignItems: 'center',
                 margin: 10
             }}>
-                <TableContainer component={Paper} sx={{maxHeight: 200, minWidth: 400}}>
+                <TableContainer component={Paper} sx={{maxHeight: 500, minWidth: 500}}>
                     <Table sx={{
                         height: "max-content"
                     }} size="small" stickyHeader aria-label="ranking table">
