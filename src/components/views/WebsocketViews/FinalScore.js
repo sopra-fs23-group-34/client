@@ -71,7 +71,12 @@ const FinalScore = () => {
                         </TableHead>
                         <TableBody>
                             {Object.entries(finalRanking).map(([key, value], index) => (
-                                <TableRow hover role="checkbox">
+                                <TableRow hover role="checkbox" style={
+                                    index === 0 ? { backgroundColor: 'gold' } :
+                                        index === 1 ? { backgroundColor: 'silver' } :
+                                            index === 2 ? { backgroundColor: '#cd8c32' } :
+                                                {}
+                                }>
                                     <TableCell>{index + 1}</TableCell>
                                     <TableCell align='right'>{key}</TableCell>
                                     <TableCell align='right'>{value}</TableCell>
