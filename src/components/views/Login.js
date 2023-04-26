@@ -6,7 +6,7 @@ import {Button} from 'components/ui/Button';
 import 'styles/views/Login.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
-import {Alert, AlertTitle} from "@mui/material";
+import {Alert, AlertTitle, Box} from "@mui/material";
 
 /*
 It is possible to add multiple components inside a single file,
@@ -42,7 +42,8 @@ const Login = () => {
     const [password, setPassword] = useState(null);
     const [username, setUsername] = useState(null);
     const [alertStatus, setAlertStatus] = useState(false);
-
+    const [demoUsername, setDemoUsername] = useState("Guest");
+    let demoPassword = "1234";
     const doLogin = async () => {
         try {
             const requestBody = JSON.stringify({username, password});
@@ -66,7 +67,38 @@ const Login = () => {
     const handleClose = () => {
         setAlertStatus(false);
     }
+    const foods = [
+        "Kebab",
+        "Pizza",
+        "Avocado",
+        "Burger",
+        "Peanut",
+        "Water",
+        "TeachingAssistant"
+    ]
+    function generateUsername() {
+        const un = foods[Math.floor(Math.random()*foods.length)]
+        const num = Math.floor(Math.random()*(999-100+1)+100);
+        return un + num;
+    }
+    const demoLogin = async () => {
+        try {
+            const demoUsername = generateUsername()
+            const demoEmail = Math.floor(1000000 + Math.random() * 9000000);
+            const requestBody = JSON.stringify({username: demoUsername, email: demoEmail, password: demoPassword});
+            const response = await api(false,false).post('/users/create', requestBody);
 
+            const user = new User(response.data);
+            console.log(demoUsername, demoPassword)
+            sessionStorage.setItem('token', user.token);
+            sessionStorage.setItem('id', user.id);
+
+            history.push(`/hub`);
+        } catch (error) {
+            // alert(`Something went wrong during the login: \n${handleError(error)}`);
+            setAlertStatus(true);
+        }
+    }
     return (
         <BaseContainer>
             <div className="login container">
@@ -99,6 +131,15 @@ const Login = () => {
                             Go to register window
                         </Button>
                     </Link>
+                    <Box sx={{paddingTop: "10px"}}>
+                    <Button
+                        width="100%"
+                        style={{backgroundColor: "red"}}
+                        onClick={() => demoLogin()}
+                        >
+                            Demo Login
+                        </Button>
+                        </Box>
                 </div>
             </div>
             <div className="login popup-message">
