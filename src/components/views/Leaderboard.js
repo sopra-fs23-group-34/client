@@ -3,7 +3,7 @@ import { handleError } from "helpers/api";
 import { api } from "helpers/api";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Box, Button, Grid, ListItemButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Button, Grid, ListItemButton, Typography } from "@mui/material";
 import "styles/views/Leaderboard.scss";
 import Item from "components/ui/Item";
 import * as React from 'react';
@@ -15,9 +15,7 @@ import { useHistory } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Paper from '@mui/material/Paper';
 import {DataGrid, useGridApiRef} from '@mui/x-data-grid';
 const { default: BaseContainer } = require("components/ui/BaseContainer")
 const Player = ({user, index}) => {
