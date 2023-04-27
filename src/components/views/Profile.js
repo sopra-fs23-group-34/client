@@ -129,6 +129,7 @@ const Profile = () => {
         <BaseContainer>
             <div className="profile container">
                 <div className="profile form">
+                    <h1 style={{marginTop: 0}}>Profile Information</h1>
                     <FormField
                         label="Username"
                         value={username}

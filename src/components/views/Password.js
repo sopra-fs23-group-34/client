@@ -80,6 +80,7 @@ const Password = () => {
         <BaseContainer>
             <div className="register container">
                 <div className="register form">
+                    <h1 style={{marginTop: 0}}>Change Password</h1>
                     <FormField
                         label="old password"
                         value={oldPassword}
