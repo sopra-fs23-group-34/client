@@ -11,15 +11,19 @@ import TableBody from "@mui/material/TableBody";
 import BaseContainer from "../../ui/BaseContainer";
 import {Link, useHistory} from "react-router-dom";
 import {Button} from "../../ui/Button";
+import 'animate.css';
 
 
 const FinalScore = () => {
     const history = useHistory();
     const {ref, msg} = useContext(WebsocketWrapper);
     const [finalRanking, setFinalRanking] = useState([]);
+    const [winner, setWinner] = useState([]);
 
     const handleFinalScore = (msg) => {
         setFinalRanking(msg.content)
+        const keys = Object.keys(msg.content);
+        setWinner(keys[0]);
     }
 
     const topicHandlers = {
@@ -94,6 +98,8 @@ const FinalScore = () => {
             <div className='finalScore container'>
                 <div className='finalScore form'>
                     <h1 style={{textAlign: 'center'}}>Final Score</h1>
+                    <h2 style={{textAlign: 'center', marginBottom: 0}} className="animate__animated animate__bounce animate__delay-1s">The Winner is...</h2>
+                    <h1 style={{textAlign: 'center', marginTop: 0, color: 'gold'}} className="animate__animated animate__fadeIn animate__delay-2s">{winner}</h1>
                     {rankingTable}
                     <Link to={"/hub"}>
                         <Button width="100%"
