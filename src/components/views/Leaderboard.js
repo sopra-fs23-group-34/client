@@ -271,7 +271,7 @@ const Leaderboard = () => {
                     sx={{
                         justifyContent: "space-between"
                     }}>
-                        <Grid item xs={2}>
+                        <Grid item xs={3} sx={{width:"120px"}}>
                             <Item>
                                 <Button style={{background: "#d9e0d9", color:"black"}}
                                     onClick={() => moveToMe()}
