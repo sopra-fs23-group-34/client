@@ -14,7 +14,7 @@ import {useHistory} from 'react-router-dom';
 
 const RoundScore = () => {
     const history = useHistory();
-    const {ref, msg} = useContext(WebsocketWrapper);
+    const {msg} = useContext(WebsocketWrapper);
     const [ranking, setRanking] = useState([]);
     const [data, setData] = useState([]);
     const [solutionValues, setSolutionValues] = useState([])
@@ -118,6 +118,7 @@ const RoundScore = () => {
                             <TableCell align="right">Fat&nbsp;(g)</TableCell>
                             <TableCell align="right">Carbs&nbsp;(g)</TableCell>
                             <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                            <TableCell align="right">Points</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>Solution Values</TableCell>
@@ -125,16 +126,18 @@ const RoundScore = () => {
                             <TableCell align="right">{Math.round(solutionValues.fat)}</TableCell>
                             <TableCell align="right">{Math.round(solutionValues.carbs)}</TableCell>
                             <TableCell align="right">{Math.round(solutionValues.protein)}</TableCell>
+                            <TableCell align="right">---</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {Object.entries(data).map(([name, {carbs, protein, fat, calories}]) => (
+                        {Object.entries(data).map(([name, {carbs, protein, fat, calories, points}]) => (
                             <TableRow key={name}>
                                 <TableCell component="th" scope="name">{name}</TableCell>
                                 <TableCell align="right">{calories[1].guessedValues}</TableCell>
                                 <TableCell align="right">{fat[1].guessedValues}</TableCell>
                                 <TableCell align="right">{carbs[1].guessedValues}</TableCell>
                                 <TableCell align="right">{protein[1].guessedValues}</TableCell>
+                                <TableCell align="right">{points[0].points}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
