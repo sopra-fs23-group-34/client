@@ -42,7 +42,6 @@ const Login = () => {
     const [password, setPassword] = useState(null);
     const [username, setUsername] = useState(null);
     const [alertStatus, setAlertStatus] = useState(false);
-    const [demoUsername, setDemoUsername] = useState("Guest");
     let demoPassword = "1234";
     const doLogin = async () => {
         try {
@@ -59,7 +58,6 @@ const Login = () => {
             // Login successfully worked --> navigate to the route /game in the GameRouter
             history.push(`/hub`);
         } catch (error) {
-            // alert(`Something went wrong during the login: \n${handleError(error)}`);
             setAlertStatus(true);
         }
     };
@@ -95,7 +93,6 @@ const Login = () => {
 
             history.push(`/hub`);
         } catch (error) {
-            // alert(`Something went wrong during the login: \n${handleError(error)}`);
             setAlertStatus(true);
         }
     }

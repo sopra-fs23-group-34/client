@@ -49,7 +49,6 @@ const Password = () => {
 
     const saveChanges = async () => {
         if (password !== newRepeatPassword) {
-            // alert("The new passwords do not match!");
             setErrorStatus(true);
         } else {
             try {

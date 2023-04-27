@@ -61,7 +61,6 @@ const Register = () => {
             // Login successfully worked --> navigate to the route /game in the GameRouter
             history.push(`/hub`);
         } catch (error) {
-            // alert(`Something went wrong during the register: \n${handleError(error)}`);
             setAlertStatus(true);
         }
     };

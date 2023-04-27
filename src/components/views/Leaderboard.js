@@ -1,6 +1,5 @@
 import { Spinner } from "components/ui/Spinner";
-import { handleError } from "helpers/api";
-import { api } from "helpers/api";
+import { handleError, api } from "helpers/api";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Box, Button, Grid, ListItemButton, Typography } from "@mui/material";
@@ -8,7 +7,6 @@ import "styles/views/Leaderboard.scss";
 import Item from "components/ui/Item";
 import * as React from 'react';
 import ListItem from '@mui/material/ListItem';
-//import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { FixedSizeList} from 'react-window';
 import { useHistory } from "react-router-dom";
