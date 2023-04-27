@@ -98,7 +98,7 @@ const FinalScore = () => {
             <div className='finalScore container'>
                 <div className='finalScore form'>
                     <h1 style={{textAlign: 'center'}}>Final Score</h1>
-                    <h2 style={{textAlign: 'center', marginBottom: 0}} className="animate__animated animate__bounce animate__delay-1s">The Winner is...</h2>
+                    <h2 style={{textAlign: 'center', marginBottom: 0}} className="animate__animated animate__bounce animate__delay-0.5s">The Winner is...</h2>
                     <h1 style={{textAlign: 'center', marginTop: 0, color: 'gold'}} className="animate__animated animate__fadeIn animate__delay-2s">{winner}</h1>
                     {rankingTable}
                     <Link to={"/hub"}>
