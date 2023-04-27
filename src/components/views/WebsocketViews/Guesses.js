@@ -19,7 +19,6 @@ const Guesses = () => {
     const [roundScoreStart, setRoundScoreStart] = useState(false);
     const [update, setUpdate] = useState(0);
 
-
     useEffect(() => {
         if (msg && msg.topic === "Timer") {
             setTimer(msg.content);
@@ -85,7 +84,7 @@ const Guesses = () => {
     return (
         <BaseContainer>
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 320}}>
-                <h2 style={{color: 'black', position: 'absolute', top: 0, left: 0}}>{timer}</h2>
+                <h2 style={{color: 'black', position: 'absolute', top: 30, left: 150}}>{timer}</h2>
                 <img src={foodLink} alt="food" className="slider image"/>
             </div>
 
