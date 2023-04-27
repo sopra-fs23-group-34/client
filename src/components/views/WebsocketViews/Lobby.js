@@ -77,7 +77,7 @@ function renderTop(props) {
         if (msg && msg.topic === "players") {
             setUsers(msg.content);
         }
-        if (msg && msg.topic === "Timer") {
+        if (msg && msg.topic === "RoundStart") {
             history.push("/guesses");
         }
         if (msg && msg.topic === "error" && msg.content === "host_left") {
