@@ -91,7 +91,6 @@ const Login = () => {
             const response = await api(false,false).post('/users/create', requestBody);
 
             const user = new User(response.data);
-            console.log(demoUsername, demoPassword)
             sessionStorage.setItem('token', user.token);
             sessionStorage.setItem('id', user.id);
 
