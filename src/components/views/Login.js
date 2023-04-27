@@ -66,15 +66,15 @@ const Login = () => {
         setAlertStatus(false);
     }
     const foods = [
-        "Kebab",
-        "Pizza",
-        "Avocado",
-        "Burger",
-        "Peanut",
-        "Water",
+        "JohnLemon",
+        "Madonnalds",
+        "BoroccoliObama",
+        "YouCorn",
+        "EggSheeran",
+        "PotatobeyMaguire",
         "TeachingAssistant",
-        "FrenchToast",
-        "Apricot",
+        "RiceWitherspoon",
+        "BettyWheat",
         "InsulinShot",
         
     ]
