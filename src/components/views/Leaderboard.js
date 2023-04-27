@@ -132,7 +132,7 @@ const Leaderboard = () => {
       }
 
     function findUser(user) {
-        return user.token === sessionStorage.getItem('token');
+        return user.user_id === parseInt(sessionStorage.getItem('id'));
     }
     function moveToMe() {
         listRef.current.scrollToItem(users.indexOf(users.find(findUser)), "center")
