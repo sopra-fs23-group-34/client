@@ -20,20 +20,38 @@ const Guesses = () => {
     const [update, setUpdate] = useState(0);
 
 
+    const handleRoundScoreStart = (msg) => {
+        setRoundScoreStart(msg.content);
+    }
+
+    const handleFood = () => {
+        setFoodName(msg.content["name"]);
+        setFoodLink(msg.content["imageLink"]);
+    }
+
+    const handleTimer = (msg) => {
+        setTimer(msg.content);
+    }
+
+    const topicHandlers = {
+        "RoundScoreStart": handleRoundScoreStart,
+        "Food": handleFood,
+        "Timer": handleTimer
+    };
+
+    function handleMessage(msg) {
+        const handler = topicHandlers[msg.topic];
+        if (handler) {
+            handler(msg);
+        }
+    }
+
     useEffect(() => {
-        if (msg && msg.topic === "Timer") {
-            setTimer(msg.content);
-        }
 
-        if (msg && msg.topic === "Food") {
-            setFoodName(msg.content["name"]);
-            setFoodLink(msg.content["imageLink"]);
-        }
+        handleMessage(msg);
 
-        if (msg && msg.topic === "RoundScoreStart") {
-            setRoundScoreStart(msg.content);
-        }
-    }, [msg]);
+    }, [msg, history]);
+
 
     useEffect(() => {
         ref.sendMessage('/app/guess/' + gameCode + '/' + userid, JSON.stringify({
@@ -85,7 +103,7 @@ const Guesses = () => {
     return (
         <BaseContainer>
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 320}}>
-                <h2 style={{color: 'black', position: 'absolute', top: 0, left: 0}}>{timer}</h2>
+                <h2 style={{color: 'black', position: 'absolute', top: 30, left: 150}}>{timer}</h2>
                 <img src={foodLink} alt="food" className="slider image"/>
             </div>
 
