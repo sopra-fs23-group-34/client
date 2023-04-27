@@ -19,20 +19,39 @@ const Guesses = () => {
     const [roundScoreStart, setRoundScoreStart] = useState(false);
     const [update, setUpdate] = useState(0);
 
+
+    const handleRoundScoreStart = (msg) => {
+        setRoundScoreStart(msg.content);
+    }
+
+    const handleFood = () => {
+        setFoodName(msg.content["name"]);
+        setFoodLink(msg.content["imageLink"]);
+    }
+
+    const handleTimer = (msg) => {
+        setTimer(msg.content);
+    }
+
+    const topicHandlers = {
+        "RoundScoreStart": handleRoundScoreStart,
+        "Food": handleFood,
+        "Timer": handleTimer
+    };
+
+    function handleMessage(msg) {
+        const handler = topicHandlers[msg.topic];
+        if (handler) {
+            handler(msg);
+        }
+    }
+
     useEffect(() => {
-        if (msg && msg.topic === "Timer") {
-            setTimer(msg.content);
-        }
 
-        if (msg && msg.topic === "Food") {
-            setFoodName(msg.content["name"]);
-            setFoodLink(msg.content["imageLink"]);
-        }
+        handleMessage(msg);
 
-        if (msg && msg.topic === "RoundScoreStart") {
-            setRoundScoreStart(msg.content);
-        }
-    }, [msg]);
+    }, [msg, history]);
+
 
     useEffect(() => {
         ref.sendMessage('/app/guess/' + gameCode + '/' + userid, JSON.stringify({
