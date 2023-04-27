@@ -1,15 +1,35 @@
 import { Box, Button, Grid } from '@mui/material';
 import BaseContainer from 'components/ui/BaseContainer';
 import Item from 'components/ui/Item';
+import { api, handleError } from 'helpers/api';
 import * as React from 'react';
+import { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import "styles/views/Stats.scss"
+
 const Stats = () => {
     const [user, setUser] = React.useState([]);
     const history = useHistory();
+    const id = sessionStorage.getItem("id");
     function Hub() {
         history.push("/hub");
     }
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await api(sessionStorage.getItem('token'), false).get('/users/getUser/' + id);
+
+                setUser(response.data)
+            } catch (error) {
+                console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
+                console.error("Details:", error);
+                alert("Something went wrong while fetching the users! See the console for details.");
+            }
+        }
+
+        fetchData();
+    })
+
     let content;
 
     content = (
@@ -148,7 +168,7 @@ const Stats = () => {
     )
     return (
         <BaseContainer className="stats container">
-            <h1>my name</h1>
+            <h1>{user.username}</h1>
             <h2>This feature is mocked</h2>
             {content}
         </BaseContainer>
