@@ -7,14 +7,11 @@ import {useHistory} from "react-router-dom";
 
 
 const Guesses = () => {
-    // use react-router-dom's hook to access the history
     const history = useHistory();
     const {ref, msg, gameCode, userid} = useContext(WebsocketWrapper);
     const [protein, setProtein] = useState(50);
     const [fat, setFat] = useState(50);
     const [carbs, setCarbs] = useState(50);
-    {/*const [sugar, setSugar] = useState(50);*/
-    }
     const [timer, setTimer] = useState(20);
     const [foodName, setFoodName] = useState("");
     const [foodLink, setFoodLink] = useState("");
@@ -44,7 +41,6 @@ const Guesses = () => {
                 'protein': protein,
                 "fat": fat,
                 "carbs": carbs,
-                /* "sugar": sugar,*/
                 "calories": calories
             }
         }));
@@ -56,7 +52,6 @@ const Guesses = () => {
                 'protein': protein,
                 "fat": fat,
                 "carbs": carbs,
-                /*"sugar": sugar,*/
                 "calories": calories
             }
         }));
@@ -78,12 +73,7 @@ const Guesses = () => {
     const handleCarbsChange = (event, newValue) => {
         setCarbs(newValue);
     }
-    {/* 
-    const handleSugarChange = (event, newValue) => {
-        setSugar(newValue);
-    }
-    */
-    }
+
     const handleCaloriesChange = (event, newValue) => {
         setCalories(newValue);
     }
@@ -94,9 +84,9 @@ const Guesses = () => {
 
     return (
         <BaseContainer>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 320 }}>
-                <h2 style={{ color: 'black', position: 'absolute', top: 0, left: 0 }}>{timer}</h2>
-                <img src={foodLink} alt="food" className="slider image" />
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 320}}>
+                <h2 style={{color: 'black', position: 'absolute', top: 0, left: 0}}>{timer}</h2>
+                <img src={foodLink} alt="food" className="slider image"/>
             </div>
 
             <h1 className="slider subtitle">{foodName}</h1>
@@ -139,18 +129,6 @@ const Guesses = () => {
                 <p className='slider description'>Selected carb/100gr: {carbs}</p>
             </div>
 
-            {/*<div className="slider form">
-                <h2 className='slider title'>Sugar</h2>
-                <Slider
-                    defaultValue={50}
-                    aria-label="sugar"
-                    valueLabelDisplay="auto"
-                    value={sugar}
-                    onChange={handleSugarChange}
-                    onChangeCommitted={handleChange}
-                />
-                <p className='slider description'>Selected sugar value: {sugar}</p>
-            </div> */}
             <div className="slider form">
                 <h2 className='slider title'>Calories</h2>
                 <Slider
