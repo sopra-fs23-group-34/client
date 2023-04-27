@@ -37,8 +37,6 @@ export default function FormDialog() {
 
   const handleChange = (event) => {
     setLobbyKey(event.target.value);
-
-    console.log("value is:", event.target.value);
   };
   const handleClickOpen = () => {
     setOpen(true);
