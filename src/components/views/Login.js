@@ -72,7 +72,11 @@ const Login = () => {
         "Burger",
         "Peanut",
         "Water",
-        "TeachingAssistant"
+        "TeachingAssistant",
+        "FrenchToast",
+        "Apricot",
+        "InsulinShot",
+        
     ]
     function generateUsername() {
         const un = foods[Math.floor(Math.random()*foods.length)]

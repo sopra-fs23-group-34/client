@@ -127,9 +127,14 @@ function renderTop(props) {
                     margin: "auto",
                     justifyContent: "left"
                 }}>
+                    <Grid container sx={{width:"35%", justifyContent:"right"}}>
+                    <Grid container sx={{flexDirection:"row", justifyContent:"right"}} >
+                        <Grid item>User count: </Grid>
+                        <Grid item sx={{fontWeight:800, paddingLeft:"3px"}}> {users.length}</Grid>
+                    </Grid>
                     <FixedSizeList
                     height={400}
-                    width={"35%"}
+                    width={"100%"}
                     itemSize={46}
                     itemCount={users.length}
                     overscanCount={1}
@@ -139,6 +144,7 @@ function renderTop(props) {
                     >
                         {renderTop}
                     </FixedSizeList>
+                    </Grid>
                 </Grid>
                 <Grid container spacing={3} sx={{
                     justifyContent: "space-between"
@@ -165,9 +171,14 @@ function renderTop(props) {
                     margin: "auto",
                     justifyContent: "space-around"
                 }}>
+                    <Grid container sx={{width:"35%"}}>
+                    <Grid container sx={{flexDirection:"row", justifyContent:"right"}} >
+                        <Grid item>User count: </Grid>
+                        <Grid item sx={{fontWeight:800, paddingLeft:"3px"}}> {users.length}</Grid>
+                    </Grid>
                     <FixedSizeList
                     height={400}
-                    width={"35%"}
+                    width={"100%"}
                     itemSize={46}
                     itemCount={users.length}
                     overscanCount={1}
@@ -177,6 +188,8 @@ function renderTop(props) {
                     >
                         {renderTop}
                     </FixedSizeList>
+                    </Grid>
+                     
                     <Box item xs={3}>
                         <h2>Number of Rounds</h2>
                         <Slider
