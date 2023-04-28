@@ -26,10 +26,12 @@ const RoundScore = () => {
 
     const handleRoundStart = () => {
         history.push('/Guesses');
+        sessionStorage.removeItem('foodName')
     }
 
     const handleFinalScoreStart = () => {
         history.push('/FinalScore');
+        sessionStorage.removeItem('foodName')
     }
 
     const handleRoundScore = (msg) => {
@@ -49,7 +51,7 @@ const RoundScore = () => {
         "RoundScore": handleRoundScore,
         "GameScore": handleRanking,
         "RoundStart": handleRoundStart,
-        "FinalScoreStart": handleFinalScoreStart
+        "FinalScoreStart": handleFinalScoreStart,
     };
 
     function handleMessage(msg) {
@@ -121,7 +123,7 @@ const RoundScore = () => {
                             <TableCell align="right">Points</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>Solution Values</TableCell>
+                            <TableCell>Nutrition Values of <strong>{sessionStorage.getItem("foodName")}</strong></TableCell>
                             <TableCell align="right">{Math.round(solutionValues.calories)}</TableCell>
                             <TableCell align="right">{Math.round(solutionValues.fat)}</TableCell>
                             <TableCell align="right">{Math.round(solutionValues.carbs)}</TableCell>

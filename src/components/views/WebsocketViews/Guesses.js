@@ -28,6 +28,7 @@ const Guesses = () => {
         if (msg && msg.topic === "Food") {
             setFoodName(msg.content["name"]);
             setFoodLink(msg.content["imageLink"]);
+            sessionStorage.setItem("foodName", msg.content["name"]);
         }
 
         if (msg && msg.topic === "RoundScoreStart") {
