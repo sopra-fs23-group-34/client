@@ -9,6 +9,7 @@ import "styles/views/Stats.scss"
 
 const Stats = () => {
     const [user, setUser] = React.useState([]);
+    const [userstats, setUserstats] = React.useState([]);
     const history = useHistory();
     const id = sessionStorage.getItem("id");
     function Hub() {
@@ -18,17 +19,31 @@ const Stats = () => {
         async function fetchData() {
             try {
                 const response = await api(sessionStorage.getItem('token'), false).get('/users/getUser/' + id);
-
-                setUser(response.data)
-            } catch (error) {
+                setUser(response.data);
+                const statsResponse = await api(sessionStorage.getItem('token'), id).get('/users/statistics/' + id);
+                setUserstats(statsResponse.data);
+                
+            } 
+            catch (error) {
+                if (error.response.data.status === 404) {
+                    const newUserStats = {
+                        "gamesPlayed": 0, 
+                        "gamesWon": 0, 
+                        "winRatio":0, 
+                        "highScore":0}
+                    
+                    setUserstats(newUserStats)
+                }
+                else {
                 console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
                 console.error("Details:", error);
                 alert("Something went wrong while fetching the users! See the console for details.");
             }
         }
+        }
 
         fetchData();
-    })
+    },[])
 
     let content;
 
@@ -64,7 +79,7 @@ const Stats = () => {
                         marginBottom: "0px",
                         fontSize: 17,
                         fontWeight: "800"
-                    }}>35</Item>
+                    }}>{userstats.gamesPlayed}</Item>
                     <Item sx={{
                         color:"#97ABFF",
                         bgcolor: "grey",
@@ -90,7 +105,7 @@ const Stats = () => {
                         marginBottom: "0px",
                         fontSize: 17,
                         fontWeight: "800"
-                    }}>31</Item>
+                    }}>{userstats.gamesWon}</Item>
                     <Item sx={{
                         color:"#97ABFF",
                         bgcolor: "grey",
@@ -116,7 +131,7 @@ const Stats = () => {
                         marginBottom: "0px",
                         fontSize: 17,
                         fontWeight: "800"
-                    }}>88.5%</Item>
+                    }}>{userstats.winRatio}</Item>
                     <Item sx={{
                         color:"#97ABFF",
                         bgcolor: "grey",
@@ -142,7 +157,7 @@ const Stats = () => {
                         marginBottom: "0px",
                         fontSize: 17,
                         fontWeight: "800"
-                    }}>8000</Item>
+                    }}>{userstats.highScore}</Item>
                     <Item sx={{
                         color:"#97ABFF",
                         bgcolor: "grey",
@@ -169,7 +184,6 @@ const Stats = () => {
     return (
         <BaseContainer className="stats container">
             <h1>{user.username}</h1>
-            <h2>This feature is mocked</h2>
             {content}
         </BaseContainer>
     )
