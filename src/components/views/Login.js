@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {api} from 'helpers/api';
 import User from 'models/User';
 import {Link, useHistory} from 'react-router-dom';
@@ -42,6 +42,8 @@ const Login = () => {
     const [password, setPassword] = useState(null);
     const [username, setUsername] = useState(null);
     const [alertStatus, setAlertStatus] = useState(false);
+    const [timerStart, setTimerStart] = useState(false);
+
     let demoPassword = "1234";
     const doLogin = async () => {
         try {
@@ -59,8 +61,16 @@ const Login = () => {
             history.push(`/hub`);
         } catch (error) {
             setAlertStatus(true);
+            setTimerStart(true);
+            setTimerStart(false);
         }
     };
+
+    useEffect(() => {
+        setTimeout(() => {
+            setAlertStatus(false);
+        }, 5000);
+    }, [timerStart]);
 
     const handleClose = () => {
         setAlertStatus(false);
@@ -102,6 +112,8 @@ const Login = () => {
             history.push(`/hub`);
         } catch (error) {
             setAlertStatus(true);
+            setTimerStart(true);
+            setTimerStart(false);
         }
     }
     return (
@@ -150,9 +162,9 @@ const Login = () => {
                         </Box>
                 </div>
             </div>
-            <div className="login popup-message">
+            <div className="login popup-message" >
             {alertStatus && (
-                <Alert severity="error" onClose={handleClose}>
+                <Alert severity="error" onClose={handleClose} >
                     <AlertTitle>Login failed</AlertTitle>
                     You have entered an invalid username or password - <strong>try again!</strong>
                 </Alert>

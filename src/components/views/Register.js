@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {api} from 'helpers/api';
 import User from 'models/User';
 import {useHistory, Link} from 'react-router-dom';
@@ -43,6 +43,7 @@ const Register = () => {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
     const [alertStatus, setAlertStatus] = useState(false);
+    const [timerStart, setTimerStart] = useState(false);
 
     const handleKeyDown = (e) => {
         if (e.keyCode === 13 && password && username && email) {
@@ -66,12 +67,20 @@ const Register = () => {
             history.push(`/hub`);
         } catch (error) {
             setAlertStatus(true);
+            setTimerStart(true);
+            setTimerStart(false);
         }
     };
     
     const handleClose = () => {
         setAlertStatus(false);
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+            setAlertStatus(false);
+        }, 5000);
+    }, [timerStart]);
     
 
     return (
@@ -124,7 +133,7 @@ const Register = () => {
                     <Alert severity="error"
                            onClose={handleClose}>
                         <AlertTitle>Registration Failed</AlertTitle>
-                        Username is already taken - <strong>try again with a different one!</strong>
+                        Username or Email is already taken - <strong>try again with a different one!</strong>
                     </Alert>
                 )}
             </div>
