@@ -102,7 +102,7 @@ function renderTop(props) {
 
     
     const startGame = async () => {
-        const gameConfig = JSON.stringify({foodCategory, roundLimit, timerLength});
+        const gameConfig = JSON.stringify({foodCategory, roundLimit,timerLength});
         const gameCode = sessionStorage.getItem("gameCode");
         const token = sessionStorage.getItem("token");
         const userId = sessionStorage.getItem("id");
