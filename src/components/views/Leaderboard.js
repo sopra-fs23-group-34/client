@@ -48,6 +48,9 @@ const Leaderboard = () => {
     let idCounter = 0;
     const [users, setUsers] = useState(null);
     const [user, setUser] = useState([]);
+    const [me, setMe] = useState([]);
+    const [userInspectStats, setUserInspectStats] = useState([]);
+    const [userOwnStats, setUserOwnStats] = useState([]);
     const history = useHistory();
     const listRef = React.createRef();
     const [show, setShow] = useState(false);
@@ -56,22 +59,58 @@ const Leaderboard = () => {
     const [rows, setRows] = useState([]);
     
     function createData(username, games_played, wins, ratio, highscore) {
-        return { id: idCounter, "Player": username, "Games played": games_played, "Wins": wins, "Win percentage": ratio, "highscore": highscore };
+        return { id: idCounter, "Player": username, "Games played": games_played, "Wins": wins, "Win percentage": Math.round((ratio*100 + Number.EPSILON) * 100) / 100, "highscore": highscore };
       }
       useEffect(() => {
           let ignore = false;
         if (!ignore)  {
+            async function fetchData() {
+                const response = await api(sessionStorage.getItem('token'), sessionStorage.getItem('id')).get('/users/statistics/' + user.user_id);
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                setUserInspectStats(response.data);
+                console.log(userInspectStats)
+            }
+            fetchData();
             setRows([
-                createData(user.username, 10, 10, 100, 8000)
+                createData(user.username, userInspectStats.gamesPlayed, userInspectStats.gamesWon, userInspectStats.winRatio, userInspectStats.highScore)
               ])
         }
         return () => { ignore = true; }
       }, [user])
     
+      useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await api(sessionStorage.getItem('token'), false).get('/users/getUser/' + sessionStorage.getItem('id'));
+                setMe(response.data);
+                const statsResponse = await api(sessionStorage.getItem('token'), sessionStorage.getItem('id')).get('/users/statistics/' + sessionStorage.getItem('id'));
+                setUserOwnStats(statsResponse.data);
+                
+            } 
+            catch (error) {
+                if (error.response.data.status === 404) {
+                    const newUserStats = {
+                        "gamesPlayed": 0, 
+                        "gamesWon": 0, 
+                        "winRatio":0, 
+                        "highScore":0}
+                    
+                    setUserOwnStats(newUserStats)
+                }
+                else {
+                console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
+                console.error("Details:", error);
+                alert("Something went wrong while fetching the users! See the console for details.");
+            }
+        }
+        }
+
+        fetchData();
+    },[])
       const handleAddRow = () => {
         idCounter += 1;
         if (idCounter === 1){
-            apiRef.current.updateRows([createData("myname", 1291, 1290, Math.round((1290/1291*100 + Number.EPSILON) * 100) / 100, 8008)]);
+            apiRef.current.updateRows([createData(me.username, userOwnStats.gamesPlayed, userOwnStats.gamesWon, userOwnStats.winRatio, userOwnStats.highScore)]);
         }
       };
 
