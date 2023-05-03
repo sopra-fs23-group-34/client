@@ -65,6 +65,11 @@ const Login = () => {
     const handleClose = () => {
         setAlertStatus(false);
     }
+    const handleKeyDown = (e) => {
+        if (e.keyCode === 13 && password && username) {
+          doLogin();
+        }
+      };
     const foods = [
         "JohnLemon",
         "Madonnalds",
@@ -108,12 +113,14 @@ const Login = () => {
                         label="Username"
                         value={username}
                         onChange={un => setUsername(un)}
+                        onKeyDown={handleKeyDown}
                     />
                     <FormField
                         label="Password"
                         value={password}
                         type="password"
                         onChange={n => setPassword(n)}
+                        onKeyDown={handleKeyDown}
                     />
                     <div className="login button-container">
                         <Button

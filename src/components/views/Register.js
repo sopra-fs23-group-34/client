@@ -44,7 +44,11 @@ const Register = () => {
     const [password, setPassword] = useState(null);
     const [alertStatus, setAlertStatus] = useState(false);
 
-
+    const handleKeyDown = (e) => {
+        if (e.keyCode === 13 && password && username && email) {
+          registerAccount();
+        }
+      };
     const registerAccount = async () => {
         try {
             const requestBody = JSON.stringify({username, email, password});
@@ -79,17 +83,20 @@ const Register = () => {
                         label="Username"
                         value={username}
                         onChange={un => setUsername(un)}
+                        onKeyDown={handleKeyDown}
                     />
                     <FormField
                         label="email"
                         value={email}
                         onChange={un => setEmail(un)}
+                        onKeyDown={handleKeyDown}
                     />
                     <FormField
                         label="Password"
                         value={password}
                         type="password"
                         onChange={n => setPassword(n)}
+                        onKeyDown={handleKeyDown}
                     />
                     
                     <div className="register button-container">
