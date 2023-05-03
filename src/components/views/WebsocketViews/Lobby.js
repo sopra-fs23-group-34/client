@@ -16,6 +16,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { api } from 'helpers/api';
 import { FixedSizeList } from 'react-window';
+import HelpPage from 'components/ui/HelpPage';
 
 const Player = ({user}) => (
     <div className="player container">
@@ -34,6 +35,7 @@ const Lobby = () => {
     const {ref, msg} = useContext(WebsocketWrapper);
     const [roundLimit, setRoundLimit] = useState(5);
     const [foodCategory, setFoodCategory] = useState("");
+    const [timerLength, setTimerLength] = useState(20);
     const handleChangeCategory = (event) => {
         setFoodCategory(event.target.value);
     };
@@ -46,10 +48,13 @@ const Lobby = () => {
         "Snacks"
     ]
 
-    const handleChange = (event, newValue) => {
+    const handleChangeRounds = (event, newValue) => {
         setRoundLimit(newValue);
     }
 
+    const handleChangeTimer = (event) => {
+        setTimerLength(event.target.value)
+    }
     // define a state variable (using the state hook).
     // if this variable changes, the component will re-render, but the variable will
     // keep its value throughout render cycles.
@@ -97,7 +102,7 @@ function renderTop(props) {
 
     
     const startGame = async () => {
-        const gameConfig = JSON.stringify({foodCategory, roundLimit});
+        const gameConfig = JSON.stringify({foodCategory, roundLimit, timerLength});
         const gameCode = sessionStorage.getItem("gameCode");
         const token = sessionStorage.getItem("token");
         const userId = sessionStorage.getItem("id");
@@ -158,6 +163,11 @@ function renderTop(props) {
                             </Button>
                         </Item>
                     </Grid>
+                    <Grid item xs={3}>
+                        <Item>
+                            <HelpPage/>
+                        </Item>
+                    </Grid>
                 </Grid>
 
             </div>
@@ -191,6 +201,15 @@ function renderTop(props) {
                     </Grid>
                      
                     <Box item xs={3}>
+                        <h2>Timer Length</h2>
+                        <Slider
+                            value={timerLength}
+                            aria-label='Default'
+                            valueLabelDisplay='auto'
+                            min={5}
+                            max={60}
+                            onChange={handleChangeTimer}
+                        />
                         <h2>Number of Rounds</h2>
                         <Slider
                             value={roundLimit}
@@ -198,7 +217,7 @@ function renderTop(props) {
                             valueLabelDisplay="auto"
                             min={1}
                             max={10}
-                            onChange={handleChange}
+                            onChange={handleChangeRounds}
                         />
                         <h2>Food categories</h2>
                         <Box sx={{minWidth: 120}}>
@@ -239,6 +258,11 @@ function renderTop(props) {
                                         () => leaveLobby()}>
                                 Leave Lobby
                             </Button>
+                        </Item>
+                    </Grid>
+                    <Grid item xs={3}>
+                        <Item>
+                            <HelpPage/>
                         </Item>
                     </Grid>
                     <Grid item xs={5} sx={{
