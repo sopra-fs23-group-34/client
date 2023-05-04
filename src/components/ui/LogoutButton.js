@@ -8,9 +8,15 @@ export default function LogoutButton() {
     const logout = async () => {
         const token = sessionStorage.getItem('token');
         const Id = sessionStorage.getItem('id');
-        await api(token, Id).post('/users/logout/'+Id)
+        const guestUser = sessionStorage.getItem('guestUser');
+        if (guestUser === true) {
+          await api(token, Id).post('/users/logout/guestUser'+Id)
+        } else {
+          await api(token, Id).post('/users/logout/'+Id)
+        }
         sessionStorage.removeItem('id');
         sessionStorage.removeItem('token');
+        sessionStorage.removeItem('guestUser');
         history.push({
           pathname: '/login'
         });

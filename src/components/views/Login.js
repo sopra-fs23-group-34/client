@@ -56,6 +56,7 @@ const Login = () => {
             // Store the token into the local storage.
             sessionStorage.setItem('token', user.token);
             sessionStorage.setItem('id', user.id);
+            sessionStorage.setItem('guestUser', false);
 
             // Login successfully worked --> navigate to the route /game in the GameRouter
             history.push(`/hub`);
@@ -98,16 +99,23 @@ const Login = () => {
         const num = Math.floor(Math.random()*(999-100+1)+100);
         return un + num;
     }
+    */
     const demoLogin = async () => {
         try {
+            /* 
             const demoUsername = generateUsername()
             const demoEmail = Math.floor(1000000 + Math.random() * 9000000);
             const requestBody = JSON.stringify({username: demoUsername, email: demoEmail, password: demoPassword});
-            const response = await api(false,false).post('/users/create', requestBody);
+            const response = await api(false,false).post('/users/create', requestBody); 
+            */
 
-            const user = new User(response.data);
+            const r = await api(false,false).get('/users/login/guestUser');
+            console.log(r);
+            
+            const user = new User(r.data);
             sessionStorage.setItem('token', user.token);
             sessionStorage.setItem('id', user.id);
+            sessionStorage.setItem('guestUser', true);
 
             history.push(`/hub`);
         } catch (error) {

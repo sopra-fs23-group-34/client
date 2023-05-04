@@ -71,6 +71,10 @@ const Profile = () => {
 
     const saveChanges = async () => {
         try {
+            console.log(sessionStorage.getItem('guestUser'));
+            if (sessionStorage.getItem('guestUser')===true) {
+                // raise error because profile of Guest User cant be changed
+            }
             const requestBody = JSON.stringify({username, email, bio});
             await api(sessionStorage.getItem('token'), false).put('/users/update/' + id, requestBody);
             // Login successfully worked --> navigate to the route /hub in the GameRouter
