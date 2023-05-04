@@ -12,6 +12,7 @@ import BaseContainer from "../../ui/BaseContainer";
 import {Link, useHistory} from "react-router-dom";
 import {Button} from "../../ui/Button";
 import 'animate.css';
+import useSound from "use-sound";
 
 
 const FinalScore = () => {
@@ -19,6 +20,7 @@ const FinalScore = () => {
     const {ref, msg} = useContext(WebsocketWrapper);
     const [finalRanking, setFinalRanking] = useState([]);
     const [winner, setWinner] = useState([]);
+    const [playWinSound] = useSound('http://codeskulptor-demos.commondatastorage.googleapis.com/descent/Zombie.mp3', {volume: 0.5});
 
     const handleFinalScore = (msg) => {
         setFinalRanking(msg.content)
@@ -97,6 +99,7 @@ const FinalScore = () => {
         <BaseContainer>
             <div className='finalScore container'>
                 <div className='finalScore form'>
+                    {playWinSound()}
                     <h1 style={{textAlign: 'center'}}>Final Score</h1>
                     <h2 style={{textAlign: 'center', marginBottom: 0}} className="animate__animated animate__bounce animate__delay-0.5s">The Winner is:</h2>
                     <h1 style={{textAlign: 'center', marginTop: 0, color: 'gold'}} className="animate__animated animate__fadeIn animate__delay-2s">{winner}</h1>

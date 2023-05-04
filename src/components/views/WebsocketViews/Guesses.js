@@ -4,6 +4,7 @@ import {WebsocketWrapper} from './WebsocketWrapper';
 import BaseContainer from "../../ui/BaseContainer";
 import {Slider} from "@mui/material";
 import {useHistory} from "react-router-dom";
+import useSound from 'use-sound';
 
 
 const Guesses = () => {
@@ -18,7 +19,8 @@ const Guesses = () => {
     const [calories, setCalories] = useState(50);
     const [roundScoreStart, setRoundScoreStart] = useState(false);
     const [update, setUpdate] = useState(0);
-
+    const [playSetSound] = useSound('http://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3', {volume: 0.5});
+    const [playTimeRunningOutSound] = useSound('http://commondatastorage.googleapis.com/codeskulptor-assets/Evillaugh.ogg', {volume: 0.5});
 
     const handleRoundScoreStart = (msg) => {
         setRoundScoreStart(msg.content);
@@ -31,6 +33,9 @@ const Guesses = () => {
 
     const handleTimer = (msg) => {
         setTimer(msg.content);
+        if (timer === 5) {
+            playTimeRunningOutSound();
+        }
     }
 
     const topicHandlers = {
@@ -64,6 +69,7 @@ const Guesses = () => {
         }));
     }, [update, gameCode, userid, ref]);
 
+
     const setGuess = () => {
         ref.sendMessage('/app/guess/' + gameCode + '/' + userid, JSON.stringify({
             content: {
@@ -78,6 +84,7 @@ const Guesses = () => {
 
     const handleChange = () => {
         setUpdate(update + 1);
+        playSetSound();
     }
 
     const handleProteinChange = (event, newValue) => {
