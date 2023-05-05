@@ -20,7 +20,7 @@ const Guesses = () => {
     const [roundScoreStart, setRoundScoreStart] = useState(false);
     const [update, setUpdate] = useState(0);
     const [playSetSound] = useSound('http://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3', {volume: 0.5});
-    const [playTimeRunningOutSound] = useSound('http://commondatastorage.googleapis.com/codeskulptor-assets/Evillaugh.ogg', {volume: 0.5});
+    const [playTimeRunningOutSound] = useSound('http://www.euskaljakintza.com/ariketak/recursos/misc196.wav', {volume: 0.5});
 
     const handleRoundScoreStart = (msg) => {
         setRoundScoreStart(msg.content);
@@ -109,64 +109,68 @@ const Guesses = () => {
 
     return (
         <BaseContainer>
-            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 320}}>
-                <h2 style={{color: 'black', position: 'absolute', top: 30, left: 150}}>{timer}</h2>
-                <img src={foodLink} alt="food" className="slider image"/>
-            </div>
+            <div className="slider main">
+                <div style={{minHeight: 320}}>
+                    <h2 style={{marginBottom: 0}}>{timer}</h2>
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                        <img src={foodLink} alt="food" className="slider image" />
+                    </div>
+                </div>
 
-            <h1 className="slider subtitle">{foodName}</h1>
-            <div className="slider form">
-                <h2 className='slider title'>Protein</h2>
-                <Slider
-                    defaultValue={50}
-                    aria-label="protein"
-                    valueLabelDisplay="auto"
-                    value={protein}
-                    onChange={handleProteinChange}
-                    onChangeCommitted={handleChange}
-                />
-                <p className='slider description'>Selected protein/100gr: {protein}</p>
-            </div>
+                <h1 className="slider subtitle">{foodName}</h1>
+                <div className="slider form">
+                    <h2 className='slider title'>Protein</h2>
+                    <Slider
+                        defaultValue={50}
+                        aria-label="protein"
+                        valueLabelDisplay="auto"
+                        value={protein}
+                        onChange={handleProteinChange}
+                        onChangeCommitted={handleChange}
+                    />
+                    <p className='slider description'>Selected protein/100gr: {protein}</p>
+                </div>
 
-            <div className="slider form">
-                <h2 className='slider title'>Fat</h2>
-                <Slider
-                    defaultValue={50}
-                    aria-label="fat"
-                    valueLabelDisplay="auto"
-                    value={fat}
-                    onChange={handleFatChange}
-                    onChangeCommitted={handleChange}
-                />
-                <p className='slider description'>Selected fat/100gr: {fat}</p>
-            </div>
+                <div className="slider form">
+                    <h2 className='slider title'>Fat</h2>
+                    <Slider
+                        defaultValue={50}
+                        aria-label="fat"
+                        valueLabelDisplay="auto"
+                        value={fat}
+                        onChange={handleFatChange}
+                        onChangeCommitted={handleChange}
+                    />
+                    <p className='slider description'>Selected fat/100gr: {fat}</p>
+                </div>
 
-            <div className="slider form">
-                <h2 className='slider title'>Carbs</h2>
-                <Slider
-                    defaultValue={50}
-                    aria-label="carbs"
-                    valueLabelDisplay="auto"
-                    value={carbs}
-                    onChange={handleCarbsChange}
-                    onChangeCommitted={handleChange}
-                />
-                <p className='slider description'>Selected carb/100gr: {carbs}</p>
-            </div>
+                <div className="slider form">
+                    <h2 className='slider title'>Carbs</h2>
+                    <Slider
+                        defaultValue={50}
+                        aria-label="carbs"
+                        valueLabelDisplay="auto"
+                        value={carbs}
+                        onChange={handleCarbsChange}
+                        onChangeCommitted={handleChange}
+                    />
+                    <p className='slider description'>Selected carb/100gr: {carbs}</p>
+                </div>
 
-            <div className="slider form">
-                <h2 className='slider title'>Calories</h2>
-                <Slider
-                    defaultValue={200}
-                    aria-label="calories"
-                    valueLabelDisplay="auto"
-                    value={calories}
-                    onChange={handleCaloriesChange}
-                    onChangeCommitted={handleChange}
-                    min={0}
-                    max={800}
-                />
-                <p className='slider description'>Selected kcal/100gr: {calories}</p>
+                <div className="slider form">
+                    <h2 className='slider title'>Calories</h2>
+                    <Slider
+                        defaultValue={200}
+                        aria-label="calories"
+                        valueLabelDisplay="auto"
+                        value={calories}
+                        onChange={handleCaloriesChange}
+                        onChangeCommitted={handleChange}
+                        min={0}
+                        max={800}
+                    />
+                    <p className='slider description'>Selected kcal/100gr: {calories}</p>
+                </div>
             </div>
         </BaseContainer>
     );

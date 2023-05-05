@@ -8,7 +8,7 @@
     @include center;
     flex-direction: column;
   }
-  &.form {
+  &.main {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,6 +24,20 @@
     box-shadow: $dropShadow;
     margin-inline: auto;
     margin-bottom: 10px;
+  }
+
+  &.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 95%;
+    height: auto;
+    font-size: 15px;
+    font-weight: 300;
+    padding: 2px 10px;
+    border-radius: 0.75em;
+    margin-inline: auto;
+    margin-bottom: 5px;
   }
   &.field {
     display: flex;
@@ -81,6 +95,5 @@
     margin-bottom: 0;
     margin-top: 2px;
     text-align: center;
-    color: black;
   }
 }
