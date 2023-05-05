@@ -13,10 +13,10 @@ const Guesses = () => {
     const [protein, setProtein] = useState(50);
     const [fat, setFat] = useState(50);
     const [carbs, setCarbs] = useState(50);
-    const [timer, setTimer] = useState(20);
+    const [timer, setTimer] = useState("");
     const [foodName, setFoodName] = useState("");
     const [foodLink, setFoodLink] = useState("");
-    const [calories, setCalories] = useState(50);
+    const [calories, setCalories] = useState(400);
     const [roundScoreStart, setRoundScoreStart] = useState(false);
     const [update, setUpdate] = useState(0);
     const [playSetSound] = useSound('http://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3', {volume: 0.5});
@@ -160,7 +160,7 @@ const Guesses = () => {
                 <div className="slider form">
                     <h2 className='slider title'>Calories</h2>
                     <Slider
-                        defaultValue={200}
+                        defaultValue={400}
                         aria-label="calories"
                         valueLabelDisplay="auto"
                         value={calories}
