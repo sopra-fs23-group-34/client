@@ -12,7 +12,7 @@ import { api } from "helpers/api";
 import { useHistory } from "react-router-dom";
 import { Typography } from "@mui/material";
 
-export default function FormDialog() {
+export default function FormDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [lobbyKey, setLobbyKey] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
@@ -52,7 +52,7 @@ export default function FormDialog() {
       <Button className="hub hubbutton" onClick={handleClickOpen}>
         <IconPersonPlus></IconPersonPlus>
         <h2>Join a game</h2>
-        <p>Join a game of one of your friends.</p>
+        {props.size === "large" ?   <p>Join a game of one of your friends.</p> : null}
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Join a game</DialogTitle>
