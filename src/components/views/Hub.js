@@ -21,7 +21,7 @@ export function BasicGrid() {
         <Box sx={{flexGrow: 1 , width:maxMediumSize ?  "110%" : "100%"}} >
             <Grid container spacing={maxMediumSize ? 1 : 3} sx={{
                 width: "100%",
-                margin: "0% -0.7%",
+                margin: "0% -0.8%",
             }}>
                 <Grid item xs={6} sm={4} order={{ xs: 4, sm: 1 }}  >
                     <Item>
@@ -59,16 +59,16 @@ export function BasicGrid() {
 }
 
 const Hub = () => {
-
+    const maxMediumSize = useMediaQuery("(max-width: 600px)");
     return (
         <BaseContainer margin="auto" className="hub container">
-            <Typography variant="h5" sx={{
+            <Typography variant={maxMediumSize ?  "h5" : "h3"} sx={{
                 textShadow: "2px 2px #000000",
                 textAlign: "center"
             }}>
             The big diabetes game
             </Typography>
-            <Typography variant="h5" sx={{
+            <Typography variant={maxMediumSize ?  "h7" : "h5"} sx={{
                 textShadow: "2px 2px #000000",
                 textAlign: "center"
             }}> Hub
