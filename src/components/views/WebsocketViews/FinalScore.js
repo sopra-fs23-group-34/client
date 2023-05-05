@@ -40,7 +40,6 @@ const FinalScore = () => {
     }
 
     const leaveGame = () => {
-        ref.sendMessage('/app/leave/' + sessionStorage.getItem('gameCode') + '/' + sessionStorage.getItem("id"))
         sessionStorage.removeItem('gameCode');
         sessionStorage.removeItem('host');
         history.push('/hub');
