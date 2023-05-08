@@ -44,7 +44,6 @@ const Login = () => {
     const [alertStatus, setAlertStatus] = useState(false);
     const [timerStart, setTimerStart] = useState(false);
 
-    let demoPassword = "1234";
     const doLogin = async () => {
         try {
             const requestBody = JSON.stringify({username, password});
@@ -81,24 +80,6 @@ const Login = () => {
           doLogin();
         }
       };
-    const foods = [
-        "JohnLemon",
-        "Madonnalds",
-        "BoroccoliObama",
-        "YouCorn",
-        "EggSheeran",
-        "PotatobeyMaguire",
-        "TeachingAssistant",
-        "RiceWitherspoon",
-        "BettyWheat",
-        "InsulinShot",
-        
-    ]
-    function generateUsername() {
-        const un = foods[Math.floor(Math.random()*foods.length)]
-        const num = Math.floor(Math.random()*(999-100+1)+100);
-        return un + num;
-    }
     
     const demoLogin = async () => {
         try {
@@ -109,7 +90,7 @@ const Login = () => {
             const response = await api(false,false).post('/users/create', requestBody); 
             */
 
-            const r = await api(false,false).get('/users/login/guestUser');
+            const r = await api(false,false).post('/users/login/guestUser');
             console.log(r);
             
             const user = new User(r.data);
