@@ -19,8 +19,9 @@ import { FixedSizeList } from 'react-window';
 import HelpPage from 'components/ui/HelpPage';
 
 const Player = ({user}) => (
-    <div className="player container">
-        <div className="player username"> {user.username} </div>
+    
+    <div className={`player container ${user.id === parseInt(sessionStorage.getItem("id")) ? "highlighted-row" : "row"}`}>
+        <div className="player username"> {`${user.host ? user.username +  " (host)" : user.username}`}</div>
     </div>
 );
 
@@ -66,7 +67,7 @@ function renderTop(props) {
         const { index, style } = props;
 
         return (
-          <ListItem style={style} key={index} component="div" disablePadding>
+          <ListItem  style={style} key={index} component="div" disablePadding>
 
               <ListItemText primary={<Player
                                 key={users[index].id}

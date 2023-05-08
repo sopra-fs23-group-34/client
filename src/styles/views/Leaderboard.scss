@@ -69,6 +69,13 @@
         display: flex;
         align-items: center;
         background: lighten($background, 5);
+        &.row {
+            height: 40px;
+        }
+        &.highlighted-row {
+            background: #1976d2b3;
+            //border: 2px solid #e7bdf5;
+        }
     }
     &.username {
         font-weight: 500;
@@ -88,5 +95,25 @@
         font-family: $fontMono;
         font-weight: 800;
         width: 10%;
+    }
+}
+
+.playerlist {
+    margin: 0;
+    padding: 0;
+    color: $textColor;
+    // body row
+    &.row {
+        height: 40px;
+        //border: 2px solid #ffffff;
+        &:hover {
+            background-color: #847cb2;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+        }
+    }
+    &.highlighted-row {
+        background: #8f65ab;
+        //border: 2px solid #e7bdf5;
     }
 }
