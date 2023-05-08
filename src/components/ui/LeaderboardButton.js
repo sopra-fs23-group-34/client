@@ -2,7 +2,7 @@ import { Button } from "components/ui/Button"
 import { useHistory } from "react-router-dom"
 import IconRankingStar from "resources/RankingStarIcon";
 
-export default function LeaderboardButton() {
+export default function LeaderboardButton(props) {
     const history = useHistory();
     const gotoLeaderboard = () => {
         history.push({
@@ -15,7 +15,7 @@ export default function LeaderboardButton() {
           >
             <IconRankingStar></IconRankingStar>
             <h2>Global leaderboard</h2>
-            <p>Take a look at the global leaderboard.</p>
+          {props.size === "large" ?   <p>Take a look at the global leaderboard.</p> : null}
           </Button>
     )
 }

@@ -10,45 +10,47 @@ import ProfileButton from "../ui/ProfileButton";
 import PopUp from "../ui/JoinLobbyButton";
 import LogoutButton from "../ui/LogoutButton";
 import Item from "components/ui/Item";
+import { useMediaQuery } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
 
 export function BasicGrid() {
+    const maxMediumSize = useMediaQuery("(max-width: 600px)");
+    
     return (
-        <Box sx={{flexGrow: 1}}>
-            <Grid container spacing={3} sx={{
+        <Box sx={{flexGrow: 1 , width:maxMediumSize ?  "100%" : "100%"}} >
+            <Grid container spacing={maxMediumSize ? 1 : 3} sx={{
                 width: "100%",
-                margin: "auto"
-
-
+                margin: "0% -0.8%",
             }}>
-                <Grid item xs={4}>
+                <Grid item xs={6} sm={4} order={{ xs: 4, sm: 1 }}  >
                     <Item>
-                        <StatsButton/>
+                        <StatsButton size={maxMediumSize ? "small" : "large"}/>
                     </Item>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={6} sm={4} order={{ xs: 2, sm: 2 }}>
                     <Item>
-                        <CreateLobbyButton/>
+                        <CreateLobbyButton size={maxMediumSize ? "small" : "large"} />
                     </Item>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={6} sm={4} order={{ xs: 5, sm: 3 }}>
                     <Item>
-                        <LeaderboardButton/>
+                        <LeaderboardButton size={maxMediumSize ? "small" : "large"} />
                     </Item>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={6} sm={4} order={{ xs: 3, sm: 4 }}>
                     <Item>
-                        <ProfileButton/>
+                        <ProfileButton size={maxMediumSize ? "small" : "large"} />
                     </Item>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={6} sm={4} order={{ xs: 2, sm: 5 }}>
                     <Item>
-                        <PopUp/>
+                        <PopUp size={maxMediumSize ? "small" : "large"} />
                     </Item>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={6} sm={4} order={{ xs: 6, sm: 6 }}>
                     <Item>
-                        <LogoutButton/>
+                        <LogoutButton size={maxMediumSize ? "small" : "large"}/>
                     </Item>
                 </Grid>
             </Grid>
@@ -57,13 +59,20 @@ export function BasicGrid() {
 }
 
 const Hub = () => {
-
+    const maxMediumSize = useMediaQuery("(max-width: 600px)");
     return (
         <BaseContainer margin="auto" className="hub container">
-            <h1>The big diabetes game</h1>
-            <p className="game paragraph">
-                Hub
-            </p>
+            <Typography variant={maxMediumSize ?  "h5" : "h3"} sx={{
+                textShadow: "2px 2px #000000",
+                textAlign: "center"
+            }}>
+            The big diabetes game
+            </Typography>
+            <Typography variant={maxMediumSize ?  "h7" : "h5"} sx={{
+                textShadow: "2px 2px #000000",
+                textAlign: "center"
+            }}> Hub
+            </Typography>
             <BasicGrid/>
         </BaseContainer>
     );

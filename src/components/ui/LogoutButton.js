@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom"
 import { api } from "helpers/api";
 import IconDoorExit from "resources/LogOutIcon";
 
-export default function LogoutButton() {
+export default function LogoutButton(props) {
     const history = useHistory();
     const logout = async () => {
         const token = sessionStorage.getItem('token');
@@ -30,7 +30,7 @@ export default function LogoutButton() {
         >
           <IconDoorExit></IconDoorExit>
           <h2>Logout</h2>
-          <p>Log out to play another day.</p>
+        {props.size === "large" ?   <p>Log out to play another day.</p> : null}
         </Button>
     )
 }

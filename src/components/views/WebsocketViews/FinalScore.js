@@ -20,7 +20,7 @@ const FinalScore = () => {
     const {ref, msg} = useContext(WebsocketWrapper);
     const [finalRanking, setFinalRanking] = useState([]);
     const [winner, setWinner] = useState([]);
-    const [playWinSound] = useSound('http://codeskulptor-demos.commondatastorage.googleapis.com/descent/Zombie.mp3', {volume: 0.5});
+    const [playWinSound] = useSound('http://audio.marsupialgurgle.com/audio/partyhorngood.mp3', {volume: 0.5});
 
     const handleFinalScore = (msg) => {
         setFinalRanking(msg.content)
@@ -40,7 +40,6 @@ const FinalScore = () => {
     }
 
     const leaveGame = () => {
-        ref.sendMessage('/app/leave/' + sessionStorage.getItem('gameCode') + '/' + sessionStorage.getItem("id"))
         sessionStorage.removeItem('gameCode');
         sessionStorage.removeItem('host');
         history.push('/hub');
