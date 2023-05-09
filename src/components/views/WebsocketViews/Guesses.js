@@ -110,10 +110,10 @@ const Guesses = () => {
     return (
         <BaseContainer>
             <div className="slider main">
-                <div style={{minHeight: 320}}>
+                <div className='slider form'>
                     <h2 style={{marginBottom: 0}}>{timer}</h2>
-                    <div style={{display: 'flex', justifyContent: 'center'}}>
-                        <img src={foodLink} alt="food" className="slider image" />
+                    <div className='slider imageForm'>
+                        <img src={foodLink} alt="food" className="slider image"/>
                     </div>
                 </div>
 
