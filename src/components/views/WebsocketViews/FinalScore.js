@@ -17,7 +17,7 @@ import useSound from "use-sound";
 
 const FinalScore = () => {
     const history = useHistory();
-    const {ref, msg} = useContext(WebsocketWrapper);
+    const {msg} = useContext(WebsocketWrapper);
     const [finalRanking, setFinalRanking] = useState([]);
     const [winner, setWinner] = useState([]);
     const [playWinSound] = useSound('http://audio.marsupialgurgle.com/audio/partyhorngood.mp3', {volume: 0.5});
@@ -57,13 +57,14 @@ const FinalScore = () => {
     rankingTable = (
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <div style={{
-                display: 'inline-block',
+                display: 'flex',
                 position: 'center',
                 justifyContent: 'center',
                 alignItems: 'center',
-                margin: 10
+                margin: 10,
+                width: '100%'
             }}>
-                <TableContainer component={Paper} sx={{maxHeight: 500, minWidth: 500}}>
+                <TableContainer component={Paper} sx={{maxHeight: 500}}>
                     <Table sx={{
                         height: "max-content"
                     }} size="small" stickyHeader aria-label="ranking table">
