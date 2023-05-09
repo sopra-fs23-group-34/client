@@ -1,5 +1,4 @@
 import {useContext, useEffect, useState} from 'react';
-import {Spinner} from 'components/ui/Spinner';
 import {Button} from 'components/ui/Button';
 import {useHistory} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
@@ -7,16 +6,15 @@ import PropTypes from "prop-types";
 import "styles/views/Lobby.scss";
 import {WebsocketWrapper} from './WebsocketWrapper';
 import * as React from "react";
-import Box from '@mui/material/Box';
 import {Grid, ListItem, ListItemText, Slider, Typography} from '@mui/material';
 import Item from 'components/ui/Item';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { api } from 'helpers/api';
-import { FixedSizeList } from 'react-window';
+import {  VariableSizeList } from 'react-window';
 import HelpPage from 'components/ui/HelpPage';
+import { useMediaQuery } from "@material-ui/core";
 
 const Player = ({user}) => (
     
@@ -32,6 +30,8 @@ Player.propTypes = {
 
 const Lobby = () => {
     // use react-router-dom's hook to access the history
+    const maxMediumSize = useMediaQuery("(max-width: 600px)");
+    
     const history = useHistory();
     const {ref, msg} = useContext(WebsocketWrapper);
     const [roundLimit, setRoundLimit] = useState(5);
@@ -68,13 +68,13 @@ function renderTop(props) {
 
         return (
           <ListItem  style={style} key={index} component="div" disablePadding>
-
-              <ListItemText primary={<Player
-                                key={users[index].id}
-                                user={users[index]}
-                                index={index}
-                                />} />
-
+                <ListItemText primary={<Player
+                    key={users[index].id}
+                    user={users[index]}
+                    index={index}
+                />}
+                    rimaryTypographyProps={{ noWrap: true }}
+                    style={{ width: '100%', minWidth: 0}}/>
           </ListItem>
         );
       }
@@ -121,119 +121,55 @@ function renderTop(props) {
     // for more information on the effect hook, please see https://reactjs.org/docs/hooks-effect.html
 
 
-    let content = <Spinner/>;
     let hostview;
-    if (users) {
-        content = (
-            <div className="game" style={{
-                width: "100%"
-            }}>
-                <Grid container spacing={3} sx={{
-                    width: "100%",
-                    margin: "auto",
-                    justifyContent: "left"
-                }}>
-                    <Grid container sx={{width:"35%", justifyContent:"right"}}>
-                    <Grid container sx={{flexDirection:"row", justifyContent:"right"}} >
-                        <Grid item>User count: </Grid>
-                        <Grid item sx={{fontWeight:800, paddingLeft:"3px"}}> {users.length}</Grid>
-                    </Grid>
-                    <FixedSizeList
-                    height={400}
-                    width={"100%"}
-                    itemSize={46}
-                    itemCount={users.length}
-                    overscanCount={1}
-                    style={{
-                        marginLeft: "25px"
-                    }}
-                    >
-                        {renderTop}
-                    </FixedSizeList>
-                    </Grid>
-                </Grid>
-                <Grid container spacing={3} sx={{
-                    justifyContent: "space-between"
-                }}>
-                    <Grid item xs={3}>
-                        <Item>
-                            <Button width="100%"
-                                    onClick={
-                                        () => leaveLobby()}>
-                                Leave Lobby
-                            </Button>
-                        </Item>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Item>
-                            <HelpPage/>
-                        </Item>
-                    </Grid>
-                </Grid>
-
-            </div>
-        );
         hostview = (
             <div className="game" style={{
                 width: "100%"
             }}>
-                <Grid container spacing={3} sx={{
-                    width: "100%",
-                    margin: "auto",
-                    justifyContent: "space-around"
-                }}>
-                    <Grid container sx={{width:"35%"}}>
-                    <Grid container sx={{flexDirection:"row", justifyContent:"right"}} >
-                        <Grid item>User count: </Grid>
-                        <Grid item sx={{fontWeight:800, paddingLeft:"3px"}}> {users.length}</Grid>
-                    </Grid>
-                    <FixedSizeList
-                    height={400}
-                    width={"100%"}
-                    itemSize={46}
+                <Grid container spacing={maxMediumSize ?  1 : 8}>
+                    <Grid item xs={12} sm={sessionStorage.getItem('host') === 'true' ? 6: 12}>
+                    <Typography align='right'>User count: {users.length}</Typography>
+                        <VariableSizeList
+                            align='right'
+                            height={maxMediumSize ?  160 : 400}
+                            width={"100%"}
+                    itemSize={() => 46}
                     itemCount={users.length}
                     overscanCount={1}
-                    style={{
-                        marginLeft: "25px"
-                    }}
                     >
-                        {renderTop}
-                    </FixedSizeList>
+                    {renderTop}
+                    </VariableSizeList>
                     </Grid>
-                     
-                    <Box item xs={3}>
-                        <h2>Timer Length</h2>
-                        <Slider
-                            value={timerLength}
-                            aria-label='Default'
-                            valueLabelDisplay='auto'
-                            min={5}
-                            max={60}
-                            onChange={handleChangeTimer}
-                        />
-                        <h2>Number of Rounds</h2>
-                        <Slider
-                            value={roundLimit}
-                            aria-label="Default"
-                            valueLabelDisplay="auto"
-                            min={1}
-                            max={10}
-                            onChange={handleChangeRounds}
-                        />
-                        <h2>Food categories</h2>
-                        <Box sx={{minWidth: 120}}>
-                            <FormControl fullWidth>
-                                <InputLabel id="food-category-label" sx={{
-                                      color: "white"
-                                    }}>Food Category</InputLabel>
+                    {sessionStorage.getItem('host') === 'true' && (
+                        <Grid item xs={12} sm={6} >
+                            <h2>Timer Length</h2>
+                            <Slider
+                                value={timerLength}
+                                aria-label='Default'
+                                valueLabelDisplay='auto'
+                                min={5}
+                                max={60}
+                                onChange={handleChangeTimer}
+                            />
+                            <h2>Number of Rounds</h2>
+                            <Slider
+                                value={roundLimit}
+                                aria-label="Default"
+                                valueLabelDisplay="auto"
+                                min={1}
+                                max={10}
+                                onChange={handleChangeRounds}
+                            />
+                            <h2>Food categories</h2>
+                            <FormControl fullWidth style={{ paddingBottom: '50px' }}>
                                 <Select
                                     sx={{
-                                      color: "white"
+                                        color: "white"
                                     }}
                                     labelId="food-category-label"
                                     id="food-category-label-select"
                                     value={foodCategory}
-                                    label="Food Category"
+                                    label=""
                                     onChange={handleChangeCategory}
                                 >
                                     {categories.map((category) => (
@@ -246,13 +182,10 @@ function renderTop(props) {
                                     ))}
                                 </Select>
                             </FormControl>
-                        </Box>
-                    </Box>
-                </Grid>
-                <Grid container spacing={3} sx={{
-                    justifyContent: "space-between"
-                }}>
-                    <Grid item xs={3}>
+                            
+                        </Grid>
+                    )}
+                    <Grid item xs={sessionStorage.getItem('host') ? 4 : 6 }>
                         <Item>
                             <Button width="100%"
                                     onClick={
@@ -261,37 +194,37 @@ function renderTop(props) {
                             </Button>
                         </Item>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={sessionStorage.getItem('host') ? 4 : 6}>
                         <Item>
                             <HelpPage/>
                         </Item>
                     </Grid>
-                    <Grid item xs={5} sx={{
-                        justifyContent: "flex-end"
-                    }}>
-                        <Item>
-                            <Button width="100%"
+                    {sessionStorage.getItem('host') === 'true' && (
+                        <Grid item xs={4} sx={{
+                            justifyContent: "flex-end"
+                        }}>
+                            <Item>
+                                <Button width="100%"
                                     disabled={!foodCategory}
                                     onClick={
                                         () => startGame()}>
-                                Start Game
-                            </Button>
-                        </Item>
-                    </Grid>
+                                    Start Game
+                                </Button>
+                            </Item>
+                        </Grid>)
+                        }
                 </Grid>
-
             </div>
         );
-    }
 
     return (
-        <BaseContainer className="lobby container">
+        <BaseContainer style={{maxWidth: sessionStorage.getItem('host') ? "900px" : "500px" }} className="lobby container">
             <h2> Game Lobby </h2>
             <Typography color={"error"}>{errorMessage}</Typography>
             <p className="lobby paragraph">
                 Lobby Key: {sessionStorage.getItem('gameCode')}
             </p>
-            {sessionStorage.getItem('host') ? hostview : content}
+            {hostview}
         </BaseContainer>
     );
 }
