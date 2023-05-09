@@ -105,6 +105,21 @@ const Login = () => {
             setTimerStart(false);
         }
     }
+
+    const test = async () => {
+        try {
+            /*
+            just a test
+            */
+            const r = await api(false,false).post('/users/test');
+            console.log(r);
+        } catch (error) {
+            setAlertStatus(true);
+            setTimerStart(true);
+            setTimerStart(false);
+        }
+    }
+
     return (
         <BaseContainer>
             <div className="login container">
@@ -147,6 +162,15 @@ const Login = () => {
                         onClick={() => demoLogin()}
                         >
                             Demo Login
+                        </Button>
+                        </Box>
+                        <Box sx={{paddingTop: "10px"}}>
+                    <Button
+                        width="100%"
+                        style={{backgroundColor: "green"}}
+                        onClick={() => test()}
+                        >
+                            TEST
                         </Button>
                         </Box>
                 </div>
