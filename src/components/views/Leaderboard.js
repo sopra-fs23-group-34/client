@@ -49,7 +49,7 @@ const Leaderboard = () => {
     const [users, setUsers] = useState(null);
     const [user, setUser] = useState([]);
     const [me, setMe] = useState([]);
-    const [userInspectStats, setUserInspectStats] = useState([]);
+
     const [userOwnStats, setUserOwnStats] = useState([]);
     const history = useHistory();
     const listRef = React.createRef();
@@ -62,20 +62,18 @@ const Leaderboard = () => {
         return { id: idCounter, "Player": username, "Games played": games_played, "Wins": wins, "Win percentage": Math.round((ratio*100 + Number.EPSILON) * 100) / 100, "highscore": highscore };
       }
       useEffect(() => {
-          let ignore = false;
-        if (!ignore)  {
             async function fetchData() {
-                const response = await api(sessionStorage.getItem('token'), sessionStorage.getItem('id')).get('/users/statistics/' + user.user_id);
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                setUserInspectStats(response.data);
-                console.log(userInspectStats)
+                setRows([])
+                if (user.user_id !== undefined) {
+                    const response = await api(sessionStorage.getItem('token'), sessionStorage.getItem('id')).get('/users/statistics/' + user.user_id);
+                setRows([
+                    createData(user.username, response.data.gamesPlayed, response.data.gamesWon, response.data.winRatio, response.data.highScore)
+                  ])
+                }
             }
             fetchData();
-            setRows([
-                createData(user.username, userInspectStats.gamesPlayed, userInspectStats.gamesWon, userInspectStats.winRatio, userInspectStats.highScore)
-              ])
-        }
-        return () => { ignore = true; }
+            
+        
       }, [user])
     
       useEffect(() => {
