@@ -44,6 +44,7 @@ const Register = () => {
     const [password, setPassword] = useState(null);
     const [alertStatus, setAlertStatus] = useState(false);
     const [timerStart, setTimerStart] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleKeyDown = (e) => {
         if (e.keyCode === 13 && password && username && email) {
@@ -67,6 +68,7 @@ const Register = () => {
             history.push(`/hub`);
         } catch (error) {
             setAlertStatus(true);
+            setErrorMessage(error.response.data.message);
             setTimerStart(true);
             setTimerStart(false);
         }
@@ -133,7 +135,7 @@ const Register = () => {
                     <Alert severity="error"
                            onClose={handleClose}>
                         <AlertTitle>Registration Failed</AlertTitle>
-                        Username or Email is already taken - <strong>try again with a different one!</strong>
+                        {errorMessage} - <strong>try again with a different one!</strong>
                     </Alert>
                 )}
             </div>

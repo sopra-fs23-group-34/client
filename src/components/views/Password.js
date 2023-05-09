@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import {handleError} from 'helpers/api';
+import React, {useEffect, useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/Register.scss';
@@ -45,10 +44,14 @@ const Password = () => {
     const [password, setPassword] = useState(null);
     const [newRepeatPassword, setNewRepeatPassword] = useState(null);
     const [errorStatus, setErrorStatus] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [timerStart, setTimerStart] = useState(false);
+
 
 
     const saveChanges = async () => {
         if (password !== newRepeatPassword) {
+            setErrorMessage("Passwords do not match!");
             setErrorStatus(true);
         } else {
             try {
@@ -63,10 +66,19 @@ const Password = () => {
                 // Login successfully worked --> navigate to the route /game in the GameRouter
                 history.push(`/hub`);
             } catch (error) {
-                alert(`Something went wrong during the editing: \n${handleError(error)}`);
+                setErrorMessage(error.response.data.message);
+                setErrorStatus(true);
+                setTimerStart(true);
+                setTimerStart(false);
             }
         }
     };
+
+    useEffect(() => {
+        setTimeout(() => {
+            setErrorStatus(false);
+        }, 5000);
+    }, [timerStart]);
 
     const goToProfile = () => {
         history.push(`/profile/` + id);
@@ -119,7 +131,7 @@ const Password = () => {
                 {errorStatus && (
                     <Alert severity="error" onClose={handleClose}>
                         <AlertTitle>Failed to change</AlertTitle>
-                        The new passwords do not match - <strong>try again!</strong>
+                        {errorMessage} - <strong>try again!</strong>
                     </Alert>
                 )}
             </div>
