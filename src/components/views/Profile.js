@@ -96,6 +96,8 @@ const Profile = () => {
         } catch (error) {
             setErrorMessage(error.response.data.message);
             setErrorStatus(true);
+            setTimerStart(true);
+            setTimerStart(false);
         }
     };
 
