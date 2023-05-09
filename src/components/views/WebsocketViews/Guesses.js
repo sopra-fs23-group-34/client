@@ -5,6 +5,7 @@ import BaseContainer from "../../ui/BaseContainer";
 import {Slider} from "@mui/material";
 import {useHistory} from "react-router-dom";
 import useSound from 'use-sound';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 
 const Guesses = () => {
@@ -16,6 +17,7 @@ const Guesses = () => {
     const [timer, setTimer] = useState("");
     const [foodName, setFoodName] = useState("");
     const [foodLink, setFoodLink] = useState("");
+    const [loading, setLoading] = useState(true);
     const [calories, setCalories] = useState(400);
     const [roundScoreStart, setRoundScoreStart] = useState(false);
     const [update, setUpdate] = useState(0);
@@ -29,6 +31,7 @@ const Guesses = () => {
     const handleFood = () => {
         setFoodName(msg.content["name"]);
         setFoodLink(msg.content["imageLink"]);
+        setLoading(false);
     }
 
     const handleTimer = (msg) => {
@@ -113,13 +116,20 @@ const Guesses = () => {
                 <div className='slider form'>
                     <h2 style={{marginBottom: 0}}>{timer}</h2>
                     <div className='slider imageForm'>
-                        <img src={foodLink} alt="food" className="slider image"/>
+                        {loading ? (
+                                <div className="loading-spinner"></div>
+                        ) : (
+                            <LazyLoadImage src={foodLink} alt="food" className="slider image" />
+                        )}
                     </div>
                 </div>
 
                 <h1 className="slider subtitle">{foodName}</h1>
                 <div className="slider form">
-                    <h2 className='slider title'>Protein</h2>
+                    <div className="slider text">
+                        <h2 className="slider title">Protein</h2>
+                        <h4 className='slider count'>{protein}g/100g</h4>
+                    </div>
                     <Slider
                         defaultValue={50}
                         aria-label="protein"
@@ -128,11 +138,13 @@ const Guesses = () => {
                         onChange={handleProteinChange}
                         onChangeCommitted={handleChange}
                     />
-                    <p className='slider description'>Selected protein/100gr: {protein}</p>
                 </div>
 
                 <div className="slider form">
-                    <h2 className='slider title'>Fat</h2>
+                    <div className="slider text">
+                        <h2 className="slider title">Fat</h2>
+                        <h4 className='slider count'>{fat}g/100g</h4>
+                    </div>
                     <Slider
                         defaultValue={50}
                         aria-label="fat"
@@ -141,11 +153,13 @@ const Guesses = () => {
                         onChange={handleFatChange}
                         onChangeCommitted={handleChange}
                     />
-                    <p className='slider description'>Selected fat/100gr: {fat}</p>
                 </div>
 
                 <div className="slider form">
-                    <h2 className='slider title'>Carbs</h2>
+                    <div className="slider text">
+                        <h2 className="slider title">Carbs</h2>
+                        <h4 className='slider count'>{carbs}g/100g</h4>
+                    </div>
                     <Slider
                         defaultValue={50}
                         aria-label="carbs"
@@ -154,11 +168,13 @@ const Guesses = () => {
                         onChange={handleCarbsChange}
                         onChangeCommitted={handleChange}
                     />
-                    <p className='slider description'>Selected carb/100gr: {carbs}</p>
                 </div>
 
                 <div className="slider form">
-                    <h2 className='slider title'>Calories</h2>
+                    <div className="slider text">
+                        <h2 className="slider title">Calories</h2>
+                        <h4 className='slider count'>{calories}kcal/100g</h4>
+                    </div>
                     <Slider
                         defaultValue={400}
                         aria-label="calories"
@@ -169,7 +185,6 @@ const Guesses = () => {
                         min={0}
                         max={800}
                     />
-                    <p className='slider description'>Selected kcal/100gr: {calories}</p>
                 </div>
             </div>
         </BaseContainer>

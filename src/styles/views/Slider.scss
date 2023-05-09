@@ -8,6 +8,7 @@
     @include center;
     flex-direction: column;
   }
+
   &.main {
     display: flex;
     flex-direction: column;
@@ -55,6 +56,7 @@
     flex-direction: column;
     justify-content: center;
   }
+
   &.input {
     height: 35px;
     padding-left: 15px;
@@ -65,12 +67,14 @@
     background: transparentize(white, 0.85);
     color: $textColor;
   }
+
   &.label {
     color: $textColor;
     margin-bottom: 10px;
     text-transform: lowercase;
     font-weight: 300;
   }
+
   &.button-container {
     display: flex;
     justify-content: center;
@@ -79,10 +83,23 @@
     margin-inline: auto;
     margin-bottom: 10px;
   }
+
+  &.text {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &.title {
     position: relative;
     margin-bottom: 0;
     margin-top: 2px;
+    text-align: left;
+  }
+
+  &.count {
+    position: relative;
+    margin-bottom: 0;
+    text-align: right;
   }
 
   &.description {
@@ -109,4 +126,23 @@
     margin-top: 2px;
     text-align: center;
   }
+
+  .loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
 }
