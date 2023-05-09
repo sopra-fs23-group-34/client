@@ -151,7 +151,8 @@ const RoundScore = () => {
         <BaseContainer>
             <div className='score container'>
                 <div className='score form'>
-                    <h1 style={{textAlign: 'center'}}>Round Overview</h1>
+                    <h1 style={{textAlign: 'center', marginBottom: '0'}}>Round Overview</h1>
+                    <h5 style={{textAlign: 'center', marginTop: '0'}}>It will automatically continues in a few seconds</h5>
                     {rankingTable}
                     {nutritionTable}
                 </div>
