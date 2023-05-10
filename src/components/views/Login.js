@@ -37,6 +37,7 @@ const Login = () => {
     const [username, setUsername] = useState(null);
     const [alertStatus, setAlertStatus] = useState(false);
     const [timerStart, setTimerStart] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const doLogin = async () => {
         try {
@@ -55,6 +56,7 @@ const Login = () => {
             history.push(`/hub`);
         } catch (error) {
             setAlertStatus(true);
+            setErrorMessage(error.response.data.message)
             setTimerStart(true);
             setTimerStart(false);
         }
@@ -95,6 +97,7 @@ const Login = () => {
             history.push(`/hub`);
         } catch (error) {
             setAlertStatus(true);
+            setErrorMessage(error.response.data.message)
             setTimerStart(true);
             setTimerStart(false);
         }
@@ -109,6 +112,7 @@ const Login = () => {
             console.log(r);
         } catch (error) {
             setAlertStatus(true);
+            setErrorMessage(error.response.data.message)
             setTimerStart(true);
             setTimerStart(false);
         }
@@ -169,13 +173,13 @@ const Login = () => {
                     </Box>
                 </div>
             </div>
-            <div className="login popup-message">
-                {alertStatus && (
-                    <Alert severity="error" onClose={handleClose}>
-                        <AlertTitle>Login failed</AlertTitle>
-                        You have entered an invalid username or password - <strong>try again!</strong>
-                    </Alert>
-                )}
+            <div className="login popup-message" >
+            {alertStatus && (
+                <Alert severity="error" onClose={handleClose} >
+                    <AlertTitle>Login failed</AlertTitle>
+                    {errorMessage} - <strong>try again!</strong>
+                </Alert>
+            )}
             </div>
         </BaseContainer>
 

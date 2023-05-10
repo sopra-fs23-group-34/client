@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {api, handleError} from 'helpers/api';
+import {api} from 'helpers/api';
 import {useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/Profile.scss';
@@ -44,9 +44,11 @@ const Profile = () => {
     const [emailPreview, setEmailPreview] = useState(null);
     const [bio, setBio] = useState(null);
     const [bioPreview, setBioPreview] = useState(null);
-    const [alertStatusInfo, setAlertStatusInfo] = useState(false);
-    const [errorStatusUsername, setErrorStatusUsername] = useState(false);
-    const [errorStatusEmail, setErrorStatusEmail] = useState(false);
+    const [statusInfo, setStatusInfo] = useState(false);
+    const [statusError, setErrorStatus] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [timerStart, setTimerStart] = useState(false);
+
 
     useEffect(() => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
@@ -59,21 +61,28 @@ const Profile = () => {
                 setBioPreview(response.data['bio']);
 
             } catch (error) {
-                console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
-                console.error("Details:", error);
-                alert("Something went wrong while fetching the users! See the console for details.");
+                setErrorMessage(error.response.data.message);
+                setErrorStatus(true);
+                setTimerStart(true);
+                setTimerStart(false);
             }
         }
 
         fetchData();
     }, [id]);
 
+    useEffect(() => {
+        setTimeout(() => {
+            setErrorStatus(false);
+        }, 5000);
+    }, [timerStart]);
+
 
     const saveChanges = async () => {
         try {
             const guestUser = sessionStorage.getItem('guestUser');
             console.log(guestUser);
-            if (guestUser=="true") {
+            if (guestUser == "true") {
                 // raise error because profile of Guest User cant be changed
                 console.log("guets User profile change denied");
             }
@@ -82,18 +91,13 @@ const Profile = () => {
             // Login successfully worked --> navigate to the route /hub in the GameRouter
             history.push(`/profile/` + id);
             // alert("Changes saved successfully!")
-            setAlertStatusInfo(true);
+            setStatusInfo(true);
 
         } catch (error) {
-            // alert(`Something went wrong during the editing: \n${handleError(error)}`);
-            // get error message from error
-            const errorMessage = error.response.data.message;
-            if (errorMessage === "You can't pick the same username as somebody else!") {
-                setErrorStatusUsername(true);
-            }
-            if (errorMessage === "You can't pick the same mail as somebody else!") {
-                setErrorStatusEmail(true);
-            }
+            setErrorMessage(error.response.data.message);
+            setErrorStatus(true);
+            setTimerStart(true);
+            setTimerStart(false);
         }
     };
 
@@ -109,15 +113,11 @@ const Profile = () => {
     }
 
     const handleCloseInfo = () => {
-        setAlertStatusInfo(false);
+        setStatusInfo(false);
     }
 
-    const handleCloseUsername = () => {
-        setErrorStatusUsername(false);
-    }
-
-    const handleCloseEmail = () => {
-        setErrorStatusEmail(false);
+    const handleCloseError = () => {
+        setErrorStatus(false);
     }
 
     let content;
@@ -170,7 +170,7 @@ const Profile = () => {
                 </div>
             </div>
             <div className="profile popup-message">
-                {alertStatusInfo && (
+                {statusInfo && (
                     <Alert severity="info" onClose={handleCloseInfo}>
                         <AlertTitle>Profile information successfully changed</AlertTitle>
                         Your new information is saved - <strong>Now go and play!</strong>
@@ -178,18 +178,10 @@ const Profile = () => {
                 )}
             </div>
             <div className="profile popup-message">
-                {errorStatusUsername && (
-                    <Alert severity="error" onClose={handleCloseUsername}>
+                {statusError && (
+                    <Alert severity="error" onClose={handleCloseError}>
                         <AlertTitle>Failed to update</AlertTitle>
-                        Username selected is already taken - <strong>Try again with a different one!</strong>
-                    </Alert>
-                )}
-            </div>
-            <div className="profile popup-message">
-                {errorStatusEmail && (
-                    <Alert severity="error" onClose={handleCloseEmail}>
-                        <AlertTitle>Failed to update</AlertTitle>
-                        The given email has already a account registered - <strong>Use a different email!</strong>
+                        {errorMessage} - <strong>Try again with a different one!</strong>
                     </Alert>
                 )}
             </div>
