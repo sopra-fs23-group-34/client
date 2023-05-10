@@ -8,12 +8,6 @@ import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import {Alert, AlertTitle, Box} from "@mui/material";
 
-/*
-It is possible to add multiple components inside a single file,
-however be sure not to clutter your files with an endless amount!
-As a rule of thumb, use one file per component and only add small,
-specific components that belong to the main one in the same file.
- */
 const FormField = props => {
     return (
         <div className="login field">
@@ -43,6 +37,7 @@ const Login = () => {
     const [username, setUsername] = useState(null);
     const [alertStatus, setAlertStatus] = useState(false);
     const [timerStart, setTimerStart] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const doLogin = async () => {
         try {
@@ -61,6 +56,7 @@ const Login = () => {
             history.push(`/hub`);
         } catch (error) {
             setAlertStatus(true);
+            setErrorMessage(error.response.data.message)
             setTimerStart(true);
             setTimerStart(false);
         }
@@ -77,10 +73,10 @@ const Login = () => {
     }
     const handleKeyDown = (e) => {
         if (e.keyCode === 13 && password && username) {
-          doLogin();
+            doLogin();
         }
-      };
-    
+    };
+
     const demoLogin = async () => {
         try {
             /* 
@@ -90,9 +86,9 @@ const Login = () => {
             const response = await api(false,false).post('/users/create', requestBody); 
             */
 
-            const r = await api(false,false).post('/users/login/guestUser');
+            const r = await api(false, false).post('/users/login/guestUser');
             console.log(r);
-            
+
             const user = new User(r.data);
             sessionStorage.setItem('token', user.token);
             sessionStorage.setItem('id', user.id);
@@ -101,6 +97,7 @@ const Login = () => {
             history.push(`/hub`);
         } catch (error) {
             setAlertStatus(true);
+            setErrorMessage(error.response.data.message)
             setTimerStart(true);
             setTimerStart(false);
         }
@@ -143,21 +140,21 @@ const Login = () => {
                         </Button>
                     </Link>
                     <Box sx={{paddingTop: "10px"}}>
-                    <Button
-                        width="100%"
-                        style={{backgroundColor: "red"}}
-                        onClick={() => demoLogin()}
+                        <Button
+                            width="100%"
+                            style={{backgroundColor: "red"}}
+                            onClick={() => demoLogin()}
                         >
                             Demo Login
                         </Button>
-                        </Box>
+                    </Box>
                 </div>
             </div>
             <div className="login popup-message" >
             {alertStatus && (
                 <Alert severity="error" onClose={handleClose} >
                     <AlertTitle>Login failed</AlertTitle>
-                    You have entered an invalid username or password - <strong>try again!</strong>
+                    {errorMessage} - <strong>try again!</strong>
                 </Alert>
             )}
             </div>

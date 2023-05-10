@@ -2,7 +2,7 @@ import { Spinner } from "components/ui/Spinner";
 import { handleError, api } from "helpers/api";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Box, Button, Grid, ListItemButton, Typography } from "@mui/material";
+import { Box, Grid, ListItemButton, Typography } from "@mui/material";
 import "styles/views/Leaderboard.scss";
 import Item from "components/ui/Item";
 import * as React from 'react';
@@ -15,6 +15,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import {DataGrid, useGridApiRef} from '@mui/x-data-grid';
+import { Button } from "components/ui/Button";
+
 const { default: BaseContainer } = require("components/ui/BaseContainer")
 const Player = ({user, index}) => {
     return (
@@ -231,7 +233,8 @@ const Leaderboard = () => {
                                 color:"white",
                                 pl:"0px",
                                 width:"11%",
-                                marginRight:"1px"
+                                marginRight:"1px",
+                                boxShadow:"none"
 
                             }}>
                                 Rank
@@ -243,7 +246,8 @@ const Leaderboard = () => {
                                 pl:"0px",
                                 width:"60%",
                                 textAlign:"left",
-                                marginLeft:"0"
+                                marginLeft:"0",
+                                boxShadow:"none"
                             }}>
                                 Username
                             </Item>
@@ -251,7 +255,8 @@ const Leaderboard = () => {
                                 marginRight:"2px",
                                 textTransform: 'uppercase',
                                 fontWeight:"900",
-                                color:"white"
+                                color:"white",
+                                boxShadow:"none"
                             }}>
                                 Total Score
                             </Item>
@@ -304,38 +309,33 @@ const Leaderboard = () => {
           <Button onClick={handleClose}>Back</Button>
         </DialogActions>
       </Dialog>
-                    <Grid container spacing={3}
-                    sx={{
-                        justifyContent: "space-between"
-                    }}>
-                        <Grid item xs={3} sx={{width:"120px"}}>
-                            <Item>
+                    <Grid container spacing={3} sx={{justifyContent:"space-between"}}>
+                        <Grid sx={{marginLeft:"3.5%", paddingTop:"4%", marginTop:"2%"}}>
+
                                 <Button style={{background: "#d9e0d9", color:"black"}}
                                     onClick={() => moveToMe()}
                                     >find me
                                 </Button>
-                            </Item>
+
                         </Grid>
-                        <Grid item xs={3}>
-                            <Item>
+                        <Grid sx={{ paddingTop:"4%", marginTop:"2%"}}>
+
                                 <Button style={{background: "#d9e0d9", color:"black"}}
                                     onClick={() => moveToTop()}
                                     >Go to Top
                                 </Button>
-                            </Item>
+
                         </Grid>
-                        <Grid item xs={3} sx={{
-                            justifyContent: "right"
+                        <Grid sx={{
+                            paddingTop:"4%", marginTop:"2%"
                         }}>
-                            <Item sx={{
-                            justifyContent: "right"
-                        }}>
-                                <Button style={{background: "#d9e0d9", color:"black"}}
+
+                                <Button style={{background: "#d9e0d9", color:"black", marginLeft:"auto", marginRight:"0"}}
                                     onClick={() => Hub()}
                                 >
                                 Hub
                                 </Button>
-                            </Item>
+
                     </Grid>
                 </Grid>
             </Grid>
