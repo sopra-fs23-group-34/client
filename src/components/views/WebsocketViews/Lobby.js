@@ -15,6 +15,8 @@ import { api } from 'helpers/api';
 import {  VariableSizeList } from 'react-window';
 import HelpPage from 'components/ui/HelpPage';
 import { useMediaQuery } from "@material-ui/core";
+import Tooltip from '@mui/material/Tooltip';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 const Player = ({user}) => (
     
@@ -31,7 +33,7 @@ Player.propTypes = {
 const Lobby = () => {
     // use react-router-dom's hook to access the history
     const maxMediumSize = useMediaQuery("(max-width: 600px)");
-    
+    const [openTooltip, setOpenTooltip] = useState(false);
     const history = useHistory();
     const {ref, msg} = useContext(WebsocketWrapper);
     const [roundLimit, setRoundLimit] = useState(5);
@@ -115,6 +117,15 @@ function renderTop(props) {
           console.log(error);
         }
       };
+
+      const handleCopyToClipboardOpen = () => {
+        setOpenTooltip(true)
+        navigator.clipboard.writeText(sessionStorage.getItem('gameCode'))
+        
+      }
+      const handleCopyToClipboardClose = () => {
+        setOpenTooltip(false)
+      }
     // the effect hook can be used to react to change in your component.
     // in this case, the effect hook is only run once, the first time the component is mounted
     // this can be achieved by leaving the second argument an empty array.
@@ -126,9 +137,9 @@ function renderTop(props) {
             <div className="game" style={{
                 width: "100%"
             }}>
-                <Grid container spacing={maxMediumSize ?  1 : 8}>
-                    <Grid item xs={12} sm={sessionStorage.getItem('host') === 'true' ? 6: 12}>
-                    <Typography align='right'>User count: {users.length}</Typography>
+                <Grid container className='lobby grid'  spacing={maxMediumSize ?  1 : 8} >
+                    <Grid className='lobby item' sx={{paddingTop:0}} item  xs={12}  sm={sessionStorage.getItem('host') === 'true' ? 6: 12} >
+                    <Typography className='lobby user-list'>User count: {users.length}</Typography>
                         <VariableSizeList
                             align='right'
                             height={maxMediumSize ?  160 : 400}
@@ -141,7 +152,7 @@ function renderTop(props) {
                     </VariableSizeList>
                     </Grid>
                     {sessionStorage.getItem('host') === 'true' && (
-                        <Grid item xs={12} sm={6} >
+                        <Grid item xs={12} sm={6} className='lobby grid'>
                             <h2>Timer Length</h2>
                             <Slider
                                 value={timerLength}
@@ -222,7 +233,24 @@ function renderTop(props) {
             <h2> Game Lobby </h2>
             <Typography color={"error"}>{errorMessage}</Typography>
             <p className="lobby paragraph">
-                Lobby Key: {sessionStorage.getItem('gameCode')}
+                Lobby Code: {sessionStorage.getItem('gameCode')}
+            <Grid item>   
+            <ClickAwayListener onClickAway={handleCopyToClipboardClose}>
+            <div>
+              <Tooltip
+
+                onClose={handleCopyToClipboardClose}
+                open={openTooltip}
+                disableFocusListener
+                placement="right-top"
+                disableTouchListener
+                title="Copied"
+              >
+                <Button style={{margin:"2%"}} onClick={() => handleCopyToClipboardOpen}>Copy Lobby Code</Button>
+              </Tooltip>
+                </div>
+          </ClickAwayListener>
+          </Grid>
             </p>
             {hostview}
         </BaseContainer>
