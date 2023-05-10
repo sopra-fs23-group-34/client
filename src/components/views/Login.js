@@ -145,7 +145,7 @@ const Login = () => {
                             style={{backgroundColor: "red"}}
                             onClick={() => demoLogin()}
                         >
-                            Demo Login
+                            Login as a guest
                         </Button>
                     </Box>
                 </div>
