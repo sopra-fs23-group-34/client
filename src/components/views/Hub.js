@@ -63,7 +63,7 @@ const Hub = () => {
     const maxMediumSize = useMediaQuery("(max-width: 600px)");
     return (
         <BaseContainer margin="auto" className="hub container">
-            <img src={TitleGif} alt={'titleAnmimation'}/>
+            <img src={TitleGif} alt={'titleAnmimation'} style={{width: '100%', height: 'auto'}}/>
             <Typography variant={maxMediumSize ?  "h7" : "h5"} sx={{
                 textShadow: "2px 2px #000000",
                 textAlign: "center"
