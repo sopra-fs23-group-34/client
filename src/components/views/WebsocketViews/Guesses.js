@@ -6,7 +6,8 @@ import {Slider} from "@mui/material";
 import {useHistory} from "react-router-dom";
 import useSound from 'use-sound';
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import Lobby from './Lobby';
+import { config } from './Lobby';
 
 const Guesses = () => {
     const history = useHistory();
@@ -23,11 +24,13 @@ const Guesses = () => {
     const [update, setUpdate] = useState(0);
     const [playSetSound] = useSound('http://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3', {volume: 0.5});
     const [playTimeRunningOutSound] = useSound('http://www.euskaljakintza.com/ariketak/recursos/misc196.wav', {volume: 0.5});
+    const roundLimit = sessionStorage.getItem("roundLimit");
+    const roundCount = sessionStorage.getItem("roundCount");
 
     const handleRoundScoreStart = (msg) => {
         setRoundScoreStart(msg.content);
     }
-
+    console.log(roundCount, roundLimit)
     const handleFood = () => {
         setFoodName(msg.content["name"]);
         setFoodLink(msg.content["imageLink"]);
@@ -114,7 +117,11 @@ const Guesses = () => {
         <BaseContainer>
             <div className="slider main">
                 <div className='slider form'>
-                    <h2 style={{marginBottom: 0}}>{timer}</h2>
+                    <div style={{clear:"both"}}>
+                    <h2 style={{marginBottom: 0, float: "left"}}>{timer}</h2>
+                    <h2 style={{float: "right"}}>Round {roundCount}/{roundLimit}</h2>
+                    </div>
+                    
                     <div className='slider imageForm'>
                         {loading ? (
                                 <div className="loading-spinner"></div>

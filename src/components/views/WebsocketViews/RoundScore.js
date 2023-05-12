@@ -18,17 +18,23 @@ const RoundScore = () => {
     const [ranking, setRanking] = useState([]);
     const [data, setData] = useState([]);
     const [solutionValues, setSolutionValues] = useState([])
-
+    const roundLimit = sessionStorage.getItem("roundLimit");
+    const roundCount = sessionStorage.getItem("roundCount");
 
     const handleRanking = (msg) => {
         setRanking(msg.content);
     }
 
     const handleRoundStart = () => {
+        sessionStorage.setItem("roundCount", parseInt(sessionStorage.getItem("roundCount"))+1);
         history.push('/Guesses');
     }
 
     const handleFinalScoreStart = () => {
+        sessionStorage.removeItem('gameCode');
+        sessionStorage.removeItem('host');
+        sessionStorage.removeItem('roundCount');
+        sessionStorage.removeItem('roundLimit');
         history.push('/FinalScore');
     }
 
@@ -150,6 +156,9 @@ const RoundScore = () => {
     return (
         <BaseContainer>
             <div className='score container'>
+            <div style={{width: "95%"}}>
+                    <h2 style={{float: "right"}}>Round {roundCount}/{roundLimit}</h2>
+                    </div>
                 <div className='score form'>
                     <h1 style={{textAlign: 'center', marginBottom: '0'}}>Round Overview</h1>
                     <h5 style={{textAlign: 'center', marginTop: '0'}}>It will automatically continues in a few seconds</h5>

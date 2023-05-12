@@ -40,8 +40,6 @@ const FinalScore = () => {
     }
 
     const leaveGame = () => {
-        sessionStorage.removeItem('gameCode');
-        sessionStorage.removeItem('host');
         history.push('/hub');
     }
 

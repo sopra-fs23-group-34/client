@@ -109,6 +109,8 @@ function renderTop(props) {
         const gameCode = sessionStorage.getItem("gameCode");
         const token = sessionStorage.getItem("token");
         const userId = sessionStorage.getItem("id");
+        sessionStorage.setItem("roundLimit", roundLimit);
+        sessionStorage.setItem("roundCount", 1);
         try {
           await api(token, userId).post("/lobbys/startGame/" + gameCode,gameConfig);
           history.push("/guesses");
