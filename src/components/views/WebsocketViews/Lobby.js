@@ -37,7 +37,7 @@ const Lobby = () => {
     const history = useHistory();
     const {ref, msg} = useContext(WebsocketWrapper);
     const [roundLimit, setRoundLimit] = useState(5);
-    const [foodCategory, setFoodCategory] = useState("");
+    const [foodCategory, setFoodCategory] = useState("All");
     const [timerLength, setTimerLength] = useState(20);
     const handleChangeCategory = (event) => {
         setFoodCategory(event.target.value);

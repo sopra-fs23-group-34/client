@@ -20,7 +20,7 @@ import { Button } from "components/ui/Button";
 const { default: BaseContainer } = require("components/ui/BaseContainer")
 const Player = ({user, index}) => {
     return (
-      <div className='player container' data-status={index}>
+      <div className={`player container ${user.user_id === parseInt(sessionStorage.getItem("id")) ? "highlighted-row" : "row"}`} data-status={index}>
             <div className="player placing">
                 {index + 1}
             </div>
