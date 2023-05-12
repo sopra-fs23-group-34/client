@@ -85,9 +85,6 @@ function renderTop(props) {
         if (msg && msg.topic === "players") {
             setUsers(msg.content);
         }
-        if (msg && msg.topic === "RoundStart") {
-            history.push("/guesses");
-        }
         if (msg && msg.topic === "error" && msg.content === "host_left") {
             setErrorMessage("The host left the lobby, you will be redirected to the hub.");
             sessionStorage.removeItem('gameCode');
@@ -113,7 +110,6 @@ function renderTop(props) {
         sessionStorage.setItem("roundCount", 1);
         try {
           await api(token, userId).post("/lobbys/startGame/" + gameCode,gameConfig);
-          history.push("/guesses");
         } catch (error) {
           //not needed to display anything because if you are host and you press start it should work
           console.log(error);

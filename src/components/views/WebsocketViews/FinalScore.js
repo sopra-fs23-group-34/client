@@ -33,6 +33,7 @@ const FinalScore = () => {
     };
 
     function handleMessage(msg) {
+        console.log(msg);
         const handler = topicHandlers[msg.topic];
         if (handler) {
             handler(msg);
