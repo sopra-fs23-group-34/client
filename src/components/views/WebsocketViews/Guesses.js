@@ -16,9 +16,7 @@ const Guesses = () => {
     const [fat, setFat] = useState(50);
     const [carbs, setCarbs] = useState(50);
     const [timer, setTimer] = useState("");
-    const [foodName, setFoodName] = useState("");
-    const [foodLink, setFoodLink] = useState("");
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [calories, setCalories] = useState(400);
     const [roundScoreStart, setRoundScoreStart] = useState(false);
     const [update, setUpdate] = useState(0);
@@ -32,8 +30,8 @@ const Guesses = () => {
     }
     console.log(roundCount, roundLimit)
     const handleFood = () => {
-        setFoodName(msg.content["name"]);
-        setFoodLink(msg.content["imageLink"]);
+        sessionStorage.setItem("foodName", msg.content["name"]);
+        sessionStorage.setItem("foodLink", msg.content["imageLink"]);
         setLoading(false);
     }
 
@@ -58,9 +56,7 @@ const Guesses = () => {
     }
 
     useEffect(() => {
-
         handleMessage(msg);
-
     }, [msg, history]);
 
 
@@ -85,7 +81,6 @@ const Guesses = () => {
                 "calories": calories
             }
         }));
-        history.push("/roundscore");
     }
 
     const handleChange = () => {
@@ -126,12 +121,12 @@ const Guesses = () => {
                         {loading ? (
                                 <div className="loading-spinner"></div>
                         ) : (
-                            <LazyLoadImage src={foodLink} alt="food" className="slider image" />
+                            <LazyLoadImage src={sessionStorage.getItem("foodLink")} alt="food" className="slider image" />
                         )}
                     </div>
                 </div>
 
-                <h1 className="slider subtitle">{foodName}</h1>
+                <h1 className="slider subtitle">{sessionStorage.getItem("foodName")}</h1>
                 <div className="slider form">
                     <div className="slider text">
                         <h2 className="slider title">Protein</h2>

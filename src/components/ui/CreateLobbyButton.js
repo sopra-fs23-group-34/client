@@ -14,6 +14,7 @@ export default function CreateLobbyButton(props) {
       await api(false, userId).post(
         "/lobbys/join/" + response.data + "/" + userId
       );
+      sessionStorage.setItem("page", "lobby");
       history.push({
         pathname: "/lobby",
         state: {

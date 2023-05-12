@@ -27,7 +27,6 @@ const RoundScore = () => {
 
     const handleRoundStart = () => {
         sessionStorage.setItem("roundCount", parseInt(sessionStorage.getItem("roundCount"))+1);
-        history.push('/Guesses');
     }
 
     const handleFinalScoreStart = () => {
@@ -35,7 +34,6 @@ const RoundScore = () => {
         sessionStorage.removeItem('host');
         sessionStorage.removeItem('roundCount');
         sessionStorage.removeItem('roundLimit');
-        history.push('/FinalScore');
     }
 
     const handleRoundScore = (msg) => {
