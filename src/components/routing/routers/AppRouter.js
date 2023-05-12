@@ -13,6 +13,7 @@ import RoundScore from "components/views/WebsocketViews/RoundScore";
 import FinalScore from "components/views/WebsocketViews/FinalScore";
 import Leaderboard from "components/views/Leaderboard";
 import Stats from "components/views/Stats";
+import EasterEgg from "components/views/easterEgg";
 
 /**
  * Main router of your application.
@@ -47,6 +48,9 @@ const AppRouter = () => {
             <Login/>
           </LoginGuard>
         </Route>
+        <Route exact path="/easteregg">
+            <EasterEgg/>
+         </Route>
         <Route exact path="/register">
           <LoginGuard>
             <Register/>
