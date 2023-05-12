@@ -84,7 +84,7 @@ const Profile = () => {
             console.log(guestUser);
             if (guestUser == "true") {
                 // raise error because profile of Guest User cant be changed
-                console.log("guets User profile change denied");
+                console.log("guest User profile change denied");
             }
             const requestBody = JSON.stringify({username, email, bio});
             await api(sessionStorage.getItem('token'), false).put('/users/update/' + id, requestBody);
