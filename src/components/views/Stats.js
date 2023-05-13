@@ -1,5 +1,6 @@
-import { Box, Button, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import BaseContainer from 'components/ui/BaseContainer';
+import { Button } from 'components/ui/Button';
 import Item from 'components/ui/Item';
 import { api, handleError } from 'helpers/api';
 import * as React from 'react';
@@ -12,6 +13,7 @@ const Stats = () => {
     const [userstats, setUserstats] = React.useState([]);
     const history = useHistory();
     const id = sessionStorage.getItem("id");
+
     function Hub() {
         history.push("/hub");
     }
@@ -54,16 +56,18 @@ const Stats = () => {
             <Item sx={{
                 fontWeight:"700",
                 fontSize:21,
-                color: "whitesmoke"
+                color: "whitesmoke",
+                boxShadow:"none"
             }}>Statistics</Item>
-            <Grid container spacing={2} sx={{
+            <Grid container spacing={0} sx={{
                     width: "60%",
                     margin: "auto",
-                    alignItems: "normal",
-                    alignContent: "normal"
+                    alignItems: "stretch",
+                    alignContent: "normal",
+                    justifyContent: "space-around"
                 }}>
-                <Box item xs={3} sx={{
-                    width: "24%",
+                <Grid item xs={4} sm={3} md={2.5} sx={{
+
                     border: 1,
                     borderRadius: 2,
                     flexDirection: "column",
@@ -72,24 +76,11 @@ const Stats = () => {
                     margin: "3px",
                     bgcolor: "grey"
                 }}>
-                    <Item sx={{
-                        color:"white",
-                        bgcolor: "grey",
-                        paddingBottom: "1px",
-                        marginBottom: "0px",
-                        fontSize: 17,
-                        fontWeight: "800"
-                    }}>{userstats.gamesPlayed}</Item>
-                    <Item sx={{
-                        color:"#97ABFF",
-                        bgcolor: "grey",
-                        paddingTop: "1px",
-                        marginTop: "0px",
-                        fontSize: 13
-                    }}>Games played</Item>
-                </Box>
-                <Box item xs={3} sx={{
-                    width: "24%",
+                    <Item className='stats number'>{userstats.gamesPlayed}</Item>
+                    <Item className='stats title'>Games played</Item>
+                </Grid>
+                <Grid item xs={4} sm={3} md={2.5} sx={{
+
                     border: 1,
                     borderRadius: 2,
                     flexDirection: "column",
@@ -98,24 +89,11 @@ const Stats = () => {
                     margin: "3px",
                     bgcolor: "grey"
                 }}>
-                    <Item sx={{
-                        color:"white",
-                        bgcolor: "grey",
-                        paddingBottom: "1px",
-                        marginBottom: "0px",
-                        fontSize: 17,
-                        fontWeight: "800"
-                    }}>{userstats.gamesWon}</Item>
-                    <Item sx={{
-                        color:"#97ABFF",
-                        bgcolor: "grey",
-                        paddingTop: "1px",
-                        marginTop: "0px",
-                        fontSize: 13
-                    }}>Games won</Item>
-                </Box>
-                <Box item xs={3} sx={{
-                    width: "24%",
+                    <Item className='stats number'>{userstats.gamesWon}</Item>
+                    <Item className='stats title'>Games won</Item>
+                </Grid>
+                <Grid item xs={4} sm={3} md={2.5} sx={{
+
                     border: 1,
                     borderRadius: 2,
                     flexDirection: "column",
@@ -124,24 +102,11 @@ const Stats = () => {
                     margin: "3px",
                     bgcolor: "grey"
                 }}>
-                    <Item sx={{
-                        color:"white",
-                        bgcolor: "grey",
-                        paddingBottom: "1px",
-                        marginBottom: "0px",
-                        fontSize: 17,
-                        fontWeight: "800"
-                    }}>{userstats.winRatio}</Item>
-                    <Item sx={{
-                        color:"#97ABFF",
-                        bgcolor: "grey",
-                        paddingTop: "1px",
-                        marginTop: "0px",
-                        fontSize: 13
-                    }}>Win ratio</Item>
-                </Box>
-                <Box item xs={3} sx={{
-                    width: "24%",
+                    <Item className='stats number'>{userstats.winRatio}</Item>
+                    <Item className='stats title'>Win ratio</Item>
+                </Grid>
+                <Grid item xs={4} sm={3} md={2.5} sx={{
+                    paddingLeft: "0px",
                     border: 1,
                     borderRadius: 2,
                     flexDirection: "column",
@@ -150,33 +115,21 @@ const Stats = () => {
                     margin: "3px",
                     bgcolor: "grey"
                 }}>
-                    <Item sx={{
-                        color:"white",
-                        bgcolor: "grey",
-                        paddingBottom: "1px",
-                        marginBottom: "0px",
-                        fontSize: 17,
-                        fontWeight: "800"
-                    }}>{userstats.highScore}</Item>
-                    <Item sx={{
-                        color:"#97ABFF",
-                        bgcolor: "grey",
-                        paddingTop: "1px",
-                        marginTop: "0px",
-                        fontSize: 13
-                    }}>Highscore</Item>
-                </Box>
+                    <Item className='stats number'>{userstats.highScore}</Item>
+                    <Item className='stats title'>Highscore</Item>
+                </Grid>
             </Grid>
             <Grid container spacing={3} sx={{ justifyContent: "right"}}>
                 <Grid item xs={2}>
-                    <Item>
+
                         <Button
+                        width="100%"
                         style={{background: "#d9e0d9", color:"black"}}
                         onClick={() => Hub()}
                         >
                             Hub
                         </Button>
-                    </Item>
+
                 </Grid>
             </Grid>
         </div>

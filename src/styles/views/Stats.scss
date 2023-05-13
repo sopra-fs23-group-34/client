@@ -18,6 +18,23 @@
         box-shadow: $dropShadow;
         width: 100%;
     }
+    &.title {
+        color: #97ABFF;
+        background: #808080;
+        padding-top: 1px;
+        margin-top: 0px;
+        font-size: 13;
+        box-shadow: none;
+    }
+    &.number {
+        color: white;
+        background: #808080;
+        padding-top: 1px;
+        margin-top: 0px;
+        font-size: 13;
+        font-weight: 800;
+        box-shadow: none;
+    }
     &.user-list {
         list-style: none;
         padding-left: 0;
