@@ -66,55 +66,19 @@ const Stats = () => {
                     alignContent: "normal",
                     justifyContent: "space-around"
                 }}>
-                <Grid item xs={4} sm={3} md={2.5} sx={{
-
-                    border: 1,
-                    borderRadius: 2,
-                    flexDirection: "column",
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    margin: "3px",
-                    bgcolor: "grey"
-                }}>
+                <Grid item xs={4} sm={3} md={2.5} className='stats float'>
                     <Item className='stats number'>{userstats.gamesPlayed}</Item>
                     <Item className='stats title'>Games played</Item>
                 </Grid>
-                <Grid item xs={4} sm={3} md={2.5} sx={{
-
-                    border: 1,
-                    borderRadius: 2,
-                    flexDirection: "column",
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    margin: "3px",
-                    bgcolor: "grey"
-                }}>
+                <Grid item xs={4} sm={3} md={2.5} className='stats float'>
                     <Item className='stats number'>{userstats.gamesWon}</Item>
                     <Item className='stats title'>Games won</Item>
                 </Grid>
-                <Grid item xs={4} sm={3} md={2.5} sx={{
-
-                    border: 1,
-                    borderRadius: 2,
-                    flexDirection: "column",
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    margin: "3px",
-                    bgcolor: "grey"
-                }}>
+                <Grid item xs={4} sm={3} md={2.5} className='stats float'>
                     <Item className='stats number'>{userstats.winRatio}</Item>
                     <Item className='stats title'>Win ratio</Item>
                 </Grid>
-                <Grid item xs={4} sm={3} md={2.5} sx={{
-                    paddingLeft: "0px",
-                    border: 1,
-                    borderRadius: 2,
-                    flexDirection: "column",
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    margin: "3px",
-                    bgcolor: "grey"
-                }}>
+                <Grid item xs={4} sm={3} md={2.5} className='stats float'>
                     <Item className='stats number'>{userstats.highScore}</Item>
                     <Item className='stats title'>Highscore</Item>
                 </Grid>

@@ -1,59 +1,78 @@
 @import 'styles/theme';
-
 .finalScore {
-  &.container {
-    margin-top: 2em;
-    min-height: 300px;
-    /* we include the center mixin defined in _theme.scss and save three duplicate lines :) */
-    @include center;
-    flex-direction: column;
-  }
-  &.form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    max-width: 36em;
-    height: auto;
-    max-height: 700px;
-    font-size: 16px;
-    font-weight: 300;
-    padding: 35px;
-    border-radius: 0.75em;
-    background-color: $background;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    box-shadow: $dropShadow;
-  }
-  &.field {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  &.input {
-    height: 35px;
-    padding-left: 15px;
-    margin-left: -4px;
-    border: none;
-    border-radius: 0.75em;
-    margin-bottom: 20px;
-    background: transparentize(white, 0.85);
-    color: $textColor;
-  }
-  &.label {
-    color: $textColor;
-    margin-bottom: 10px;
-    text-transform: lowercase;
-    font-weight: 300;
-  }
-  &.button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 2em;
-  }
-  &.popup-message {
-    margin-top: 2em;
-    /* we include the center mixin defined in _theme.scss and save three duplicate lines :) */
-    @include center;
-    flex-direction: column;
-  }
+    &.container {
+        margin-top: 2em;
+        min-height: 300px;
+        /* we include the center mixin defined in _theme.scss and save three duplicate lines :) */
+        @include center;
+        flex-direction: column;
+    }
+    &.form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        max-width: 36em;
+        height: auto;
+        max-height: 700px;
+        font-size: 16px;
+        font-weight: 300;
+        padding: 35px;
+        border-radius: 0.75em;
+        background-color: $background;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        box-shadow: $dropShadow;
+    }
+    &.field {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    /*
+    display: 'flex',
+                position: 'center',
+                justifyContent: 'center',
+                alignItems: 'center',
+                margin: 10,
+                width: '100%'
+                */
+    &.table {
+        display: flex;
+        position: center;
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+        width: "100%";
+    }
+    &.input {
+        height: 35px;
+        padding-left: 15px;
+        margin-left: -4px;
+        border: none;
+        border-radius: 0.75em;
+        margin-bottom: 20px;
+        background: transparentize(white, 0.85);
+        color: $textColor;
+    }
+    &.label {
+        color: $textColor;
+        margin-bottom: 10px;
+        text-transform: lowercase;
+        font-weight: 300;
+    }
+    &.button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 2em;
+    }
+    &.popup-message {
+        margin-top: 2em;
+        /* we include the center mixin defined in _theme.scss and save three duplicate lines :) */
+        @include center;
+        flex-direction: column;
+    }
+    & h1,
+    h2 {
+        text-align: center;
+    }
 }
