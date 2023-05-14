@@ -40,8 +40,13 @@ const FinalScore = () => {
         }
     }
 
+
     const leaveGame = () => {
         sessionStorage.removeItem('inGame');
+        sessionStorage.removeItem('gameCode');
+        sessionStorage.removeItem('host');
+        sessionStorage.removeItem('roundCount');
+        sessionStorage.removeItem('roundLimit');
         history.push('/hub');
     }
 

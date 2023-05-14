@@ -29,12 +29,7 @@ const RoundScore = () => {
         sessionStorage.setItem("roundCount", parseInt(sessionStorage.getItem("roundCount"))+1);
     }
 
-    const handleFinalScoreStart = () => {
-        sessionStorage.removeItem('gameCode');
-        sessionStorage.removeItem('host');
-        sessionStorage.removeItem('roundCount');
-        sessionStorage.removeItem('roundLimit');
-    }
+
 
     const handleRoundScore = (msg) => {
         setData(msg.content)
@@ -53,7 +48,6 @@ const RoundScore = () => {
         "RoundScore": handleRoundScore,
         "GameScore": handleRanking,
         "RoundStart": handleRoundStart,
-        "FinalScoreStart": handleFinalScoreStart
     };
 
     function handleMessage(msg) {
