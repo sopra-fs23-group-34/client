@@ -24,6 +24,8 @@ export default function FormDialog(props) {
     try {
       await api(token, userId).post("/lobbys/join/" + lobbyKey + "/" + userId);
       sessionStorage.setItem("gameCode", lobbyKey);
+      sessionStorage.setItem("page", "lobby");
+      sessionStorage.setItem("inGame", "true");
       history.push({
         pathname: "/lobby",
         state: {

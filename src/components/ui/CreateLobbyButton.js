@@ -15,6 +15,7 @@ export default function CreateLobbyButton(props) {
         "/lobbys/join/" + response.data + "/" + userId
       );
       sessionStorage.setItem("page", "lobby");
+      sessionStorage.setItem("inGame", "true");
       history.push({
         pathname: "/lobby",
         state: {

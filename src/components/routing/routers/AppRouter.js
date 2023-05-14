@@ -14,6 +14,7 @@ import FinalScore from "components/views/WebsocketViews/FinalScore";
 import Leaderboard from "components/views/Leaderboard";
 import Stats from "components/views/Stats";
 import EasterEgg from "components/views/easterEgg";
+import { InGameGuard } from "../routeProtectors/InGameGuard";
 
 /**
  * Main router of your application.
@@ -70,6 +71,7 @@ const AppRouter = () => {
           <Redirect to="/hub"/>
         </Route>
         <Route path="/*">
+        <InGameGuard>
           <WebsocketWrapperComponent> 
             <Route path="/lobby">
                 <Lobby/>
@@ -82,8 +84,9 @@ const AppRouter = () => {
               </Route>
               <Route path="/finalScore">
                 <FinalScore/>
-            </Route>
+              </Route>
           </WebsocketWrapperComponent>
+          </InGameGuard>
         </Route>
       </Switch>
     </BrowserRouter>

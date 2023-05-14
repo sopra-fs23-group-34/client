@@ -41,11 +41,11 @@ const FinalScore = () => {
     }
 
     const leaveGame = () => {
+        sessionStorage.removeItem('inGame');
         history.push('/hub');
     }
 
     useEffect(() => {
-
         handleMessage(msg);
 
     }, [msg, history]);
