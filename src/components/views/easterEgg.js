@@ -1,23 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {api} from 'helpers/api';
-import User from 'models/User';
-import {Link, useHistory} from 'react-router-dom';
-import {Button} from 'components/ui/Button';
+import React from 'react';
 import 'styles/views/easterEgg.scss';
 import BaseContainer from "components/ui/BaseContainer";
-import PropTypes from "prop-types";
-import {Alert, AlertTitle, Box} from "@mui/material";
+import {Box} from "@mui/material";
 import { QRCodeCanvas } from "qrcode.react";
-
-
-const FormField = props => {
-    return (
-        <div className="easterEgg field">
-            <label className="easterEgg label">
-            </label>
-        </div>
-    );
-};
 
 const EasterEgg = () => {
 
