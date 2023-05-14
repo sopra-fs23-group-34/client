@@ -72,10 +72,12 @@
     }
     &.username {
         font-weight: 500;
+        margin-left: 0;
         color: $accent;
         width: 60%;
         overflow: hidden;
         text-overflow: ellipsis;
+        font-family: $fontMono;
     }
     &.totalscore {
         margin-left: auto;
@@ -87,7 +89,11 @@
         margin-left: 2px;
         font-family: $fontMono;
         font-weight: 800;
-        width: 10%;
+        min-width: max-content;
+        margin-right: 0;
+        margin-left: 0;
+        width: 16%;
+        text-align: center;
     }
 }
 

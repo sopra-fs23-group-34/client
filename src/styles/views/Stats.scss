@@ -49,62 +49,61 @@
     h2 {
         margin: 0.5em 0;
     }
-}
-
-.player {
-    &.container[data-status="0"] {
-        margin: 0.5em 0;
-        width: 100%;
-        padding: 10px;
-        border-radius: $borderRadius;
-        display: flex;
-        align-items: center;
-        background: lighten(rgb(248, 178, 0), 5);
-    }
-    &.container[data-status="1"] {
-        margin: 0.5em 0;
-        width: 100%;
-        padding: 10px;
-        border-radius: $borderRadius;
-        display: flex;
-        align-items: center;
-        background: lighten(rgb(207, 204, 204), 5);
-    }
-    &.container[data-status="2"] {
-        margin: 0.5em 0;
-        width: 100%;
-        padding: 10px;
-        border-radius: $borderRadius;
-        display: flex;
-        align-items: center;
-        background: lighten(rgb(187, 104, 56), 5);
-    }
-    &.container {
-        margin: 0.5em 0;
-        width: 100%;
-        padding: 10px;
-        border-radius: $borderRadius;
-        display: flex;
-        align-items: center;
-        background: lighten($background, 5);
-    }
-    &.username {
-        font-weight: 500;
-        color: $accent;
-        width: 60%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    &.totalscore {
-        margin-left: auto;
-        margin-right: 10px;
-        font-family: $fontMono;
-        font-weight: 500;
-    }
-    &.placing {
-        margin-left: 2px;
-        font-family: $fontMono;
-        font-weight: 800;
-        width: 10%;
+    .player {
+        &.container[data-status="0"] {
+            margin: 0.5em 0;
+            width: 100%;
+            padding: 10px;
+            border-radius: $borderRadius;
+            display: flex;
+            align-items: center;
+            background: lighten(rgb(248, 178, 0), 5);
+        }
+        &.container[data-status="1"] {
+            margin: 0.5em 0;
+            width: 100%;
+            padding: 10px;
+            border-radius: $borderRadius;
+            display: flex;
+            align-items: center;
+            background: lighten(rgb(207, 204, 204), 5);
+        }
+        &.container[data-status="2"] {
+            margin: 0.5em 0;
+            width: 100%;
+            padding: 10px;
+            border-radius: $borderRadius;
+            display: flex;
+            align-items: center;
+            background: lighten(rgb(187, 104, 56), 5);
+        }
+        &.container {
+            margin: 0.5em 0;
+            width: 100%;
+            padding: 10px;
+            border-radius: $borderRadius;
+            display: flex;
+            align-items: center;
+            background: lighten($background, 5);
+        }
+        &.username {
+            font-weight: 500;
+            color: $accent;
+            width: 60%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        &.totalscore {
+            margin-left: auto;
+            margin-right: 10px;
+            font-family: $fontMono;
+            font-weight: 500;
+        }
+        &.placing {
+            margin-left: 2px;
+            font-family: $fontMono;
+            font-weight: 800;
+            width: 10%;
+        }
     }
 }
