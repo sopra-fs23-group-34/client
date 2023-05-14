@@ -13,10 +13,15 @@ import Item from "components/ui/Item";
 import { useMediaQuery } from "@material-ui/core";
 import { Typography } from "@mui/material";
 import TitleGif from '../../resources/TitleGif.gif';
+import { useEffect } from "react";
 
 
 export function BasicGrid() {
     const maxMediumSize = useMediaQuery("(max-width: 600px)");
+
+    useEffect(() => {
+        sessionStorage.removeItem("inGame");
+    }, []);
     
     return (
         <Box sx={{flexGrow: 1 , width:maxMediumSize ?  "100%" : "100%"}} >

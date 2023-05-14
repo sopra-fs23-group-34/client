@@ -23,10 +23,11 @@ const FinalScore = () => {
     const [playWinSound] = useSound('http://audio.marsupialgurgle.com/audio/partyhorngood.mp3', {volume: 0.5});
 
     const handleFinalScore = (msg) => {
-        setFinalRanking(msg.content)
+        setFinalRanking(msg.content);
+        sessionStorage.setItem('finalRanking', JSON.stringify(msg.content)); 
         const keys = Object.keys(msg.content);
         setWinner(keys[0]);
-    }
+      }
 
     const topicHandlers = {
         "FinalScore": handleFinalScore
@@ -40,16 +41,24 @@ const FinalScore = () => {
         }
     }
 
-
+    
     const leaveGame = () => {
-        sessionStorage.removeItem('inGame');
+        sessionStorage.removeItem('finalRanking');
         sessionStorage.removeItem('gameCode');
         sessionStorage.removeItem('host');
         sessionStorage.removeItem('roundCount');
         sessionStorage.removeItem('roundLimit');
+        sessionStorage.removeItem('inGame');
         history.push('/hub');
     }
 
+    useEffect(() => {
+        const storedFinalRanking = localStorage.getItem('finalRanking');
+        if (storedFinalRanking) {
+          setFinalRanking(JSON.parse(storedFinalRanking));
+        }
+    }, []);
+    
     useEffect(() => {
         handleMessage(msg);
 

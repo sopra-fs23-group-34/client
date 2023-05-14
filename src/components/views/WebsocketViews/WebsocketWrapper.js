@@ -47,6 +47,7 @@ export function WebsocketWrapperComponent() {
   };
 
   const handleWebSocketConnect = () => {
+    ref.sendMessage("/app/reconnect/" + sessionStorage.getItem("gameCode") + "/" + sessionStorage.getItem("id"));
     setWebsocketConnected(true);
     updateLobbyPlayers();
   };
