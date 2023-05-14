@@ -117,11 +117,16 @@ function renderTop(props) {
       };
 
       const handleCopyToClipboardOpen = () => {
-        setOpenTooltip(true)
+        console.log("here")
         navigator.clipboard.writeText(sessionStorage.getItem('gameCode'))
+        setOpenTooltip(true)
+        console.log(openTooltip)
+        
         
       }
-      const handleCopyToClipboardClose = () => {
+      async function handleCopyToClipboardClose() {
+        await new Promise(resolve => setTimeout(resolve, 300));
+
         setOpenTooltip(false)
       }
     // the effect hook can be used to react to change in your component.
@@ -231,20 +236,17 @@ function renderTop(props) {
             <h2> Game Lobby </h2>
             <Typography color={"error"}>{errorMessage}</Typography>
             <p className="lobby paragraph">
-                Lobby Code: {sessionStorage.getItem('gameCode')}
             <Grid item>   
             <ClickAwayListener onClickAway={handleCopyToClipboardClose}>
             <div>
               <Tooltip
-
+                title={`${openTooltip ? "copied" : "copy to clipboard"}`}
+                enterDelay={500}
+                leaveDelay={500}
+                placement="right-start"
                 onClose={handleCopyToClipboardClose}
-                open={openTooltip}
-                disableFocusListener
-                placement="right-top"
-                disableTouchListener
-                title="Copied"
               >
-                <Button style={{margin:"2%"}} onClick={() => handleCopyToClipboardOpen}>Copy Lobby Code</Button>
+                <Button style={{margin:"2%"}} onClick={handleCopyToClipboardOpen}>Lobby Code: {sessionStorage.getItem('gameCode')}</Button>
               </Tooltip>
                 </div>
           </ClickAwayListener>

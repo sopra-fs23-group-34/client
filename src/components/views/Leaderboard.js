@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Box, Grid, ListItemButton, Typography } from "@mui/material";
 import "styles/views/Leaderboard.scss";
-import Item from "components/ui/Item";
 import * as React from 'react';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -66,8 +65,8 @@ const Leaderboard = () => {
       useEffect(() => {
             async function fetchData() {
                 setRows([])
-                if (user.user_id !== undefined) {
-                    const response = await api(sessionStorage.getItem('token'), sessionStorage.getItem('id')).get('/users/statistics/' + user.user_id);
+                if (user.userId !== undefined) {
+                    const response = await api(sessionStorage.getItem('token'), sessionStorage.getItem('id')).get('/users/statistics/' + user.userId);
                 setRows([
                     createData(user.username, response.data.gamesPlayed, response.data.gamesWon, response.data.winRatio, response.data.highScore)
                   ])
@@ -169,7 +168,7 @@ const Leaderboard = () => {
       }
 
     function findUser(user) {
-        return user.user_id === parseInt(sessionStorage.getItem('id'));
+        return user.userId === parseInt(sessionStorage.getItem('id'));
     }
     function moveToMe() {
         listRef.current.scrollToItem(users.indexOf(users.find(findUser)), "center")
@@ -226,40 +225,15 @@ const Leaderboard = () => {
                             display:"flex",
                             justifyContent:"flex-start"
                         }}>
-                            <Item sx={{
-                                marginLeft:"2px",
-                                textTransform: 'uppercase',
-                                fontWeight:"900",
-                                color:"white",
-                                pl:"0px",
-                                width:"11%",
-                                marginRight:"1px",
-                                boxShadow:"none"
-
-                            }}>
+                            <div className="player placing">
                                 Rank
-                            </Item>
-                            <Item sx={{
-                                textTransform: 'uppercase' ,
-                                fontWeight:"900",
-                                color:"white",
-                                pl:"0px",
-                                width:"60%",
-                                textAlign:"left",
-                                marginLeft:"0",
-                                boxShadow:"none"
-                            }}>
+                            </div>
+                            <div style={{fontWeight:800, marginLeft:"2px"}} className="player username">
                                 Username
-                            </Item>
-                            <Item sx={{
-                                marginRight:"2px",
-                                textTransform: 'uppercase',
-                                fontWeight:"900",
-                                color:"white",
-                                boxShadow:"none"
-                            }}>
+                            </div>
+                            <div style={{marginLeft:"auto", marginRight:0, fontWeight:800}} className="player totalscore">
                                 Total Score
-                            </Item>
+                            </div>
                         </Box>
                         <FixedSizeList
                         height={144}
@@ -309,10 +283,10 @@ const Leaderboard = () => {
           <Button onClick={handleClose}>Back</Button>
         </DialogActions>
       </Dialog>
-                    <Grid container spacing={3} sx={{justifyContent:"space-between"}}>
+                    <Grid container spacing={3} sx={{justifyContent:"space-between", marginTop:"0"}}>
                         <Grid sx={{marginLeft:"3.5%", paddingTop:"4%", marginTop:"2%"}}>
 
-                                <Button style={{background: "#d9e0d9", color:"black"}}
+                                <Button
                                     onClick={() => moveToMe()}
                                     >find me
                                 </Button>
@@ -320,7 +294,7 @@ const Leaderboard = () => {
                         </Grid>
                         <Grid sx={{ paddingTop:"4%", marginTop:"2%"}}>
 
-                                <Button style={{background: "#d9e0d9", color:"black"}}
+                                <Button
                                     onClick={() => moveToTop()}
                                     >Go to Top
                                 </Button>
@@ -330,7 +304,7 @@ const Leaderboard = () => {
                             paddingTop:"4%", marginTop:"2%"
                         }}>
 
-                                <Button style={{background: "#d9e0d9", color:"black", marginLeft:"auto", marginRight:"0"}}
+                                <Button style={{marginLeft:"auto", marginRight:"0"}}
                                     onClick={() => Hub()}
                                 >
                                 Hub
