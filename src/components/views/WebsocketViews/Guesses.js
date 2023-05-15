@@ -8,6 +8,8 @@ import useSound from 'use-sound';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Lobby from './Lobby';
 import { config } from './Lobby';
+import { clearStorage } from 'helpers/clearStorage';
+import { Button } from 'components/ui/Button';
 
 const Guesses = () => {
     const history = useHistory();
@@ -81,6 +83,14 @@ const Guesses = () => {
                 "calories": calories
             }
         }));
+    }
+
+    const leaveGame = () => {
+        if (ref) {
+            ref.sendMessage('/app/'+sessionStorage.getItem("gameCode") + "/" + sessionStorage.getItem("id"));
+            clearStorage();
+            history.push("/hub");
+        }
     }
 
     const handleChange = () => {
@@ -188,6 +198,10 @@ const Guesses = () => {
                         max={800}
                     />
                 </div>
+                <Button 
+                    style={{marginTop:"5px"}}
+                    onClick={leaveGame}
+                    >Leave game</Button>
             </div>
         </BaseContainer>
     );
