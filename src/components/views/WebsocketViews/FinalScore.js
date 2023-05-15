@@ -13,6 +13,7 @@ import {Link, useHistory} from "react-router-dom";
 import {Button} from "../../ui/Button";
 import 'animate.css';
 import useSound from "use-sound";
+import { clearStorage } from 'helpers/clearStorage';
 
 
 const FinalScore = () => {
@@ -43,12 +44,7 @@ const FinalScore = () => {
 
     
     const leaveGame = () => {
-        sessionStorage.removeItem('finalRanking');
-        sessionStorage.removeItem('gameCode');
-        sessionStorage.removeItem('host');
-        sessionStorage.removeItem('roundCount');
-        sessionStorage.removeItem('roundLimit');
-        sessionStorage.removeItem('inGame');
+        clearStorage();
         history.push('/hub');
     }
 
