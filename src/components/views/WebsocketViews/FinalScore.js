@@ -14,6 +14,7 @@ import {Button} from "../../ui/Button";
 import 'animate.css';
 import useSound from "use-sound";
 import { clearStorage } from 'helpers/clearStorage';
+import FinalScoreGif from "../../../resources/FinalScoreGif.gif";
 
 
 const FinalScore = () => {
@@ -109,7 +110,7 @@ const FinalScore = () => {
             <div className='finalScore container'>
                 <div className='finalScore form'>
                     {playWinSound()}
-                    <h1>Final Score</h1>
+                    <img src={FinalScoreGif} alt={'FinalScoreGif'} style={{width: '100%', height: 'auto'}}/>
                     <h2 style={{marginBottom: 0}} className="animate__animated animate__bounce animate__delay-0.5s">The Winner is:</h2>
                     <h1 style={{marginTop: 0, color: 'gold'}} className="animate__animated animate__fadeIn animate__delay-2s">{winner}</h1>
                     {rankingTable}
