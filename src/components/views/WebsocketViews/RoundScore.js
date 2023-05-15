@@ -10,11 +10,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useHistory} from 'react-router-dom';
-
+import { Button } from 'components/ui/Button';
+import { clearStorage } from 'helpers/clearStorage';
+import { Box, Grid } from '@mui/material';
+import { api } from 'helpers/api';
 
 const RoundScore = () => {
     const history = useHistory();
-    const {msg} = useContext(WebsocketWrapper);
+    const {msg, ref} = useContext(WebsocketWrapper);
     const [ranking, setRanking] = useState([]);
     const [data, setData] = useState([]);
     const [solutionValues, setSolutionValues] = useState([])
@@ -64,6 +67,30 @@ const RoundScore = () => {
 
     }, [msg, history]);
 
+    const leaveGame = () => {
+        if (ref) {
+            ref.sendMessage('/app/'+sessionStorage.getItem("gameCode") + "/" + sessionStorage.getItem("id"));
+            clearStorage();
+            history.push("/hub");
+        }
+    }
+
+    const continueGame = async() => {
+        const id = sessionStorage.getItem("id");
+        const token = sessionStorage.getItem("token");
+        const gameCode = sessionStorage.getItem("gameCode");
+        try {
+            await api(token, id).put("/lobbys/continueGame/"+gameCode);
+          } catch (error) {
+            console.log(error);
+          }
+    }
+    useEffect(() => {
+        console.log(sessionStorage.getItem("host"), sessionStorage.getItem("host")!=="true")
+        if (sessionStorage.getItem("host")!=="true"){
+            document.getElementById("gamecontinuer").style.display = "none";
+        }
+    })
     let rankingTable;
 
     rankingTable = (
@@ -156,6 +183,22 @@ const RoundScore = () => {
                     <h5 style={{textAlign: 'center', marginTop: '0'}}>It will automatically continues in a few seconds</h5>
                     {rankingTable}
                     {nutritionTable}
+                    <Grid container spacing={3} sx={{justifyContent:"space-between", clear:"both", flexGrow:1}}>
+                    <Grid item xs={2}>
+                    <Button 
+                    style={{marginTop:"5px"}}
+                    onClick={leaveGame}
+                    >Leave game</Button>
+                    </Grid>
+                    <Grid item xs={2}>
+                    <Button id="gamecontinuer" 
+                    style={{marginTop:"5px", float:"right"}}
+                    onClick={continueGame}
+                    >
+                        Continue Game
+                    </Button>
+                    </Grid>
+                    </Grid>
                 </div>
             </div>
         </BaseContainer>
