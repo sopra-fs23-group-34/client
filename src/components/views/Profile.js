@@ -60,6 +60,8 @@ const Profile = () => {
                 setEmailPreview(response.data['email']);
                 setBioPreview(response.data['bio']);
 
+
+
             } catch (error) {
                 setErrorMessage(error.response.data.message);
                 setErrorStatus(true);
@@ -91,6 +93,7 @@ const Profile = () => {
             // Login successfully worked --> navigate to the route /hub in the GameRouter
             history.push(`/profile/` + id);
             // alert("Changes saved successfully!")
+            sessionStorage.setItem('username', username);
             setStatusInfo(true);
 
         } catch (error) {

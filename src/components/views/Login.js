@@ -51,6 +51,7 @@ const Login = () => {
             sessionStorage.setItem('token', user.token);
             sessionStorage.setItem('id', user.id);
             sessionStorage.setItem('guestUser', false);
+            sessionStorage.setItem('username', user.username);
 
             // Login successfully worked --> navigate to the route /game in the GameRouter
             history.push(`/hub`);
@@ -93,6 +94,8 @@ const Login = () => {
             sessionStorage.setItem('token', user.token);
             sessionStorage.setItem('id', user.id);
             sessionStorage.setItem('guestUser', true);
+            sessionStorage.setItem('username', user.username);
+
 
             history.push(`/hub`);
         } catch (error) {
