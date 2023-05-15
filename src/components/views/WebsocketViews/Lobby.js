@@ -178,7 +178,8 @@ function renderTop(props) {
                             <FormControl fullWidth style={{ paddingBottom: '50px' }}>
                                 <Select
                                     sx={{
-                                        color: "white"
+                                        color: "white",
+                                        bgcolor: "#2365a3"
                                     }}
                                     labelId="food-category-label"
                                     id="food-category-label-select"
