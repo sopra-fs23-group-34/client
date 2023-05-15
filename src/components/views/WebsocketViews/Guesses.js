@@ -6,8 +6,6 @@ import {Slider} from "@mui/material";
 import {useHistory} from "react-router-dom";
 import useSound from 'use-sound';
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import Lobby from './Lobby';
-import { config } from './Lobby';
 import { clearStorage } from 'helpers/clearStorage';
 import { Button } from 'components/ui/Button';
 

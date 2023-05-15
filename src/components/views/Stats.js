@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import BaseContainer from 'components/ui/BaseContainer';
 import { Button } from 'components/ui/Button';
 import Item from 'components/ui/Item';

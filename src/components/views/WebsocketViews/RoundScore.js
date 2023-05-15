@@ -12,7 +12,7 @@ import Paper from '@mui/material/Paper';
 import {useHistory} from 'react-router-dom';
 import { Button } from 'components/ui/Button';
 import { clearStorage } from 'helpers/clearStorage';
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { api } from 'helpers/api';
 
 const RoundScore = () => {
