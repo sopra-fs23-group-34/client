@@ -156,7 +156,7 @@ const RoundScore = () => {
                     </TableHead>
                     <TableBody>
                         {Object.entries(data).map(([name, {carbs, protein, fat, calories, points}]) => (
-                            <TableRow key={name}>
+                            <TableRow key={name} className={name === sessionStorage.getItem("username") ? "score highlighted-row" : ""}>
                                 <TableCell component="th" scope="name">{name}</TableCell>
                                 <TableCell align="right">{calories[1].guessedValues}</TableCell>
                                 <TableCell align="right">{fat[1].guessedValues}</TableCell>
