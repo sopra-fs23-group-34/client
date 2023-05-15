@@ -55,37 +55,36 @@
         margin-right: 2%;
         font-size: large;
     }
-}
-
-.player {
-    &.container {
-        margin: 0.5em 0;
-        width: 20em;
-        padding: 10px;
-        border-radius: $borderRadius;
-        display: flex;
-        align-items: center;
-        background: lighten($background, 5);
-        &.row {
-            height: 40px;
+    .player {
+        &.container {
+            margin: 0.5em 0;
+            width: 100%;
+            padding: 10px;
+            border-radius: $borderRadius;
+            display: flex;
+            align-items: center;
+            background: lighten($background, 5);
+            &.row {
+                height: 40px;
+            }
+            &.highlighted-row {
+                background: #1976d2b3;
+                border: 2px solid #b9e0ec;
+            }
         }
-        &.highlighted-row {
-            background: #1976d2b3;
-            border: 2px solid #b9e0ec;
+        &.name {
+            font-weight: 300;
+            margin-left: 5px;
         }
-    }
-    &.name {
-        font-weight: 300;
-        margin-left: 5px;
-    }
-    &.username {
-        font-weight: 500;
-        color: $accent;
-    }
-    &.id {
-        margin-left: auto;
-        margin-right: 10px;
-        font-family: $fontMono;
-        font-weight: 300;
+        &.username {
+            font-weight: 500;
+            color: $accent;
+        }
+        &.id {
+            margin-left: auto;
+            margin-right: 10px;
+            font-family: $fontMono;
+            font-weight: 300;
+        }
     }
 }
