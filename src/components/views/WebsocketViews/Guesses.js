@@ -118,6 +118,10 @@ const Guesses = () => {
 
     return (
         <BaseContainer>
+                <Button 
+                    className="leave-button"
+                    onClick={leaveGame}
+                >Leave game</Button>
             <div className="slider main">
                 <div className='slider form'>
                     <div style={{clear:"both"}}>
@@ -196,10 +200,6 @@ const Guesses = () => {
                         max={800}
                     />
                 </div>
-                <Button 
-                    style={{marginTop:"5px"}}
-                    onClick={leaveGame}
-                    >Leave game</Button>
             </div>
         </BaseContainer>
     );

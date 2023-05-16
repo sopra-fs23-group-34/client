@@ -174,6 +174,9 @@ const RoundScore = () => {
 
     return (
         <BaseContainer>
+        <Button className="leave-button"
+                    onClick={leaveGame}
+                    >Leave game</Button>
             <div className='score container'>
             <div style={{width: "95%"}}>
                     <h2 style={{float: "right"}}>Round {roundCount}/{roundLimit}</h2>
@@ -183,13 +186,7 @@ const RoundScore = () => {
                     <h5 style={{textAlign: 'center', marginTop: '0'}}>Continuing in a few seconds...</h5>
                     {rankingTable}
                     {nutritionTable}
-                    <Grid container spacing={3} sx={{justifyContent:"space-between", clear:"both", flexGrow:1}}>
-                    <Grid item xs={2}>
-                    <Button 
-                    style={{marginTop:"5px"}}
-                    onClick={leaveGame}
-                    >Leave game</Button>
-                    </Grid>
+                    <Grid container spacing={3} sx={{justifyContent:"right", clear:"both", flexGrow:1}}>
                     <Grid item xs={2}>
                     <Button id="gamecontinuer" 
                     style={{marginTop:"5px", float:"right"}}
