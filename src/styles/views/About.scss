@@ -1,0 +1,75 @@
+@import 'styles/theme';
+.about-content {
+    width: 45em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 3em;
+    max-height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.about-team {
+    width: 28em;
+    margin-top: 1em;
+    & .team-container {
+        display: flex;
+        //flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    & .team-member {
+        margin-bottom: 1em;
+        margin-left: 0.2em;
+        width: 8em;
+        & .name-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 0;
+            flex-shrink: 0;
+        }
+        & .roles-container {
+            display: flex;
+            flex-direction: column;
+        }
+        & .member-name {
+            width: 100%;
+            text-align: center;
+            font-size: 1.5em;
+            color: $textColor;
+            font-weight: 600;
+            line-height: 1.5em;
+            border-bottom: 0.1em solid;
+            margin: 0.25em;
+        }
+        & .member-role {
+            display: inline-block;
+            text-transform: lowercase;
+            color: $accent;
+            font-weight: 500;
+            padding: 0.25em 0.5em;
+            border-radius: 0.3em;
+            margin: 0.25em;
+        }
+    }
+}
+
+.about-explore {
+    width: 28em;
+    & .explore-list {
+        padding: 0;
+        list-style-type: none;
+    }
+    & .explore-item {
+        margin-left: 0;
+        text-transform: lowercase;
+        background-color: $accent;
+        padding: 0.3em 0.5em;
+        border-radius: 0.5em;
+        box-shadow: $dropShadow;
+        margin-bottom: 1em;
+    }
+}
