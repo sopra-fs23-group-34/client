@@ -15,6 +15,7 @@ import Leaderboard from "components/views/Leaderboard";
 import Stats from "components/views/Stats";
 import EasterEgg from "components/views/easterEgg";
 import { InGameGuard } from "../routeProtectors/InGameGuard";
+import About from "components/views/About";
 
 /**
  * Main router of your application.
@@ -48,6 +49,11 @@ const AppRouter = () => {
           <LoginGuard>
             <Login/>
           </LoginGuard>
+        </Route>
+        <Route path ="/about">
+          <GameGuard>
+            <About/>
+          </GameGuard>
         </Route>
         <Route exact path="/easteregg">
             <EasterEgg/>
