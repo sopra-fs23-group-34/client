@@ -70,7 +70,6 @@ const Register = () => {
         else {
             setValidCredentials(true);
         }
-        console.log(validCredentials);
     }
 
     const registerAccount = async () => {
