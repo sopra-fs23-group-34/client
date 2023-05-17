@@ -115,7 +115,7 @@ const RoundScore = () => {
                         </TableHead>
                         <TableBody>
                             {Object.entries(ranking).map(([key, value], index) => (
-                                <TableRow hover role="checkbox">
+                                <TableRow hover role="checkbox" className={key === sessionStorage.getItem("username") ? "score highlighted-row" : ""}>
                                     <TableCell>{index + 1}</TableCell>
                                     <TableCell align='right'>{key}</TableCell>
                                     <TableCell align='right'>{value}</TableCell>

@@ -38,16 +38,17 @@ FormField.propTypes = {
 const Profile = () => {
     const history = useHistory();
     const {id} = useParams();
-    const [username, setUsername] = useState(null);
-    const [usernamePreview, setUsernamePreview] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [emailPreview, setEmailPreview] = useState(null);
-    const [bio, setBio] = useState(null);
-    const [bioPreview, setBioPreview] = useState(null);
+    const [username, setUsername] = useState("");
+    const [usernamePreview, setUsernamePreview] = useState("");
+    const [email, setEmail] = useState("");
+    const [emailPreview, setEmailPreview] = useState("");
+    const [bio, setBio] = useState("");
+    const [bioPreview, setBioPreview] = useState("");
     const [statusInfo, setStatusInfo] = useState(false);
     const [statusError, setErrorStatus] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [timerStart, setTimerStart] = useState(false);
+    const [validCredentials, setValidCredentials] = useState(false);
 
 
     useEffect(() => {
@@ -60,13 +61,8 @@ const Profile = () => {
                 setEmailPreview(response.data['email']);
                 setBioPreview(response.data['bio']);
 
-
-
             } catch (error) {
-                setErrorMessage(error.response.data.message);
-                setErrorStatus(true);
-                setTimerStart(true);
-                setTimerStart(false);
+                raiseError(error.response.data.message);
             }
         }
 
@@ -79,15 +75,40 @@ const Profile = () => {
         }, 5000);
     }, [timerStart]);
 
+    const raiseError = (message) => {
+        setErrorMessage(message);
+        setErrorStatus(true);
+        setTimerStart(true);
+        setTimerStart(false);
+    }
 
-    const saveChanges = async () => {
+    const checkValid = () => {
+        // check username for valid length and no empty spaces
+        if (username.length > 3 && username.length < 20 && !username.includes(' ')) {
+            setValidCredentials(true);
+        }
+        // check valid email
+        else if (email.includes('@') && email.includes('.') && email.length > 5) {
+            setValidCredentials(true);
+        }
+        else if (bio.length > 0) {
+            setValidCredentials(true);
+        }
+        else {
+            setValidCredentials(false);
+        }
+    }
+
+    const requestChange = async () => {
         try {
+            // check if user is guest
             const guestUser = sessionStorage.getItem('guestUser');
             console.log(guestUser);
             if (guestUser == "true") {
                 // raise error because profile of Guest User cant be changed
                 console.log("guest User profile change denied");
             }
+
             const requestBody = JSON.stringify({username, email, bio});
             await api(sessionStorage.getItem('token'), false).put('/users/update/' + id, requestBody);
             // Login successfully worked --> navigate to the route /hub in the GameRouter
@@ -95,12 +116,11 @@ const Profile = () => {
             // alert("Changes saved successfully!")
             sessionStorage.setItem('username', username);
             setStatusInfo(true);
+            setValidCredentials(false);
+
 
         } catch (error) {
-            setErrorMessage(error.response.data.message);
-            setErrorStatus(true);
-            setTimerStart(true);
-            setTimerStart(false);
+            raiseError(error.response.data.message);
         }
     };
 
@@ -133,25 +153,34 @@ const Profile = () => {
                         label="Username"
                         value={username}
                         placeholder={usernamePreview}
-                        onChange={un => setUsername(un)}
+                        onChange={un => {
+                            setUsername(un);
+                            checkValid();
+                        }}
                     />
                     <FormField
                         label="email"
                         value={email}
                         placeholder={emailPreview}
-                        onChange={n => setEmail(n)}
+                        onChange={n => {
+                            setEmail(n);
+                            checkValid();
+                        }}
                     />
                     <FormField
                         label="bio"
                         value={bio}
                         placeholder={bioPreview}
-                        onChange={n => setBio(n)}
+                        onChange={n => {
+                            setBio(n);
+                            checkValid();
+                        }}
                     />
                     <div className="profile button-container">
                         <Button
-                            disabled={!email && !username && !bio}
+                            disabled={!validCredentials}
                             width="100%"
-                            onClick={() => saveChanges()}
+                            onClick={() => requestChange()}
                         >
                             save changes
                         </Button>
@@ -199,3 +228,5 @@ const Profile = () => {
  * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
  */
 export default Profile;
+
+
