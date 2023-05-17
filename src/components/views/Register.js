@@ -21,6 +21,7 @@ const FormField = props => {
                 {props.label}
             </label>
             <input
+                style={{marginBottom: 0}}
                 className="register input"
                 placeholder="enter here.."
                 value={props.value}
@@ -39,18 +40,39 @@ FormField.propTypes = {
 
 const Register = () => {
     const history = useHistory();
-    const [username, setUsername] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [password, setPassword] = useState(null);
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [alertStatus, setAlertStatus] = useState(false);
     const [timerStart, setTimerStart] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [validCredentials, setValidCredentials] = useState(false);
 
     const handleKeyDown = (e) => {
         if (e.keyCode === 13 && password && username && email) {
           registerAccount();
         }
       };
+
+    const checkValid = () => {
+        // check username for valid length and no empty spaces
+        if (username.length < 3 || username.length > 20 || username.includes(' ')) {
+            setValidCredentials(false);
+        }
+        // check valid email
+        else if (!email.includes('@') || !email.includes('.') || email.length < 5) {
+            setValidCredentials(false);
+        }
+        // check valid password
+        else if (password.length < 4 || password.length > 20) {
+            setValidCredentials(false);
+        }
+        else {
+            setValidCredentials(true);
+        }
+        console.log(validCredentials);
+    }
+
     const registerAccount = async () => {
         try {
             const requestBody = JSON.stringify({username, email, password});
@@ -69,10 +91,7 @@ const Register = () => {
             // Login successfully worked --> navigate to the route /game in the GameRouter
             history.push(`/hub`);
         } catch (error) {
-            setAlertStatus(true);
-            setErrorMessage(error.response.data.message);
-            setTimerStart(true);
-            setTimerStart(false);
+            raiseError(error.response.data.message);
         }
     };
     
@@ -85,7 +104,13 @@ const Register = () => {
             setAlertStatus(false);
         }, 5000);
     }, [timerStart]);
-    
+
+    const raiseError = (error) => {
+        setAlertStatus(true);
+        setErrorMessage(error)
+        setTimerStart(true);
+        setTimerStart(false);
+    }
 
     return (
         <BaseContainer>
@@ -95,26 +120,45 @@ const Register = () => {
                     <FormField
                         label="Username"
                         value={username}
-                        onChange={un => setUsername(un)}
+                        onChange={un => {
+                            setUsername(un);
+                            checkValid();
+                        }}
                         onKeyDown={handleKeyDown}
                     />
+                    <p style={{marginTop: 0, fontSize: 12}}>
+                        Username must be minimum 3 characters long and not contain any spaces.
+                    </p>
                     <FormField
                         label="email"
                         value={email}
-                        onChange={un => setEmail(un)}
+                        onChange={un => {
+                            setEmail(un);
+                            checkValid();
+                        }}
                         onKeyDown={handleKeyDown}
                     />
+                    <p style={{marginTop: 0, fontSize: 12}}>
+                        Must be a valid email address.
+                    </p>
+
                     <FormField
                         label="Password"
                         value={password}
                         type="password"
-                        onChange={n => setPassword(n)}
+                        onChange={n => {
+                            setPassword(n);
+                            checkValid();
+                        }}
                         onKeyDown={handleKeyDown}
                     />
+                    <p style={{marginTop: 0, fontSize: 12}}>
+                        Password must be minimum 5 characters long.
+                    </p>
                     
                     <div className="register button-container">
                         <Button
-                            disabled={!username || !password}
+                            disabled={!validCredentials}
                             width="100%"
                             onClick={() => registerAccount()}
                         >

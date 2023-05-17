@@ -33,8 +33,8 @@ FormField.propTypes = {
 
 const Login = () => {
     const history = useHistory();
-    const [password, setPassword] = useState(null);
-    const [username, setUsername] = useState(null);
+    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("");
     const [alertStatus, setAlertStatus] = useState(false);
     const [timerStart, setTimerStart] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -56,10 +56,7 @@ const Login = () => {
             // Login successfully worked --> navigate to the route /game in the GameRouter
             history.push(`/hub`);
         } catch (error) {
-            setAlertStatus(true);
-            setErrorMessage(error.response.data.message)
-            setTimerStart(true);
-            setTimerStart(false);
+            raiseError(error.response.data.message);
         }
     };
 
@@ -68,6 +65,13 @@ const Login = () => {
             setAlertStatus(false);
         }, 5000);
     }, [timerStart]);
+
+    const raiseError = (error) => {
+        setAlertStatus(true);
+        setErrorMessage(error)
+        setTimerStart(true);
+        setTimerStart(false);
+    }
 
     const handleClose = () => {
         setAlertStatus(false);
@@ -99,10 +103,7 @@ const Login = () => {
 
             history.push(`/hub`);
         } catch (error) {
-            setAlertStatus(true);
-            setErrorMessage(error.response.data.message)
-            setTimerStart(true);
-            setTimerStart(false);
+            raiseError(error.response.data.message)
         }
     }
 
