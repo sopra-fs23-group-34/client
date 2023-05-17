@@ -13,7 +13,8 @@ import RoundScore from "components/views/WebsocketViews/RoundScore";
 import FinalScore from "components/views/WebsocketViews/FinalScore";
 import Leaderboard from "components/views/Leaderboard";
 import Stats from "components/views/Stats";
-import EasterEgg from "components/views/easterEgg";
+import EasterEgg from "components/views/EasterEgg";
+import ColorGame from "components/views/ColorGame";
 import { InGameGuard } from "../routeProtectors/InGameGuard";
 import About from "components/views/About";
 
@@ -58,6 +59,9 @@ const AppRouter = () => {
         <Route exact path="/easteregg">
             <EasterEgg/>
          </Route>
+         <Route exact path="/colorgame">
+                     <ColorGame/>
+                  </Route>
         <Route exact path="/register">
           <LoginGuard>
             <Register/>
