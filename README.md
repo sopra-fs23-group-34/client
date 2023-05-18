@@ -40,6 +40,25 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Screenshots
+Upon visiting the website, the login screen appears, with the possibility to go to the registration page to create a new account, or alternatively, log in as a Guest.
+ ![login screen](/screenshots/login_screen.png)
+ 
+Upon logging in, you are redirected to the main hub.
+ ![main hub](/screenshots/main_hub.png)
+ 
+When creating a game lobby, the host can change the settings and see the users within the lobby.
+ ![lobby screen as the host](/screenshots/lobby-screen_host.png)
+ 
+A regular user can join a game via main hub and is shown the playerlist of the current lobby.
+ ![lobby screen as a player](/screenshots/lobby-screen_player.png)
+
+During the game, the user is presented with a food item, for which they must guess the protein and fat contents, as well as how many carbohydrates and calories it contains.
+![Gameplay screen, where the top is a food image and its name, and below are sliders for all values to guess](/screenshots/gameplay_screen.png)
+
+After each round, there is an overview screen, showing the actual values of the product, as well as all guesses of the players in the lobby. Your own guesses are highlighted in blue.
+![Round overview screen with an overall points table, as well as detailed table with the guesses of this round](/screenshots/round_overview.png)
+
 ## Roadmap
 For future additions we have some ideas, what one could implement. The following mentionings are not sorted by any means. But are more meant as inspiration for you.
 Firstly, there would be the possibility to implement a new game mode. The first additional game mode could be a higher lower implementation of a game. Before starting the game you would choose your food category, like "Fruits" as well as the nutrition value, you would compare the food items. Lets assume one would choose "Fruits" and "carbs". Then you would get as first item an apple. Then a picture of the second item would appear. Lets assume, it is a pineapple. Now you have to decide, if a pineapple has more or less carbs then an apple. If you guessed correctly, you get a positive feedback and the next picture of a food item. If you guessed incorrectly, there will be an end of game screen and you can restart.    
