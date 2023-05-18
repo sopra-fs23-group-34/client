@@ -17,6 +17,7 @@ import HelpPage from 'components/ui/HelpPage';
 import { useMediaQuery } from "@material-ui/core";
 import Tooltip from '@mui/material/Tooltip';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
+import QRCode from "react-qr-code";
 
 const Player = ({user}) => (
     
@@ -233,9 +234,7 @@ function renderTop(props) {
             <h2> Game Lobby </h2>
             <Typography color={"error"}>{errorMessage}</Typography>
             <p className="lobby paragraph">
- 
             <ClickAwayListener onClickAway={handleCopyToClipboardClose}>
-
               <Tooltip
                 title={`${openTooltip ? "copied" : "copy to clipboard"}`}
                 enterDelay={100}
@@ -250,8 +249,13 @@ function renderTop(props) {
               </Tooltip>
 
           </ClickAwayListener>
-
             </p>
+            <QRCode
+            size={256}
+            style={{ height: "auto", maxWidth: "10%"}}
+            value={sessionStorage.getItem('gameCode')}
+            viewBox={`0 0 256 256`}
+            />
             {hostview}
         </BaseContainer>
     );
