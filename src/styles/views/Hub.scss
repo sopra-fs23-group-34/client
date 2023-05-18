@@ -24,23 +24,18 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        // box-shadow: $dropShadow;
         width: 1000px;
         margin: auto;
-    }
-    &.user-list {
-        list-style: none;
-        padding-left: 0;
-    }
-    &.user-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
     }
     & p,
     h1 {
         margin: 0.2em 0;
+    }
+    & h3 {
+        margin-top: 8px;
+        margin-bottom: 2px;
+        font-family: "Arial Rounded MT Bold";
+        color: #fc7eec;
     }
     &.hubbutton {
         &:hover {

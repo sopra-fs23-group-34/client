@@ -69,7 +69,7 @@ const Hub = () => {
     return (
         <BaseContainer margin="auto" className="hub container">
             <img src={TitleGif} alt={'titleAnmimation'} style={{width: '100%', height: 'auto'}}/>
-            <h3 style={{marginTop: 8, marginBottom: 2, fontFamily: 'Arial Rounded MT Bold', color: '#fc7eec'}}>Welcome back, {sessionStorage.getItem("username")}!</h3>
+            <h3>Welcome back, {sessionStorage.getItem("username")}!</h3>
             <Typography variant={maxMediumSize ?  "h7" : "h5"} sx={{
                 textShadow: "2px 2px #000000",
                 textAlign: "center"
