@@ -1,4 +1,6 @@
-# SoPra FS23 - Client Template with build pack
+# The big diabetes Game
+## Introduction
+Food is a important part of our daily live, but most people have no idea what the nutrition values of the food on their plate are. Additionally, there are some people with diabetis or some other illness, where it is crucial to know how many carbs you are eating, to dose your medication correctly. With this web application we wanted to create a possibility for interested people to learn something about the nutrition values of food in a playful way.
 
 ## Getting started
 
@@ -38,9 +40,19 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Learn More
+## Roadmap
+For future additions we have some ideas, what one could implement. The following mentionings are not sorted by any means. But are more meant as inspiration for you.
+Firstly, there would be the possibility to implement a new game mode. The first additional game mode could be a higher lower implementation of a game. Before starting the game you would choose your food category, like "Fruits" as well as the nutrition value, you would compare the food items. Lets assume one would choose "Fruits" and "carbs". Then you would get as first item an apple. Then a picture of the second item would appear. Lets assume, it is a pineapple. Now you have to decide, if a pineapple has more or less carbs then an apple. If you guessed correctly, you get a positive feedback and the next picture of a food item. If you guessed incorrectly, there will be an end of game screen and you can restart.    
+Another new game mode would be, that you get four pictures of different food Items and additionally the correct nutrition values of one of them. Then you have to guess to which food item the displayed nutrition values belong to. If you guessed correctly, you will get new pictures and nutrition values. If not, it is game over.
+Another feature for the original game would be a possibility at the end of a game to see all the different questions and answers again, so that one can internalise the different nutrition values of the food items.    
+Inspection mode, to be able to go through the different food items after the game to internalise the different values.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Authors
+- [Nico Manzoni](https://www.github.com/nizonic) - *frontend*
+- [André Seidenglanz](https://www.github.com/sugar-free55) - *frontend*
+- [Nataell Cornu](https://www.github.com/nataell95) - *frontend/backend*
+- [Maurice Hess](https://www.github.com/mauhess) - *backend*
+- [Elias Suter](https://www.github.com/Bye-B) - *backend*
 
-
-> Thanks to Lucas Pelloni and Kyrill Hux for working on the template.
+## License
+This project is licensed under [Apache 2.0](LICENSE).
