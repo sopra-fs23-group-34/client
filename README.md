@@ -1,4 +1,6 @@
-# SoPra FS23 - Client Template with build pack
+# The big diabetes Game
+## Introduction
+Food is a important part of our daily live, but most people have no idea what the nutrition values of the food on their plate are. Additionally, there are some people with diabetis or some other illness, where it is crucial to know how many carbs you are eating, to dose your medication correctly. With this web application we wanted to create a possibility for interested people to learn something about the nutrition values of food in a playful way.
 
 ## Getting started
 
@@ -38,9 +40,12 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Learn More
+## Authors
+- [Nico Manzoni](https://www.github.com/nizonic) - *frontend*
+- [André Seidenglanz](https://www.github.com/sugar-free55) - *frontend*
+- [Nataell Cornu](https://www.github.com/nataell95) - *frontend/backend*
+- [Maurice Hess](https://www.github.com/mauhess) - *backend*
+- [Elias Suter](https://www.github.com/Bye-B) - *backend*
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-
-> Thanks to Lucas Pelloni and Kyrill Hux for working on the template.
+## License
+This project is licensed under [Apache 2.0](LICENSE)
