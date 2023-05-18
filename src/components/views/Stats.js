@@ -88,7 +88,6 @@ const Stats = () => {
 
                         <Button
                         width="100%"
-                        style={{background: "#d9e0d9", color:"black"}}
                         onClick={() => Hub()}
                         >
                             Hub
