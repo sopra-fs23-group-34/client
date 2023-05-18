@@ -117,12 +117,8 @@ function renderTop(props) {
       };
 
       const handleCopyToClipboardOpen = () => {
-        console.log("here")
         navigator.clipboard.writeText(sessionStorage.getItem('gameCode'))
         setOpenTooltip(true)
-        console.log(openTooltip)
-        
-        
       }
       async function handleCopyToClipboardClose() {
         await new Promise(resolve => setTimeout(resolve, 300));
@@ -237,21 +233,24 @@ function renderTop(props) {
             <h2> Game Lobby </h2>
             <Typography color={"error"}>{errorMessage}</Typography>
             <p className="lobby paragraph">
-            <Grid item>   
+ 
             <ClickAwayListener onClickAway={handleCopyToClipboardClose}>
-            <div>
+
               <Tooltip
                 title={`${openTooltip ? "copied" : "copy to clipboard"}`}
-                enterDelay={500}
-                leaveDelay={500}
+                enterDelay={100}
+                leaveDelay={200}
                 placement="right-start"
                 onClose={handleCopyToClipboardClose}
+                width="auto"
               >
+                <div style={{width:"auto"}}>
                 <Button style={{margin:"2%"}} onClick={handleCopyToClipboardOpen}>Lobby Code: {sessionStorage.getItem('gameCode')}</Button>
-              </Tooltip>
                 </div>
+              </Tooltip>
+
           </ClickAwayListener>
-          </Grid>
+
             </p>
             {hostview}
         </BaseContainer>
