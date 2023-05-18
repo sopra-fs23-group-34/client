@@ -55,4 +55,4 @@ Inspection mode, to be able to go through the different food items after the gam
 - [Elias Suter](https://www.github.com/Bye-B) - *backend*
 
 ## License
-This project is licensed under [Apache 2.0](LICENSE)
+This project is licensed under [Apache 2.0](LICENSE).
