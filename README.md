@@ -2,20 +2,16 @@
 ## Introduction
 Food is a important part of our daily live, but most people have no idea what the nutrition values of the food on their plate are. Additionally, there are some people with diabetis or some other illness, where it is crucial to know how many carbs you are eating, to dose your medication correctly. With this web application we wanted to create a possibility for interested people to learn something about the nutrition values of food in a playful way.
 
-## Getting started
+## Technologies
 
-Read and go through these Tutorials. It will make your life easier:--)
+The Client is written with JavaScript, using the React library. Many components made use of the React component library [MUI](https://mui.com/).
+To communicate between the front- and backend, REST was used. Once a user is inside a Lobby, a Websocket connection is established.
 
-- Read the React [Docs](https://reactjs.org/docs/getting-started.html)
-- Do this React [Getting Started](https://reactjs.org/tutorial/tutorial.html) Tutorial (it doesn’t assume any existing React knowledge)
-- Get an Understanding of [CSS](https://www.w3schools.com/Css/), [SCSS](https://sass-lang.com/documentation/syntax), and [HTML](https://www.w3schools.com/html/html_intro.asp)!
+## High-level Components
 
-Next, there are two other technologies that you should look at:
 
-* [react-router-dom](https://reacttraining.com/react-router/web/guides/quick-start) offers declarative routing for React. It is a collection of navigational components that fit nicely with the application. 
-* [react-hooks](https://reactrouter.com/web/api/Hooks) let you access the router's state and perform navigation from inside your components.
 
-## Prerequisites and Installation
+## Launch and Deployment
 For your local development environment, you will need Node.js. You can download it [here](https://nodejs.org). All other dependencies, including React, get installed with:
 
 ```npm install```
