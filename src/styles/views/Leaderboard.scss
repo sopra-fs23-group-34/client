@@ -31,6 +31,44 @@
     h2 {
         margin: 0.5em 0;
     }
+    & .leaderboard-wrapper {
+        width: 100%;
+        & .leaderboard-base {
+            width: 60%;
+            margin: auto;
+        }
+        & .leaderboard-header {
+            flex-direction: row;
+            display: flex;
+            justify-content: flex-start;
+            &.placing {
+                margin-left: 2px;
+                font-family: $fontMono;
+                font-weight: 800;
+                min-width: max-content;
+                margin-right: 0;
+                margin-left: 0;
+                width: 16%;
+                text-align: center;
+            }
+            &.username {
+                font-weight: 800;
+                margin-left: 2%;
+                color: $accent;
+                width: 60%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-family: $fontMono;
+            }
+            &.totalscore {
+                margin-left: auto;
+                margin-right: 0;
+                font-family: $fontMono;
+                font-weight: 800;
+                width: auto;
+            }
+        }
+    }
     .player {
         &.container[data-status="0"] {
             margin: 0.5em 0;

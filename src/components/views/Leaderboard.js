@@ -206,32 +206,22 @@ const Leaderboard = () => {
 
     if (users) {
         content = (
-            <div className = "leaderboard" style={{
-                width: "100%"
-            }}>
-                <Grid container spacing={3} sx={{
-                    width: "60%",
-                    margin: "auto"
-                }}>
+            <div className = "leaderboard-wrapper">
+                <Grid container spacing={3} className='leaderboard-base'>
                     <Box item xs={3}
                     sx={{
                         width: "100%"
                     }}
                     >
                         <Box item xs={3}
-                        sx={{
-                            width: "100%",
-                            flexDirection: "row",
-                            display:"flex",
-                            justifyContent:"flex-start"
-                        }}>
-                            <div className="player placing">
+                        className='leaderboard-header'>
+                            <div className="leaderboard-header placing">
                                 Rank
                             </div>
-                            <div style={{fontWeight:800, marginLeft:"2px"}} className="player username">
+                            <div className="leaderboard-header username">
                                 Username
                             </div>
-                            <div style={{marginLeft:"auto", marginRight:0, fontWeight:800}} className="player totalscore">
+                            <div className="leaderboard-header totalscore">
                                 Total Score
                             </div>
                         </Box>
