@@ -65,15 +65,8 @@ const FinalScore = () => {
     let rankingTable;
 
     rankingTable = (
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <div style={{
-                display: 'flex',
-                position: 'center',
-                justifyContent: 'center',
-                alignItems: 'center',
-                margin: 10,
-                width: '100%'
-            }}>
+        <div className='rankingTable-parent'>
+            <div className='rankingTable-parent container'>
                 <TableContainer component={Paper} sx={{maxHeight: 500}}>
                     <Table sx={{
                         height: "max-content"
