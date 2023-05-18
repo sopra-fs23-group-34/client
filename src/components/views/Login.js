@@ -112,7 +112,7 @@ const Login = () => {
         <BaseContainer>
             <div className="login container">
                 <div className="login form">
-                    <h1 style={{marginTop: 0}}>Login Form</h1>
+                    <h1>Login</h1>
                     <FormField
                         label="Username"
                         value={username}
@@ -146,7 +146,7 @@ const Login = () => {
                     <Box sx={{paddingTop: "10px"}}>
                         <Button
                             width="100%"
-                            style={{backgroundColor: "red"}}
+                            style={{backgroundColor: "#fab921"}}
                             onClick={() => demoLogin()}
                         >
                             Login as a guest

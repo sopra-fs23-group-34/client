@@ -115,7 +115,7 @@ const Register = () => {
         <BaseContainer>
             <div className="register container">
                 <div className="register form">
-                    <h1 style={{marginTop: 0}}>Register Form</h1>
+                    <h1 >Register</h1>
                     <FormField
                         label="Username"
                         value={username}
@@ -164,11 +164,10 @@ const Register = () => {
                             Register
                         </Button>
                     </div>
-                    
-                    <p>Switch to Login.</p>
                     <Link to="/login">
                         <Button
                             width="100%"
+                            style={{marginTop:"10px"}}
                         >
                             Go to login window
                         </Button>
