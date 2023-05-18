@@ -17,25 +17,29 @@ import { api } from 'helpers/api';
 
 const RoundScore = () => {
     const history = useHistory();
-    const {msg, ref} = useContext(WebsocketWrapper);
+    const { msg, ref } = useContext(WebsocketWrapper);
+
+
     const [ranking, setRanking] = useState([]);
-    const [data, setData] = useState([]);
     const [solutionValues, setSolutionValues] = useState([])
+    const [playerGuesses, setPlayerGuesses] = useState([]);
+
+
     const roundLimit = sessionStorage.getItem("roundLimit");
     const roundCount = sessionStorage.getItem("roundCount");
 
     const handleRanking = (msg) => {
         setRanking(msg.content);
+        sessionStorage.setItem('ranking', JSON.stringify(msg.content)); 
     }
 
     const handleRoundStart = () => {
         sessionStorage.setItem("roundCount", parseInt(sessionStorage.getItem("roundCount"))+1);
     }
 
-
-
     const handleRoundScore = (msg) => {
-        setData(msg.content)
+        setPlayerGuesses(msg.content)
+        sessionStorage.setItem('playerGuesses', JSON.stringify(msg.content));
         const actualValues = {
             carbs: msg.content[Object.keys(msg.content)[0]].carbs[0].actualValues,
             protein: msg.content[Object.keys(msg.content)[0]].protein[0].actualValues,
@@ -43,11 +47,26 @@ const RoundScore = () => {
             calories: msg.content[Object.keys(msg.content)[0]].calories[0].actualValues
         };
         setSolutionValues(actualValues);
-        // {player1{calories {actualValues, guessedValues, deviations}, carbs {actualValues, guessedValues, deviations}, fat, protein}
+        sessionStorage.setItem('solutionValues', JSON.stringify(actualValues));
     }
 
+    useEffect(() => {
+        const playerGuesses = sessionStorage.getItem('playerGuesses');
+        const storedRanking = sessionStorage.getItem('ranking');
+        const solutionValues = sessionStorage.getItem('solutionValues');
+        if (playerGuesses) {
+            setPlayerGuesses(JSON.parse(playerGuesses));
+        }
+        if (solutionValues) {
+            setSolutionValues(JSON.parse(solutionValues));
+        }
+        if (storedRanking) {
+            setRanking(JSON.parse(storedRanking));
+        }
+    
+    }, []);
+
     const topicHandlers = {
-        "Ranking": handleRanking,
         "RoundScore": handleRoundScore,
         "GameScore": handleRanking,
         "RoundStart": handleRoundStart,
@@ -62,9 +81,7 @@ const RoundScore = () => {
 
 
     useEffect(() => {
-
         handleMessage(msg);
-
     }, [msg, history]);
 
     const leaveGame = () => {
@@ -91,6 +108,7 @@ const RoundScore = () => {
             document.getElementById("gamecontinuer").style.display = "none";
         }
     })
+
     let rankingTable;
 
     rankingTable = (
@@ -155,7 +173,7 @@ const RoundScore = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {Object.entries(data).map(([name, {carbs, protein, fat, calories, points}]) => (
+                        {Object.entries(playerGuesses).map(([name, {carbs, protein, fat, calories, points}]) => (
                             <TableRow key={name} className={name === sessionStorage.getItem("username") ? "score highlighted-row" : ""}>
                                 <TableCell component="th" scope="name">{name}</TableCell>
                                 <TableCell align="right">{calories[1].guessedValues}</TableCell>
