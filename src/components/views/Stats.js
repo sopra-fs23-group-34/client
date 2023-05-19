@@ -75,7 +75,7 @@ const Stats = () => {
                     <Item className='stats title'>Games won</Item>
                 </Grid>
                 <Grid item xs={4} sm={3} md={2.5} className='stats float'>
-                    <Item className='stats number'>{userstats.winRatio}</Item>
+                    <Item className='stats number'>{Math.round((userstats.winRatio*100 + Number.EPSILON) * 100) / 100}%</Item>
                     <Item className='stats title'>Win ratio</Item>
                 </Grid>
                 <Grid item xs={4} sm={3} md={2.5} className='stats float'>
