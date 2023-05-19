@@ -192,11 +192,12 @@ const RoundScore = () => {
 
     return (
         <BaseContainer>
-        <Button className="leave-button"
-                    onClick={leaveGame}
-                    >Leave game</Button>
             <div className='score container'>
             <div style={{width: "95%"}}>
+            <Button className="leave-button"
+                    style={{marginLeft:"0px"}}
+                    onClick={leaveGame}
+                    >Leave game</Button>
                     <h2 style={{float: "right"}}>Round {roundCount}/{roundLimit}</h2>
                     </div>
                 <div className='score form'>
