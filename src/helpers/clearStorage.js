@@ -8,4 +8,7 @@ export const clearStorage = () => {
     sessionStorage.removeItem('foodLink');
     sessionStorage.removeItem('foodName');
     sessionStorage.removeItem('page');
+    sessionStorage.removeItem('playerGuesses');
+    sessionStorage.removeItem('ranking');
+    sessionStorage.removeItem('solutionValues');
 }
