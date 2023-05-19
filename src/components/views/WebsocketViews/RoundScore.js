@@ -202,7 +202,7 @@ const RoundScore = () => {
                     </div>
                 <div className='score form'>
                     <h1 style={{textAlign: 'center', marginBottom: '0'}}>Round Overview</h1>
-                    <h5 style={{textAlign: 'center', marginTop: '0'}}>Continuing in a few seconds...</h5>
+                    <h5 style={{textAlign: 'center', marginTop: '0'}}>Host will continue game...</h5>
                     {rankingTable}
                     {nutritionTable}
                     <Grid container spacing={3} sx={{justifyContent:"right", clear:"both", flexGrow:1}}>
