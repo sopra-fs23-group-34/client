@@ -48,12 +48,6 @@ const Register = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [validCredentials, setValidCredentials] = useState(false);
 
-    const handleKeyDown = (e) => {
-        if (e.keyCode === 13 && password && username && email) {
-          registerAccount();
-        }
-      };
-
     const checkValid = () => {
         // check username for valid length and no empty spaces
         if (username.length < 3 || username.length > 20 || username.includes(' ')) {
@@ -111,6 +105,19 @@ const Register = () => {
         setTimerStart(false);
     }
 
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.keyCode === 13 && (username && password && email)) {
+                registerAccount();
+            }
+        };
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [username, password, email]);
+    
     return (
         <BaseContainer>
             <div className="register container">
@@ -123,7 +130,6 @@ const Register = () => {
                             setUsername(un);
                             checkValid();
                         }}
-                        onKeyDown={handleKeyDown}
                     />
                     <p style={{marginTop: 0, fontSize: 12}}>
                         Username must be minimum 3 characters long and not contain any spaces.
@@ -135,7 +141,6 @@ const Register = () => {
                             setEmail(un);
                             checkValid();
                         }}
-                        onKeyDown={handleKeyDown}
                     />
                     <p style={{marginTop: 0, fontSize: 12}}>
                         Must be a valid email address.
@@ -149,7 +154,6 @@ const Register = () => {
                             setPassword(n);
                             checkValid();
                         }}
-                        onKeyDown={handleKeyDown}
                     />
                     <p style={{marginTop: 0, fontSize: 12}}>
                         Password must be minimum 5 characters long.

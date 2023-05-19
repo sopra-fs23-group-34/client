@@ -11,12 +11,27 @@ import "styles/views/Hub.scss";
 import { api } from "helpers/api";
 import { useHistory } from "react-router-dom";
 import { Typography } from "@mui/material";
+import { useEffect } from "react";
 
 export default function FormDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [lobbyKey, setLobbyKey] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
   const history = useHistory();
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+        if (event.keyCode === 13 && (lobbyKey)) {
+            joinLobby();
+        }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+    };
+}, [lobbyKey]);
+
 
   const joinLobby = async () => {
     const userId = sessionStorage.getItem("id");
