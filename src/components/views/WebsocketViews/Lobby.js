@@ -40,6 +40,7 @@ const Lobby = () => {
     const [roundLimit, setRoundLimit] = useState(5);
     const [foodCategory, setFoodCategory] = useState("All");
     const [timerLength, setTimerLength] = useState(20);
+    sessionStorage.setItem("roundCount", 1);
     const handleChangeCategory = (event) => {
         setFoodCategory(event.target.value);
     };
@@ -108,7 +109,6 @@ function renderTop(props) {
         const token = sessionStorage.getItem("token");
         const userId = sessionStorage.getItem("id");
         sessionStorage.setItem("roundLimit", roundLimit);
-        sessionStorage.setItem("roundCount", 1);
         try {
           await api(token, userId).post("/lobbys/startGame/" + gameCode,gameConfig);
         } catch (error) {
