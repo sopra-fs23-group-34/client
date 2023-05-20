@@ -39,10 +39,11 @@ const Player = ({user, index}) => {
   };
 
 const columns = [
-    {field: "Player", width:350},
-    {field: "Games played", width:150, type:"number", align:"center", cellClassName: "games-played"},
+    {field: "Player", width:250},
+    {field: "Singleplayer Games", width:150, type:"number", align:"center", cellClassName: "sp-games-played"},
+    {field: "Multiplayer Games", width:150, type:"number", align:"center", cellClassName: "mp-games-played"},
     {field: "Wins", width: 80, type:"number", align:"center", cellClassName: "wins"},
-    {field: "Win percentage", width: 150, type:"number", valueFormatter: ({ value }) => `${value} %`, align:"center", cellClassName: "win-percentage"},
+    {field: "Win ratio", width: 100, type:"number", valueFormatter: ({ value }) => `${value} %`, align:"center", cellClassName: "win-percentage"},
     {field: "highscore", width: 100, type:"number", align:"center", cellClassName: "highscore"}
 ]
 const Leaderboard = () => {
@@ -59,8 +60,8 @@ const Leaderboard = () => {
     const apiRef = useGridApiRef();
     const [rows, setRows] = useState([]);
     
-    function createData(username, games_played, wins, ratio, highscore) {
-        return { id: idCounter, "Player": username, "Games played": games_played, "Wins": wins, "Win percentage": Math.round((ratio*100 + Number.EPSILON) * 100) / 100, "highscore": highscore };
+    function createData(username, sp_games_played, mp_games_played, wins, ratio, highscore) {
+        return { id: idCounter, "Player": username, "Singleplayer Games": sp_games_played, "Multiplayer Games": mp_games_played, "Wins": wins, "Win ratio": Math.round((ratio*100 + Number.EPSILON) * 100) / 100, "highscore": highscore };
       }
       useEffect(() => {
             async function fetchData() {
@@ -68,7 +69,7 @@ const Leaderboard = () => {
                 if (user.userId !== undefined) {
                     const response = await api(sessionStorage.getItem('token'), sessionStorage.getItem('id')).get('/users/statistics/' + user.userId);
                 setRows([
-                    createData(user.username, response.data.gamesPlayed, response.data.gamesWon, response.data.winRatio, response.data.highScore)
+                    createData(user.username, response.data.singleplayerGamesPlayed, response.data.multiplayerGamesPlayed, response.data.gamesWon, response.data.winRatio, response.data.highScore)
                   ])
                 }
             }
@@ -84,12 +85,14 @@ const Leaderboard = () => {
                 setMe(response.data);
                 const statsResponse = await api(sessionStorage.getItem('token'), sessionStorage.getItem('id')).get('/users/statistics/' + sessionStorage.getItem('id'));
                 setUserOwnStats(statsResponse.data);
+                console.log(statsResponse.data);
                 
             } 
             catch (error) {
                 if (error.response.data.status === 404) {
                     const newUserStats = {
-                        "gamesPlayed": 0, 
+                        "Singleplayer Games played": 0,
+                        "Multiplayer Games played": 0,
                         "gamesWon": 0, 
                         "winRatio":0, 
                         "highScore":0}
@@ -109,7 +112,7 @@ const Leaderboard = () => {
       const handleAddRow = () => {
         idCounter += 1;
         if (idCounter === 1){
-            apiRef.current.updateRows([createData(me.username, userOwnStats.gamesPlayed, userOwnStats.gamesWon, userOwnStats.winRatio, userOwnStats.highScore)]);
+            apiRef.current.updateRows([createData(me.username, userOwnStats.singleplayerGamesPlayed,userOwnStats.multiplayerGamesPlayed, userOwnStats.gamesWon, userOwnStats.winRatio, userOwnStats.highScore)]);
         }
       };
 
