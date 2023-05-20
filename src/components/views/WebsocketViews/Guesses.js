@@ -22,13 +22,12 @@ const Guesses = () => {
     const [update, setUpdate] = useState(0);
     const [playSetSound] = useSound('http://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3', {volume: 0.5});
     const [playTimeRunningOutSound] = useSound('http://www.euskaljakintza.com/ariketak/recursos/misc196.wav', {volume: 0.5});
-    const roundLimit = sessionStorage.getItem("roundLimit");
-    const roundCount = sessionStorage.getItem("roundCount");
+    const [roundLimit, setRoundLimit] = useState("");
+    const [roundCount, setRoundCount] = useState("");
 
     const handleRoundScoreStart = (msg) => {
         setRoundScoreStart(msg.content);
     }
-    console.log(roundCount, roundLimit)
     const handleFood = () => {
         sessionStorage.setItem("foodName", msg.content["name"]);
         sessionStorage.setItem("foodLink", msg.content["imageLink"]);
@@ -42,10 +41,17 @@ const Guesses = () => {
         }
     }
 
+    const handleRoundCounter = (msg) => {
+        console.log(msg);
+        setRoundCount(msg.content["currentRound"]);
+        setRoundLimit(msg.content["maxRounds"]);
+    }
+    
     const topicHandlers = {
         "RoundScoreStart": handleRoundScoreStart,
         "Food": handleFood,
-        "Timer": handleTimer
+        "Timer": handleTimer,
+        "RoundCounter": handleRoundCounter
     };
 
     function handleMessage(msg) {

@@ -25,8 +25,14 @@ const RoundScore = () => {
     const [playerGuesses, setPlayerGuesses] = useState([]);
 
 
-    const roundLimit = sessionStorage.getItem("roundLimit");
-    const roundCount = sessionStorage.getItem("roundCount");
+    const [roundLimit, setRoundLimit] = useState("");
+    const [roundCount, setRoundCount] = useState("");
+
+    const handleRoundCounter = (msg) => {
+        console.log(msg);
+        setRoundCount(msg.content["currentRound"]);
+        setRoundLimit(msg.content["maxRounds"]);
+    }
 
     const handleRanking = (msg) => {
         setRanking(msg.content);
@@ -70,6 +76,7 @@ const RoundScore = () => {
         "RoundScore": handleRoundScore,
         "GameScore": handleRanking,
         "RoundStart": handleRoundStart,
+        "RoundCounter": handleRoundCounter
     };
 
     function handleMessage(msg) {
