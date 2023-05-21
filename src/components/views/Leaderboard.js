@@ -90,9 +90,9 @@ const Leaderboard = () => {
             catch (error) {
                 if (error.response.data.status === 404) {
                     const newUserStats = {
-                        "Singleplayer Games played": 0,
-                        "Multiplayer Games played": 0,
-                        "gamesWon": 0, 
+                        "SingleplayerGames": 0,
+                        "MultiplayerGames": 0,
+                        "Wins": 0, 
                         "winRatio":0, 
                         "highScore":0}
                     
@@ -111,7 +111,7 @@ const Leaderboard = () => {
       const handleAddRow = () => {
         idCounter += 1;
         if (idCounter === 1){
-            apiRef.current.updateRows([createData(me.username, userOwnStats.singleplayerGamesPlayed,userOwnStats.multiplayerGamesPlayed, userOwnStats.gamesWon, userOwnStats.winRatio, userOwnStats.highScore)]);
+            apiRef.current.updateRows([createData(me.username, userOwnStats.SingleplayerGames,userOwnStats.MultiplayerGames, userOwnStats.Wins, userOwnStats.winRatio, userOwnStats.highScore)]);
         }
       };
 
