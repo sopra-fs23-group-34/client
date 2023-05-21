@@ -105,6 +105,10 @@
             display: flex;
             align-items: center;
             background: lighten($background, 5);
+            &.highlighted-row {
+                background: #1976d2b3;
+                border: 2px solid #b9e0ec;
+            }
         }
         &.username {
             font-weight: 500;
