@@ -29,4 +29,12 @@
         background-color: #2365a3;
         color: white
     }
+    &.login-button {
+        width: 100%;
+        margin-top: 10px;
+        &.guest {
+            background-Color: #fab921;
+            color: white;
+        }
+    }
 }

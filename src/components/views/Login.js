@@ -7,6 +7,7 @@ import 'styles/views/Login.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import {Alert, AlertTitle, Box} from "@mui/material";
+import PopUp from "../ui/GuestAccountButton";
 
 const FormField = props => {
     return (
@@ -144,20 +145,12 @@ const Login = () => {
                     <p>Create an Account</p>
                     <Link to={"/register"}>
                         <Button
-                            width="100%"
+                            className="login-button"
                         >
                             Go to register window
                         </Button>
                     </Link>
-                    <Box sx={{paddingTop: "10px"}}>
-                        <Button
-                            width="100%"
-                            style={{backgroundColor: "#fab921"}}
-                            onClick={() => demoLogin()}
-                        >
-                            Login as a guest
-                        </Button>
-                    </Box>
+                        <PopUp/>
                 </div>
             </div>
             <div className="login popup-message" >
