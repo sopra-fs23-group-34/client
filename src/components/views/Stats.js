@@ -29,7 +29,7 @@ const Stats = () => {
             catch (error) {
                 if (error.response.data.status === 404) {
                     const newUserStats = {
-                        "gamesPlayed": 0, 
+                        "multiplayerGamesPlayed": 0, 
                         "gamesWon": 0, 
                         "winRatio":0, 
                         "highScore":0}
@@ -60,14 +60,14 @@ const Stats = () => {
                 boxShadow:"none"
             }}>Statistics</Item>
             <Grid container spacing={0} sx={{
-                    width: "60%",
+                    width: "100%",
                     margin: "auto",
                     alignItems: "stretch",
                     alignContent: "normal",
                     justifyContent: "space-around"
                 }}>
                 <Grid item xs={4} sm={3} md={2.5} className='stats float'>
-                    <Item className='stats number'>{userstats.gamesPlayed}</Item>
+                    <Item className='stats number'>{userstats.multiplayerGamesPlayed}</Item>
                     <Item className='stats title'>Games played</Item>
                 </Grid>
                 <Grid item xs={4} sm={3} md={2.5} className='stats float'>
@@ -83,18 +83,12 @@ const Stats = () => {
                     <Item className='stats title'>Highscore</Item>
                 </Grid>
             </Grid>
-            <Grid container spacing={3} sx={{ justifyContent: "right"}}>
-                <Grid item xs={2}>
-
                         <Button
-                        width="100%"
+                        className="hub-button"
                         onClick={() => Hub()}
                         >
                             Hub
                         </Button>
-
-                </Grid>
-            </Grid>
         </div>
     )
     return (
