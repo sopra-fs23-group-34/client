@@ -58,7 +58,7 @@ const Stats = () => {
                 fontSize:21,
                 color: "whitesmoke",
                 boxShadow:"none"
-            }}>Statistics</Item>
+            }}>Multiplayer Statistics</Item>
             <Grid container spacing={0} sx={{
                     width: "100%",
                     margin: "auto",
