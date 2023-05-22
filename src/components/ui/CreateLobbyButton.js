@@ -7,7 +7,6 @@ export default function CreateLobbyButton(props) {
   const createLobby = async () => {
     const userId = sessionStorage.getItem("id");
     const response = await api(false, userId).post("/lobbys/create");
-    console.log(response.data);
     sessionStorage.setItem("gameCode", response.data);
     sessionStorage.setItem("host", true);
     try {

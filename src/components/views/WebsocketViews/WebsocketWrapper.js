@@ -30,7 +30,6 @@ export function WebsocketWrapperComponent() {
   };
   
   useEffect(() => {
-    console.log(msg);
     if (msg && (msg.topic === "RoundStart" || msg.topic === "FinalScoreStart" || msg.topic === "RoundScoreStart")) {
       sessionStorage.setItem("page", msg.topic);
       setPage(msg.topic);

@@ -29,7 +29,6 @@ const RoundScore = () => {
     const [roundCount, setRoundCount] = useState("");
 
     const handleRoundCounter = (msg) => {
-        console.log(msg);
         setRoundCount(msg.content["currentRound"]);
         setRoundLimit(msg.content["maxRounds"]);
     }
@@ -110,7 +109,6 @@ const RoundScore = () => {
           }
     }
     useEffect(() => {
-        console.log(sessionStorage.getItem("host"), sessionStorage.getItem("host")!=="true")
         if (sessionStorage.getItem("host")!=="true"){
             document.getElementById("gamecontinuer").style.display = "none";
         }

@@ -42,7 +42,6 @@ const Guesses = () => {
     }
 
     const handleRoundCounter = (msg) => {
-        console.log(msg);
         setRoundCount(msg.content["currentRound"]);
         setRoundLimit(msg.content["maxRounds"]);
     }
