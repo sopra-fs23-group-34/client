@@ -107,7 +107,7 @@ const Register = () => {
 
     useEffect(() => {
         const handleKeyDown = (event) => {
-            if (event.keyCode === 13 && (username && password && email)) {
+            if (event.keyCode === 13 && checkValid) {
                 registerAccount();
             }
         };
