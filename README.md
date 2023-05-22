@@ -5,12 +5,11 @@
 Food is a important part of our daily live, but most people have no idea what the nutrition values of the food on their plate are. Additionally, there are some people with diabetes or some other illness, where it is crucial to know how many carbs you are eating, to dose your medication correctly. With this web application we wanted to create a possibility for interested people to learn something about the nutrition values of food in a playful way.
 
 ## Technologies
-
 The Client is written with JavaScript, using the React library. Many components made use of the React component library [MUI](https://mui.com/).
-To communicate between the front- and backend, REST was used. Once a user is inside a Lobby, a Websocket connection is established.
+To communicate between the front- and backend, REST and a Websocked were used. Once a user is inside a Lobby, a Websocket connection is established and the communication during the game is via the websocket, this reduces the latency.
 
 ## High-level Components
-
+The first relevant high-level component is the App component since it serves as the main container of the game. The AppRouter defines the routing mechanism of the game and lets you navigate between different views. From the Hub, which is the main component after the login, you can access all views related to the game and player statistics. For instance, from there, you can start or join a game or look at the leaderboard. Also the WebSocket Wrapper is another relevant high-level component that handles all the communication and routing of a running game from the start of a new lobby.
 
 
 ## Launch and Deployment
