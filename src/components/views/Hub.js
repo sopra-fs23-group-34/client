@@ -14,6 +14,7 @@ import { useMediaQuery } from "@material-ui/core";
 import { Typography } from "@mui/material";
 import TitleGif from '../../resources/TitleGif.gif';
 import { useEffect } from "react";
+import AboutButton from "components/ui/AboutButton";
 
 
 export function BasicGrid() {
@@ -68,13 +69,9 @@ const Hub = () => {
     const maxMediumSize = useMediaQuery("(max-width: 600px)");
     return (
         <BaseContainer margin="auto" className="hub container">
+<AboutButton/>
             <img src={TitleGif} alt={'titleAnmimation'} style={{width: '100%', height: 'auto'}}/>
             <h3>Welcome back, {sessionStorage.getItem("username")}!</h3>
-            <Typography variant={maxMediumSize ?  "h7" : "h5"} sx={{
-                textShadow: "2px 2px #000000",
-                textAlign: "center"
-            }}>
-            </Typography>
             <BasicGrid/>
         </BaseContainer>
     );

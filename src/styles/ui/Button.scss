@@ -37,4 +37,9 @@
             color: white;
         }
     }
+    &.about-button {
+        margin-left: auto;
+        margin-right: 0px;
+        background-color: $accent;
+    }
 }
