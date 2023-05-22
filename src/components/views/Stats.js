@@ -66,19 +66,19 @@ const Stats = () => {
                     alignContent: "normal",
                     justifyContent: "space-around"
                 }}>
-                <Grid item xs={4} sm={3} md={2.5} className='stats float'>
+                <Grid item xs={5.7} sm={2.85}  className='stats float'>
                     <Item className='stats number'>{userstats.multiplayerGamesPlayed}</Item>
                     <Item className='stats title'>Games played</Item>
                 </Grid>
-                <Grid item xs={4} sm={3} md={2.5} className='stats float'>
+                <Grid item xs={5.7} sm={2.85} className='stats float'>
                     <Item className='stats number'>{userstats.gamesWon}</Item>
                     <Item className='stats title'>Games won</Item>
                 </Grid>
-                <Grid item xs={4} sm={3} md={2.5} className='stats float'>
+                <Grid item xs={5.7} sm={2.85} className='stats float'>
                     <Item className='stats number'>{Math.round((userstats.winRatio*100 + Number.EPSILON) * 100) / 100}%</Item>
                     <Item className='stats title'>Win ratio</Item>
                 </Grid>
-                <Grid item xs={4} sm={3} md={2.5} className='stats float'>
+                <Grid item xs={5.7} sm={2.85} className='stats float'>
                     <Item className='stats number'>{userstats.highScore}</Item>
                     <Item className='stats title'>Highscore</Item>
                 </Grid>
