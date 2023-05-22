@@ -208,7 +208,7 @@ const Leaderboard = () => {
 
     if (users) {
         content = (
-            <div className = "leaderboard-wrapper">
+            <div  className = "leaderboard-wrapper">
                 <Grid container spacing={3} className='leaderboard-base'>
                     <Box item xs={3}
                     sx={{
@@ -274,37 +274,29 @@ const Leaderboard = () => {
             <Button onClick={handleAddRow}>Compare against your own Stats</Button>
           <Button onClick={handleClose}>Back</Button>
         </DialogActions>
-      </Dialog>
-                    <Grid container spacing={3} sx={{justifyContent:"space-between", marginTop:"0"}}>
-                        <Grid sx={{marginLeft:"3.5%", paddingTop:"4%", marginTop:"2%"}}>
-
-                                <Button
-                                    onClick={() => moveToMe()}
-                                    >find me
-                                </Button>
-
-                        </Grid>
-                        <Grid sx={{ paddingTop:"4%", marginTop:"2%"}}>
-
-                                <Button
-                                    onClick={() => moveToTop()}
-                                    >Go to Top
-                                </Button>
-
-                        </Grid>
-                        <Grid sx={{
-                            paddingTop:"4%", marginTop:"2%"
-                        }}>
-
-                                <Button style={{marginLeft:"auto", marginRight:"0"}}
+            </Dialog>
+            <Grid container spacing={3} sx={{justifyContent:"space-between", marginTop:"0"}}>
+                <Grid item xs={4}>
+                    <Button style={{width:"100%"}}
+                                onClick={() => moveToMe()}
+                                >find me
+                            </Button>
+                </Grid>
+                <Grid item xs={4}>
+                    <Button style={{width:"100%"}}
+                                onClick={() => moveToTop()}
+                                >Go to Top
+                            </Button>
+                </Grid>
+                <Grid item xs={4}>
+                        <Button style={{width:"100%"}}
                                     onClick={() => Hub()}
                                 >
                                 Hub
-                                </Button>
-
+                        </Button>
+                    </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
         </div>
         )
     }

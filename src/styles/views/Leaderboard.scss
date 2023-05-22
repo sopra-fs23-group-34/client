@@ -33,9 +33,20 @@
     }
     & .leaderboard-wrapper {
         width: 100%;
-        & .leaderboard-base {
+        @media (min-width: 868px) {
             width: 60%;
-            margin: auto;
+        }
+        & .leaderboard-base {
+            width: 100%; // Reset the width for mobile
+            justify-content: center;
+            margin-left:0% ;
+            margin-top: 1%;
+
+            @media (min-width: 868px) {
+                width: 60%;
+                margin: auto;
+                align:center;
+            }
         }
         & .leaderboard-header {
             flex-direction: row;
