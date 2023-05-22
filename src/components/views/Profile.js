@@ -196,7 +196,7 @@ const Profile = () => {
                         <Button className="profile button-container"
                                 onClick={() => gotoHub()}
                         >
-                            Back to hub
+                            Hub
                         </Button>
                     </div>
                 </div>

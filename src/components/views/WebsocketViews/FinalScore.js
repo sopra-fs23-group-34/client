@@ -110,7 +110,7 @@ const FinalScore = () => {
                         <Button width="100%"
                                 onClick={
                                     () => leaveGame()}>
-                            Back to Hub
+                            Hub
                         </Button>
                     </Link>
                 </div>

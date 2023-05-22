@@ -274,27 +274,27 @@ const Leaderboard = () => {
             <Button onClick={handleAddRow}>Compare against your own Stats</Button>
           <Button onClick={handleClose}>Back</Button>
         </DialogActions>
-            </Dialog>
+                    </Dialog>
+                </Grid>
             <Grid container spacing={3} sx={{justifyContent:"space-between", marginTop:"0"}}>
-                <Grid item xs={4}>
-                    <Button style={{width:"100%"}}
-                                onClick={() => moveToMe()}
-                                >find me
-                            </Button>
-                </Grid>
-                <Grid item xs={4}>
-                    <Button style={{width:"100%"}}
-                                onClick={() => moveToTop()}
-                                >Go to Top
-                            </Button>
-                </Grid>
-                <Grid item xs={4}>
+                    <Grid item xs={4}>
                         <Button style={{width:"100%"}}
-                                    onClick={() => Hub()}
-                                >
-                                Hub
+                                onClick={() => Hub()}
+                            >
+                            Hub
                         </Button>
                     </Grid>
+                    <Grid item xs={4}>
+                        <Button style={{width:"100%"}}
+                                onClick={() => moveToTop()}
+                                >Go to Top
+                        </Button>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Button style={{width:"100%"}}
+                                onClick={() => moveToMe()}
+                                >find me
+                        </Button>
                     </Grid>
                 </Grid>
         </div>
