@@ -17,7 +17,7 @@ import HelpPage from 'components/ui/HelpPage';
 import { useMediaQuery } from "@material-ui/core";
 import Tooltip from '@mui/material/Tooltip';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-import QRCode from "react-qr-code";
+
 
 const Player = ({user}) => (
     
@@ -117,8 +117,9 @@ function renderTop(props) {
         }
       };
 
-      const handleCopyToClipboardOpen = () => {
-        navigator.clipboard.writeText(sessionStorage.getItem('gameCode'))
+    const handleCopyToClipboardOpen = () => {
+        navigator.clipboard.writeText( "url: https://sopra-fs23-group-34-client.oa.r.appspot.com/\n" +
+        "gamecode: " + sessionStorage.getItem('gameCode'))
         setOpenTooltip(true)
       }
       async function handleCopyToClipboardClose() {
@@ -250,12 +251,6 @@ function renderTop(props) {
 
           </ClickAwayListener>
             </p>
-            <QRCode
-            size={256}
-            style={{ height: "auto", maxWidth: "10%"}}
-            value={sessionStorage.getItem('gameCode')}
-            viewBox={`0 0 256 256`}
-            />
             {hostview}
         </BaseContainer>
     );
