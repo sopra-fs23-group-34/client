@@ -9,7 +9,10 @@ The Client is written with JavaScript, using the React library. Many components 
 To communicate between the front- and backend, REST and a Websocked were used. Once a user is inside a Lobby, a Websocket connection is established and the communication during the game is via the websocket, this reduces the latency.
 
 ## High-level Components
-The first relevant high-level component is the App component since it serves as the main container of the game. The AppRouter defines the routing mechanism of the game and lets you navigate between different views. From the Hub, which is the main component after the login, you can access all views related to the game and player statistics. For instance, from there, you can start or join a game or look at the leaderboard. Also the WebSocket Wrapper is another relevant high-level component that handles all the communication and routing of a running game from the start of a new lobby.
+The first relevant high-level component is the [App](/src/App.js) component since it serves as the main container of the game. \
+The [AppRouter](/src/components/routing/routers/AppRouter.js) defines the routing mechanism of the game and lets you navigate between different views. \
+From the [Hub](/src/components/views/Hub.js), which is the main component after the login, you can access all views related to the game and player statistics. For instance, from there, you can start or join a game or look at the leaderboard. \
+Also the [WebSocket Wrapper](/src/components/views/WebsocketViews/WebsocketWrapper.js) is another relevant high-level component that handles all the communication and routing of a running game from the start of a new lobby.
 
 
 ## Launch and Deployment
