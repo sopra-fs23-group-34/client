@@ -2,7 +2,7 @@ import { Spinner } from "components/ui/Spinner";
 import { handleError, api } from "helpers/api";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Box, Grid, ListItemButton, Typography } from "@mui/material";
+import { Alert, AlertTitle, Box, Grid, ListItemButton, Typography } from "@mui/material";
 import "styles/views/Leaderboard.scss";
 import * as React from 'react';
 import ListItem from '@mui/material/ListItem';
@@ -51,7 +51,7 @@ const Leaderboard = () => {
     const [users, setUsers] = useState(null);
     const [user, setUser] = useState([]);
     const [me, setMe] = useState([]);
-
+    const [alertStatus, setAlertStatus] = useState(false);
     const [userOwnStats, setUserOwnStats] = useState([]);
     const history = useHistory();
     const listRef = React.createRef();
@@ -173,6 +173,9 @@ const Leaderboard = () => {
         return user.userId === parseInt(sessionStorage.getItem('id'));
     }
     function moveToMe() {
+        if (sessionStorage.getItem("guestUser") === "true") {
+            setAlertStatus(true);
+        }
         listRef.current.scrollToItem(users.indexOf(users.find(findUser)), "center")
     }
     function moveToTop() {
@@ -181,14 +184,21 @@ const Leaderboard = () => {
     function Hub() {
         history.push("/hub");
     }
-    useEffect(() => {
-        let ignore = false;
-        if (!ignore && listRef.current)  {
-            moveToMe()
-        }
-        return () => { ignore = true; }
-        },);
 
+    useEffect(() => {
+        if (listRef.current)  {
+            moveToMe();
+        }
+        },[]);
+
+    useEffect(() => {
+        async function getGuestStatus() {
+            if (sessionStorage.getItem("guestUser") === "true") {
+                setAlertStatus(true);
+            }
+        }
+        getGuestStatus();
+    }, []);
 
     useEffect(() => {
         async function fetchData() {
@@ -305,6 +315,13 @@ const Leaderboard = () => {
         <BaseContainer className="leaderboard container">
             <h2>Global Leaderboard</h2>
             {content}
+            <div className="leaderboard popup-message">
+            {alertStatus && (
+                <Alert severity="info" onClose={() => setAlertStatus(false)} >
+                    {me.username}: <strong>You are using a Guest Account, your stats are not being tracked.</strong>
+                </Alert>
+            )}
+            </div>
         </BaseContainer>
     )
 }

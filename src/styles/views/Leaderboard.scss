@@ -42,7 +42,7 @@
             margin-left: 0%;
             margin-top: 1%;
             @media (min-width: 868px) {
-                width: 60%;
+                width: 100%;
                 margin: auto;
             }
         }
@@ -143,6 +143,12 @@
             width: 16%;
             text-align: center;
         }
+    }
+    &.popup-message {
+        margin-top: 2em;
+        /* we include the center mixin defined in _theme.scss and save three duplicate lines :) */
+        @include center;
+        flex-direction: column;
     }
 }
 

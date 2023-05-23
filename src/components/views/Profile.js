@@ -49,6 +49,7 @@ const Profile = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [timerStart, setTimerStart] = useState(false);
     const [validCredentials, setValidCredentials] = useState(false);
+    const [alertStatus, setAlertStatus] = useState(false);
 
 
     useEffect(() => {
@@ -81,7 +82,14 @@ const Profile = () => {
         setTimerStart(true);
         setTimerStart(false);
     }
-
+    useEffect(() => {
+        async function getGuestStatus() {
+            if (sessionStorage.getItem("guestUser") === "true") {
+                setAlertStatus(true);
+            }
+        }
+        getGuestStatus();
+    }, []);
     const checkValid = () => {
         // check username for valid length and no empty spaces
         if (username.length > 3 && username.length < 20 && !username.includes(' ')) {
@@ -188,6 +196,7 @@ const Profile = () => {
                     <div className="profile button-container">
                         <Button className="profile button-container"
                                 onClick={() => gotoPassword()}
+                                disabled={sessionStorage.getItem("guestUser") === "true"}
                         >
                             Change password
                         </Button>
@@ -199,23 +208,26 @@ const Profile = () => {
                             Hub
                         </Button>
                     </div>
-                </div>
-            </div>
-            <div className="profile popup-message">
+                    <div className="profile popup-message">
                 {statusInfo && (
                     <Alert severity="info" onClose={handleCloseInfo}>
                         <AlertTitle>Profile information successfully changed</AlertTitle>
                         Your new information is saved - <strong>Now go and play!</strong>
                     </Alert>
                 )}
-            </div>
-            <div className="profile popup-message">
                 {statusError && (
                     <Alert severity="error" onClose={handleCloseError}>
                         <AlertTitle>Failed to update</AlertTitle>
                         {errorMessage} - <strong>Try again with a different one!</strong>
                     </Alert>
                 )}
+                {alertStatus && (
+                <Alert severity="info" onClose={() => setAlertStatus(false)} >
+                    {sessionStorage.getItem("username")}: <strong>You are using a Guest Account, you cannot edit your profile.</strong>
+                </Alert>
+                )}
+            </div>
+            </div>
             </div>
         </BaseContainer>
     );
