@@ -54,7 +54,13 @@
     & .hub-button {
         float: left;
         width: 22%;
-        margin-top: 10%;
+        margin-top: 5%;
         margin-left: 1%;
+    }
+    &.popup-message {
+        margin-top: 2em;
+        /* we include the center mixin defined in _theme.scss and save three duplicate lines :) */
+        @include center;
+        flex-direction: column;
     }
 }

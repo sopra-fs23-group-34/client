@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Alert, Grid } from '@mui/material';
 import BaseContainer from 'components/ui/BaseContainer';
 import { Button } from 'components/ui/Button';
 import Item from 'components/ui/Item';
@@ -13,6 +13,8 @@ const Stats = () => {
     const [userstats, setUserstats] = React.useState([]);
     const history = useHistory();
     const id = sessionStorage.getItem("id");
+    const [alertStatus, setAlertStatus] = React.useState(false);
+
 
     function Hub() {
         history.push("/hub");
@@ -35,6 +37,7 @@ const Stats = () => {
                         "highScore":0}
                     
                     setUserstats(newUserStats)
+                    setAlertStatus(true);
                 }
                 else {
                 console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
@@ -83,6 +86,13 @@ const Stats = () => {
                     <Item className='stats title'>Highscore</Item>
                 </Grid>
             </Grid>
+            <div className="stats popup-message">
+            {alertStatus && (
+                <Alert severity="info" onClose={() => setAlertStatus(false)} >
+                    {user.username}: <strong>You are using a Guest Account, your stats are not being tracked.</strong>
+                </Alert>
+            )}
+            </div>
                         <Button
                         className="hub-button"
                         onClick={() => Hub()}
@@ -95,6 +105,7 @@ const Stats = () => {
         <BaseContainer className="stats container">
             <h1>{user.username}</h1>
             {content}
+            
         </BaseContainer>
     )
 }
