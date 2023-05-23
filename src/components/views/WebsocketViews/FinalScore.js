@@ -73,7 +73,7 @@ const FinalScore = () => {
                         <TableHead>
                             <TableRow>
                                 <TableCell>Rank</TableCell>
-                                <TableCell align='right'>Name</TableCell>
+                                <TableCell align='left'>Name</TableCell>
                                 <TableCell align='right'>Points</TableCell>
                             </TableRow>
                         </TableHead>
@@ -86,7 +86,7 @@ const FinalScore = () => {
                                                 {}
                                 }>
                                     <TableCell>{index + 1}</TableCell>
-                                    <TableCell align='right'>{key}</TableCell>
+                                    <TableCell align='left'>{key}</TableCell>
                                     <TableCell align='right'>{value}</TableCell>
                                 </TableRow>
                             ))}
