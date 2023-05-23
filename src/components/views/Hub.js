@@ -25,7 +25,7 @@ export function BasicGrid() {
     }, []);
 
     return (
-        <Box sx={{flexGrow: 1 , width:maxMediumSize ?  "100%" : "100%"}} >
+        <Box sx={{flexGrow: 1 , width:"100%"}} >
             <Grid container spacing={maxMediumSize ? 1 : 3} sx={{
                 width: "100%",
                 margin: "0% -0.8%",

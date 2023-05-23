@@ -79,9 +79,9 @@ const Login = () => {
     }
 
     useEffect(() => {
-        const handleKeyDown = (event) => {
+        const handleKeyDown = async(event) => {
             if (event.keyCode === 13 && (username && password)) {
-                doLogin();
+                await doLogin();
             }
         };
         document.addEventListener("keydown", handleKeyDown);

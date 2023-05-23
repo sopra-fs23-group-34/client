@@ -117,15 +117,15 @@ function renderTop(props) {
         }
       };
 
-    const handleCopyToClipboardOpen = () => {
-        navigator.clipboard.writeText( "url: https://sopra-fs23-group-34-client.oa.r.appspot.com/\n" +
-        "gamecode: " + sessionStorage.getItem('gameCode'))
-        setOpenTooltip(true)
+    const handleCopyToClipboardOpen = async() => {
+        await navigator.clipboard.writeText( "url: https://sopra-fs23-group-34-client.oa.r.appspot.com/\n" +
+        "gamecode: " + sessionStorage.getItem('gameCode'));
+        setOpenTooltip(true);
       }
       async function handleCopyToClipboardClose() {
         await new Promise(resolve => setTimeout(resolve, 300));
 
-        setOpenTooltip(false)
+        setOpenTooltip(false);
       }
     // the effect hook can be used to react to change in your component.
     // in this case, the effect hook is only run once, the first time the component is mounted
@@ -140,7 +140,7 @@ function renderTop(props) {
             }}>
                 <Grid container className='lobby grid'  spacing={maxMediumSize ?  1 : 8} >
                     <Grid className='lobby item' sx={{paddingTop:0}} item  xs={12}  sm={sessionStorage.getItem('host') === 'true' ? 6: 12} >
-                    <Typography className='lobby user-list'>User count: {users.length}</Typography>
+                    <Typography className='lobby user-count'>User count: {users.length}</Typography>
                         <VariableSizeList
                             align='right'
                             height={maxMediumSize ?  160 : 400}

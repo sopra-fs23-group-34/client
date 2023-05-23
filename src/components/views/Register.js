@@ -106,9 +106,9 @@ const Register = () => {
     }
 
     useEffect(() => {
-        const handleKeyDown = (event) => {
+        const handleKeyDown = async(event) => {
             if (event.keyCode === 13 && checkValid) {
-                registerAccount();
+                await registerAccount();
             }
         };
         document.addEventListener("keydown", handleKeyDown);

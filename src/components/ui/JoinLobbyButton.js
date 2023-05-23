@@ -20,9 +20,9 @@ export default function FormDialog(props) {
   const history = useHistory();
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleKeyDown = async(event) => {
         if (event.keyCode === 13 && (lobbyKey)) {
-            joinLobby();
+            await joinLobby();
         }
     };
     document.addEventListener("keydown", handleKeyDown);

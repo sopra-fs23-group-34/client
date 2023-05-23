@@ -39,13 +39,11 @@
         & .leaderboard-base {
             width: 100%; // Reset the width for mobile
             justify-content: center;
-            margin-left:0% ;
+            margin-left: 0%;
             margin-top: 1%;
-
             @media (min-width: 868px) {
                 width: 60%;
                 margin: auto;
-                align:center;
             }
         }
         & .leaderboard-header {
@@ -58,7 +56,6 @@
                 font-weight: 800;
                 min-width: max-content;
                 margin-right: 0;
-                margin-left: 0;
                 width: 16%;
                 text-align: center;
             }
@@ -73,10 +70,11 @@
             }
             &.totalscore {
                 margin-left: auto;
-                margin-right: 0;
+                margin-right: 4%;
                 font-family: $fontMono;
                 font-weight: 800;
                 width: auto;
+                text-align: right;
             }
         }
     }
@@ -137,7 +135,6 @@
             font-weight: 500;
         }
         &.placing {
-            margin-left: 2px;
             font-family: $fontMono;
             font-weight: 800;
             min-width: max-content;

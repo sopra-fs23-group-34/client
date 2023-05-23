@@ -29,9 +29,9 @@ export default function FormDialog(props) {
     setTimerStart(false);
 }
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleKeyDown = async(event) => {
         if (event.keyCode === 13 && (lobbyKey)) {
-            guestLogin();
+              await guestLogin();
         }
     };
     document.addEventListener("keydown", handleKeyDown);
@@ -45,7 +45,6 @@ export default function FormDialog(props) {
   const guestLogin = async () => {
     try {
       const r = await api(false, false).post('/users/login/guestUser');
-      console.log(r);
 
       const user = new User(r.data);
       sessionStorage.setItem('token', user.token);
