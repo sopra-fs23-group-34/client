@@ -1,4 +1,13 @@
-# The big diabetes Game
+# The Big Diabetes Game
+
+<p align="center">
+ <a href="https://github.com/sopra-fs23-group-34/client/actions">
+  <img src="https://github.com/sopra-fs23-group-34/client/workflows/Deploy%20Project%20to%20App%20Engine/badge.svg" alt="Deployment Status">
+ </a>
+ <a href="https://sonarcloud.io/project/overview?id=sopra-fs23-group-34_client">
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=sopra-fs23-group-34_client&metric=alert_status" alt="">
+ </a>
+</p>
 
 ## Introduction
 
