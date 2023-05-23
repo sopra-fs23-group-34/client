@@ -15,6 +15,7 @@ import 'animate.css';
 import useSound from "use-sound";
 import { clearStorage } from 'helpers/clearStorage';
 import FinalScoreGif from "../../../resources/FinalScoreGif.gif";
+import WinSound from "../../../resources/WinSound.mp3";
 
 
 const FinalScore = () => {
@@ -22,7 +23,7 @@ const FinalScore = () => {
     const {msg} = useContext(WebsocketWrapper);
     const [finalRanking, setFinalRanking] = useState([]);
     const [winner, setWinner] = useState([]);
-    const [playWinSound] = useSound('https://audio.marsupialgurgle.com/audio/partyhorngood.mp3', {volume: 0.5});
+    const [playWinSound] = useSound(WinSound, {volume: 0.5});
 
     const handleFinalScore = (msg) => {
         setFinalRanking(msg.content);

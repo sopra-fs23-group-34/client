@@ -8,6 +8,9 @@ import useSound from 'use-sound';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { clearStorage } from 'helpers/clearStorage';
 import { Button } from 'components/ui/Button';
+import TimeRunningOut from "../../../resources/TimeRunningOut.mp3";
+import SetSlider from "../../../resources/SetSlider.mp3";
+
 
 const Guesses = () => {
     const history = useHistory();
@@ -20,8 +23,8 @@ const Guesses = () => {
     const [calories, setCalories] = useState(400);
     const [roundScoreStart, setRoundScoreStart] = useState(false);
     const [update, setUpdate] = useState(0);
-    const [playSetSound] = useSound('https://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3', {volume: 0.5});
-    const [playTimeRunningOutSound] = useSound('https://www.euskaljakintza.com/ariketak/recursos/misc196.wav', {volume: 0.5});
+    const [playSetSound] = useSound(SetSlider, {volume: 0.5});
+    const [playTimeRunningOutSound] = useSound(TimeRunningOut, {volume: 0.5});
     const [roundLimit, setRoundLimit] = useState("");
     const [roundCount, setRoundCount] = useState("");
 
@@ -36,7 +39,7 @@ const Guesses = () => {
 
     const handleTimer = (msg) => {
         setTimer(msg.content);
-        if (timer === 5) {
+        if (timer === 6) {
             playTimeRunningOutSound();
         }
     }
