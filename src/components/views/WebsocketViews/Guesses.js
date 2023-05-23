@@ -124,15 +124,18 @@ const Guesses = () => {
     return (
         <BaseContainer>
             <div className="slider main">
-                <div className='slider form'>
-                <Button 
+            <div style={{clear:"both"}}>
+            <Button 
                     className="leave-button"
                     onClick={leaveGame}
                 >Leave game</Button>
-                    <div style={{clear:"both"}}>
+                <h2 style={{float: "right"}}>Round {roundCount}/{roundLimit}</h2>
+                </div>
+                <div className='slider form'>
+                
+                    
                     <h2 style={{marginBottom: 0, float: "left"}}>{timer}</h2>
-                    <h2 style={{float: "right"}}>Round {roundCount}/{roundLimit}</h2>
-                    </div>
+                    
                     
                     <div className='slider imageForm'>
                         {loading ? (
