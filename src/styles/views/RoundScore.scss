@@ -1,82 +1,85 @@
-@import 'styles/theme';
-
-.score {
-  &.container {
-    margin: 20px;
-    background: $background;
-    border-radius: $borderRadius;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: $dropShadow;
-  }
-  &.form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    font-size: 16px;
-    font-weight: 300;
-    padding: 20px;
-    border-radius: 0.75em;
-    background-color: $background;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    box-shadow: $dropShadow;
-  }
-  &.field {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  &.input {
-    height: 35px;
-    padding-left: 15px;
-    margin-left: -4px;
-    border: none;
-    border-radius: 0.75em;
-    margin-bottom: 20px;
-    background: transparentize(white, 0.85);
-    color: $textColor;
-  }
-  &.label {
-    color: $textColor;
-    margin-bottom: 10px;
-    text-transform: lowercase;
-    font-weight: 300;
-  }
-  &.button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 2em;
-  }
-
-  &.table {
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    border: 1px solid #ffffff;
-  }
-
-  &.th, &.td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ffffff;
-  }
-
-  &.th {
-    font-weight: bold;
-    border: 1px solid #ffffff;
-  }
-
-
-  &.td:first-child {
-    font-weight: bold;
-    border: 1px solid #ffffff;
-  }
-
-  .highlighted-row {
-    background-color: lightblue;
-  }
-
-}
+    @import 'styles/theme';
+    .score {
+        &.container {
+            margin: 20px;
+            background: $background;
+            border-radius: $borderRadius;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: $dropShadow;
+        }
+        & .score-wrapper {
+            justify-self: center;
+            margin: auto;
+            width: 100%;
+            margin-bottom: 4%;
+            @media (min-width: 868px) {
+                width: 50%;
+            }
+        }
+        &.form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 300;
+            padding: 20px;
+            border-radius: 0.75em;
+            background-color: $background;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            box-shadow: $dropShadow;
+        }
+        &.field {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        &.input {
+            height: 35px;
+            padding-left: 15px;
+            margin-left: -4px;
+            border: none;
+            border-radius: 0.75em;
+            margin-bottom: 20px;
+            background: transparentize(white, 0.85);
+            color: $textColor;
+        }
+        &.label {
+            color: $textColor;
+            margin-bottom: 10px;
+            text-transform: lowercase;
+            font-weight: 300;
+        }
+        &.button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2em;
+        }
+        &.table {
+            border-collapse: collapse;
+            width: 50%;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #ffffff;
+        }
+        &.th,
+        &.td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ffffff;
+        }
+        &.th {
+            font-weight: bold;
+            border: 1px solid #ffffff;
+            width: auto;
+        }
+        &.td:first-child {
+            font-weight: bold;
+            border: 1px solid #ffffff;
+        }
+        .highlighted-row {
+            background-color: lightblue;
+        }
+    }

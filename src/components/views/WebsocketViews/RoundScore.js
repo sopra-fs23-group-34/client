@@ -117,22 +117,15 @@ const RoundScore = () => {
     let rankingTable;
 
     rankingTable = (
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <div style={{
-                display: 'inline-block',
-                position: 'center',
-                justifyContent: 'center',
-                alignItems: 'center',
-                margin: 10
-            }}>
-                <TableContainer component={Paper} sx={{maxHeight: 200, minWidth: 300}}>
+            <div className="score-wrapper">
+                <TableContainer component={Paper} sx={{maxHeight: 200}}>
                     <Table sx={{
                         height: "max-content"
                     }} size="small" stickyHeader aria-label="ranking table">
                         <TableHead>
                             <TableRow>
                                 <TableCell>Rank</TableCell>
-                                <TableCell align='right'>Name</TableCell>
+                                <TableCell align='left'>Name</TableCell>
                                 <TableCell align='right'>Points</TableCell>
                             </TableRow>
                         </TableHead>
@@ -140,7 +133,7 @@ const RoundScore = () => {
                             {Object.entries(ranking).map(([key, value], index) => (
                                 <TableRow hover role="checkbox" className={key === sessionStorage.getItem("username") ? "score highlighted-row" : ""}>
                                     <TableCell>{index + 1}</TableCell>
-                                    <TableCell align='right'>{key}</TableCell>
+                                    <TableCell align='left'>{key}</TableCell>
                                     <TableCell align='right'>{value}</TableCell>
                                 </TableRow>
                             ))}
@@ -148,7 +141,6 @@ const RoundScore = () => {
                     </Table>
                 </TableContainer>
             </div>
-        </div>
     );
 
     let nutritionTable;
