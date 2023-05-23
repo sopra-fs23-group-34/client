@@ -29,6 +29,8 @@ const Guesses = () => {
     const [roundCount, setRoundCount] = useState("");
 
     const handleRoundScoreStart = (msg) => {
+        sessionStorage.removeItem("ranking");
+        sessionStorage.removeItem("playerGuesses");
         setRoundScoreStart(msg.content);
     }
     const handleFood = () => {

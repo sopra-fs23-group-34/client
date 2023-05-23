@@ -17,7 +17,6 @@ import HelpPage from 'components/ui/HelpPage';
 import { useMediaQuery } from "@material-ui/core";
 import Tooltip from '@mui/material/Tooltip';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-import QRCode from "react-qr-code";
 
 const Player = ({user}) => (
     

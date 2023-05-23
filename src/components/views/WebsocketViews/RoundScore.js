@@ -39,6 +39,8 @@ const RoundScore = () => {
     }
 
     const handleRoundStart = () => {
+        sessionStorage.removeItem("foodName");
+        sessionStorage.removeItem("foodLink");
         sessionStorage.setItem("roundCount", parseInt(sessionStorage.getItem("roundCount"))+1);
     }
 
@@ -98,7 +100,7 @@ const RoundScore = () => {
         }
     }
 
-    const continueGame = async() => {
+    const continueGame = async () => {
         const id = sessionStorage.getItem("id");
         const token = sessionStorage.getItem("token");
         const gameCode = sessionStorage.getItem("gameCode");
