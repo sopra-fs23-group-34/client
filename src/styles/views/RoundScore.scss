@@ -18,6 +18,15 @@
                 width: 50%;
             }
         }
+        & .score-wrapper2 {
+            justify-self: center;
+            margin: auto;
+            width: 100%;
+            margin-bottom: 4%;
+            @media (min-width: 868px) {
+                width: 75%;
+            }
+        }
         &.form {
             display: flex;
             flex-direction: column;

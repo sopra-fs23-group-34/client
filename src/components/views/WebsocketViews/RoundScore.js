@@ -12,7 +12,7 @@ import Paper from '@mui/material/Paper';
 import {useHistory} from 'react-router-dom';
 import { Button } from 'components/ui/Button';
 import { clearStorage } from 'helpers/clearStorage';
-import { Grid } from '@mui/material';
+import {Grid} from '@mui/material';
 import { api } from 'helpers/api';
 
 const RoundScore = () => {
@@ -146,26 +146,26 @@ const RoundScore = () => {
     let nutritionTable;
 
     nutritionTable = (
-        <div>
+        <div className='score-wrapper2'>
             <TableContainer component={Paper} sx={{maxHeight: 400}}>
                 <Table sx={{
-                    height: "max-content"
+                    height: "max-content",
                 }} size="small" stickyHeader aria-label="dense table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Player Name</TableCell>
-                            <TableCell align="right">Calories (kcal)</TableCell>
+                            <TableCell align="right">Protein&nbsp;(g)</TableCell>
                             <TableCell align="right">Fat&nbsp;(g)</TableCell>
                             <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                            <TableCell align="right">Calories (kcal)</TableCell>
                             <TableCell align="right">Points</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>Solution Values</TableCell>
-                            <TableCell align="right">{Math.round(solutionValues.calories)}</TableCell>
+                            <TableCell align="right">{Math.round(solutionValues.protein)}</TableCell>
                             <TableCell align="right">{Math.round(solutionValues.fat)}</TableCell>
                             <TableCell align="right">{Math.round(solutionValues.carbs)}</TableCell>
-                            <TableCell align="right">{Math.round(solutionValues.protein)}</TableCell>
+                            <TableCell align="right">{Math.round(solutionValues.calories)}</TableCell>
                             <TableCell align="right">---</TableCell>
                         </TableRow>
                     </TableHead>
@@ -173,10 +173,10 @@ const RoundScore = () => {
                         {Object.entries(playerGuesses).map(([name, {carbs, protein, fat, calories, points}]) => (
                             <TableRow key={name} className={name === sessionStorage.getItem("username") ? "score highlighted-row" : ""}>
                                 <TableCell component="th" scope="name">{name}</TableCell>
-                                <TableCell align="right">{calories[1].guessedValues}</TableCell>
+                                <TableCell align="right">{protein[1].guessedValues}</TableCell>
                                 <TableCell align="right">{fat[1].guessedValues}</TableCell>
                                 <TableCell align="right">{carbs[1].guessedValues}</TableCell>
-                                <TableCell align="right">{protein[1].guessedValues}</TableCell>
+                                <TableCell align="right">{calories[1].guessedValues}</TableCell>
                                 <TableCell align="right">{points[0].points}</TableCell>
                             </TableRow>
                         ))}
