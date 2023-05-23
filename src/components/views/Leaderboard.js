@@ -175,6 +175,7 @@ const Leaderboard = () => {
     function moveToMe() {
         if (sessionStorage.getItem("guestUser") === "true") {
             setAlertStatus(true);
+            return ;
         }
         listRef.current.scrollToItem(users.indexOf(users.find(findUser)), "center")
     }
