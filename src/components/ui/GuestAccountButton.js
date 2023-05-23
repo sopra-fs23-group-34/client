@@ -77,7 +77,7 @@ export default function FormDialog(props) {
         Guest login
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Create Guest Account?</DialogTitle>
+        <DialogTitle>Use Guest Account?</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Guest Accounts are one time use and don't track any statistics.
@@ -88,7 +88,7 @@ export default function FormDialog(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={guestLogin}>Create Guest Account</Button>
+          <Button onClick={guestLogin}>Use Guest Account</Button>
         </DialogActions>
       </Dialog>
     </div>

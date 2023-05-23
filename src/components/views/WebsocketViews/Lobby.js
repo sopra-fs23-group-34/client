@@ -17,7 +17,7 @@ import HelpPage from 'components/ui/HelpPage';
 import { useMediaQuery } from "@material-ui/core";
 import Tooltip from '@mui/material/Tooltip';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-
+import QRCode from "react-qr-code";
 
 const Player = ({user}) => (
     
@@ -127,6 +127,22 @@ function renderTop(props) {
 
         setOpenTooltip(false);
       }
+
+  const [isHovered, setIsHovered] = useState(false);
+
+  const buttonIn = () => {
+    setIsHovered(true);
+  };
+
+  const buttonOut = () => {
+    setIsHovered(false);
+  };
+
+  const buttonStyles = {
+    margin: '2%',
+    transition: 'transform 0.3s',
+    transform: isHovered ? 'scale(1.8)' : 'scale(1)', // Increase the size of the button on hover
+  };
     // the effect hook can be used to react to change in your component.
     // in this case, the effect hook is only run once, the first time the component is mounted
     // this can be achieved by leaving the second argument an empty array.
@@ -244,11 +260,10 @@ function renderTop(props) {
                 onClose={handleCopyToClipboardClose}
                 width="auto"
               >
-                <div style={{width:"auto"}}>
-                <Button style={{margin:"2%"}} onClick={handleCopyToClipboardOpen}>Lobby Code: {sessionStorage.getItem('gameCode')}</Button>
+                <div style={{width:"auto",}}>
+                <Button style={buttonStyles} onMouseEnter={buttonIn} onMouseLeave={buttonOut} onClick={handleCopyToClipboardOpen}>Lobby Code: {sessionStorage.getItem('gameCode')}</Button>
                 </div>
               </Tooltip>
-
           </ClickAwayListener>
             </p>
             {hostview}
