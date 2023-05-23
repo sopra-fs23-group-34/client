@@ -1,151 +1,134 @@
 @import 'styles/theme';
-
 .slider {
-  &.container {
-    margin-top: 2em;
-    min-height: 300px;
-    /* we include the center mixin defined in _theme.scss and save three duplicate lines :)  */
-    @include center;
-    flex-direction: column;
-  }
-
-  &.main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 80%;
-    max-width: 100em;
-    height: auto;
-    font-size: 15px;
-    font-weight: 300;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 20px;
-    border-radius: 0.75em;
-    background-color: $background;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    box-shadow: $dropShadow;
-    margin-inline: auto;
-    margin-bottom: 10px;
-  }
-
-  &.form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 95%;
-    height: auto;
-    font-size: 15px;
-    font-weight: 300;
-    padding: 2px 10px;
-    border-radius: 0.75em;
-    margin-inline: auto;
-    margin-bottom: 5px;
-  }
-
-  &.imageForm {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: auto;
-    border-radius: 0.75em;
-    margin-inline: auto;
-    margin-bottom: 5px;
-  }
-
-  &.field {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  &.input {
-    height: 35px;
-    padding-left: 15px;
-    margin-left: -4px;
-    border: none;
-    border-radius: 0.75em;
-    margin-bottom: 20px;
-    background: transparentize(white, 0.85);
-    color: $textColor;
-  }
-
-  &.label {
-    color: $textColor;
-    margin-bottom: 10px;
-    text-transform: lowercase;
-    font-weight: 300;
-  }
-
-  &.button-container {
-    display: flex;
-    justify-content: center;
-    width: 90%;
-    max-width: 100em;
-    margin-inline: auto;
-    margin-bottom: 10px;
-  }
-
-  &.text {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &.title {
-    position: relative;
-    margin-bottom: 0;
-    margin-top: 2px;
-    text-align: left;
-  }
-
-  &.count {
-    position: relative;
-    margin-bottom: 0;
-    text-align: right;
-  }
-
-  &.description {
-    position: relative;
-    margin-bottom: 2px;
-    margin-top: 0;
-  }
-
-  &.image {
-    max-width: 300px;
-    max-height: 300px;
-    object-fit: contain;
-    border-radius: 0.75em;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    height: auto;
-    width: 100%;
-  }
-
-  &.subtitle {
-    position: relative;
-    margin-bottom: 0;
-    margin-top: 2px;
-    text-align: center;
-  }
-
-  .loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
+    &.container {
+        margin-top: 2em;
+        min-height: 300px;
+        /* we include the center mixin defined in _theme.scss and save three duplicate lines :)  */
+        @include center;
+        flex-direction: column;
     }
-    100% {
-      transform: rotate(360deg);
+    &.main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 80%;
+        max-width: 100em;
+        height: auto;
+        font-size: 15px;
+        font-weight: 300;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        border-radius: 0.75em;
+        background-color: $background;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        box-shadow: $dropShadow;
+        margin-inline: auto;
+        margin-bottom: 10px;
     }
-  }
-
+    &.form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 95%;
+        height: auto;
+        font-size: 15px;
+        font-weight: 300;
+        padding: 2px 10px;
+        border-radius: 0.75em;
+        margin-inline: auto;
+        margin-bottom: 5px;
+    }
+    &.imageForm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: auto;
+        border-radius: 0.75em;
+        margin-inline: auto;
+        margin-bottom: 5px;
+    }
+    &.field {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    &.input {
+        height: 35px;
+        padding-left: 15px;
+        margin-left: -4px;
+        border: none;
+        border-radius: 0.75em;
+        margin-bottom: 20px;
+        background: transparentize(white, 0.85);
+        color: $textColor;
+    }
+    &.label {
+        color: $textColor;
+        margin-bottom: 10px;
+        text-transform: lowercase;
+        font-weight: 300;
+    }
+    &.button-container {
+        display: flex;
+        justify-content: center;
+        width: 90%;
+        max-width: 100em;
+        margin-inline: auto;
+        margin-bottom: 10px;
+    }
+    &.text {
+        display: flex;
+        justify-content: space-between;
+    }
+    &.title {
+        position: relative;
+        margin-bottom: 0;
+        margin-top: 2px;
+        text-align: left;
+    }
+    &.count {
+        position: relative;
+        margin-bottom: 0;
+        text-align: right;
+    }
+    &.description {
+        position: relative;
+        margin-bottom: 2px;
+        margin-top: 0;
+    }
+    &.image {
+        max-width: 300px;
+        max-height: 300px;
+        object-fit: contain;
+        border-radius: 0.75em;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        width: 100%;
+    }
+    &.subtitle {
+        position: relative;
+        margin-bottom: 0;
+        margin-top: 2px;
+        text-align: center;
+    }
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 }
