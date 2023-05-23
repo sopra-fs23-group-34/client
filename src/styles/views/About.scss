@@ -9,12 +9,13 @@
     box-sizing: border-box;
     padding-left: 4%;
     overflow-y: auto;
+    overflow-x: hidden;
     background-color: #555550;
 }
 
 .about-logo {
     height: 4.5em;
-    width: 33em;
+    width: 98%;
     margin-bottom: 2em;
     flex-shrink: 0;
     filter: drop-shadow($dropShadow);
@@ -38,7 +39,6 @@
     margin-top: 0;
     margin-bottom: .7em;
     font-size: 2rem;
-    height: 1.6em;
     font-weight: 600;
     color: #4e92d6df;
     border-bottom: .09em solid $textColor;
