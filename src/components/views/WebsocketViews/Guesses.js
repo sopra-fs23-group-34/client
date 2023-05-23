@@ -20,8 +20,8 @@ const Guesses = () => {
     const [calories, setCalories] = useState(400);
     const [roundScoreStart, setRoundScoreStart] = useState(false);
     const [update, setUpdate] = useState(0);
-    const [playSetSound] = useSound('http://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3', {volume: 0.5});
-    const [playTimeRunningOutSound] = useSound('http://www.euskaljakintza.com/ariketak/recursos/misc196.wav', {volume: 0.5});
+    const [playSetSound] = useSound('https://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3', {volume: 0.5});
+    const [playTimeRunningOutSound] = useSound('https://www.euskaljakintza.com/ariketak/recursos/misc196.wav', {volume: 0.5});
     const [roundLimit, setRoundLimit] = useState("");
     const [roundCount, setRoundCount] = useState("");
 

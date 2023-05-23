@@ -22,7 +22,7 @@ const FinalScore = () => {
     const {msg} = useContext(WebsocketWrapper);
     const [finalRanking, setFinalRanking] = useState([]);
     const [winner, setWinner] = useState([]);
-    const [playWinSound] = useSound('http://audio.marsupialgurgle.com/audio/partyhorngood.mp3', {volume: 0.5});
+    const [playWinSound] = useSound('https://audio.marsupialgurgle.com/audio/partyhorngood.mp3', {volume: 0.5});
 
     const handleFinalScore = (msg) => {
         setFinalRanking(msg.content);
