@@ -44,7 +44,7 @@ const About = () => {
                                     <EmojiPeopleIcon className='member-image'></EmojiPeopleIcon>
                                     </div>
                                 </div>
-                                <p className="member-name">Nataell</p>
+                                <a href="https://www.github.com/nataell95" className="member-name">Nataell</a>
                             </div>
                             <div className="roles-container">
                                 <span className="member-role">frontend</span>
@@ -58,7 +58,7 @@ const About = () => {
                                     <DirectionsBikeIcon className='member-image'></DirectionsBikeIcon>
                                     </div>
                                 </div>
-                                <p className="member-name">André</p>
+                                <a href="https://www.github.com/sugar-free55" className="member-name">André</a>
                             </div>
                             <div className="roles-container">
                                 <span className="member-role">frontend</span>
@@ -71,7 +71,7 @@ const About = () => {
                                     <AccessibilityNewIcon className='member-image'></AccessibilityNewIcon>
                                     </div>
                                 </div>
-                                <p className="member-name">Nico</p>
+                                <a href="https://www.github.com/nizonic" className="member-name">Nico</a>
                             </div>
                             <div className="roles-container">
                                 <span className="member-role">frontend</span>
@@ -84,7 +84,7 @@ const About = () => {
                                     <ElderlyIcon className='member-image'></ElderlyIcon>
                                     </div>
                                 </div>
-                                <p className="member-name">Maurice</p>
+                                <a href="https://www.github.com/mauhess" className="member-name">Maurice</a>
                             </div>
                             <div className="roles-container">
                                 <span className="member-role">backend</span>
@@ -97,7 +97,7 @@ const About = () => {
                                     <SelfImprovementIcon className='member-image'></SelfImprovementIcon>
                                     </div>
                                 </div>
-                                <p className="member-name">Elias</p>
+                                <a href="https://www.github.com/Bye-B" className="member-name">Elias</a>
                             </div>
                             <div className="roles-container">
                                 <span className="member-role">backend</span>
