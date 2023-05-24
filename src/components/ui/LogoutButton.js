@@ -10,10 +10,8 @@ export default function LogoutButton(props) {
         const Id = sessionStorage.getItem('id');
         const guestUser = sessionStorage.getItem('guestUser');
         if (guestUser === "true") {
-          console.log("guest user true");
           await api(token, Id).post('/users/logout/guestUser/'+Id)
         } else {
-          console.log("guest user false");
           await api(token, Id).post('/users/logout/'+Id)
         }
         sessionStorage.removeItem('id');

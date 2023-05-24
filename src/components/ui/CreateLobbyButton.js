@@ -2,6 +2,7 @@ import { Button } from "components/ui/Button";
 import { useHistory } from "react-router-dom";
 import IconPlusCircle from "resources/PlusCircleIcon";
 import { api } from "helpers/api";
+
 export default function CreateLobbyButton(props) {
   const history = useHistory();
   const createLobby = async () => {

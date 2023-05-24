@@ -59,6 +59,7 @@ const FinalScore = () => {
     useEffect(() => {
         handleMessage(msg);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [msg, history]);
 
 
@@ -80,7 +81,7 @@ const FinalScore = () => {
                         </TableHead>
                         <TableBody>
                             {Object.entries(finalRanking).map(([key, value], index) => (
-                                <TableRow hover role="checkbox" style={
+                                <TableRow key={index} hover role="checkbox" style={
                                     index === 0 ? { backgroundColor: 'gold' } :
                                         index === 1 ? { backgroundColor: 'silver' } :
                                             index === 2 ? { backgroundColor: '#cd8c32' } :

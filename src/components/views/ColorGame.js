@@ -1,21 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useHistory} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/ColorGame.scss';
 import BaseContainer from "components/ui/BaseContainer";
-import PropTypes from "prop-types";
-import {Alert, AlertTitle, Box} from "@mui/material";
-import { useMediaQuery } from "@material-ui/core";
-import useSound from "use-sound";
 
 
 const ColorGame = ({ blink }) => {
-    const maxMediumSize = useMediaQuery("(max-width: 600px)");
-    const history = useHistory();
-
-    const [screenWidth, setScreenWidth] = useState((window.innerWidth));
-    const [screenHeight, setScreenHeight] = useState((window.innerHeight));
-
     const [cellWidth, setCellWidth] = useState((window.innerWidth)/4);
     const [cellHeight, setCellHeight] = useState((window.innerHeight)/4);
     const [fontSize, setFontSize] = useState((window.innerHeight)/40);
@@ -39,13 +28,10 @@ const ColorGame = ({ blink }) => {
     };
   },  [cellWidth, cellHeight, fontSize]);
 
-
-    const [guess, setGuess] = useState(null);
     const [categoryToGuessDisplay, setCategoryToGuessDisplay] =  useState("text");
     const [colorToGuess, setColorToGuess] = useState("white");
     const [count, setCount] = useState(0);
 
-    const fontColors = ['brown', 'orange', 'yellow', 'green', 'white', 'black', 'blue', 'red', 'purple'];
     const allValuesDisplay = ["background-color", "font-color", "text"];
     const colorsAndRgb = new Map([
         ["brown", "rgb(150, 75, 0)"],

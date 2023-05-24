@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Spinner } from "components/ui/Spinner";
 import { handleError, api } from "helpers/api";
 import { useEffect, useState } from "react";

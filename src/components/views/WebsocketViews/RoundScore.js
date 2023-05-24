@@ -90,6 +90,7 @@ const RoundScore = () => {
 
     useEffect(() => {
         handleMessage(msg);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [msg, history]);
 
     const leaveGame = () => {
@@ -136,7 +137,7 @@ const RoundScore = () => {
                         </TableHead>
                         <TableBody>
                             {Object.entries(ranking).map(([key, value], index) => (
-                                <TableRow hover role="checkbox" className={key === sessionStorage.getItem("username") ? "score highlighted-row" : ""}>
+                                <TableRow key={index} hover role="checkbox" className={key === sessionStorage.getItem("username") ? "score highlighted-row" : ""}>
                                     <TableCell>{index + 1}</TableCell>
                                     <TableCell align='left'>{key}</TableCell>
                                     <TableCell align='right'>{value}</TableCell>

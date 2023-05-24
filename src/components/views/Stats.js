@@ -46,8 +46,8 @@ const Stats = () => {
             }
         }
         }
-
         fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     let content;

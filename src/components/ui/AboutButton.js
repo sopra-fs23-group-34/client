@@ -1,12 +1,10 @@
 import { Dialog, IconButton } from "@mui/material";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { useHistory } from "react-router-dom";
 import React from "react";
 import About from "../views/About.js";
 import CloseIcon from '@mui/icons-material/Close';
 export default function AboutButton() {
     const [open, setOpen] = React.useState(false);
-    const history = useHistory();
 
     const handleClickOpen = () => {
         setOpen(true);

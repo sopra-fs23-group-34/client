@@ -76,7 +76,6 @@ function renderTop(props) {
                     user={users[index]}
                     index={index}
                 />}
-                    rimaryTypographyProps={{ noWrap: true }}
                     style={{ width: '100%', minWidth: 0}}/>
           </ListItem>
         );

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useContext, useEffect, useState} from 'react';
 import 'styles/views/Slider.scss';
 import {WebsocketWrapper} from './WebsocketWrapper';

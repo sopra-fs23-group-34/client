@@ -118,6 +118,7 @@ const Register = () => {
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
         };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [username, password, email]);
     
     return (

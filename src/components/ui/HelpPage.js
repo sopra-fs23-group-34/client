@@ -31,7 +31,7 @@ export default function HelpPage() {
 
   return (
     <div>
-      <Button width="100%" onClick={handleClickOpen('paper')}>Help Page</Button>
+      <Button width="100%" onClick={handleClickOpen('paper')}>Tutorial Page</Button>
       <Dialog
         fullWidth={true}
         maxWidth={"md"}

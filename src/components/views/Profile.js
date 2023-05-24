@@ -110,9 +110,7 @@ const Profile = () => {
     const requestChange = async () => {
         try {
             // check if user is guest
-            const guestUser = sessionStorage.getItem('guestUser');
-            console.log(guestUser);
-            if (guestUser == "true") {
+            if (sessionStorage.getItem('guestUser')) {
                 // raise error because profile of Guest User cant be changed
                 console.log("guest User profile change denied");
             }

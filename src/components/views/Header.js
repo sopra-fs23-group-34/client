@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/heading-has-content */
 import React from "react";
 import PropTypes from "prop-types";
 import "styles/views/Header.scss";
