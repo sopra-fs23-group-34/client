@@ -113,7 +113,10 @@ const RoundScore = () => {
     useEffect(() => {
         if (sessionStorage.getItem("host")!=="true"){
             document.getElementById("gamecontinuer").style.display = "none";
+            document.getElementById('commentHost').style.display = "none";
         }
+        else if (sessionStorage.getItem("host")==="true"){
+            document.getElementById('commentPlayer').style.display = "none";        }
     })
 
     let rankingTable;
@@ -155,20 +158,20 @@ const RoundScore = () => {
                 }} size="small" stickyHeader aria-label="dense table">
                     <TableHead>
                         <TableRow>
-                            <TableCell className='guesses-header'>Player Name</TableCell>
-                            <TableCell className='guesses-header' align="right">Protein&nbsp;(g)</TableCell>
-                            <TableCell className='guesses-header' align="right">Fat&nbsp;(g)</TableCell>
-                            <TableCell className='guesses-header' align="right">Carbs&nbsp;(g)</TableCell>
-                            <TableCell className='guesses-header' align="right">Calories (kcal)</TableCell>
-                            <TableCell className='guesses-header' align="right">Points</TableCell>
+                            <TableCell className='guesses-header1'>Player Name</TableCell>
+                            <TableCell className='guesses-header1' align="right">Protein&nbsp;(g)</TableCell>
+                            <TableCell className='guesses-header1' align="right">Fat&nbsp;(g)</TableCell>
+                            <TableCell className='guesses-header1' align="right">Carbs&nbsp;(g)</TableCell>
+                            <TableCell className='guesses-header1' align="right">Calories (kcal)</TableCell>
+                            <TableCell className='guesses-header1' align="right">Points</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>Solution Values</TableCell>
-                            <TableCell align="right">{Math.round(solutionValues.protein)}</TableCell>
-                            <TableCell align="right">{Math.round(solutionValues.fat)}</TableCell>
-                            <TableCell align="right">{Math.round(solutionValues.carbs)}</TableCell>
-                            <TableCell align="right">{Math.round(solutionValues.calories)}</TableCell>
-                            <TableCell align="right">---</TableCell>
+                            <TableCell className='guesses-header2'>Solution Values</TableCell>
+                            <TableCell className='guesses-header2' align="right">{Math.round(solutionValues.protein)}</TableCell>
+                            <TableCell className='guesses-header2' align="right">{Math.round(solutionValues.fat)}</TableCell>
+                            <TableCell className='guesses-header2' align="right">{Math.round(solutionValues.carbs)}</TableCell>
+                            <TableCell className='guesses-header2' align="right">{Math.round(solutionValues.calories)}</TableCell>
+                            <TableCell className='guesses-header2' align="right">---</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -185,6 +188,8 @@ const RoundScore = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <p style={{textAlign: 'right', marginTop: '0', fontSize: '.8em'}}>You are highlighted in blue!</p>
+
         </div>
     );
 
@@ -201,7 +206,9 @@ const RoundScore = () => {
                     </div>
                 <div className='score form'>
                     <h1 style={{textAlign: 'center', marginBottom: '0'}}>Round Overview</h1>
-                    <h5 style={{textAlign: 'center', marginTop: '0'}}>Host will continue game...</h5>
+                    <h5 style={{textAlign: 'center', marginTop: '0'}} id='commentHost'>Continue when you are ready...</h5>
+                    <h5 style={{textAlign: 'center', marginTop: '0'}} id='commentPlayer'>Host will continue game...</h5>
+
                     {rankingTable}
                     {nutritionTable}
                     <Grid container spacing={3} sx={{justifyContent:"right", clear:"both", flexGrow:1}}>

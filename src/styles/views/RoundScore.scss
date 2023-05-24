@@ -90,12 +90,15 @@
             border: 1px solid #ffffff;
         }
         .highlighted-row {
-            background-color: lightblue;
+            background-color: #c3e8f5;
         }
         & .ranking-header {
-            background-color: purple;
+            background-color: #f8a9e9;
         }
-        & .guesses-header {
-            background-color: green;
+        & .guesses-header1 {
+            background-color: #f8a9e9;
+        }
+        & .guesses-header2 {
+            background-color: #f6c1eb;
         }
     }
