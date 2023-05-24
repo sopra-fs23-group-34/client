@@ -1,11 +1,11 @@
 import 'styles/views/About.scss';
 import { GitHub } from "@material-ui/icons";
 import TitleGif from '../../resources/TitleGif.gif';
-import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 import nico from "../../resources/members/nico.jpg";
 import nataell from "../../resources/members/nataell.png";
 import andre from "../../resources/members/andre.JPG";
 import maurice from "../../resources/members/maurice.jpeg";
+import elias from "../../resources/members/elias.jpg";
 
 const About = () => {
 
@@ -28,7 +28,7 @@ const About = () => {
                     <p className="about-header">Explore the project</p>
                     <ul className="explore-list">
                         <li className="explore-item">
-                            <a className="explore-item-inner" href="https://github.com/sopra-fs23-group-34" target="_blank">
+                            <a className="explore-item-inner" href="https://github.com/sopra-fs23-group-34" target="_blank" rel="noreferrer">
                                 <GitHub className="explore-item-icon" />
                                 Check out our code on GitHub!
                             </a>
@@ -95,7 +95,7 @@ const About = () => {
                             <div className="name-container">
                                 <div className="hex">
                                     <div className="hex-background">
-                                    <SelfImprovementIcon className='member-image'></SelfImprovementIcon>
+                                    <img src={elias} alt='Elias' className='member-image'></img>
                                     </div>
                                 </div>
                                 <a href="https://www.github.com/Bye-B" className="member-name">Elias</a>
