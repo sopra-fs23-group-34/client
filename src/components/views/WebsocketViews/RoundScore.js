@@ -188,7 +188,7 @@ const RoundScore = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <p style={{textAlign: 'right', marginTop: '0', fontSize: '.8em'}}>You are highlighted in blue!</p>
+            <p>You are highlighted in blue!</p>
 
         </div>
     );
@@ -205,9 +205,9 @@ const RoundScore = () => {
                     <h2 style={{float: "right"}}>Round {roundCount}/{roundLimit}</h2>
                     </div>
                 <div className='score form'>
-                    <h1 style={{textAlign: 'center', marginBottom: '0'}}>Round Overview</h1>
-                    <h5 style={{textAlign: 'center', marginTop: '0'}} id='commentHost'>Continue when you are ready...</h5>
-                    <h5 style={{textAlign: 'center', marginTop: '0'}} id='commentPlayer'>Host will continue game...</h5>
+                    <h1>Round Overview</h1>
+                    <h5 id='commentHost'>Continue when you are ready...</h5>
+                    <h5 id='commentPlayer'>Host will continue game...</h5>
 
                     {rankingTable}
                     {nutritionTable}
