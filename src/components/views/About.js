@@ -6,6 +6,11 @@ import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 import ElderlyIcon from '@mui/icons-material/Elderly';
+import nico from "../../resources/members/nico.jpg";
+import nataell from "../../resources/members/nataell.png";
+import andre from "../../resources/members/andre.JPG";
+import maurice from "../../resources/members/maurice.jpeg";
+
 const About = () => {
 
     return (
@@ -41,7 +46,7 @@ const About = () => {
                             <div className="name-container">
                             <div className="hex">
                                     <div className="hex-background">
-                                    <EmojiPeopleIcon className='member-image'></EmojiPeopleIcon>
+                                    <img src={nataell} alt='Nataell' className='member-image'></img>
                                     </div>
                                 </div>
                                 <a href="https://www.github.com/nataell95" className="member-name">Nataell</a>
@@ -55,7 +60,7 @@ const About = () => {
                             <div className="name-container">
                             <div className="hex">
                                     <div className="hex-background">
-                                    <DirectionsBikeIcon className='member-image'></DirectionsBikeIcon>
+                                    <img src={andre} alt='André' className='member-image'></img>
                                     </div>
                                 </div>
                                 <a href="https://www.github.com/sugar-free55" className="member-name">André</a>
@@ -68,7 +73,7 @@ const About = () => {
                             <div className="name-container">
                             <div className="hex">
                                     <div className="hex-background">
-                                    <AccessibilityNewIcon className='member-image'></AccessibilityNewIcon>
+                                    <img src={nico} alt='Nico' className='member-image'></img>
                                     </div>
                                 </div>
                                 <a href="https://www.github.com/nizonic" className="member-name">Nico</a>
@@ -81,7 +86,7 @@ const About = () => {
                             <div className="name-container">
                             <div className="hex">
                                     <div className="hex-background">
-                                    <ElderlyIcon className='member-image'></ElderlyIcon>
+                                    <img src={maurice} alt='Maurice' className='member-image'></img>
                                     </div>
                                 </div>
                                 <a href="https://www.github.com/mauhess" className="member-name">Maurice</a>
