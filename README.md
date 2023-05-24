@@ -1,4 +1,11 @@
-# ![The Big Diabetes Game!](src/resources/TitleGif.gif)
+<h1 align="center">
+  <br>
+  <a href="https://github.com/sopra-fs23-group-34"><img src="src/resources/TitleGif.gif" alt="The Big Diabetes Game!" width="100%"></a>
+  <br>
+  The Big Diabetes Game Client
+  <br>
+</h1>
+
 
 <p align="center">
  <a href="https://github.com/sopra-fs23-group-34/client/actions">
