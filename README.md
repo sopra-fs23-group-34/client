@@ -28,8 +28,8 @@ To communicate between the front- and backend, REST and a Websocked were used. O
 The first relevant high-level component is the [App](/src/App.js) component since it serves as the main container of the game. \
 The [AppRouter](/src/components/routing/routers/AppRouter.js) defines the routing mechanism of the game and lets you navigate between different views. \
 From the [Hub](/src/components/views/Hub.js), which is the main component after the login, you can access all views related to the game and player statistics. For instance, from there, you can start or join a game or look at the leaderboard. \
-Also the [WebSocket Wrapper](/src/components/views/WebsocketViews/WebsocketWrapper.js) is another relevant high-level component that handles all the communication and routing of a running game from the start of a new lobby.
-
+Also the [WebSocket Wrapper](/src/components/views/WebsocketViews/WebsocketWrapper.js) is another relevant high-level component that handles all the communication and routing of a running game from the start of a new lobby. \
+Finally, our gameflow is handled and rendered within the [Guessing Page](/src/components/views/WebsocketViews/Guesses.js), the [Round Score](/src/components/views/WebsocketViews/RoundScore.js), and finally the [Final Score](/src/components/views/WebsocketViews/FinalScore.js). With the help of specific WebSocket messages from the backend we route between those screens, and switch between displaying the food image with the sliders, the Round Score Page, where you can see the current leaderboard of the lobby, as well as the guesses for the last round, and at the end of the game we route to the Final Score screen, where the final scores of the game are displayed, and the winner gets announced.
 
 ## Launch and Deployment
 For your local development environment, you will need Node.js. You can download it [here](https://nodejs.org). All other dependencies, including React, get installed with:
