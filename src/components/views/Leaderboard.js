@@ -95,8 +95,8 @@ const Leaderboard = () => {
                         "Wins": 0, 
                         "winRatio":0, 
                         "highScore":0}
-                    
-                    setUserOwnStats(newUserStats)
+                    setAlertStatus(true);
+                    setUserOwnStats(newUserStats);
                 }
                 else {
                 console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
@@ -173,7 +173,7 @@ const Leaderboard = () => {
         return user.userId === parseInt(sessionStorage.getItem('id'));
     }
     function moveToMe() {
-        if (sessionStorage.getItem("guestUser") === "true") {
+        if (sessionStorage.getItem("guestUser") === "true" || (userOwnStats.MultiplayerGames === 0 && userOwnStats.SingleplayerGames === 0)) {
             setAlertStatus(true);
             return ;
         }
@@ -192,14 +192,7 @@ const Leaderboard = () => {
         }
         },[]);
 
-    useEffect(() => {
-        async function getGuestStatus() {
-            if (sessionStorage.getItem("guestUser") === "true") {
-                setAlertStatus(true);
-            }
-        }
-        getGuestStatus();
-    }, []);
+
 
     useEffect(() => {
         async function fetchData() {
@@ -319,7 +312,10 @@ const Leaderboard = () => {
             <div className="leaderboard popup-message">
             {alertStatus && (
                 <Alert severity="info" onClose={() => setAlertStatus(false)} >
-                    {me.username}: <strong>You are using a Guest Account, your stats are not being tracked.</strong>
+                    {me.username}: {sessionStorage.getItem("guestUser") ? 
+                    <strong>You are using a Guest Account, your stats are not being tracked.</strong> : 
+                    <strong>You have yet to play a game!</strong>
+                    }
                 </Alert>
             )}
             </div>

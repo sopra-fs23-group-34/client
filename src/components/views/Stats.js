@@ -36,7 +36,7 @@ const Stats = () => {
                         "winRatio":0, 
                         "highScore":0}
                     
-                    setUserstats(newUserStats)
+                    setUserstats(newUserStats);
                     setAlertStatus(true);
                 }
                 else {
@@ -88,8 +88,8 @@ const Stats = () => {
             </Grid>
             <div className="stats popup-message">
             {alertStatus && (
-                <Alert severity="info" onClose={() => setAlertStatus(false)} >
-                    {user.username}: <strong>You are using a Guest Account, your stats are not being tracked.</strong>
+                <Alert severity="info" onClose={() => setAlertStatus(false)}>
+                    {user.username}: {sessionStorage.getItem("guestUser") ? <strong>You are using a Guest Account, your stats are not being tracked.</strong> : <strong>You have yet to play a game!</strong>}
                 </Alert>
             )}
             </div>
