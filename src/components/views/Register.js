@@ -142,6 +142,7 @@ const Register = () => {
                     <FormField
                         label="email"
                         value={email}
+                        type="email"
                         onChange={un => {
                             setEmail(un);
                             checkValid();

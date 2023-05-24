@@ -167,6 +167,7 @@ const Profile = () => {
                     <FormField
                         label="email"
                         value={email}
+                        type="email"
                         placeholder={emailPreview}
                         onChange={n => {
                             setEmail(n);
