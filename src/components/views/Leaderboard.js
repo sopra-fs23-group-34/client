@@ -90,9 +90,9 @@ const Leaderboard = () => {
             catch (error) {
                 if (error.response.data.status === 404) {
                     const newUserStats = {
-                        "SingleplayerGames": 0,
-                        "MultiplayerGames": 0,
-                        "Wins": 0, 
+                        "singleplayerGamesPlayed": 0,
+                        "multiplayerGamesPlayed": 0,
+                        "gamesWon": 0, 
                         "winRatio":0, 
                         "highScore":0}
                     setAlertStatus(true);
@@ -191,7 +191,6 @@ const Leaderboard = () => {
             moveToMe();
         }
         },[]);
-
 
 
     useEffect(() => {
