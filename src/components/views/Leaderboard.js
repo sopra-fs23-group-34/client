@@ -2,18 +2,18 @@ import { Spinner } from "components/ui/Spinner";
 import { handleError, api } from "helpers/api";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Alert, AlertTitle, Box, Grid, ListItemButton, Typography } from "@mui/material";
+import { Alert, Box, Grid, ListItemButton, Typography } from "@mui/material";
 import "styles/views/Leaderboard.scss";
 import * as React from 'react';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import { FixedSizeList} from 'react-window';
+import { FixedSizeList } from 'react-window';
 import { useHistory } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import {DataGrid, useGridApiRef} from '@mui/x-data-grid';
+import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { Button } from "components/ui/Button";
 
 const { default: BaseContainer } = require("components/ui/BaseContainer")

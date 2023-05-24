@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {api} from 'helpers/api';
+import { useEffect, useState } from 'react';
+import { api } from 'helpers/api';
 import User from 'models/User';
-import {Link, useHistory} from 'react-router-dom';
-import {Button} from 'components/ui/Button';
+import { Link, useHistory } from 'react-router-dom';
+import { Button } from 'components/ui/Button';
 import 'styles/views/Login.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
-import {Alert, AlertTitle, Box} from "@mui/material";
+import { Alert, AlertTitle } from "@mui/material";
 import PopUp from "../ui/GuestAccountButton";
 import AboutButton from 'components/ui/AboutButton';
 import TitleGif from '../../resources/TitleGif.gif';
@@ -93,31 +93,6 @@ const Login = () => {
         };
     }, [username, password]);
     
-    const demoLogin = async () => {
-        try {
-            /* 
-            const demoUsername = generateUsername()
-            const demoEmail = Math.floor(1000000 + Math.random() * 9000000);
-            const requestBody = JSON.stringify({username: demoUsername, email: demoEmail, password: demoPassword});
-            const response = await api(false,false).post('/users/create', requestBody); 
-            */
-
-            const r = await api(false, false).post('/users/login/guestUser');
-            console.log(r);
-
-            const user = new User(r.data);
-            sessionStorage.setItem('token', user.token);
-            sessionStorage.setItem('id', user.id);
-            sessionStorage.setItem('guestUser', true);
-            sessionStorage.setItem('username', user.username);
-
-
-            history.push(`/hub`);
-        } catch (error) {
-            raiseError(error.response.data.message)
-        }
-    }
-
 
     return (
         <BaseContainer>

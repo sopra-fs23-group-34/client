@@ -1,6 +1,5 @@
 import BaseContainer from "components/ui/BaseContainer";
 import "styles/views/Hub.scss";
-import * as React from 'react';
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import StatsButton from '../ui/StatsButton';
@@ -11,7 +10,6 @@ import PopUp from "../ui/JoinLobbyButton";
 import LogoutButton from "../ui/LogoutButton";
 import Item from "components/ui/Item";
 import { useMediaQuery } from "@material-ui/core";
-import { Typography } from "@mui/material";
 import TitleGif from '../../resources/TitleGif.gif';
 import { useEffect } from "react";
 import AboutButton from "components/ui/AboutButton";
@@ -66,7 +64,6 @@ export function BasicGrid() {
 }
 
 const Hub = () => {
-    const maxMediumSize = useMediaQuery("(max-width: 600px)");
     return (
         <BaseContainer margin="auto" className="hub container">
             <AboutButton/>

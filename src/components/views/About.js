@@ -1,11 +1,7 @@
 import 'styles/views/About.scss';
 import { GitHub } from "@material-ui/icons";
 import TitleGif from '../../resources/TitleGif.gif';
-import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
-import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
-import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
-import ElderlyIcon from '@mui/icons-material/Elderly';
 import nico from "../../resources/members/nico.jpg";
 import nataell from "../../resources/members/nataell.png";
 import andre from "../../resources/members/andre.JPG";
