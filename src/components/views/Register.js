@@ -8,6 +8,7 @@ import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import {Alert, AlertTitle} from "@mui/material";
 import AboutButton from 'components/ui/AboutButton';
+import TitleGif from '../../resources/TitleGif.gif';
 
 /*
 It is possible to add multiple components inside a single file,
@@ -124,7 +125,8 @@ const Register = () => {
             <div className="register container">
                 <div className="register form">
                 <AboutButton/>
-                    <h1 >Register</h1>
+                <img src={TitleGif} alt={'titleAnmimation'} style={{width: '100%', height: 'auto'}}/>
+                    <h2>Register</h2>
                     <FormField
                         label="Username"
                         value={username}
@@ -133,7 +135,7 @@ const Register = () => {
                             checkValid();
                         }}
                     />
-                    <p style={{marginTop: 0, fontSize: 12}}>
+                    <p>
                         Username must be minimum 3 characters long and not contain any spaces.
                     </p>
                     <FormField
@@ -144,7 +146,7 @@ const Register = () => {
                             checkValid();
                         }}
                     />
-                    <p style={{marginTop: 0, fontSize: 12}}>
+                    <p>
                         Must be a valid email address.
                     </p>
 
@@ -157,7 +159,7 @@ const Register = () => {
                             checkValid();
                         }}
                     />
-                    <p style={{marginTop: 0, fontSize: 12}}>
+                    <p>
                         Password must be minimum 5 characters long.
                     </p>
                     

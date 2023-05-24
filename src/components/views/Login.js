@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import {Alert, AlertTitle, Box} from "@mui/material";
 import PopUp from "../ui/GuestAccountButton";
 import AboutButton from 'components/ui/AboutButton';
+import TitleGif from '../../resources/TitleGif.gif';
 
 const FormField = props => {
     return (
@@ -123,7 +124,8 @@ const Login = () => {
             <div className="login container">
                 <div className="login form">
                 <AboutButton/>
-                    <h1>Login</h1>
+                <img src={TitleGif} alt={'titleAnmimation'} style={{width: '100%', height: 'auto'}}/>
+                    <h2>Login</h2>
                     <FormField
                         label="Username"
                         value={username}
