@@ -20,7 +20,7 @@ const About = () => {
                         The idea for this project stems from one of our group members, who is living with diabetes.
                         Thus, he has to stay on top of what he eats, and keeps track of his calorie intake among other things.
                         He proposed the idea of a game, where you have to find out, which nutritional values different foods have.
-                        Our whole team was on board with the idea, and thus we started work on <strong>The big Diabetes Game</strong>.
+                        Our whole team was on board with the idea, and thus we started work on <strong>The Big Diabetes Game</strong>.
                     </p>
                 </div>
                 <div className="about-explore">
