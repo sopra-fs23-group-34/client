@@ -95,8 +95,8 @@ const Leaderboard = () => {
                         "Wins": 0, 
                         "winRatio":0, 
                         "highScore":0}
-                    
-                    setUserOwnStats(newUserStats)
+                    setAlertStatus(true);
+                    setUserOwnStats(newUserStats);
                 }
                 else {
                 console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
@@ -192,14 +192,7 @@ const Leaderboard = () => {
         }
         },[]);
 
-    useEffect(() => {
-        async function getGuestStatus() {
-            if (sessionStorage.getItem("guestUser") || (userOwnStats.MultiplayerGames === 0 && userOwnStats.SingleplayerGames === 0)) {
-                setAlertStatus(true);
-            }
-        }
-        getGuestStatus();
-    }, []);
+
 
     useEffect(() => {
         async function fetchData() {
