@@ -69,7 +69,7 @@ const Hub = () => {
     const maxMediumSize = useMediaQuery("(max-width: 600px)");
     return (
         <BaseContainer margin="auto" className="hub container">
-<AboutButton/>
+            <AboutButton/>
             <img src={TitleGif} alt={'titleAnmimation'} style={{width: '100%', height: 'auto'}}/>
             <h3>Welcome back, {sessionStorage.getItem("username")}!</h3>
             <BasicGrid/>

@@ -7,6 +7,7 @@ import 'styles/views/Register.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import {Alert, AlertTitle} from "@mui/material";
+import AboutButton from 'components/ui/AboutButton';
 
 /*
 It is possible to add multiple components inside a single file,
@@ -122,6 +123,7 @@ const Register = () => {
         <BaseContainer>
             <div className="register container">
                 <div className="register form">
+                <AboutButton/>
                     <h1 >Register</h1>
                     <FormField
                         label="Username"

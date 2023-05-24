@@ -8,6 +8,7 @@ import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import {Alert, AlertTitle, Box} from "@mui/material";
 import PopUp from "../ui/GuestAccountButton";
+import AboutButton from 'components/ui/AboutButton';
 
 const FormField = props => {
     return (
@@ -121,6 +122,7 @@ const Login = () => {
         <BaseContainer>
             <div className="login container">
                 <div className="login form">
+                <AboutButton/>
                     <h1>Login</h1>
                     <FormField
                         label="Username"
