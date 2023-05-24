@@ -47,7 +47,8 @@ const About = () => {
                                 <p className="member-name">Nataell</p>
                             </div>
                             <div className="roles-container">
-                                <span className="member-role">Wizard shit</span>
+                                <span className="member-role">frontend</span>
+                                <span className="member-role">backend</span>
                             </div>
                         </div>
                         <div className="team-member">
@@ -60,7 +61,8 @@ const About = () => {
                                 <p className="member-name">André</p>
                             </div>
                             <div className="roles-container">
-                                <span className="member-role">Fancy frontend</span>
+                                <span className="member-role">frontend</span>
+                                <span className="member-role">sound & design</span>
                             </div>
                         </div><div className="team-member">
                             <div className="name-container">
@@ -73,6 +75,7 @@ const About = () => {
                             </div>
                             <div className="roles-container">
                                 <span className="member-role">frontend</span>
+                                <span className="member-role">team lead</span>
                             </div>
                         </div><div className="team-member">
                             <div className="name-container">
@@ -85,6 +88,7 @@ const About = () => {
                             </div>
                             <div className="roles-container">
                                 <span className="member-role">backend</span>
+                                <span className="member-role">API handling</span>
                             </div>
                         </div><div className="team-member">
                             <div className="name-container">
@@ -97,6 +101,7 @@ const About = () => {
                             </div>
                             <div className="roles-container">
                                 <span className="member-role">backend</span>
+                                <span className="member-role">API handling</span>
                             </div>
                         </div>
                     </div>
