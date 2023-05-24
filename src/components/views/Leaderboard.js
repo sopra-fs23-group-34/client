@@ -111,7 +111,7 @@ const Leaderboard = () => {
       const handleAddRow = () => {
         idCounter += 1;
         if (idCounter === 1){
-            apiRef.current.updateRows([createData(me.username, userOwnStats.SingleplayerGames,userOwnStats.MultiplayerGames, userOwnStats.Wins, userOwnStats.winRatio, userOwnStats.highScore)]);
+            apiRef.current.updateRows([createData(me.username, userOwnStats.singleplayerGamesPlayed,userOwnStats.multiplayerGamesPlayed, userOwnStats.gamesWon, userOwnStats.winRatio, userOwnStats.highScore)]);
         }
       };
 
