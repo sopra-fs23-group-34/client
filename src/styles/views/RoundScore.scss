@@ -83,6 +83,7 @@
             font-weight: bold;
             border: 1px solid #ffffff;
             width: auto;
+            background-color: inherit;
         }
         &.td:first-child {
             font-weight: bold;
@@ -90,5 +91,11 @@
         }
         .highlighted-row {
             background-color: lightblue;
+        }
+        & .ranking-header {
+            background-color: purple;
+        }
+        & .guesses-header {
+            background-color: green;
         }
     }

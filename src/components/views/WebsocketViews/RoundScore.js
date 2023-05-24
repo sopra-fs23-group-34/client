@@ -126,9 +126,9 @@ const RoundScore = () => {
                     }} size="small" stickyHeader aria-label="ranking table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Rank</TableCell>
-                                <TableCell align='left'>Name</TableCell>
-                                <TableCell align='right'>Points</TableCell>
+                                <TableCell className='ranking-header'>Rank</TableCell>
+                                <TableCell className='ranking-header' align='left'>Name</TableCell>
+                                <TableCell className='ranking-header' align='right'>Points</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -155,12 +155,12 @@ const RoundScore = () => {
                 }} size="small" stickyHeader aria-label="dense table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Player Name</TableCell>
-                            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                            <TableCell align="right">Calories (kcal)</TableCell>
-                            <TableCell align="right">Points</TableCell>
+                            <TableCell className='guesses-header'>Player Name</TableCell>
+                            <TableCell className='guesses-header' align="right">Protein&nbsp;(g)</TableCell>
+                            <TableCell className='guesses-header' align="right">Fat&nbsp;(g)</TableCell>
+                            <TableCell className='guesses-header' align="right">Carbs&nbsp;(g)</TableCell>
+                            <TableCell className='guesses-header' align="right">Calories (kcal)</TableCell>
+                            <TableCell className='guesses-header' align="right">Points</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>Solution Values</TableCell>
