@@ -2,7 +2,7 @@
   <br>
   <a href="https://github.com/sopra-fs23-group-34"><img src="src/resources/TitleGif.gif" alt="The Big Diabetes Game!" width="100%"></a>
   <br>
-  The Big Diabetes Game Client
+  The Big Diabetes Game: Client
   <br>
 </h1>
 
