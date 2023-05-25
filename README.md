@@ -76,7 +76,7 @@ During the game, the user is presented with a food item, for which they must gue
 After each round, there is an overview screen, showing the actual values of the product, as well as all guesses of the players in the lobby. Your own guesses are highlighted in blue. In addition, the host of the game can continue to the next round by pressing a button in the bottom right corner.
 ![Round overview screen for players with an overall points table, as well as detailed table with the guesses of this round](/screenshots/round_overview_player.png)
 
-![Round overview screen for host with an overall points table, as well as detailed table with the guesses of this round](/screenshots/host.png)
+![Round overview screen for host with an overall points table, as well as detailed table with the guesses of this round](/screenshots/round_overview_host.png)
 
 
 ## Roadmap
