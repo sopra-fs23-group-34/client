@@ -73,8 +73,11 @@ A regular user can join a game via main hub and is shown the playerlist of the c
 During the game, the user is presented with a food item, for which they must guess the protein and fat contents, as well as how many carbohydrates and calories it contains.
 ![Gameplay screen, where the top is a food image and its name, and below are sliders for all values to guess](/screenshots/gameplay_screen.png)
 
-After each round, there is an overview screen, showing the actual values of the product, as well as all guesses of the players in the lobby. Your own guesses are highlighted in blue.
-![Round overview screen with an overall points table, as well as detailed table with the guesses of this round](/screenshots/round_overview.png)
+After each round, there is an overview screen, showing the actual values of the product, as well as all guesses of the players in the lobby. Your own guesses are highlighted in blue. In addition, the host of the game can continue to the next round by pressing a button in the bottom right corner.
+![Round overview screen for players with an overall points table, as well as detailed table with the guesses of this round](/screenshots/round_overview_player.png)
+
+![Round overview screen for host with an overall points table, as well as detailed table with the guesses of this round](/screenshots/host.png)
+
 
 ## Roadmap
 
